@@ -1,0 +1,7 @@
+export enum DocumentStandardCompliance {
+  ECOWAS_ID_CARD = 'ECOWAS_ID_CARD',
+  EU_ID_CARD = 'EU_ID_CARD',
+  EU_PASSPORT = 'EU_PASSPORT',
+  EU_RESIDENT_PERMIT = 'EU_RESIDENT_PERMIT',
+  ICAO = 'ICAO',
+}
