@@ -1,6 +1,6 @@
 import { VFC } from 'react'
+import { DocumentScoreDistribution } from '@@types'
 import { ScoreRadar } from '../ScoreRadar'
-import { DocumentScoreDistribution } from '../../../types'
 
 export interface DocumentScoreDistributionRadarProps {
   value: DocumentScoreDistribution

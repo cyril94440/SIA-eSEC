@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit'
-import * as actions from '../actions'
+import * as actions from '@@actions'
 import {
   DocumentMaterial,
   DocumentScore,
@@ -7,7 +7,7 @@ import {
   DocumentSpecs,
   DocumentStandardCompliance,
   DocumentType
-} from '../types'
+} from '@@types'
 
 interface ProjectState {
   title: string

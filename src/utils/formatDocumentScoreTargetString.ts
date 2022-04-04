@@ -1,4 +1,4 @@
-import { DocumentScoreTarget } from '../types'
+import { DocumentScoreTarget } from '@@types'
 
 export function formatDocumentScoreTargetString(value: DocumentScoreTarget): string {
   switch (value) {

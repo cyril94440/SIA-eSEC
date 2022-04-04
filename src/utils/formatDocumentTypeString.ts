@@ -1,4 +1,4 @@
-import { DocumentType } from '../types'
+import { DocumentType } from '@@types'
 
 export function formatDocumentTypeString(value: DocumentType): string {
   switch (value) {

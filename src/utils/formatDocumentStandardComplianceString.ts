@@ -1,4 +1,4 @@
-import { DocumentStandardCompliance } from '../types'
+import { DocumentStandardCompliance } from '@@types'
 
 export function formatDocumentStandardComplianceString(value: DocumentStandardCompliance): string {
   switch (value) {

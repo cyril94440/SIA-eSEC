@@ -1,6 +1,6 @@
 import { VFC } from 'react'
+import { DocumentScoreLevelsCoverage } from '@@types'
 import { ScoreRadar } from '../ScoreRadar'
-import { DocumentScoreLevelsCoverage } from '../../../types'
 
 export interface DocumentScoreLevelsCoverageRadarProps {
   value: DocumentScoreLevelsCoverage

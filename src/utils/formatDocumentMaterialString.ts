@@ -1,4 +1,4 @@
-import { DocumentMaterial } from '../types'
+import { DocumentMaterial } from '@@types'
 
 export function formatDocumentMaterialString(value: DocumentMaterial): string {
   switch (value) {

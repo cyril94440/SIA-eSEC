@@ -1,6 +1,6 @@
 import { VFC } from 'react'
+import { DocumentScoreThreatsProtection } from '@@types'
 import { ScoreRadar } from '../ScoreRadar'
-import { DocumentScoreThreatsProtection } from '../../../types'
 
 export interface DocumentScoreThreatsProtectionRadarProps {
   value: DocumentScoreThreatsProtection

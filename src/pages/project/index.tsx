@@ -1,24 +1,92 @@
-import { Box, Flex, Heading, Select, VStack } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { ChangeEventHandler, useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import * as consts from '@@consts'
 import {
-  DocumentScoreDistributionRadar,
-  DocumentScoreLevelsCoverageRadar,
-  DocumentScoreOverallRadar,
-  DocumentScoreThreatsProtectionRadar
-} from '../components'
-import { RootState } from '../store'
-import * as thunks from '../thunks'
-import { DocumentMaterial, DocumentScoreTarget, DocumentStandardCompliance, DocumentType } from '../types'
+  AppLogo,
+  DocumentScoreDistributionRadar, DocumentScoreLevelsCoverageRadar, DocumentScoreOverallRadar,
+  DocumentScoreThreatsProtectionRadar,
+} from '@@components'
+import { RootState } from '@@store'
+import * as thunks from '@@thunks'
+import { DocumentMaterial, DocumentScoreTarget, DocumentStandardCompliance, DocumentType } from '@@types'
 import {
-  formatDocumentMaterialString, formatDocumentScoreTargetString,
-  formatDocumentStandardComplianceString,
-  formatDocumentTypeString
-} from '../utils'
+  formatDocumentMaterialString, formatDocumentScoreTargetString, formatDocumentStandardComplianceString,
+  formatDocumentTypeString,
+} from '@@utils'
+import * as styles from './styles'
 
 const Project: NextPage = () => {
+  const title = useSelector((state: RootState) => state.project.title)
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
+      <div css={styles.root}>
+        <div css={styles.sidebar}>
+          <div css={styles.sidebarLogoContainer}>
+            <AppLogo color={consts.COLOR_WHITE} />
+          </div>
+        </div>
+        <div css={styles.main}>
+          <div css={styles.mainTop}></div>
+          <div css={styles.mainContent}>
+            <div css={styles.mainContentHeader}>
+              <div css={styles.contentTitle}>
+                {title}
+              </div>
+            </div>
+            <div css={styles.sectionTitle}>
+              1 - General Info
+            </div>
+            <div css={styles.sectionItem}>
+              <div css={styles.sectionItemTitle}>Document Type</div>
+            </div>
+            <div css={styles.sectionItem}>
+              <div css={styles.sectionItemTitle}>Material</div>
+            </div>
+            <div css={styles.sectionItem}>
+              <div css={styles.sectionItemTitle}>Standard Compliance</div>
+            </div>
+            <div css={styles.sectionItem}>
+              <div css={styles.sectionItemTitle}>Score Target</div>
+            </div>
+            <div css={styles.sectionTitle}>
+              2 - Document Design
+            </div>
+            <div css={styles.sectionItem}>
+              <div css={styles.contentText}>
+                Document Design security refers to the physical features, techniques, and characteristics of documents
+                including strengthening their security and improving their resistance to attack and misuse.
+                With widespread access to low cost technologies including high quality scanning, color copying,
+                image processing and photo quality printing, the capacity of individuals to produce convincing counterfeit
+                travel documents and very deceptive alterations has increased significantly.
+              </div>
+            </div>
+            <div css={styles.sectionTitle}>
+              3 - Security Features
+            </div>
+            <div css={styles.sectionItem}>
+              <div css={styles.sectionItemTitle}>IR</div>
+            </div>
+            <div css={styles.sectionItem}>
+              <div css={styles.sectionItemTitle}>Offset Design</div>
+            </div>
+          </div>
+        </div>
+        <div css={styles.scores}>
+          <div css={styles.scoresTitleContainer}>
+            <div css={styles.contentTitle}>
+              Scores
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+/*
   const dispatch = useDispatch()
   const title = useSelector((state: RootState) => state.project.title)
   const documentSpecs = useSelector((state: RootState) => state.project.documentSpecs)
@@ -139,6 +207,7 @@ const Project: NextPage = () => {
       </Box>
     </>
   )
+*/
 }
 
 export default Project

@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
-import { DocumentMaterial, DocumentScore, DocumentScoreTarget, DocumentStandardCompliance, DocumentType } from '../types'
+import { DocumentMaterial, DocumentScore, DocumentScoreTarget, DocumentStandardCompliance, DocumentType } from '@@types'
 
 export const projectSetDocumentType = createAction<DocumentType>('projectSetDocumentType')
 export const projectSetDocumentMaterial = createAction<DocumentMaterial>('projectSetDocumentMaterial')

@@ -5,7 +5,7 @@ import {
   DocumentSpecs,
   DocumentStandardCompliance,
   DocumentType
-} from '../types'
+} from '@@types'
 
 export async function calculateDocumentScore(specs: DocumentSpecs): Promise<DocumentScore> {
   let value = 0

@@ -1,17 +1,20 @@
-import '../styles/globals.css'
-import { ChakraProvider } from '@chakra-ui/react'
+import 'normalize.css'
+
+import { Global } from '@emotion/react'
 import { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
-import { store } from '../store'
+import { store } from '@@store'
+import * as styles from '@@styles'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
-      <ChakraProvider>
+    <>
+      <Global styles={styles.global} />
+      <Provider store={store}>
         <Component {...pageProps} />
-      </ChakraProvider>
-    </Provider>
+      </Provider>
+    </>
   )
 }
 
-export default MyApp
+export default App
