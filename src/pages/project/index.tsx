@@ -1,24 +1,18 @@
-import { NextPage } from 'next'
+import {NextPage} from 'next'
 import Head from 'next/head'
-import { ChangeEventHandler, useCallback, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import {CardSelect, Icons} from '@@components'
 import * as consts from '@@consts'
-import {
-  AppLogo,
-  DocumentScoreDistributionRadar, DocumentScoreLevelsCoverageRadar, DocumentScoreOverallRadar,
-  DocumentScoreThreatsProtectionRadar,
-} from '@@components'
-import { RootState } from '@@store'
+import {RootState} from '@@store'
 import * as thunks from '@@thunks'
-import { DocumentMaterial, DocumentScoreTarget, DocumentStandardCompliance, DocumentType } from '@@types'
-import {
-  formatDocumentMaterialString, formatDocumentScoreTargetString, formatDocumentStandardComplianceString,
-  formatDocumentTypeString,
-} from '@@utils'
+import {DocumentMaterial, DocumentType} from '@@types'
+import {formatDocumentMaterialString, formatDocumentTypeString} from '@@utils'
 import * as styles from './styles'
 
 const Project: NextPage = () => {
+  const dispatch = useDispatch()
   const title = useSelector((state: RootState) => state.project.title)
+  const documentSpecs = useSelector((state: RootState) => state.project.documentSpecs)
   return (
     <>
       <Head>
@@ -27,7 +21,7 @@ const Project: NextPage = () => {
       <div css={styles.root}>
         <div css={styles.sidebar}>
           <div css={styles.sidebarLogoContainer}>
-            <AppLogo color={consts.COLOR_WHITE} />
+            <Icons.App color={consts.COLOR_WHITE} />
           </div>
         </div>
         <div css={styles.main}>
@@ -43,9 +37,51 @@ const Project: NextPage = () => {
             </div>
             <div css={styles.sectionItem}>
               <div css={styles.sectionItemTitle}>Document Type</div>
+              <CardSelect
+                value={documentSpecs.type}
+                items={[
+                  {
+                    value: DocumentType.PASSPORT,
+                    icon: Icons.DocumentTypePassport,
+                    label: formatDocumentTypeString(DocumentType.PASSPORT),
+                  },
+                  {
+                    value: DocumentType.ID_CARD,
+                    icon: Icons.DocumentTypeIdCard,
+                    label: formatDocumentTypeString(DocumentType.ID_CARD),
+                  },
+                  {
+                    value: DocumentType.DRIVING_LICENSE,
+                    icon: Icons.DocumentTypeDriving,
+                    label: formatDocumentTypeString(DocumentType.DRIVING_LICENSE),
+                  },
+                  {
+                    value: DocumentType.OTHER,
+                    icon: Icons.DocumentTypeOther,
+                    label: formatDocumentTypeString(DocumentType.OTHER),
+                  },
+                ]}
+                onChange={value => dispatch(thunks.projectChangeDocumentType(value as DocumentType))}
+              />
             </div>
             <div css={styles.sectionItem}>
               <div css={styles.sectionItemTitle}>Material</div>
+              <CardSelect
+                value={documentSpecs.material}
+                items={[
+                  {
+                    value: DocumentMaterial.PLASTIC,
+                    icon: Icons.DocumentMaterialPlastic,
+                    label: formatDocumentMaterialString(DocumentMaterial.PLASTIC),
+                  },
+                  {
+                    value: DocumentMaterial.PAPER,
+                    icon: Icons.DocumentMaterialPaper,
+                    label: formatDocumentMaterialString(DocumentMaterial.PAPER),
+                  },
+                ]}
+                onChange={value => dispatch(thunks.projectChangeDocumentMaterial(value as DocumentMaterial))}
+              />
             </div>
             <div css={styles.sectionItem}>
               <div css={styles.sectionItemTitle}>Standard Compliance</div>
@@ -80,6 +116,29 @@ const Project: NextPage = () => {
           <div css={styles.scoresTitleContainer}>
             <div css={styles.contentTitle}>
               Scores
+            </div>
+            <div css={styles.contentSubtitle}>
+              Check out your scores in real time
+            </div>
+          </div>
+          <div css={styles.scoresPanelGroup}>
+            <div css={styles.scoresPanel}>
+              ...
+            </div>
+            <div css={styles.scoresPanel}>
+              ...
+            </div>
+            <div css={[styles.scoresPanel, styles.scoresPanelSquared]}>
+              ...
+            </div>
+            <div css={[styles.scoresPanel, styles.scoresPanelSquared]}>
+              ...
+            </div>
+            <div css={[styles.scoresPanel, styles.scoresPanelSquared]}>
+              ...
+            </div>
+            <div css={[styles.scoresPanel, styles.scoresPanelSquared]}>
+              ...
             </div>
           </div>
         </div>

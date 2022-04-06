@@ -11,7 +11,7 @@ export async function calculateDocumentScore(specs: DocumentSpecs): Promise<Docu
   let value = 0
 
   switch (specs.type) {
-    case DocumentType.DRIVING:
+    case DocumentType.DRIVING_LICENSE:
       value += 5
       break
     case DocumentType.ID_CARD:

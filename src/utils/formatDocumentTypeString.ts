@@ -2,8 +2,8 @@ import { DocumentType } from '@@types'
 
 export function formatDocumentTypeString(value: DocumentType): string {
   switch (value) {
-    case DocumentType.DRIVING:
-      return 'Driving'
+    case DocumentType.DRIVING_LICENSE:
+      return 'Driving License'
     case DocumentType.ID_CARD:
       return 'ID Card'
     case DocumentType.OTHER:

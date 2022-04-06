@@ -1,5 +1,5 @@
 export enum DocumentType {
-  DRIVING = 'DRIVING',
+  DRIVING_LICENSE = 'DRIVING_LICENSE',
   ID_CARD = 'ID_CARD',
   OTHER = 'OTHER',
   PASSPORT = 'PASSPORT',

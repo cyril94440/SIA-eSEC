@@ -1,20 +1,10 @@
 import { css } from '@emotion/react'
 import * as consts from '@@consts'
 
-export const fontBase = css`
-  letter-spacing: ${consts.LETTER_SPACING};
-`
-
-export const fontMedium32 = css`
-  ${fontBase};
-  font-size: ${consts.FONT_MEDIUM_32_SIZE};
-  font-weight: ${consts.FONT_MEDIUM_32_WEIGHT};
-`
-
-export const fontMedium40 = css`
-  ${fontBase};
-  font-size: ${consts.FONT_MEDIUM_40_SIZE};
-  font-weight: ${consts.FONT_MEDIUM_40_WEIGHT};
+export const fontRegular12 = css`
+  font-size: ${consts.FONT_REGULAR_12_SIZE};
+  font-weight: ${consts.FONT_REGULAR_12_WEIGHT};
+  line-height: ${consts.FONT_REGULAR_12_LINE_HEIGHT};
 `
 
 export const fontRegular14 = css`
@@ -24,7 +14,22 @@ export const fontRegular14 = css`
 `
 
 export const fontRegular20 = css`
-  ${fontBase};
   font-size: ${consts.FONT_REGULAR_20_SIZE};
   font-weight: ${consts.FONT_REGULAR_20_WEIGHT};
+  letter-spacing: ${consts.FONT_REGULAR_20_LETTER_SPACING};
+  line-height: ${consts.FONT_REGULAR_20_LINE_HEIGHT};
+`
+
+export const fontMedium32 = css`
+  font-size: ${consts.FONT_MEDIUM_32_SIZE};
+  font-weight: ${consts.FONT_MEDIUM_32_WEIGHT};
+  letter-spacing: ${consts.FONT_MEDIUM_32_LETTER_SPACING};
+  line-height: ${consts.FONT_MEDIUM_32_LINE_HEIGHT};
+`
+
+export const fontMedium40 = css`
+  font-size: ${consts.FONT_MEDIUM_40_SIZE};
+  font-weight: ${consts.FONT_MEDIUM_40_WEIGHT};
+  letter-spacing: ${consts.FONT_MEDIUM_40_LETTER_SPACING};
+  line-height: ${consts.FONT_MEDIUM_40_LINE_HEIGHT};
 `
