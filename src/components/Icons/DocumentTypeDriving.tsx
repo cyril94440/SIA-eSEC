@@ -1,6 +1,6 @@
-import { Icon } from '../Icon'
+import { Icon } from "../Icon";
 
-export const DocumentTypeDriving: Icon = (props) =>
+export const DocumentTypeDriving: Icon = (props) => (
   <svg viewBox="0 0 36 48" fill="none">
     <path
       fill={props.color}
@@ -17,3 +17,4 @@ export const DocumentTypeDriving: Icon = (props) =>
       d="M27.8818 39.2637H8.11797C6.80431 39.2637 6.80324 41.2497 8.11797 41.2497H27.8818C29.1955 41.2497 29.1966 39.2637 27.8818 39.2637Z"
     />
   </svg>
+);

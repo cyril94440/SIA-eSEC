@@ -1,7 +1,7 @@
-import { VFC } from 'react'
+import { VFC } from "react";
 
 export interface IconProps {
-  color: string
+  color: string;
 }
 
-export type Icon = VFC<IconProps>
+export type Icon = VFC<IconProps>;

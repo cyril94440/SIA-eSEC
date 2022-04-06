@@ -1,5 +1,5 @@
 export interface DocumentScoreDistribution {
-  body: number
-  personalization: number
-  design: number
+  body: number;
+  personalization: number;
+  design: number;
 }

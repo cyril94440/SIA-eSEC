@@ -1,44 +1,37 @@
-import { VFC } from 'react'
-import { Icon } from '../Icon'
-import * as styles from './styles'
+import { VFC } from "react";
+import { Icon } from "../Icon";
+import * as styles from "./styles";
 
 export interface CardSelectProps {
-  value: string
-  items: CardSelectItem[]
-  onChange: (value: string) => void
+  value: string;
+  items: CardSelectItem[];
+  onChange: (value: string) => void;
 }
 
 export interface CardSelectItem {
-  value: string
-  icon: Icon
-  label: string
+  value: string;
+  icon: Icon;
+  label: string;
 }
 
 export const CardSelect: VFC<CardSelectProps> = (props) => {
   return (
     <div css={styles.root}>
-      {
-        props.items.map(item => {
-          const Icon = item.icon
-          const selected = item.value === props.value
-          return (
+      {props.items.map((item) => {
+        const Icon = item.icon;
+        const selected = item.value === props.value;
+        return (
+          <div key={item.value} css={styles.item}>
             <div
-              key={item.value}
-              css={styles.item}
+              css={[styles.itemIcon, selected && styles.itemIconSelected]}
+              onClick={!selected ? () => props.onChange(item.value) : undefined}
             >
-              <div
-                css={[styles.itemIcon, selected && styles.itemIconSelected]}
-                onClick={!selected ? () => props.onChange(item.value) : undefined}
-                >
-                <Icon color={'currentColor'} />
-              </div>
-              <div css={styles.itemLabel}>
-                {item.label}
-              </div>
+              <Icon color={"currentColor"} />
             </div>
-          )
-        })
-      }
+            <div css={styles.itemLabel}>{item.label}</div>
+          </div>
+        );
+      })}
     </div>
-  )
-}
+  );
+};

@@ -1,17 +1,17 @@
-import { css } from '@emotion/react'
-import * as consts from '@@consts'
-import * as styles from '@@styles'
+import { css } from "@emotion/react";
+import * as consts from "@@consts";
+import * as styles from "@@styles";
 
 export const root = css`
   display: flex;
   gap: ${consts.SIZE(3)};
-`
+`;
 
 export const item = css`
   display: flex;
   flex-direction: column;
   gap: ${consts.SIZE(1)};
-`
+`;
 
 export const itemIcon = css`
   display: flex;
@@ -23,15 +23,15 @@ export const itemIcon = css`
   color: ${consts.COLOR_NEUTRAL_70};
   background-color: ${consts.COLOR_NEUTRAL_BLUE};
   cursor: pointer;
-`
+`;
 
 export const itemIconSelected = css`
   color: ${consts.COLOR_WHITE};
   background-color: ${consts.COLOR_PRIMARY_36};
   cursor: default;
-`
+`;
 
 export const itemLabel = css`
   ${styles.fontRegular12};
   color: ${consts.COLOR_GREY_BLUE};
-`
+`;

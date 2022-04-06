@@ -1,6 +1,6 @@
-import { Icon } from '../Icon'
+import { Icon } from "../Icon";
 
-export const DocumentMaterialPlastic: Icon = (props) =>
+export const DocumentMaterialPlastic: Icon = (props) => (
   <svg viewBox="0 0 36 50" fill="none">
     <path
       fill={props.color}
@@ -14,16 +14,7 @@ export const DocumentMaterialPlastic: Icon = (props) =>
       clipRule="evenodd"
       d="M21.3999 39.2506L21.3999 48.8506L23.0999 48.8506L23.0999 39.2506C23.0999 38.1718 23.4803 37.155 24.1311 36.4199C24.7789 35.6883 25.6339 35.3006 26.4999 35.3006L34.9999 35.3006L34.9999 33.6006L26.4999 33.6006C25.1116 33.6006 23.8045 34.2243 22.8583 35.293C21.9151 36.3583 21.3999 37.7833 21.3999 39.2506Z"
     />
-    <path
-      stroke={props.color}
-      strokeWidth="1.7"
-      strokeLinecap="round"
-      d="M14.5 6L6 15.5"
-    />
-    <path
-      stroke={props.color}
-      strokeWidth="1.7"
-      strokeLinecap="round"
-      d="M10.5 5L4.5 11.5"
-    />
+    <path stroke={props.color} strokeWidth="1.7" strokeLinecap="round" d="M14.5 6L6 15.5" />
+    <path stroke={props.color} strokeWidth="1.7" strokeLinecap="round" d="M10.5 5L4.5 11.5" />
   </svg>
+);

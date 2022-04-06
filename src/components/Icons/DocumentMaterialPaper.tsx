@@ -1,6 +1,6 @@
-import { Icon } from '../Icon'
+import { Icon } from "../Icon";
 
-export const DocumentMaterialPaper: Icon = (props) =>
+export const DocumentMaterialPaper: Icon = (props) => (
   <svg viewBox="0 0 36 50" fill="none">
     <path
       fill={props.color}
@@ -15,3 +15,4 @@ export const DocumentMaterialPaper: Icon = (props) =>
       d="M21.25 39.2506L21.25 48.8506L22.95 48.8506L22.95 39.2506C22.95 38.1718 23.3304 37.155 23.9812 36.4199C24.629 35.6883 25.484 35.3006 26.35 35.3006L34.85 35.3006L34.85 33.6006L26.35 33.6006C24.9617 33.6006 23.6546 34.2243 22.7084 35.293C21.7652 36.3583 21.25 37.7833 21.25 39.2506Z"
     />
   </svg>
+);

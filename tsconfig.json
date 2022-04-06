@@ -20,6 +20,7 @@
       "@@actions": ["actions"],
       "@@components": ["components"],
       "@@consts": ["consts"],
+      "@@hooks": ["hooks"],
       "@@store": ["store"],
       "@@styles": ["styles"],
       "@@thunks": ["thunks"],

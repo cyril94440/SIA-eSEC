@@ -4,61 +4,61 @@ import {
   DocumentScoreTarget,
   DocumentSpecs,
   DocumentStandardCompliance,
-  DocumentType
-} from '@@types'
+  DocumentType,
+} from "@@types";
 
 export async function calculateDocumentScore(specs: DocumentSpecs): Promise<DocumentScore> {
-  let value = 0
+  let value = 0;
 
   switch (specs.type) {
     case DocumentType.DRIVING_LICENSE:
-      value += 5
-      break
+      value += 5;
+      break;
     case DocumentType.ID_CARD:
-      value += 10
-      break
+      value += 10;
+      break;
     case DocumentType.OTHER:
-      value += 15
-      break
+      value += 15;
+      break;
     case DocumentType.PASSPORT:
-      value += 20
-      break
+      value += 20;
+      break;
   }
 
   switch (specs.material) {
     case DocumentMaterial.PAPER:
-      value += 5
-      break
+      value += 5;
+      break;
     case DocumentMaterial.PLASTIC:
-      value += 10
-      break
+      value += 10;
+      break;
   }
 
   switch (specs.standardCompliance) {
     case DocumentStandardCompliance.ECOWAS_ID_CARD:
-      value += 5
-      break
+      value += 5;
+      break;
     case DocumentStandardCompliance.EU_ID_CARD:
-      value += 10
-      break
+      value += 10;
+      break;
     case DocumentStandardCompliance.EU_PASSPORT:
-      value += 15
-      break
+      value += 15;
+      break;
     case DocumentStandardCompliance.EU_RESIDENT_PERMIT:
-      value += 20
-      break
+      value += 20;
+      break;
     case DocumentStandardCompliance.ICAO:
-      value += 25
-      break
+      value += 25;
+      break;
   }
 
   switch (specs.scoreTarget) {
     case DocumentScoreTarget.SIA_RECO:
-      value += 5
-      break
+      value += 5;
+      break;
     case DocumentScoreTarget.THEORICAL_MAXIMUM:
-      value += 10
-      break
+      value += 10;
+      break;
   }
 
   return {
@@ -111,5 +111,5 @@ export async function calculateDocumentScore(specs: DocumentSpecs): Promise<Docu
       level3: 60,
       madsv: 20,
     },
-  }
+  };
 }

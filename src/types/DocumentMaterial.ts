@@ -1,4 +1,4 @@
 export enum DocumentMaterial {
-  PAPER = 'PAPER',
-  PLASTIC = 'PLASTIC',
+  PAPER = "PAPER",
+  PLASTIC = "PLASTIC",
 }

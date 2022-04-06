@@ -1,10 +1,10 @@
-import 'normalize.css'
+import "normalize.css";
 
-import { Global } from '@emotion/react'
-import { AppProps } from 'next/app'
-import { Provider } from 'react-redux'
-import { store } from '@@store'
-import * as styles from '@@styles'
+import { Global } from "@emotion/react";
+import { AppProps } from "next/app";
+import { Provider } from "react-redux";
+import { store } from "@@store";
+import * as styles from "@@styles";
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -14,7 +14,7 @@ function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </Provider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

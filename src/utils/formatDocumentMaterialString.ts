@@ -1,12 +1,12 @@
-import { DocumentMaterial } from '@@types'
+import { DocumentMaterial } from "@@types";
 
 export function formatDocumentMaterialString(value: DocumentMaterial): string {
   switch (value) {
     case DocumentMaterial.PAPER:
-      return 'Paper'
+      return "Paper";
     case DocumentMaterial.PLASTIC:
-      return 'Plastic'
+      return "Plastic";
     default:
-      throw new Error(`Unhandled document material: "${value}"`)
+      throw new Error(`Unhandled document material: "${value}"`);
   }
 }

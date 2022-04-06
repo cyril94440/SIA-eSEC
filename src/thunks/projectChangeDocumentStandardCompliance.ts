@@ -1,12 +1,12 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import * as actions from '@@actions'
-import { DocumentStandardCompliance } from '@@types'
-import { projectUpdateDocumentScore } from './projectUpdateDocumentScore'
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import * as actions from "@@actions";
+import { DocumentStandardCompliance } from "@@types";
+import { projectUpdateDocumentScore } from "./projectUpdateDocumentScore";
 
 export const projectChangeDocumentStandardCompliance = createAsyncThunk<void, DocumentStandardCompliance>(
-  'projectChangeDocumentStandardCompliance',
+  "projectChangeDocumentStandardCompliance",
   async (value, { dispatch }) => {
-    dispatch(actions.projectSetDocumentStandardCompliance(value))
-    dispatch(projectUpdateDocumentScore())
+    dispatch(actions.projectSetDocumentStandardCompliance(value));
+    dispatch(projectUpdateDocumentScore());
   }
-)
+);
