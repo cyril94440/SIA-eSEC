@@ -70,59 +70,61 @@ export async function calculateDocumentScore(specs: DocumentSpecs): Promise<Docu
     value += 5;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.IR_A)) {
+  const securityFeaturesSet = new Set(specs.securityFeatures);
+
+  if (securityFeaturesSet.has(DocumentSecurityFeature.IR_A)) {
     value += 1;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.IR_B)) {
+  if (securityFeaturesSet.has(DocumentSecurityFeature.IR_B)) {
     value += 2;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.IR_C)) {
+  if (securityFeaturesSet.has(DocumentSecurityFeature.IR_C)) {
     value += 3;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.IR_D)) {
+  if (securityFeaturesSet.has(DocumentSecurityFeature.IR_D)) {
     value += 4;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.IR_E)) {
+  if (securityFeaturesSet.has(DocumentSecurityFeature.IR_E)) {
     value += 5;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.IR_F)) {
+  if (securityFeaturesSet.has(DocumentSecurityFeature.IR_F)) {
     value += 6;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_A)) {
+  if (securityFeaturesSet.has(DocumentSecurityFeature.OFFSET_DESIGN_A)) {
     value += 1;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_B)) {
+  if (securityFeaturesSet.has(DocumentSecurityFeature.OFFSET_DESIGN_B)) {
     value += 2;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_C)) {
+  if (securityFeaturesSet.has(DocumentSecurityFeature.OFFSET_DESIGN_C)) {
     value += 3;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_D)) {
+  if (securityFeaturesSet.has(DocumentSecurityFeature.OFFSET_DESIGN_D)) {
     value += 4;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_E)) {
+  if (securityFeaturesSet.has(DocumentSecurityFeature.OFFSET_DESIGN_E)) {
     value += 5;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_F)) {
+  if (securityFeaturesSet.has(DocumentSecurityFeature.OFFSET_DESIGN_F)) {
     value += 6;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_G)) {
+  if (securityFeaturesSet.has(DocumentSecurityFeature.OFFSET_DESIGN_G)) {
     value += 7;
   }
 
-  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_H)) {
+  if (securityFeaturesSet.has(DocumentSecurityFeature.OFFSET_DESIGN_H)) {
     value += 8;
   }
 
