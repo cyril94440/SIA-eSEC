@@ -30,6 +30,7 @@ import {
   formatDocumentSecurityFeatureString,
   formatDocumentStandardComplianceString,
   formatDocumentTypeString,
+  formatPageTitle,
 } from "@@utils";
 import * as styles from "./styles";
 
@@ -46,7 +47,7 @@ const Project: NextPage = () => {
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{formatPageTitle(title)}</title>
       </Head>
       <div css={styles.root}>
         <div css={styles.sidebar}>
