@@ -8,16 +8,19 @@ import {
   DocumentSpecs,
   DocumentStandardCompliance,
   DocumentType,
+  ProjectStatus,
 } from "@@types";
 
 interface ProjectState {
   title: string;
+  status: ProjectStatus;
   documentSpecs: DocumentSpecs;
   documentScore: DocumentScore | null;
 }
 
 const initialState: ProjectState = {
   title: "Test project",
+  status: ProjectStatus.ONGOING,
   documentSpecs: {
     type: DocumentType.PASSPORT,
     material: DocumentMaterial.PAPER,

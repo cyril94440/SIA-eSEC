@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import * as consts from "@@consts";
 import * as styles from "@@styles";
+import { fontMedium14 } from "@@styles";
 
 export const root = css`
   display: flex;
@@ -30,7 +31,10 @@ export const sidebarLogoContainer = css`
 `;
 
 export const mainTop = css`
+  display: flex;
+  align-items: end;
   height: ${consts.SIZE(10)};
+  padding-bottom: ${consts.SIZE(2)};
 `;
 
 export const mainContent = css``;
@@ -127,6 +131,18 @@ export const contentSectionItemTitle = css`
   ${styles.fontRegular20};
   color: ${consts.COLOR_GREY_BLUE};
   margin-bottom: ${consts.SIZE(2)};
+`;
+
+export const status = css`
+  color: ${consts.COLOR_SUCCESS_40};
+`;
+
+export const statusLabel = css`
+  ${styles.fontMedium14};
+`;
+
+export const statusValue = css`
+  ${styles.fontRegular14};
 `;
 
 export const overallScoreValue = css`

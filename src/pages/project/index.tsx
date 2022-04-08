@@ -31,12 +31,14 @@ import {
   formatDocumentStandardComplianceString,
   formatDocumentTypeString,
   formatPageTitle,
+  formatProjectStatusString,
 } from "@@utils";
 import * as styles from "./styles";
 
 const Project: NextPage = () => {
   const dispatch = useDispatch();
   const title = useSelector((state: RootState) => state.project.title);
+  const status = useSelector((state: RootState) => state.project.status);
   const documentSpecs = useSelector((state: RootState) => state.project.documentSpecs);
   const documentScore = useSelector((state: RootState) => state.project.documentScore);
 
@@ -56,7 +58,12 @@ const Project: NextPage = () => {
           </div>
         </div>
         <div css={styles.main}>
-          <div css={styles.mainTop}></div>
+          <div css={styles.mainTop}>
+            <div css={styles.status}>
+              <span css={styles.statusLabel}>{"Status: "}</span>
+              <span css={styles.statusValue}>{formatProjectStatusString(status)}</span>
+            </div>
+          </div>
           <div css={styles.mainContent}>
             <div css={styles.mainContentHeader}>
               <div css={styles.contentTitle}>{title}</div>
