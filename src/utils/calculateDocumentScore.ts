@@ -2,6 +2,7 @@ import {
   DocumentMaterial,
   DocumentScore,
   DocumentScoreTarget,
+  DocumentSecurityFeature,
   DocumentSpecs,
   DocumentStandardCompliance,
   DocumentType,
@@ -60,6 +61,72 @@ export async function calculateDocumentScore(specs: DocumentSpecs): Promise<Docu
       value += 10;
       break;
   }
+
+  if (specs.designAnswer1) {
+    value += 5;
+  }
+
+  if (specs.designAnswer2) {
+    value += 5;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.IR_A)) {
+    value += 1;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.IR_B)) {
+    value += 2;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.IR_C)) {
+    value += 3;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.IR_D)) {
+    value += 4;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.IR_E)) {
+    value += 5;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.IR_F)) {
+    value += 6;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_A)) {
+    value += 1;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_B)) {
+    value += 2;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_C)) {
+    value += 3;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_D)) {
+    value += 4;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_E)) {
+    value += 5;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_F)) {
+    value += 6;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_G)) {
+    value += 7;
+  }
+
+  if (specs.securityFeatures.has(DocumentSecurityFeature.OFFSET_DESIGN_H)) {
+    value += 8;
+  }
+
+  value = Math.min(value, 100);
 
   return {
     value,

@@ -81,9 +81,9 @@ function useDropdownRenderContent<TItem>(
     (hide) => {
       hideRef.current = hide;
       return (
-        <div css={styles.contentList}>
+        <div css={styles.content}>
           {items.map((item) => (
-            <div key={itemId(item)} css={styles.contentListItem} onClick={() => handleItemClick(item)}>
+            <div key={itemId(item)} css={styles.item} onClick={() => handleItemClick(item)}>
               {itemContent ? (
                 itemContent(item)
               ) : (
@@ -96,6 +96,6 @@ function useDropdownRenderContent<TItem>(
         </div>
       );
     },
-    [hideRef, items, itemId, itemContent, itemText]
+    [hideRef, items, itemId, itemContent, itemSelected, itemText, handleItemClick]
   );
 }

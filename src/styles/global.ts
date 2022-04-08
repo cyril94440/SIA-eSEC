@@ -21,6 +21,6 @@ export const global = css`
 
   body {
     font-family: "Saira", sans-serif;
-    background-color: ${consts.COLOR_WHITE};
+    background: ${consts.COLOR_WHITE};
   }
 `;

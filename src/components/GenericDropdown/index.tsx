@@ -9,7 +9,7 @@ export interface GenericDropdownProps {
 }
 
 export interface GenericDropdownRenderControl {
-  (toggle: () => void): React.ReactNode;
+  (toggle: () => void, visible: boolean): React.ReactNode;
 }
 
 export interface GenericDropdownRenderContent {
@@ -34,7 +34,7 @@ export const GenericDropdown: VFC<GenericDropdownProps> = (props) => {
 
   return (
     <div css={styles.root} onMouseLeave={handleMouseLeave} onMouseOver={handleMouseOver}>
-      {props.renderControl(handleToggle)}
+      {props.renderControl(handleToggle, visible)}
       {visible && (
         <div css={[styles.contentContainer, props.fullWidth && styles.contentContainerStretch]}>
           {props.renderContent(handleHide)}

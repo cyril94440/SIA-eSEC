@@ -11,7 +11,7 @@ export const root = css`
 export const sidebar = css`
   flex: none;
   width: ${consts.SIZE(11)};
-  background-color: ${consts.COLOR_PRIMARY_36};
+  background: ${consts.COLOR_PRIMARY_36};
   padding: ${consts.SIZE(6)} 0;
   display: flex;
   flex-direction: column;
@@ -22,6 +22,7 @@ export const main = css`
   flex: 2;
   padding-left: ${consts.SIZE(5)};
   padding-right: ${consts.SIZE(3)};
+  padding-bottom: ${consts.SIZE(50)};
 `;
 
 export const sidebarLogoContainer = css`
@@ -44,7 +45,7 @@ export const scores = css`
   padding-left: ${consts.SIZE(3)};
   padding-right: ${consts.SIZE(5)};
   padding-top: ${consts.SIZE(10)};
-  background-color: ${consts.COLOR_NEUTRAL_BLUE};
+  background: ${consts.COLOR_NEUTRAL_BLUE};
 `;
 
 export const scoresTitleContainer = css`
@@ -53,9 +54,9 @@ export const scoresTitleContainer = css`
 `;
 
 export const scoresPanel = css`
-  background-color: ${consts.COLOR_WHITE};
+  background: ${consts.COLOR_WHITE};
   border-radius: ${consts.SIZE(1)};
-  box-shadow: ${`0px ${consts.SIZE(0.5)} ${consts.SIZE(3)} rgba(0, 0, 0, 0.04)`};
+  box-shadow: ${`0px ${consts.SIZE(1 / 2)} ${consts.SIZE(3)} rgba(0, 0, 0, 0.04)`};
   padding: ${consts.SIZE(3)} ${consts.SIZE(6)};
 `;
 
@@ -102,6 +103,12 @@ export const contentText = css`
   ${styles.fontRegular14};
 `;
 
+export const contentControlLabel = css`
+  ${styles.fontMedium14};
+  color: ${consts.COLOR_GREY_BLUE};
+  margin-bottom: ${consts.SIZE(2)};
+`;
+
 export const contentControlContainer = css`
   max-width: ${consts.SIZE(65)};
 `;
@@ -113,18 +120,19 @@ export const contentSectionTitle = css`
 `;
 
 export const contentSectionItem = css`
-  margin-bottom: ${consts.SIZE(3)};
+  margin-bottom: ${consts.SIZE(5)};
 `;
 
 export const contentSectionItemTitle = css`
   ${styles.fontRegular20};
   color: ${consts.COLOR_GREY_BLUE};
-  margin-bottom: ${consts.SIZE(3)};
+  margin-bottom: ${consts.SIZE(2)};
 `;
 
 export const overallScoreValue = css`
   ${styles.fontMedium32};
   color: ${consts.COLOR_GREY_BLUE};
+  margin-bottom: ${consts.SIZE(1)};
 `;
 
 export const icao = css`

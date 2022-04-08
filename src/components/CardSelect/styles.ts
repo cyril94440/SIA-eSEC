@@ -19,16 +19,16 @@ export const itemIcon = css`
   width: ${consts.SIZE(11)};
   height: ${consts.SIZE(10)};
   padding: ${consts.SIZE(2)} ${consts.SIZE(3)};
-  border-radius: ${consts.SIZE(0.5)};
+  border-radius: ${consts.SIZE(1 / 2)};
   color: ${consts.COLOR_NEUTRAL_70};
-  background-color: ${consts.COLOR_NEUTRAL_BLUE};
+  background: ${consts.COLOR_NEUTRAL_BLUE};
   cursor: pointer;
 `;
 
 export const itemIconSelected = css`
   color: ${consts.COLOR_WHITE};
-  background-color: ${consts.COLOR_PRIMARY_36};
-  cursor: default;
+  background: ${consts.COLOR_PRIMARY_36};
+  cursor: unset;
 `;
 
 export const itemLabel = css`

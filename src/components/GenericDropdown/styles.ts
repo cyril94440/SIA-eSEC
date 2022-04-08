@@ -8,7 +8,6 @@ export const root = css`
 export const contentContainer = css`
   position: absolute;
   z-index: 1;
-  padding-top: ${consts.SIZE(1)};
 `;
 
 export const contentContainerStretch = css`

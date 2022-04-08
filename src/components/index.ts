@@ -3,4 +3,7 @@ export * from "./Charts";
 export * from "./GenericDropdown";
 export * from "./Icon";
 export * from "./Icons";
+export * from "./MultiSelect";
+export * from "./Progress";
+export * from "./RadioGroup";
 export * from "./Select";

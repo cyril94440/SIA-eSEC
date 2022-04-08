@@ -9,12 +9,12 @@ export const COLOR_NEUTRAL_80 = "#CBCBCD";
 export const COLOR_NEUTRAL_90 = "#E5E5E6";
 export const COLOR_NEUTRAL_95 = "#F2F2F3";
 
-export const COLOR_CRITICAL_50 = "#DD0707";
 export const COLOR_CRITICAL_30 = "#950404";
+export const COLOR_CRITICAL_50 = "#DD0707";
 export const COLOR_CRITICAL_90 = "#FECDCD";
 
-export const COLOR_SUCCESS_40 = "#47C806";
 export const COLOR_SUCCESS_30 = "#359405";
+export const COLOR_SUCCESS_40 = "#47C806";
 export const COLOR_SUCCESS_90 = "#DEFDCE";
 
 export const COLOR_GREY_BLUE = "#274E68";

@@ -7,14 +7,13 @@ export const control = css`
   padding: 0 ${consts.SIZE(2)};
   border-radius: ${consts.SIZE(1)};
   color: ${consts.COLOR_GREY_BLUE};
-  background-color: ${consts.COLOR_NEUTRAL_BLUE};
+  background: ${consts.COLOR_NEUTRAL_BLUE};
   cursor: pointer;
   user-select: none;
 
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
 `;
 
 export const controlText = css`
@@ -27,12 +26,13 @@ export const controlIcon = css`
   width: ${consts.SIZE(1.5)};
 `;
 
-export const contentList = css`
+export const content = css`
+  background: ${consts.COLOR_NEUTRAL_BLUE};
   border-radius: ${consts.SIZE(1)};
-  background-color: ${consts.COLOR_NEUTRAL_BLUE};
+  margin-top: ${consts.SIZE(1)};
 `;
 
-export const contentListItem = css`
+export const item = css`
   position: relative;
   &:not(:last-child) {
     border-bottom: 1px solid ${consts.COLOR_NEUTRAL_95};
@@ -52,6 +52,6 @@ export const defaultItemContent = css`
 
 export const defaultItemContentSelected = css`
   color: ${consts.COLOR_WHITE};
-  background-color: ${consts.COLOR_PRIMARY_60};
+  background: ${consts.COLOR_PRIMARY_60};
   border-radius: ${consts.SIZE(1)};
 `;

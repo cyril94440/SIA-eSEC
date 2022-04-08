@@ -4,6 +4,7 @@ import {
   DocumentMaterial,
   DocumentScore,
   DocumentScoreTarget,
+  DocumentSecurityFeature,
   DocumentSpecs,
   DocumentStandardCompliance,
   DocumentType,
@@ -22,6 +23,16 @@ const initialState: ProjectState = {
     material: DocumentMaterial.PAPER,
     standardCompliance: DocumentStandardCompliance.EU_PASSPORT,
     scoreTarget: DocumentScoreTarget.SIA_RECO,
+    designAnswer1: true,
+    designAnswer2: false,
+    securityFeatures: [
+      DocumentSecurityFeature.IR_A,
+      DocumentSecurityFeature.IR_D,
+      DocumentSecurityFeature.OFFSET_DESIGN_B,
+      DocumentSecurityFeature.OFFSET_DESIGN_C,
+      DocumentSecurityFeature.OFFSET_DESIGN_E,
+      DocumentSecurityFeature.OFFSET_DESIGN_H,
+    ],
   },
   documentScore: null,
 };
@@ -34,11 +45,20 @@ export const project = createReducer(initialState, (builder) => {
     .addCase(actions.projectSetDocumentMaterial, (state, action) => {
       state.documentSpecs.material = action.payload;
     })
+    .addCase(actions.projectSetDocumentStandardCompliance, (state, action) => {
+      state.documentSpecs.standardCompliance = action.payload;
+    })
     .addCase(actions.projectSetDocumentScoreTarget, (state, action) => {
       state.documentSpecs.scoreTarget = action.payload;
     })
-    .addCase(actions.projectSetDocumentStandardCompliance, (state, action) => {
-      state.documentSpecs.standardCompliance = action.payload;
+    .addCase(actions.projectSetDocumentDesignAnswer1, (state, action) => {
+      state.documentSpecs.designAnswer1 = action.payload;
+    })
+    .addCase(actions.projectSetDocumentDesignAnswer2, (state, action) => {
+      state.documentSpecs.designAnswer2 = action.payload;
+    })
+    .addCase(actions.projectSetDocumentSecurityFeatures, (state, action) => {
+      state.documentSpecs.securityFeatures = action.payload;
     })
     .addCase(actions.projectSetDocumentScore, (state, action) => {
       state.documentScore = action.payload;
