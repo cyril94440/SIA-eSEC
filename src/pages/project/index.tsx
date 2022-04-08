@@ -113,6 +113,7 @@ const Project: NextPage = () => {
               <div css={styles.contentSectionItemTitle}>Standard Compliance</div>
               <div css={styles.contentControlContainer}>
                 <Select
+                  value={documentSpecs.standardCompliance}
                   items={[
                     DocumentStandardCompliance.ECOWAS_ID_CARD,
                     DocumentStandardCompliance.EU_ID_CARD,
@@ -122,8 +123,7 @@ const Project: NextPage = () => {
                   ]}
                   itemId={(item) => item}
                   itemText={(item) => formatDocumentStandardComplianceString(item)}
-                  itemSelected={(item) => item === documentSpecs.standardCompliance}
-                  onItemSelect={(item) => {
+                  onChange={(item) => {
                     dispatch(thunks.projectChangeDocumentStandardCompliance(item));
                   }}
                 />
@@ -133,11 +133,11 @@ const Project: NextPage = () => {
               <div css={styles.contentSectionItemTitle}>Score Target</div>
               <div css={styles.contentControlContainer}>
                 <Select
+                  value={documentSpecs.scoreTarget}
                   items={[DocumentScoreTarget.THEORICAL_MAXIMUM, DocumentScoreTarget.SIA_RECO]}
                   itemId={(item) => item}
                   itemText={(item) => formatDocumentScoreTargetString(item)}
-                  itemSelected={(item) => item === documentSpecs.scoreTarget}
-                  onItemSelect={(item) => {
+                  onChange={(item) => {
                     dispatch(thunks.projectChangeDocumentScoreTarget(item));
                   }}
                 />

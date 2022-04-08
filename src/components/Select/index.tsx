@@ -1,101 +1,62 @@
-import { MutableRefObject, ReactNode, useCallback, useRef } from "react";
-import { GenericDropdown, GenericDropdownRenderContent, GenericDropdownRenderControl } from "../GenericDropdown";
+import { ReactNode, useRef } from "react";
+import { GenericDropdown } from "../GenericDropdown";
 import { Icons } from "../Icons";
 import * as styles from "./styles";
 
 export interface SelectProps<TItem> {
+  value: TItem | null;
   items: TItem[];
   itemId: (item: TItem) => string;
   itemText: (item: TItem) => string;
-  itemContent?: (item: TItem) => ReactNode;
-  itemSelected: (item: TItem) => boolean;
-  onItemSelect: (item: TItem) => void;
+  itemContent?: (item: TItem, selected: boolean) => ReactNode;
+  onChange: (value: TItem) => void;
 }
 
 export const Select = <TItem,>(props: SelectProps<TItem>) => {
-  const { items, itemId, itemText, itemContent, itemSelected, onItemSelect } = props;
-  const selectedItem = items.find((item) => item && itemSelected(item));
-  const selectedItemText = selectedItem ? itemText(selectedItem) : "";
-
   const hideRef = useRef<() => void>();
-  const handleItemClick = useHandleItemClick(hideRef, onItemSelect);
-  const dropdownRenderControl = useDropdownRenderControl(selectedItemText);
-  const dropdownRenderContent = useDropdownRenderContent(
-    items,
-    itemId,
-    itemText,
-    itemContent,
-    itemSelected,
-    hideRef,
-    handleItemClick
-  );
-
+  const valueText = props.value ? props.itemText(props.value) : "";
   return (
-    <GenericDropdown fullWidth={true} renderControl={dropdownRenderControl} renderContent={dropdownRenderContent} />
+    <GenericDropdown
+      fullWidth={true}
+      renderControl={(toggle) => {
+        return (
+          <div css={styles.control} onClick={toggle}>
+            <div css={styles.controlText}>{valueText}</div>
+            <div css={styles.controlIcon}>
+              <Icons.ChevronDown color="currentColor" />
+            </div>
+          </div>
+        );
+      }}
+      renderContent={(hide) => {
+        hideRef.current = hide;
+        return (
+          <div css={styles.content}>
+            {props.items.map((item) => {
+              const selected = item === props.value;
+              return (
+                <div
+                  key={props.itemId(item)}
+                  css={styles.item}
+                  onClick={() => {
+                    if (hideRef.current) {
+                      hideRef.current();
+                      hideRef.current = undefined;
+                    }
+                    props.onChange(item);
+                  }}
+                >
+                  {props.itemContent?.(item, selected) ?? (
+                    <div css={[styles.defaultItemContent, item === props.value && styles.defaultItemContentSelected]}>
+                      {props.itemText(item)}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        );
+      }}
+    />
   );
 };
-
-function useHandleItemClick<TItem>(
-  hideRef: MutableRefObject<(() => void) | undefined>,
-  onItemSelect: (item: TItem) => void
-) {
-  return useCallback<(item: TItem) => void>(
-    (item) => {
-      if (hideRef.current) {
-        hideRef.current();
-        hideRef.current = undefined;
-      }
-
-      onItemSelect(item);
-    },
-    [hideRef, onItemSelect]
-  );
-}
-
-function useDropdownRenderControl(text: string) {
-  return useCallback<GenericDropdownRenderControl>(
-    (toggle) => {
-      return (
-        <div css={styles.control} onClick={toggle}>
-          <div css={styles.controlText}>{text}</div>
-          <div css={styles.controlIcon}>
-            <Icons.ChevronDown color="currentColor" />
-          </div>
-        </div>
-      );
-    },
-    [text]
-  );
-}
-
-function useDropdownRenderContent<TItem>(
-  items: Array<TItem>,
-  itemId: (item: TItem) => string,
-  itemText: (item: TItem) => string,
-  itemContent: ((item: TItem) => ReactNode) | undefined,
-  itemSelected: (item: TItem) => boolean,
-  hideRef: MutableRefObject<(() => void) | undefined>,
-  handleItemClick: (item: TItem) => void
-) {
-  return useCallback<GenericDropdownRenderContent>(
-    (hide) => {
-      hideRef.current = hide;
-      return (
-        <div css={styles.content}>
-          {items.map((item) => (
-            <div key={itemId(item)} css={styles.item} onClick={() => handleItemClick(item)}>
-              {itemContent ? (
-                itemContent(item)
-              ) : (
-                <div css={[styles.defaultItemContent, itemSelected(item) && styles.defaultItemContentSelected]}>
-                  {itemText(item)}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      );
-    },
-    [hideRef, items, itemId, itemContent, itemSelected, itemText, handleItemClick]
-  );
-}
