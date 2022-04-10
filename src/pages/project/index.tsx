@@ -68,7 +68,17 @@ const Project: NextPage = () => {
           </div>
           <div css={styles.mainContent}>
             <div css={styles.mainContentHeader}>
-              <div css={styles.contentTitle}>{title}</div>
+              <div css={styles.mainContentTitle}>
+                <div css={styles.mainContentTitleBody}>{title}</div>
+                <div
+                  css={styles.mainContentTitleEditIcon}
+                  onClick={() => {
+                    dispatch(thunks.projectRename());
+                  }}
+                >
+                  <Icons.Edit color="currentColor" />
+                </div>
+              </div>
               <div css={styles.encryptionInfo}>
                 <div css={styles.encryptionInfoIcon}>
                   <Icons.Lock color="currentColor" />
@@ -77,7 +87,13 @@ const Project: NextPage = () => {
                   The data are end-to-end encrypted, you and your collaborators are the only ones who can access the
                   data.
                 </div>
-                <Button title="More info" kind={ButtonKind.Secondary} />
+                <Button
+                  title="More info"
+                  kind={ButtonKind.Secondary}
+                  onClick={() => {
+                    dispatch(thunks.projectViewEncryptionInfo());
+                  }}
+                />
               </div>
             </div>
             <div css={styles.contentSectionTitle}>1 - General Info</div>
@@ -273,9 +289,9 @@ const Project: NextPage = () => {
         <div css={styles.scores}>
           {documentScore && (
             <>
-              <div css={styles.scoresTitleContainer}>
-                <div css={styles.contentTitle}>Scores</div>
-                <div css={styles.contentSubtitle}>Check out your scores in real time</div>
+              <div css={styles.scoresHeader}>
+                <div css={styles.scoresTitle}>Scores</div>
+                <div css={styles.scoresSubtitle}>Check out your scores in real time</div>
               </div>
               <div css={styles.scoresPanelGroup}>
                 <div css={styles.scoresPanel}>
@@ -288,7 +304,14 @@ const Project: NextPage = () => {
                     <div css={styles.icaoStatusBlock}>
                       ICAO: <span css={styles.icaoNotCompliant}>Not compliant</span>
                     </div>
-                    <div css={styles.icaoMissingFeaturesBlock}>Missing Features</div>
+                    <div
+                      css={styles.icaoMissingFeaturesBlock}
+                      onClick={() => {
+                        dispatch(thunks.projectViewMissingFeatures());
+                      }}
+                    >
+                      Missing Features
+                    </div>
                   </div>
                 </div>
                 <div css={[styles.scoresPanel, styles.scoresPanelSquare]}>
@@ -336,7 +359,13 @@ const Project: NextPage = () => {
                   </div>
                 </div>
                 <div css={styles.downloadReportContainer}>
-                  <Button title="Download report" fullWidth={true} />
+                  <Button
+                    title="Download report"
+                    fullWidth={true}
+                    onClick={() => {
+                      dispatch(thunks.projectDownloadReport());
+                    }}
+                  />
                 </div>
               </div>
             </>

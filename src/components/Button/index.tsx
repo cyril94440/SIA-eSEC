@@ -5,6 +5,7 @@ export interface ButtonProps {
   title: string;
   kind?: ButtonKind;
   fullWidth?: boolean;
+  onClick: () => void;
 }
 
 export enum ButtonKind {
@@ -16,7 +17,10 @@ export const Button: VFC<ButtonProps> = (props) => {
   const kind = props.kind ?? ButtonKind.Primary;
   const fullWidth = props.fullWidth ?? false;
   return (
-    <div css={[styles.root, kind === ButtonKind.Secondary && styles.rootSecondary, fullWidth && styles.rootFullWidth]}>
+    <div
+      css={[styles.root, kind === ButtonKind.Secondary && styles.rootSecondary, fullWidth && styles.rootFullWidth]}
+      onClick={props.onClick}
+    >
       {props.title}
     </div>
   );

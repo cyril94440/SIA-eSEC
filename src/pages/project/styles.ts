@@ -43,6 +43,26 @@ export const mainContentHeader = css`
   margin-bottom: ${consts.SIZE(8)};
 `;
 
+export const mainContentTitle = css`
+  color: ${consts.COLOR_GREY_BLUE};
+  margin-bottom: ${consts.SIZE(1)};
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: ${consts.SIZE(2)};
+`;
+
+export const mainContentTitleBody = css`
+  ${styles.fontMedium40};
+`;
+
+export const mainContentTitleEditIcon = css`
+  width: ${consts.SIZE(2)};
+  height: ${consts.SIZE(2)};
+  cursor: pointer;
+  user-select: none;
+`;
+
 export const scores = css`
   flex: 1;
   min-width: ${consts.SIZE(60)};
@@ -52,16 +72,27 @@ export const scores = css`
   background: ${consts.COLOR_NEUTRAL_BLUE};
 `;
 
-export const scoresTitleContainer = css`
+export const scoresHeader = css`
   padding-left: ${consts.SIZE(2)};
   margin-bottom: ${consts.SIZE(1)};
+  color: ${consts.COLOR_GREY_BLUE};
+`;
+
+export const scoresTitle = css`
+  ${styles.fontMedium40};
+  margin-bottom: ${consts.SIZE(1)};
+`;
+
+export const scoresSubtitle = css`
+  ${styles.fontRegular14};
+  color: ${consts.COLOR_GREY_BLUE};
 `;
 
 export const scoresPanel = css`
   background: ${consts.COLOR_WHITE};
   border-radius: ${consts.SIZE(1)};
   box-shadow: ${`0px ${consts.SIZE(1 / 2)} ${consts.SIZE(3)} rgba(0, 0, 0, 0.04)`};
-  padding: ${consts.SIZE(3)} ${consts.SIZE(6)};
+  padding: ${consts.SIZE(4)} ${consts.SIZE(6)};
 `;
 
 export const scoresPanelTitle = css`
@@ -90,17 +121,6 @@ export const scoresPanelGroup = css`
   display: flex;
   flex-direction: column;
   gap: ${consts.SIZE(4)};
-`;
-
-export const contentTitle = css`
-  ${styles.fontMedium40};
-  color: ${consts.COLOR_GREY_BLUE};
-  margin-bottom: ${consts.SIZE(1)};
-`;
-
-export const contentSubtitle = css`
-  ${styles.fontRegular14};
-  color: ${consts.COLOR_GREY_BLUE};
 `;
 
 export const contentText = css`
@@ -167,6 +187,7 @@ export const icaoMissingFeaturesBlock = css`
   flex: none;
   color: ${consts.COLOR_GREY_BLUE};
   cursor: pointer;
+  user-select: none;
 `;
 
 export const icaoNotCompliant = css`
