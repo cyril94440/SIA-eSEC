@@ -26,7 +26,8 @@
       "@@styles": ["styles"],
       "@@thunks": ["thunks"],
       "@@types": ["types"],
-      "@@utils": ["utils"]
+      "@@utils": ["utils"],
+      "@@views": ["views"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

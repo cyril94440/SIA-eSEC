@@ -2,6 +2,8 @@ import { App } from "./App";
 import { CheckboxChecked } from "./CheckboxChecked";
 import { CheckboxUnchecked } from "./CheckboxUnchecked";
 import { ChevronDown } from "./ChevronDown";
+import { ChevronLeft } from "./ChevronLeft";
+import { ChevronRight } from "./ChevronRight";
 import { DocumentMaterialPaper } from "./DocumentMaterialPaper";
 import { DocumentMaterialPlastic } from "./DocumentMaterialPlastic";
 import { DocumentTypeDriving } from "./DocumentTypeDriving";
@@ -18,6 +20,8 @@ export const Icons = {
   CheckboxChecked,
   CheckboxUnchecked,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   DocumentMaterialPaper,
   DocumentMaterialPlastic,
   DocumentTypeDriving,

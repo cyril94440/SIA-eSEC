@@ -6,17 +6,6 @@ import { fontRegular12 } from "@@styles";
 export const root = css`
   display: flex;
   flex-direction: row;
-  min-height: 100vh;
-`;
-
-export const sidebar = css`
-  flex: none;
-  width: ${consts.SIZE(11)};
-  background: ${consts.COLOR_PRIMARY_36};
-  padding: ${consts.SIZE(6)} 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 export const main = css`
@@ -24,10 +13,6 @@ export const main = css`
   padding-left: ${consts.SIZE(5)};
   padding-right: ${consts.SIZE(3)};
   padding-bottom: ${consts.SIZE(50)};
-`;
-
-export const sidebarLogoContainer = css`
-  width: ${consts.SIZE(6)};
 `;
 
 export const mainTop = css`
