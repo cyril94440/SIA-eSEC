@@ -61,3 +61,9 @@ export const fontMedium10Caps = css`
   line-height: ${consts.FONT_MEDIUM_10_CAPS_LINE_HEIGHT};
   text-transform: uppercase;
 `;
+
+export const fontSemiBold12 = css`
+  font-size: ${consts.FONT_SEMIBOLD_12_SIZE};
+  font-weight: ${consts.FONT_SEMIBOLD_12_WEIGHT};
+  line-height: ${consts.FONT_SEMIBOLD_12_LINE_HEIGHT};
+`;

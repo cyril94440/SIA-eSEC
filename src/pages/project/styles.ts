@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import * as consts from "@@consts";
 import * as styles from "@@styles";
+import { fontRegular12 } from "@@styles";
 
 export const root = css`
   display: flex;
@@ -39,7 +40,7 @@ export const mainTop = css`
 export const mainContent = css``;
 
 export const mainContentHeader = css`
-  margin-bottom: ${consts.SIZE(12)};
+  margin-bottom: ${consts.SIZE(8)};
 `;
 
 export const scores = css`
@@ -123,7 +124,7 @@ export const contentSectionTitle = css`
 `;
 
 export const contentSectionItem = css`
-  margin-bottom: ${consts.SIZE(5)};
+  margin-bottom: ${consts.SIZE(7)};
 `;
 
 export const contentSectionItemTitle = css`
@@ -174,4 +175,21 @@ export const icaoNotCompliant = css`
 
 export const downloadReportContainer = css`
   padding: ${consts.SIZE(4)} 0;
+`;
+
+export const encryptionInfo = css`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: ${consts.SIZE(1)};
+  padding: ${consts.SIZE(1)} 0;
+  color: ${consts.COLOR_GREY_BLUE};
+`;
+
+export const encryptionInfoIcon = css`
+  width: ${consts.SIZE(2)};
+`;
+
+export const encryptionInfoText = css`
+  ${fontRegular12};
 `;

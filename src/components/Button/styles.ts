@@ -13,6 +13,16 @@ export const root = css`
   border-radius: ${consts.SIZE(1 / 2)};
   cursor: pointer;
   user-select: none;
+  white-space: nowrap;
+`;
+
+export const rootSecondary = css`
+  ${styles.fontSemiBold12};
+  height: ${consts.SIZE(3)};
+  padding: 0 ${consts.SIZE(1.5)};
+  color: ${consts.COLOR_PRIMARY_36};
+  background: unset;
+  border: 1px solid ${consts.COLOR_PRIMARY_36};
 `;
 
 export const rootFullWidth = css`

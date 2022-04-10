@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
+  ButtonKind,
   CardSelect,
   DocumentScoreDistributionRadar,
   DocumentScoreLevelsCoverageRadar,
@@ -68,6 +69,16 @@ const Project: NextPage = () => {
           <div css={styles.mainContent}>
             <div css={styles.mainContentHeader}>
               <div css={styles.contentTitle}>{title}</div>
+              <div css={styles.encryptionInfo}>
+                <div css={styles.encryptionInfoIcon}>
+                  <Icons.Lock color="currentColor" />
+                </div>
+                <div css={styles.encryptionInfoText}>
+                  The data are end-to-end encrypted, you and your collaborators are the only ones who can access the
+                  data.
+                </div>
+                <Button title="More info" kind={ButtonKind.Secondary} />
+              </div>
             </div>
             <div css={styles.contentSectionTitle}>1 - General Info</div>
             <div css={styles.contentSectionItem}>

@@ -65,4 +65,8 @@ export const FONT_MEDIUM_10_CAPS_SIZE = "10px";
 export const FONT_MEDIUM_10_CAPS_WEIGHT = 500;
 export const FONT_MEDIUM_10_CAPS_LINE_HEIGHT = "110%";
 
+export const FONT_SEMIBOLD_12_SIZE = "12px";
+export const FONT_SEMIBOLD_12_WEIGHT = 600;
+export const FONT_SEMIBOLD_12_LINE_HEIGHT = "110%";
+
 export const SIZE = (value: number) => value * 8 + "px";

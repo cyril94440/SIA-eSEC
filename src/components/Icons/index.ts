@@ -8,6 +8,7 @@ import { DocumentTypeDriving } from "./DocumentTypeDriving";
 import { DocumentTypeIdCard } from "./DocumentTypeIdCard";
 import { DocumentTypeOther } from "./DocumentTypeOther";
 import { DocumentTypePassport } from "./DocumentTypePassport";
+import { Lock } from "./Lock";
 import { RadioActive } from "./RadioActive";
 import { RadioInactive } from "./RadioInactive";
 
@@ -22,6 +23,7 @@ export const Icons = {
   DocumentTypeIdCard,
   DocumentTypeOther,
   DocumentTypePassport,
+  Lock,
   RadioActive,
   RadioInactive,
 };
