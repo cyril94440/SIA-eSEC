@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  Button,
   CardSelect,
   DocumentScoreDistributionRadar,
   DocumentScoreLevelsCoverageRadar,
@@ -322,6 +323,9 @@ const Project: NextPage = () => {
                       />
                     </div>
                   </div>
+                </div>
+                <div css={styles.downloadReportContainer}>
+                  <Button title="Download report" fullWidth={true} />
                 </div>
               </div>
             </>

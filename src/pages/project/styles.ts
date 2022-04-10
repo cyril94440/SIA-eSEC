@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 import * as consts from "@@consts";
 import * as styles from "@@styles";
-import { fontMedium14 } from "@@styles";
 
 export const root = css`
   display: flex;
@@ -171,4 +170,8 @@ export const icaoMissingFeaturesBlock = css`
 
 export const icaoNotCompliant = css`
   color: ${consts.COLOR_CRITICAL_50};
+`;
+
+export const downloadReportContainer = css`
+  padding: ${consts.SIZE(4)} 0;
 `;

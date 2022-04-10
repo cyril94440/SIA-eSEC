@@ -27,11 +27,11 @@ export const fontMedium14 = css`
   line-height: ${consts.FONT_MEDIUM_14_LINE_HEIGHT};
 `;
 
-export const fontMedium32 = css`
-  font-size: ${consts.FONT_MEDIUM_32_SIZE};
-  font-weight: ${consts.FONT_MEDIUM_32_WEIGHT};
-  letter-spacing: ${consts.FONT_MEDIUM_32_LETTER_SPACING};
-  line-height: ${consts.FONT_MEDIUM_32_LINE_HEIGHT};
+export const fontMedium16 = css`
+  font-size: ${consts.FONT_MEDIUM_16_SIZE};
+  font-weight: ${consts.FONT_MEDIUM_16_WEIGHT};
+  letter-spacing: ${consts.FONT_MEDIUM_16_LETTER_SPACING};
+  line-height: ${consts.FONT_MEDIUM_16_LINE_HEIGHT};
 `;
 
 export const fontMedium20 = css`
@@ -39,6 +39,13 @@ export const fontMedium20 = css`
   font-weight: ${consts.FONT_MEDIUM_20_WEIGHT};
   letter-spacing: ${consts.FONT_MEDIUM_20_LETTER_SPACING};
   line-height: ${consts.FONT_MEDIUM_20_LINE_HEIGHT};
+`;
+
+export const fontMedium32 = css`
+  font-size: ${consts.FONT_MEDIUM_32_SIZE};
+  font-weight: ${consts.FONT_MEDIUM_32_WEIGHT};
+  letter-spacing: ${consts.FONT_MEDIUM_32_LETTER_SPACING};
+  line-height: ${consts.FONT_MEDIUM_32_LINE_HEIGHT};
 `;
 
 export const fontMedium40 = css`

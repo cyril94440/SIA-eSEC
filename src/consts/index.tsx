@@ -41,6 +41,11 @@ export const FONT_MEDIUM_14_WEIGHT = 500;
 export const FONT_MEDIUM_14_LETTER_SPACING = "-0.01em";
 export const FONT_MEDIUM_14_LINE_HEIGHT = "145%";
 
+export const FONT_MEDIUM_16_SIZE = "16px";
+export const FONT_MEDIUM_16_WEIGHT = 500;
+export const FONT_MEDIUM_16_LETTER_SPACING = "-0.01em";
+export const FONT_MEDIUM_16_LINE_HEIGHT = "110%";
+
 export const FONT_MEDIUM_20_SIZE = "20px";
 export const FONT_MEDIUM_20_WEIGHT = 500;
 export const FONT_MEDIUM_20_LETTER_SPACING = "-0.01em";
