@@ -23,6 +23,7 @@ export const itemIcon = css`
   color: ${consts.COLOR_NEUTRAL_70};
   background: ${consts.COLOR_NEUTRAL_BLUE};
   cursor: pointer;
+  user-select: none;
 `;
 
 export const itemIconSelected = css`

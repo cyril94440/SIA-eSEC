@@ -10,7 +10,6 @@ export const control = css`
   background: ${consts.COLOR_NEUTRAL_BLUE};
   cursor: pointer;
   user-select: none;
-
   display: flex;
   flex-direction: row;
   align-items: center;

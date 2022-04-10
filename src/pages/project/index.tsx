@@ -6,6 +6,7 @@ import {
   Button,
   ButtonKind,
   CardSelect,
+  CommentsWrap,
   DocumentScoreDistributionRadar,
   DocumentScoreLevelsCoverageRadar,
   DocumentScoreOverallRadar,
@@ -194,23 +195,25 @@ const Project: NextPage = () => {
                 <div css={styles.contentControlLabel}>
                   1 - Is the security design based on a risk analysis and is it documented ?
                 </div>
-                <RadioGroup
-                  value={documentSpecs.designAnswer1}
-                  items={[
-                    {
-                      value: true,
-                      content: "Yes - all aspects blablablablablablablablablablablablablab",
-                    },
-                    {
-                      value: false,
-                      content: "No - all aspects blablablablablablablablablablablablablablablablablabla",
-                      activeBackgroundColor: consts.COLOR_CRITICAL_50,
-                    },
-                  ]}
-                  onChange={(value) => {
-                    dispatch(thunks.projectChangeDocumentDesignAnswer1(value));
-                  }}
-                />
+                <CommentsWrap text="No comments yet">
+                  <RadioGroup
+                    value={documentSpecs.designAnswer1}
+                    items={[
+                      {
+                        value: true,
+                        content: "Yes - all aspects blablablablablablablablablablablablablab",
+                      },
+                      {
+                        value: false,
+                        content: "No - all aspects blablablablablablablablablablablablablablablablablabla",
+                        activeBackgroundColor: consts.COLOR_CRITICAL_50,
+                      },
+                    ]}
+                    onChange={(value) => {
+                      dispatch(thunks.projectChangeDocumentDesignAnswer1(value));
+                    }}
+                  />
+                </CommentsWrap>
               </div>
             </div>
             <div css={styles.contentSectionItem}>
@@ -218,70 +221,76 @@ const Project: NextPage = () => {
                 <div css={styles.contentControlLabel}>
                   2 - Is the security design based on a risk analysis and is it documented ?
                 </div>
-                <RadioGroup
-                  value={documentSpecs.designAnswer2}
-                  items={[
-                    {
-                      value: true,
-                      content: "Yes - all aspects blablablablablablablablablablablablablab",
-                    },
-                    {
-                      value: false,
-                      content: "No - all aspects blablablablablablablablablablablablablablablablablabla",
-                      activeBackgroundColor: consts.COLOR_CRITICAL_50,
-                    },
-                  ]}
-                  onChange={(value) => {
-                    dispatch(thunks.projectChangeDocumentDesignAnswer2(value));
-                  }}
-                />
+                <CommentsWrap text="No comments yet">
+                  <RadioGroup
+                    value={documentSpecs.designAnswer2}
+                    items={[
+                      {
+                        value: true,
+                        content: "Yes - all aspects blablablablablablablablablablablablablab",
+                      },
+                      {
+                        value: false,
+                        content: "No - all aspects blablablablablablablablablablablablablablablablablabla",
+                        activeBackgroundColor: consts.COLOR_CRITICAL_50,
+                      },
+                    ]}
+                    onChange={(value) => {
+                      dispatch(thunks.projectChangeDocumentDesignAnswer2(value));
+                    }}
+                  />
+                </CommentsWrap>
               </div>
             </div>
             <div css={styles.contentSectionTitle}>3 - Security Features</div>
             <div css={styles.contentSectionItem}>
               <div css={styles.contentSectionItemTitle}>IR</div>
               <div css={styles.contentControlContainer}>
-                <MultiSelect
-                  title="Select your feature"
-                  value={documentSpecs.securityFeatures}
-                  items={[
-                    DocumentSecurityFeature.IR_A,
-                    DocumentSecurityFeature.IR_B,
-                    DocumentSecurityFeature.IR_C,
-                    DocumentSecurityFeature.IR_D,
-                    DocumentSecurityFeature.IR_E,
-                    DocumentSecurityFeature.IR_F,
-                  ]}
-                  itemId={(item) => item}
-                  itemContent={(item) => formatDocumentSecurityFeatureString(item)}
-                  onChange={(value) => {
-                    dispatch(thunks.projectChangeDocumentSecurityFeatures(value));
-                  }}
-                />
+                <CommentsWrap text="No comments yet">
+                  <MultiSelect
+                    title="Select your feature"
+                    value={documentSpecs.securityFeatures}
+                    items={[
+                      DocumentSecurityFeature.IR_A,
+                      DocumentSecurityFeature.IR_B,
+                      DocumentSecurityFeature.IR_C,
+                      DocumentSecurityFeature.IR_D,
+                      DocumentSecurityFeature.IR_E,
+                      DocumentSecurityFeature.IR_F,
+                    ]}
+                    itemId={(item) => item}
+                    itemContent={(item) => formatDocumentSecurityFeatureString(item)}
+                    onChange={(value) => {
+                      dispatch(thunks.projectChangeDocumentSecurityFeatures(value));
+                    }}
+                  />
+                </CommentsWrap>
               </div>
             </div>
             <div css={styles.contentSectionItem}>
               <div css={styles.contentSectionItemTitle}>Offset Design</div>
               <div css={styles.contentControlContainer}>
-                <MultiSelect
-                  title="Select your feature"
-                  value={documentSpecs.securityFeatures}
-                  items={[
-                    DocumentSecurityFeature.OFFSET_DESIGN_A,
-                    DocumentSecurityFeature.OFFSET_DESIGN_B,
-                    DocumentSecurityFeature.OFFSET_DESIGN_C,
-                    DocumentSecurityFeature.OFFSET_DESIGN_D,
-                    DocumentSecurityFeature.OFFSET_DESIGN_E,
-                    DocumentSecurityFeature.OFFSET_DESIGN_F,
-                    DocumentSecurityFeature.OFFSET_DESIGN_G,
-                    DocumentSecurityFeature.OFFSET_DESIGN_H,
-                  ]}
-                  itemId={(item) => item}
-                  itemContent={(item) => formatDocumentSecurityFeatureString(item)}
-                  onChange={(value) => {
-                    dispatch(thunks.projectChangeDocumentSecurityFeatures(value));
-                  }}
-                />
+                <CommentsWrap text="No comments yet">
+                  <MultiSelect
+                    title="Select your feature"
+                    value={documentSpecs.securityFeatures}
+                    items={[
+                      DocumentSecurityFeature.OFFSET_DESIGN_A,
+                      DocumentSecurityFeature.OFFSET_DESIGN_B,
+                      DocumentSecurityFeature.OFFSET_DESIGN_C,
+                      DocumentSecurityFeature.OFFSET_DESIGN_D,
+                      DocumentSecurityFeature.OFFSET_DESIGN_E,
+                      DocumentSecurityFeature.OFFSET_DESIGN_F,
+                      DocumentSecurityFeature.OFFSET_DESIGN_G,
+                      DocumentSecurityFeature.OFFSET_DESIGN_H,
+                    ]}
+                    itemId={(item) => item}
+                    itemContent={(item) => formatDocumentSecurityFeatureString(item)}
+                    onChange={(value) => {
+                      dispatch(thunks.projectChangeDocumentSecurityFeatures(value));
+                    }}
+                  />
+                </CommentsWrap>
               </div>
             </div>
           </div>
