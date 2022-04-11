@@ -22,6 +22,7 @@
       "@@components": ["components"],
       "@@consts": ["consts"],
       "@@hooks": ["hooks"],
+      "@@routes": ["routes"],
       "@@services": ["services"],
       "@@store": ["store"],
       "@@styles": ["styles"],
