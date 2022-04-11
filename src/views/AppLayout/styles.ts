@@ -9,13 +9,17 @@ export const root = css`
 
 export const sidenav = css`
   flex: none;
-  width: ${consts.SIZE(11)};
+  width: ${consts.SIZE(29)};
   color: ${consts.COLOR_WHITE};
   background: ${consts.COLOR_PRIMARY_36};
   padding: ${consts.SIZE(6)} 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+export const sidenavMinimized = css`
+  width: ${consts.SIZE(11)};
 `;
 
 export const main = css`
