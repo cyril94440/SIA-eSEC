@@ -19,17 +19,19 @@
     "pretty": true,
     "paths": {
       "@@actions": ["actions"],
-      "@@components": ["components"],
       "@@consts": ["consts"],
       "@@hooks": ["hooks"],
       "@@routes": ["routes"],
       "@@services": ["services"],
       "@@store": ["store"],
-      "@@styles": ["styles"],
       "@@thunks": ["thunks"],
       "@@types": ["types"],
       "@@utils": ["utils"],
-      "@@views": ["views"]
+      "@@view/app": ["view/app"],
+      "@@view/components": ["view/components"],
+      "@@view/containers": ["view/containers"],
+      "@@view/pages": ["view/pages"],
+      "@@view/styles": ["view/styles"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
