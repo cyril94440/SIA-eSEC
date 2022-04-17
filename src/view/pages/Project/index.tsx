@@ -1,23 +1,34 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@@hooks";
+import { useEffect, useMemo } from "react";
+import { DocumentDesignQuestion } from "@@api";
+import { formatPageTitle } from "@@core";
 import * as thunks from "@@thunks";
-import { formatPageTitle } from "@@utils";
 import { AppLayout } from "@@view/containers";
+import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import { Content, Scores } from "./components";
 import * as styles from "./styles";
 
-export const Project: NextPage = () => {
+export interface ProjectProps {
+  documentDesignQuestionsJson: string;
+}
+
+export const Project: NextPage<ProjectProps> = (props) => {
   const dispatch = useAppDispatch();
   const title = useAppSelector((state) => state.project.title);
   const status = useAppSelector((state) => state.project.status);
   const documentSpecs = useAppSelector((state) => state.project.documentSpecs);
   const documentScore = useAppSelector((state) => state.project.documentScore);
+  const documentDesignQuestions = useAppSelector((state) => state.project.documentDesignQuestions);
 
   useEffect(() => {
     dispatch(thunks.projectLoad());
   }, [dispatch]);
+
+  useEffect(() => {
+    const documentDesignQuestions = JSON.parse(props.documentDesignQuestionsJson) as DocumentDesignQuestion[];
+    dispatch(thunks.projectChangeDocumentDesignQuestions(documentDesignQuestions));
+  }, [dispatch, props.documentDesignQuestionsJson]);
 
   return (
     <>
@@ -29,6 +40,7 @@ export const Project: NextPage = () => {
           title={title}
           status={status}
           documentSpecs={documentSpecs}
+          documentDesignQuestions={documentDesignQuestions}
           onRenameClick={() => {
             dispatch(thunks.projectRename());
           }}
@@ -47,11 +59,8 @@ export const Project: NextPage = () => {
           onChangeDocumentScoreTarget={(value) => {
             dispatch(thunks.projectChangeDocumentScoreTarget(value));
           }}
-          onChangeDocumentDesignAnswer1={(value) => {
-            dispatch(thunks.projectChangeDocumentDesignAnswer1(value));
-          }}
-          onChangeDocumentDesignAnswer2={(value) => {
-            dispatch(thunks.projectChangeDocumentDesignAnswer2(value));
+          onChangeDocumentDesignAnswer={(value) => {
+            dispatch(thunks.projectChangeDocumentDesignAnswer(value));
           }}
           onChangeDocumentSecurityFeatures={(value) => {
             dispatch(thunks.projectChangeDocumentSecurityFeatures(value));

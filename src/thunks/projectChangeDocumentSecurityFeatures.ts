@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import * as actions from "@@actions";
+import { DocumentSecurityFeature } from "@@core";
+import { actions } from "@@store";
 import { projectUpdateDocumentScore } from "./projectUpdateDocumentScore";
-import { DocumentSecurityFeature } from "@@types";
 
 export const projectChangeDocumentSecurityFeatures = createAsyncThunk<void, DocumentSecurityFeature[]>(
   "projectChangeDocumentSecurityFeatures",

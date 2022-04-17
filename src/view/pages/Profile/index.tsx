@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { formatPageTitle } from "@@utils";
+import { formatPageTitle } from "@@core";
 import { AppLayout } from "@@view/containers";
 import * as styles from "./styles";
 

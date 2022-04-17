@@ -1,14 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import * as actions from "@@actions";
-import { AppState } from "@@store";
-import { calculateDocumentScore } from "@@utils";
+import { calculateDocumentScore } from "@@core";
+import { actions, AppState } from "@@store";
 
 export const projectUpdateDocumentScore = createAsyncThunk<void, void>(
   "projectUpdateDocumentScore",
   async (value, { dispatch, getState }) => {
     const state = getState() as AppState;
     const specs = state.project.documentSpecs;
-    const score = await calculateDocumentScore(specs);
+    const designQuestions = state.project.documentDesignQuestions;
+
+    if (!designQuestions) {
+      return;
+    }
+
+    const score = await calculateDocumentScore(specs, designQuestions);
     dispatch(actions.projectSetDocumentScore(score));
   }
 );

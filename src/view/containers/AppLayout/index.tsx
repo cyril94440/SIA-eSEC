@@ -1,11 +1,11 @@
 import { SerializedStyles } from "@emotion/utils";
 import { useRouter } from "next/router";
 import { FC, ReactNode, useContext } from "react";
-import { useAppDispatch, useAppSelector } from "@@hooks";
-import * as routes from "@@routes";
-import { LocalStorageContext } from "@@services";
+import { routes } from "@@core";
 import * as thunks from "@@thunks";
 import { Icons } from "@@view/components";
+import { LocalStorageContext } from "@@view/contexts";
+import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import { Main, Sidenav, SidenavHeader, SidenavItem, SidenavSection, SidenavToggle } from "./components";
 import * as styles from "./styles";
 

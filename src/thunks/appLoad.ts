@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import * as actions from "@@actions";
-import { LocalStorage } from "@@services";
+import { LocalStorage } from "@@core";
+import { actions } from "@@store";
 
 export interface AppLoadArgs {
   localStorage: LocalStorage;

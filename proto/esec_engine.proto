@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+message GetDocumentDesignQuestionsRequest {}
+message GetDocumentDesignQuestionsResponse{
+    repeated DocumentDesignQuestion questions = 1;
+}
+
+message DocumentDesignQuestion{
+    int32 id = 1;
+    string question_title = 2;
+    optional string details = 3;
+    repeated DocumentDesignAnswer answers = 4;
+}
+
+message DocumentDesignAnswer{
+    int32 id = 1;
+    string answer_title = 2;
+    float score = 3;
+    optional string recommendation = 4;
+    optional float score_cost_effectiveness = 5;
+}
+
+service DatabaseService{
+    rpc GetDocumentDesignQuestions (GetDocumentDesignQuestionsRequest) returns (GetDocumentDesignQuestionsResponse){};
+}

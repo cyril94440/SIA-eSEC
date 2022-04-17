@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import * as actions from "@@actions";
-import { AppState } from "@@store";
-import { LocalStorage } from "@@services";
+import { LocalStorage } from "@@core";
+import { actions, AppState } from "@@store";
 
 export interface AppToggleSidenavArgs {
   localStorage: LocalStorage;

@@ -9,7 +9,7 @@ export const root = css`
 
 export const item = css`
   ${styles.fontRegular14};
-  height: ${styles.getSize(6)};
+  min-height: ${styles.getSize(6)};
   padding: ${styles.getSize(2)};
   background: ${styles.COLOR_NEUTRAL_BLUE};
   border-radius: ${styles.getSize(1)};

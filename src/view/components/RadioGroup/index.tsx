@@ -3,7 +3,7 @@ import { Icons } from "../Icons";
 import * as styles from "./styles";
 
 export interface RadioGroupProps<TValue> {
-  value: TValue;
+  value: TValue | null;
   items: RadioGroupItemProps<TValue>[];
   onChange: (value: TValue) => void;
 }

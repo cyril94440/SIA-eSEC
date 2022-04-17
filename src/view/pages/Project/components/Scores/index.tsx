@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { DocumentScore } from "@@types";
+import { DocumentScore } from "@@core";
 import {
   DocumentScoreDistributionRadar,
   DocumentScoreLevelsCoverageRadar,

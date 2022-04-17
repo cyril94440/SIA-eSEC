@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { DocumentScoreOverall } from "@@types";
+import { DocumentScoreOverall } from "@@core";
 import { ScoreRadar } from "../ScoreRadar";
 
 export interface DocumentScoreOverallRadarProps {

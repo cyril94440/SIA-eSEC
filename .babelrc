@@ -3,6 +3,11 @@
     [
       "next/babel",
       {
+        "preset-env": {
+          "targets": {
+            "browsers": "Chrome 55"
+          }
+        },
         "preset-react": {
           "runtime": "automatic",
           "importSource": "@emotion/react"

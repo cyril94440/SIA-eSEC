@@ -1,5 +1,12 @@
 import { FC } from "react";
+import { DocumentDesignQuestion } from "@@api";
 import {
+  formatDocumentMaterialString,
+  formatDocumentScoreTargetString,
+  formatDocumentSecurityFeatureString,
+  formatDocumentStandardComplianceString,
+  formatDocumentTypeString,
+  DocumentDesignAnswer,
   DocumentMaterial,
   DocumentScoreTarget,
   DocumentSecurityFeature,
@@ -7,16 +14,8 @@ import {
   DocumentStandardCompliance,
   DocumentType,
   ProjectStatus,
-} from "@@types";
-import {
-  formatDocumentMaterialString,
-  formatDocumentScoreTargetString,
-  formatDocumentSecurityFeatureString,
-  formatDocumentStandardComplianceString,
-  formatDocumentTypeString,
-} from "@@utils";
+} from "@@core";
 import { CardSelect, CommentsWrap, Icons, MultiSelect, RadioGroup, Select } from "@@view/components";
-import * as sharedStyles from "@@view/styles";
 import { Label, Text, Header, Section, SectionItem, Status } from "./components";
 import * as styles from "./styles";
 
@@ -24,18 +23,22 @@ export interface ContentProps {
   title: string;
   status: ProjectStatus;
   documentSpecs: DocumentSpecs;
+  documentDesignQuestions: DocumentDesignQuestion[] | null;
   onRenameClick: () => void;
   onEncryptionInfoClick: () => void;
   onChangeDocumentType: (value: DocumentType) => void;
   onChangeDocumentMaterial: (value: DocumentMaterial) => void;
   onChangeDocumentStandardCompliance: (value: DocumentStandardCompliance) => void;
   onChangeDocumentScoreTarget: (value: DocumentScoreTarget) => void;
-  onChangeDocumentDesignAnswer1: (value: boolean) => void;
-  onChangeDocumentDesignAnswer2: (value: boolean) => void;
+  onChangeDocumentDesignAnswer: (value: DocumentDesignAnswer) => void;
   onChangeDocumentSecurityFeatures: (value: DocumentSecurityFeature[]) => void;
 }
 
 export const Content: FC<ContentProps> = (props) => {
+  if (!props.documentDesignQuestions) {
+    return <div css={styles.root}></div>;
+  }
+
   return (
     <div css={styles.root}>
       <Status value={props.status} />
@@ -126,46 +129,28 @@ export const Content: FC<ContentProps> = (props) => {
             deceptive alterations has increased significantly.
           </Text>
         </SectionItem>
-        <SectionItem fullWidth={false}>
-          <Label>1 - Is the security design based on a risk analysis and is it documented ?</Label>
-          <CommentsWrap text="No comments yet">
-            <RadioGroup
-              value={props.documentSpecs.designAnswer1}
-              items={[
-                {
-                  value: true,
-                  content: "Yes - all aspects blablablablablablablablablablablablablab",
-                },
-                {
-                  value: false,
-                  content: "No - all aspects blablablablablablablablablablablablablablablablablabla",
-                  activeBackgroundColor: sharedStyles.COLOR_CRITICAL_50,
-                },
-              ]}
-              onChange={props.onChangeDocumentDesignAnswer1}
-            />
-          </CommentsWrap>
-        </SectionItem>
-        <SectionItem fullWidth={false}>
-          <Label>2 - Is the security design based on a risk analysis and is it documented ?</Label>
-          <CommentsWrap text="No comments yet">
-            <RadioGroup
-              value={props.documentSpecs.designAnswer2}
-              items={[
-                {
-                  value: true,
-                  content: "Yes - all aspects blablablablablablablablablablablablablab",
-                },
-                {
-                  value: false,
-                  content: "No - all aspects blablablablablablablablablablablablablablablablablabla",
-                  activeBackgroundColor: sharedStyles.COLOR_CRITICAL_50,
-                },
-              ]}
-              onChange={props.onChangeDocumentDesignAnswer2}
-            />
-          </CommentsWrap>
-        </SectionItem>
+        {props.documentDesignQuestions.map((question, questionIndex) => {
+          const value = props.documentSpecs.designAnswers.find((a) => a.questionId === question.id)?.answerId ?? null;
+          return (
+            <SectionItem key={question.id} fullWidth={false}>
+              <Label>{`${questionIndex + 1} - ${question.questionTitle}`}</Label>
+              <CommentsWrap text="No comments yet">
+                <RadioGroup
+                  value={value}
+                  items={question.answers.map((answer) => {
+                    return {
+                      value: answer.id,
+                      content: answer.answerTitle,
+                    };
+                  })}
+                  onChange={(answerId: number) => {
+                    props.onChangeDocumentDesignAnswer({ questionId: question.id, answerId });
+                  }}
+                />
+              </CommentsWrap>
+            </SectionItem>
+          );
+        })}
       </Section>
       <Section title="3 - Security Features">
         <SectionItem title="IR" fullWidth={false}>

@@ -1,5 +1,5 @@
 import React, { useCallback, useState, FC } from "react";
-import { useTimeout } from "@@hooks";
+import { useTimeout } from "@@view/hooks";
 import * as styles from "./styles";
 
 export interface GenericDropdownProps {

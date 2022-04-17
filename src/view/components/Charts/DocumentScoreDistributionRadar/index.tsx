@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { DocumentScoreDistribution } from "@@types";
+import { DocumentScoreDistribution } from "@@core";
 import { ScoreRadar } from "../ScoreRadar";
 
 export interface DocumentScoreDistributionRadarProps {

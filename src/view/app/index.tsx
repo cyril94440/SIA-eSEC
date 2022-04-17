@@ -4,10 +4,11 @@ import { Global as EmotionGlobal } from "@emotion/react";
 import { AppProps } from "next/app";
 import { useContext, useEffect, useMemo, FC } from "react";
 import { Provider as ReduxProvider } from "react-redux";
-import { useAppDispatch, useAppSelector } from "@@hooks";
-import { LocalStorage, LocalStorageContext } from "@@services";
+import { LocalStorage } from "@@core";
 import { store } from "@@store";
 import * as thunks from "@@thunks";
+import { LocalStorageContext } from "@@view/contexts";
+import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import * as styles from "@@view/styles";
 
 export const App: FC<AppProps> = (props) => {

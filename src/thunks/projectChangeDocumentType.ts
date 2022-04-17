@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import * as actions from "@@actions";
-import { DocumentType } from "@@types";
+import { DocumentType } from "@@core";
+import { actions } from "@@store";
 import { projectUpdateDocumentScore } from "./projectUpdateDocumentScore";
 
 export const projectChangeDocumentType = createAsyncThunk<void, DocumentType>(

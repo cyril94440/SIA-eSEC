@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { DocumentScoreLevelsCoverage } from "@@types";
+import { DocumentScoreLevelsCoverage } from "@@core";
 import { ScoreRadar } from "../ScoreRadar";
 
 export interface DocumentScoreLevelsCoverageRadarProps {

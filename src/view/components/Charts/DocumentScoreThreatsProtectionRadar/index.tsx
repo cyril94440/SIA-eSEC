@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { DocumentScoreThreatsProtection } from "@@types";
+import { DocumentScoreThreatsProtection } from "@@core";
 import { ScoreRadar } from "../ScoreRadar";
 
 export interface DocumentScoreThreatsProtectionRadarProps {
