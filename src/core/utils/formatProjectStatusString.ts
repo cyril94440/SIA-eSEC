@@ -5,6 +5,6 @@ export function formatProjectStatusString(value: ProjectStatus): string {
     case ProjectStatus.ONGOING:
       return "On going";
     default:
-      throw new Error(`Unhandled project status: "${value}"`);
+      return "Unrecognized";
   }
 }

@@ -13,6 +13,6 @@ export function formatDocumentStandardComplianceString(value: DocumentStandardCo
     case DocumentStandardCompliance.ICAO:
       return "ICAO";
     default:
-      throw new Error(`Unhandled document standard compliance: "${value}"`);
+      return "Unrecognized";
   }
 }

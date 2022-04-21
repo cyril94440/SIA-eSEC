@@ -4,6 +4,7 @@ export * from "./DocumentScoreDistribution";
 export * from "./DocumentScoreLevelsCoverage";
 export * from "./DocumentScoreOverall";
 export * from "./DocumentScoreTarget";
+export * from "./DocumentScoreThreatsProtection";
 export * from "./DocumentSpecs";
 export * from "./DocumentStandardCompliance";
 export * from "./DocumentType";

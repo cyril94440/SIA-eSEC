@@ -7,6 +7,6 @@ export function formatDocumentMaterialString(value: DocumentMaterial): string {
     case DocumentMaterial.PLASTIC:
       return "Plastic";
     default:
-      throw new Error(`Unhandled document material: "${value}"`);
+      return "Unrecognized";
   }
 }

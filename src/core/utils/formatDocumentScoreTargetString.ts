@@ -7,6 +7,6 @@ export function formatDocumentScoreTargetString(value: DocumentScoreTarget): str
     case DocumentScoreTarget.THEORICAL_MAXIMUM:
       return "Theorical maximum";
     default:
-      throw new Error(`Unhandled document score target: "${value}"`);
+      return "Unrecognized";
   }
 }

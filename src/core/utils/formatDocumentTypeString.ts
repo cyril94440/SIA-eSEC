@@ -11,6 +11,6 @@ export function formatDocumentTypeString(value: DocumentType): string {
     case DocumentType.PASSPORT:
       return "Passport";
     default:
-      throw new Error(`Unhandled document type: "${value}"`);
+      return "Unrecognized";
   }
 }
