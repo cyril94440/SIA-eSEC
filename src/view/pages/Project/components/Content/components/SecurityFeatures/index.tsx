@@ -19,7 +19,6 @@ export interface SecurityFeaturesProps {
 
 export const SecurityFeatures: FC<SecurityFeaturesProps> = (props) => {
   const documentSecurityFeaturesTree = buildDocumentSecurityFeatureTree(props.documentSecurityFeaturesInfo);
-  // console.log("documentSecurityFeaturesTree", documentSecurityFeaturesTree);
   return (
     <Section title="3 - Security Features">
       {documentSecurityFeaturesTree.categoryNodes.map((categoryNode) => {

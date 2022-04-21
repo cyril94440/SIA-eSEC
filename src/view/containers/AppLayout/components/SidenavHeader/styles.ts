@@ -9,7 +9,7 @@ export const root = css`
 `;
 
 export const logo = css`
-  width: ${styles.getSize(6)};
+  width: ${styles.getSize(9)};
   margin-bottom: ${styles.getSize(2)};
 `;
 
