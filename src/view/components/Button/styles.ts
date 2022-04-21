@@ -3,6 +3,7 @@ import * as styles from "@@view/styles";
 
 export const root = css`
   ${styles.fontMedium16};
+  line-height: 1;
   display: inline-flex;
   align-items: center;
   height: ${styles.getSize(6)};
@@ -17,6 +18,7 @@ export const root = css`
 
 export const rootSecondary = css`
   ${styles.fontSemiBold12};
+  line-height: 1;
   height: ${styles.getSize(3)};
   padding: 0 ${styles.getSize(1.5)};
   color: ${styles.COLOR_PRIMARY_36};
