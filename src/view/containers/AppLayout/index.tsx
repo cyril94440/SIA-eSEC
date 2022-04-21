@@ -5,12 +5,13 @@ import { routes } from "@@core";
 import * as thunks from "@@thunks";
 import { Icons } from "@@view/components";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
-import { Main, Sidenav, SidenavHeader, SidenavItem, SidenavSection, SidenavToggle } from "./components";
+import { Main, Sidebar, Sidenav, SidenavHeader, SidenavItem, SidenavSection, SidenavToggle } from "./components";
 import * as styles from "./styles";
 
 export interface AppLayoutProps {
   mainCss?: SerializedStyles;
   children?: ReactNode;
+  sidebar?: ReactNode;
 }
 
 export const AppLayout: FC<AppLayoutProps> = (props) => {
@@ -84,7 +85,10 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
           }}
         />
       </Sidenav>
-      <Main css={props.mainCss}>{props.children}</Main>
+      <Main css={props.mainCss} withSidebar={!!props.sidebar}>
+        {props.children}
+      </Main>
+      {props.sidebar && <Sidebar>{props.sidebar}</Sidebar>}
     </div>
   );
 };

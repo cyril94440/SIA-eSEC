@@ -7,7 +7,6 @@ import * as thunks from "@@thunks";
 import { AppLayout } from "@@view/containers";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import { Content, Scores } from "./components";
-import * as styles from "./styles";
 
 export interface ProjectProps {
   documentDesignQuestionsInfoJson: string;
@@ -40,7 +39,19 @@ export const Project: NextPage<ProjectProps> = (props) => {
       <Head>
         <title>{formatPageTitle(title)}</title>
       </Head>
-      <AppLayout mainCss={styles.root}>
+      <AppLayout
+        sidebar={
+          <Scores
+            documentScore={documentScore}
+            onDownloadReportClick={() => {
+              dispatch(thunks.projectDownloadReport());
+            }}
+            onIcaoMissingFeaturesClick={() => {
+              dispatch(thunks.projectViewMissingFeatures());
+            }}
+          />
+        }
+      >
         <Content
           title={title}
           status={status}
@@ -70,15 +81,6 @@ export const Project: NextPage<ProjectProps> = (props) => {
           }}
           onChangeDocumentSecurityFeatures={(value) => {
             dispatch(thunks.projectChangeDocumentSecurityFeatures(value));
-          }}
-        />
-        <Scores
-          documentScore={documentScore}
-          onDownloadReportClick={() => {
-            dispatch(thunks.projectDownloadReport());
-          }}
-          onIcaoMissingFeaturesClick={() => {
-            dispatch(thunks.projectViewMissingFeatures());
           }}
         />
       </AppLayout>

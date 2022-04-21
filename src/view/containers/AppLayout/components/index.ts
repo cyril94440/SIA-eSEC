@@ -1,4 +1,5 @@
 export * from "./Main";
+export * from "./Sidebar";
 export * from "./Sidenav";
 export * from "./SidenavHeader";
 export * from "./SidenavItem";
