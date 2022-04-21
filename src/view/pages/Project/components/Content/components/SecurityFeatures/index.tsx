@@ -33,7 +33,7 @@ export const SecurityFeatures: FC<SecurityFeaturesProps> = (props) => {
                 <SectionItem
                   key={locationNode.item}
                   title={formatDocumentSecurityFeatureLocationString(locationNode.item)}
-                  fullWidth={false}
+                  fullWidth={true}
                 >
                   <CommentsWrap text="No comments yet">
                     <MultiSelect<number>

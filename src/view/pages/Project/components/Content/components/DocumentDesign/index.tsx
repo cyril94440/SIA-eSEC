@@ -28,7 +28,7 @@ export const DocumentDesign: FC<DocumentDesignProps> = (props) => {
       {props.documentDesignQuestionsInfo.map((question, questionIndex) => {
         const value = props.documentSpecs.designAnswers.find((a) => a.idQuestion === question.id)?.idAnswer ?? null;
         return (
-          <SectionItem key={question.id} fullWidth={false}>
+          <SectionItem key={question.id} fullWidth={true}>
             <Label>{`${questionIndex + 1} - ${question.questionTitle}`}</Label>
             <CommentsWrap text="No comments yet">
               <RadioGroup

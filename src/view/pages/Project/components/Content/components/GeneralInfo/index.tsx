@@ -71,7 +71,7 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
           onChange={(value) => props.onChangeDocumentMaterial(value as DocumentMaterial)}
         />
       </SectionItem>
-      <SectionItem title="Standard Compliance" fullWidth={false}>
+      <SectionItem title="Standard Compliance" fullWidth={true}>
         <Select
           value={props.documentSpecs.standardCompliance}
           items={[
@@ -86,7 +86,7 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
           onChange={props.onChangeDocumentStandardCompliance}
         />
       </SectionItem>
-      <SectionItem title="Score Target" fullWidth={false}>
+      <SectionItem title="Score Target" fullWidth={true}>
         <Select
           value={props.documentSpecs.scoreTarget}
           items={[DocumentScoreTarget.THEORICAL_MAXIMUM, DocumentScoreTarget.SIA_RECO]}
