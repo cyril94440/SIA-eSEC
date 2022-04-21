@@ -18,7 +18,7 @@ export const SidenavItem: FC<SidenavItemProps> = (props) => {
   const inner = (
     <>
       <div css={styles.icon}>
-        <props.Icon color="currentColor" />
+        <props.Icon />
       </div>
       <div css={[styles.title, props.minimized && styles.titleHidden]}>{props.title}</div>
     </>

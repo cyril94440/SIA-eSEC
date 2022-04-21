@@ -14,12 +14,12 @@ export const Header: FC<HeaderProps> = (props) => {
       <div css={styles.title}>
         <div css={styles.titleBody}>{props.title}</div>
         <div css={styles.titleEditIcon} onClick={props.onRenameClick}>
-          <Icons.Edit color="currentColor" />
+          <Icons.Edit />
         </div>
       </div>
       <div css={styles.encryptionInfo}>
         <div css={styles.encryptionInfoIcon}>
-          <Icons.Lock color="currentColor" />
+          <Icons.Lock />
         </div>
         <div css={styles.encryptionInfoText}>
           The data are end-to-end encrypted, you and your collaborators are the only ones who can access the data.

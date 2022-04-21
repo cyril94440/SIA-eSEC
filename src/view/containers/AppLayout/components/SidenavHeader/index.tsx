@@ -10,7 +10,7 @@ export const SidenavHeader: FC<SidenavHeaderProps> = (props) => {
   return (
     <div css={styles.root}>
       <div css={styles.logo}>
-        <Icons.App color="currentColor" />
+        <Icons.App />
       </div>
       <div css={[styles.title, props.minimized && styles.titleHidden]}>Design secure IDs</div>
     </div>

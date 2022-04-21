@@ -25,7 +25,7 @@ export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
             <div css={styles.input} onClick={toggle}>
               <div css={styles.inputText}>{props.title}</div>
               <div css={styles.inputIcon}>
-                <Icons.ChevronDown color="currentColor" />
+                <Icons.ChevronDown />
               </div>
             </div>
             <div css={styles.itemList}>
@@ -39,7 +39,7 @@ export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
                   }}
                 >
                   <div css={[styles.itemIcon, styles.itemIconChecked]}>
-                    <Icons.CheckboxChecked color="currentColor" />
+                    <Icons.CheckboxChecked />
                   </div>
                   <div css={[styles.itemContent, styles.itemContentSelected]}>{props.itemContent(item, true)}</div>
                 </div>
@@ -62,7 +62,7 @@ export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
                   }}
                 >
                   <div css={styles.itemIcon}>
-                    <Icons.CheckboxUnchecked color="currentColor" />
+                    <Icons.CheckboxUnchecked />
                   </div>
                   <div css={styles.itemContent}>{props.itemContent(item, false)}</div>
                 </div>

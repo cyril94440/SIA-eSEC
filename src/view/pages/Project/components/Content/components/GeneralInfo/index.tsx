@@ -31,22 +31,22 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
           items={[
             {
               value: DocumentType.PASSPORT,
-              icon: Icons.DocumentTypePassport,
+              Icon: Icons.DocumentTypePassport,
               label: formatDocumentTypeString(DocumentType.PASSPORT),
             },
             {
               value: DocumentType.ID_CARD,
-              icon: Icons.DocumentTypeIdCard,
+              Icon: Icons.DocumentTypeIdCard,
               label: formatDocumentTypeString(DocumentType.ID_CARD),
             },
             {
               value: DocumentType.DRIVING_LICENSE,
-              icon: Icons.DocumentTypeDriving,
+              Icon: Icons.DocumentTypeDriving,
               label: formatDocumentTypeString(DocumentType.DRIVING_LICENSE),
             },
             {
               value: DocumentType.OTHER,
-              icon: Icons.DocumentTypeOther,
+              Icon: Icons.DocumentTypeOther,
               label: formatDocumentTypeString(DocumentType.OTHER),
             },
           ]}
@@ -59,12 +59,12 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
           items={[
             {
               value: DocumentMaterial.PLASTIC,
-              icon: Icons.DocumentMaterialPlastic,
+              Icon: Icons.DocumentMaterialPlastic,
               label: formatDocumentMaterialString(DocumentMaterial.PLASTIC),
             },
             {
               value: DocumentMaterial.PAPER,
-              icon: Icons.DocumentMaterialPaper,
+              Icon: Icons.DocumentMaterialPaper,
               label: formatDocumentMaterialString(DocumentMaterial.PAPER),
             },
           ]}

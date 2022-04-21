@@ -10,7 +10,7 @@ export interface CardSelectProps {
 
 export interface CardSelectItem {
   value: string;
-  icon: Icon;
+  Icon: Icon;
   label: string;
 }
 
@@ -18,7 +18,6 @@ export const CardSelect: FC<CardSelectProps> = (props) => {
   return (
     <div css={styles.root}>
       {props.items.map((item) => {
-        const Icon = item.icon;
         const selected = item.value === props.value;
         return (
           <div key={item.value} css={styles.item}>
@@ -26,7 +25,7 @@ export const CardSelect: FC<CardSelectProps> = (props) => {
               css={[styles.itemIcon, selected && styles.itemIconSelected]}
               onClick={!selected ? () => props.onChange(item.value) : undefined}
             >
-              <Icon color={"currentColor"} />
+              <item.Icon />
             </div>
             <div css={styles.itemLabel}>{item.label}</div>
           </div>

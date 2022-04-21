@@ -11,7 +11,7 @@ export const SidenavToggle: FC<SidenavToggleProps> = (props) => {
   const Icon = props.minimized ? Icons.ChevronRight : Icons.ChevronLeft;
   return (
     <div css={styles.root} onClick={props.onClick}>
-      <Icon color="currentColor" />
+      <Icon />
     </div>
   );
 };

@@ -23,7 +23,7 @@ export const Select = <TItem,>(props: SelectProps<TItem>) => {
           <div css={styles.control} onClick={toggle}>
             <div css={styles.controlText}>{valueText}</div>
             <div css={styles.controlIcon}>
-              <Icons.ChevronDown color="currentColor" />
+              <Icons.ChevronDown />
             </div>
           </div>
         );

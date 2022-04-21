@@ -5,6 +5,7 @@ export * from "./CommentsWrap";
 export * from "./GenericDropdown";
 export * from "./Icon";
 export * from "./Icons";
+export * from "./IconWrap";
 export * from "./MultiSelect";
 export * from "./Progress";
 export * from "./RadioGroup";

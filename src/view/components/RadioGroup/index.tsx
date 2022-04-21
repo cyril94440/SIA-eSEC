@@ -32,7 +32,7 @@ export const RadioGroup = <TValue,>(props: RadioGroupProps<TValue>) => {
             onClick={!active ? () => props.onChange(item.value) : undefined}
           >
             <div css={styles.itemIcon}>
-              <Icon color="currentColor" />
+              <Icon />
             </div>
             <div css={styles.itemContent}>{item.content}</div>
           </div>
