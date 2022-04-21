@@ -11,7 +11,7 @@ import * as styles from "./styles";
 
 export interface AppLayoutProps {
   mainCss?: SerializedStyles;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const AppLayout: FC<AppLayoutProps> = (props) => {

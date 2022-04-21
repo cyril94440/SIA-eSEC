@@ -3,7 +3,7 @@ import * as styles from "./styles";
 
 export interface CommentsWrapProps {
   text: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const CommentsWrap: FC<CommentsWrapProps> = (props) => {

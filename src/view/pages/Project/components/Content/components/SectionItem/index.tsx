@@ -4,7 +4,7 @@ import * as styles from "./styles";
 export interface SectionItemProps {
   title?: string;
   fullWidth: boolean;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const SectionItem: FC<SectionItemProps> = (props) => {

@@ -43,8 +43,7 @@ export const item = css`
   flex-direction: row;
   align-items: center;
   gap: ${styles.getSize(2)};
-  height: ${styles.getSize(6)};
-  padding: 0 ${styles.getSize(2)};
+  padding: ${styles.getSize(1.5)} ${styles.getSize(2)};
   cursor: pointer;
   user-select: none;
   &:not(:last-child) {

@@ -1,9 +1,8 @@
-import { DocumentDesignQuestion } from "@@api";
+import { DocumentDesignQuestion } from "@@api/common";
 import {
   DocumentMaterial,
   DocumentScore,
   DocumentScoreTarget,
-  DocumentSecurityFeature,
   DocumentSpecs,
   DocumentStandardCompliance,
   DocumentType,
@@ -80,6 +79,7 @@ export async function calculateDocumentScore(
 
   const securityFeaturesSet = new Set(specs.securityFeatures);
 
+  /*
   if (securityFeaturesSet.has(DocumentSecurityFeature.IR_A)) {
     value += 1;
   }
@@ -135,6 +135,7 @@ export async function calculateDocumentScore(
   if (securityFeaturesSet.has(DocumentSecurityFeature.OFFSET_DESIGN_H)) {
     value += 8;
   }
+*/
 
   value = Math.min(value, 100);
 

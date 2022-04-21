@@ -1,17 +1,23 @@
 import { GetStaticProps } from "next";
-import * as api from "@@api";
+import * as api from "@@api/server";
 import { Project, ProjectProps } from "@@view/pages";
 
 export const getStaticProps: GetStaticProps<ProjectProps> = async () => {
   const client = api.createClient();
 
-  const documentDesignQuestions = await new Promise<api.DocumentDesignQuestion[]>((resolve, reject) => {
-    client.getDocumentDesignQuestions({}, (err, res) => (err ? reject(err) : resolve(res.questions)));
-  });
+  const [documentDesignQuestionsInfo, documentSecurityFeaturesInfo] = await Promise.all([
+    api
+      .getPromise<api.GetDocumentDesignQuestionsResponse>((cb) => client.getDocumentDesignQuestions({}, cb))
+      .then((res) => res.questions),
+    api
+      .getPromise<api.GetSecurityFeaturesResponse>((cb) => client.getSecurityFeatures({}, cb))
+      .then((res) => res.securityFeatures),
+  ]);
 
   return {
     props: {
-      documentDesignQuestionsJson: JSON.stringify(documentDesignQuestions),
+      documentDesignQuestionsInfoJson: JSON.stringify(documentDesignQuestionsInfo),
+      documentSecurityFeaturesInfoJson: JSON.stringify(documentSecurityFeaturesInfo),
     },
     revalidate: 60,
   };

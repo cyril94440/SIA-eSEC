@@ -20,6 +20,82 @@ message DocumentDesignAnswer{
     optional float score_cost_effectiveness = 5;
 }
 
+message GetSecurityFeaturesRequest {}
+message GetSecurityFeaturesResponse{
+    repeated SecurityFeature security_features = 1;
+}
+
+message SecurityFeature{
+    int32 id = 1;
+    SFLocation location = 2;
+    SFCategory category = 3;
+    repeated SFMaterial materials_compatible = 4;
+    string title = 5;
+    optional string description = 6;
+    repeated SFScore scores = 7;
+}
+
+message SFScore{
+    SFType type = 1;
+    SFCategory category = 2;
+    optional SFScoreSubCategory sub_category = 3;
+    float score = 4;
+}
+
+enum SFLocation{
+    SFPersonalization = 0;
+	InksTechPersonalization = 1;
+	DocumentBody = 2;
+	InksBackground = 3;
+	SecurityDesign = 4;
+}
+
+enum SFCategory{
+    Personalization = 0;
+	Structure = 1;
+	Printed = 2;
+	Material = 3;
+}
+
+enum SFMaterial{
+    Paper = 0;
+    Plastic = 1;
+}
+
+enum SFType {
+	Protection = 0;
+	Level = 1;
+}
+
+enum SFScoreCategory {
+	Counterfeit = 0;
+	Alteration = 1;
+	Stealing = 2;
+	Recycling = 3;
+	Impostor = 4;
+
+	Level1 = 5;
+	Level2 = 6;
+	Level3 = 7;
+	ABC = 8;
+}
+
+enum SFScoreSubCategory {
+	LimitedMatTech = 0;
+	Reproduction = 1;
+	Other = 2;
+	Photo = 3;
+	Data = 4;
+	SpecialPersoTech = 5;
+	Tracking = 6;
+
+	Look = 7;
+	Feel = 8;
+	Tilt = 9;
+}
+
+
 service DatabaseService{
     rpc GetDocumentDesignQuestions (GetDocumentDesignQuestionsRequest) returns (GetDocumentDesignQuestionsResponse){};
+    rpc GetSecurityFeatures (GetSecurityFeaturesRequest) returns (GetSecurityFeaturesResponse){};
 }

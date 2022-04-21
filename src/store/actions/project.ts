@@ -1,11 +1,10 @@
 import { createAction } from "@reduxjs/toolkit";
-import * as api from "@@api";
+import * as api from "@@api/common";
 import {
   DocumentDesignAnswer,
   DocumentMaterial,
   DocumentScore,
   DocumentScoreTarget,
-  DocumentSecurityFeature,
   DocumentStandardCompliance,
   DocumentType,
 } from "@@core";
@@ -17,9 +16,7 @@ export const projectSetDocumentStandardCompliance = createAction<DocumentStandar
 );
 export const projectSetDocumentScoreTarget = createAction<DocumentScoreTarget>("projectSetDocumentScoreTarget");
 export const projectSetDocumentDesignAnswer = createAction<DocumentDesignAnswer>("projectSetDocumentDesignAnswer");
-export const projectSetDocumentSecurityFeatures = createAction<DocumentSecurityFeature[]>(
-  "projectSetDocumentSecurityFeatures"
-);
+export const projectSetDocumentSecurityFeatures = createAction<number[]>("projectSetDocumentSecurityFeatures");
 export const projectSetDocumentScore = createAction<DocumentScore>("projectSetDocumentScore");
 export const projectSetDocumentDesignQuestions = createAction<api.DocumentDesignQuestion[]>(
   "projectSetDocumentDesignQuestions"

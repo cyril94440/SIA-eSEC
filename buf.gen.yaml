@@ -1,10 +1,19 @@
 version: v1
 plugins:
-  - name: ts
-    out: ./src/api/gen
+  - name: common
+    out: ./src/api/common/gen
     strategy: all
     path: ./node_modules/ts-proto/protoc-gen-ts_proto
     opt:
-      - outputServices=grpc-js
       - esModuleInterop=true
+      - exportCommonSymbols=false
+      - outputServices=none
+  - name: server
+    out: ./src/api/server/gen
+    strategy: all
+    path: ./node_modules/ts-proto/protoc-gen-ts_proto
+    opt:
+      - esModuleInterop=true
+      - exportCommonSymbols=false
+      - outputServices=grpc-js
 

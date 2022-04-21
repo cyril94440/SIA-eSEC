@@ -3,7 +3,7 @@ import * as styles from "./styles";
 
 export interface SidenavProps {
   minimized: boolean;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const Sidenav: FC<SidenavProps> = (props) => {

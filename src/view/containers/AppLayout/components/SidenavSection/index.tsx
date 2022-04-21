@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import * as styles from "./styles";
 
 export interface SidenavSectionProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const SidenavSection: FC<SidenavSectionProps> = (props) => {

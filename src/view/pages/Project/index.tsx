@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useMemo } from "react";
-import { DocumentDesignQuestion } from "@@api";
+import * as api from "@@api/common";
 import { formatPageTitle } from "@@core";
 import * as thunks from "@@thunks";
 import { AppLayout } from "@@view/containers";
@@ -10,7 +10,8 @@ import { Content, Scores } from "./components";
 import * as styles from "./styles";
 
 export interface ProjectProps {
-  documentDesignQuestionsJson: string;
+  documentDesignQuestionsInfoJson: string;
+  documentSecurityFeaturesInfoJson: string;
 }
 
 export const Project: NextPage<ProjectProps> = (props) => {
@@ -19,16 +20,27 @@ export const Project: NextPage<ProjectProps> = (props) => {
   const status = useAppSelector((state) => state.project.status);
   const documentSpecs = useAppSelector((state) => state.project.documentSpecs);
   const documentScore = useAppSelector((state) => state.project.documentScore);
-  const documentDesignQuestions = useAppSelector((state) => state.project.documentDesignQuestions);
+
+  const documentDesignQuestionsInfo = useMemo(
+    () => JSON.parse(props.documentDesignQuestionsInfoJson) as api.DocumentDesignQuestion[],
+    [props.documentDesignQuestionsInfoJson]
+  );
+
+  const documentSecurityFeaturesInfo = useMemo(
+    () => JSON.parse(props.documentSecurityFeaturesInfoJson) as api.SecurityFeature[],
+    [props.documentSecurityFeaturesInfoJson]
+  );
+
+  // console.log("documentDesignQuestionsInfo", documentDesignQuestionsInfo);
+  // console.log("documentSecurityFeaturesInfo", documentSecurityFeaturesInfo);
 
   useEffect(() => {
     dispatch(thunks.projectLoad());
   }, [dispatch]);
 
   useEffect(() => {
-    const documentDesignQuestions = JSON.parse(props.documentDesignQuestionsJson) as DocumentDesignQuestion[];
-    dispatch(thunks.projectChangeDocumentDesignQuestions(documentDesignQuestions));
-  }, [dispatch, props.documentDesignQuestionsJson]);
+    dispatch(thunks.projectChangeDocumentDesignQuestions(documentDesignQuestionsInfo));
+  }, [dispatch, documentDesignQuestionsInfo]);
 
   return (
     <>
@@ -40,7 +52,8 @@ export const Project: NextPage<ProjectProps> = (props) => {
           title={title}
           status={status}
           documentSpecs={documentSpecs}
-          documentDesignQuestions={documentDesignQuestions}
+          documentDesignQuestionsInfo={documentDesignQuestionsInfo}
+          documentSecurityFeaturesInfo={documentSecurityFeaturesInfo}
           onRenameClick={() => {
             dispatch(thunks.projectRename());
           }}

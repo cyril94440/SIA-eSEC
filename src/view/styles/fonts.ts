@@ -20,6 +20,13 @@ export const fontRegular20 = css`
   line-height: ${consts.FONT_REGULAR_20_LINE_HEIGHT};
 `;
 
+export const fontRegular24 = css`
+  font-size: ${consts.FONT_REGULAR_24_SIZE};
+  font-weight: ${consts.FONT_REGULAR_24_WEIGHT};
+  letter-spacing: ${consts.FONT_REGULAR_24_LETTER_SPACING};
+  line-height: ${consts.FONT_REGULAR_24_LINE_HEIGHT};
+`;
+
 export const fontMedium14 = css`
   font-size: ${consts.FONT_MEDIUM_14_SIZE};
   font-weight: ${consts.FONT_MEDIUM_14_WEIGHT};

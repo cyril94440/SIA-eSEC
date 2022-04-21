@@ -5,7 +5,7 @@ import { SerializedStyles } from "@emotion/utils";
 export interface MainProps {
   css?: SerializedStyles;
   className?: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const Main: FC<MainProps> = (props) => {

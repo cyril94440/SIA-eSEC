@@ -1,2 +1,2 @@
 export * from "./gen/esec_engine";
-export * from "./createClient";
+export * from "./gen/esec_score";

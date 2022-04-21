@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+import "esec_engine.proto";
+
+message ComputeScoreRequest {
+    repeated DocumentDesignFormAnswer document_design_answers = 1;
+    repeated int32 security_features_IDs = 2;
+}
+message ComputeScoreResponse{
+    TNScore scores = 1;
+}
+
+message DocumentDesignFormAnswer{
+    int32 idQuestion =  1;
+	int32 idAnswer = 2;
+}
+
+message TNScore{ //Total Normalized Score
+    float total_score = 1;
+    float document_design_score = 2;
+    TNSFScore security_features_score = 3;
+}
+
+message TNSFScore{
+    TNSFLocationScore location_score = 1;
+    TNSFProtectionScore protection_score = 2;
+    TNSFLevelScore level_score = 3;
+}
+
+message TNSFLocationScore{
+    float score = 1;
+    map<int32,float> score_per_loc = 2; //int32 is id_location
+}
+
+message TNSFProtectionScore{
+    float score = 1;
+
+    map<int32,TNSFProtectionCategoryScore> category_scores = 2; //int32 is id_category
+
+    message TNSFProtectionCategoryScore{
+        float score = 1;
+        map<int32,float> subcategories_scores = 2; //int32 is id_sub_category
+    }
+}
+
+message TNSFLevelScore{
+    float score = 1;
+
+    map<int32,TNSFLevelCategoryScore> category_scores = 2; //int32 is id_category
+
+    message TNSFLevelCategoryScore{
+        float score = 1;
+        map<int32,float> subcategories_scores = 2; //int32 is id_sub_category
+    }
+}
+
+service ComputeScoreService{
+    rpc ComputeScores (ComputeScoreRequest) returns (ComputeScoreResponse){};
+}

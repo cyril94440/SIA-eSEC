@@ -3,7 +3,7 @@ import * as styles from "./styles";
 
 export interface SectionProps {
   title?: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const Section: FC<SectionProps> = (props) => {

@@ -34,6 +34,11 @@ export const FONT_REGULAR_20_WEIGHT = 400;
 export const FONT_REGULAR_20_LETTER_SPACING = "-0.01em";
 export const FONT_REGULAR_20_LINE_HEIGHT = "110%";
 
+export const FONT_REGULAR_24_SIZE = "24px";
+export const FONT_REGULAR_24_WEIGHT = 400;
+export const FONT_REGULAR_24_LETTER_SPACING = "-0.01em";
+export const FONT_REGULAR_24_LINE_HEIGHT = "110%";
+
 export const FONT_MEDIUM_14_SIZE = "14px";
 export const FONT_MEDIUM_14_WEIGHT = 500;
 export const FONT_MEDIUM_14_LETTER_SPACING = "-0.01em";

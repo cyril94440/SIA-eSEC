@@ -20,7 +20,8 @@
     "isolatedModules": true,
     "paths": {
       "@@core": ["core"],
-      "@@api": ["api"],
+      "@@api/common": ["api/common"],
+      "@@api/server": ["api/server"],
       "@@store": ["store"],
       "@@thunks": ["thunks"],
       "@@view/app": ["view/app"],

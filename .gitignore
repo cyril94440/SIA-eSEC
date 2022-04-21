@@ -37,4 +37,5 @@ yarn-error.log*
 *.tsbuildinfo
 
 # generated proto files
-/src/api/gen
+/src/api/common/gen
+/src/api/server/gen

@@ -1,10 +1,9 @@
 import { createReducer } from "@reduxjs/toolkit";
-import * as api from "@@api";
+import * as api from "@@api/common";
 import {
   DocumentMaterial,
   DocumentScore,
   DocumentScoreTarget,
-  DocumentSecurityFeature,
   DocumentSpecs,
   DocumentStandardCompliance,
   DocumentType,
@@ -30,12 +29,16 @@ const initialState: ProjectState = {
     scoreTarget: DocumentScoreTarget.SIA_RECO,
     designAnswers: [],
     securityFeatures: [
-      DocumentSecurityFeature.IR_A,
-      DocumentSecurityFeature.IR_D,
-      DocumentSecurityFeature.OFFSET_DESIGN_B,
-      DocumentSecurityFeature.OFFSET_DESIGN_C,
-      DocumentSecurityFeature.OFFSET_DESIGN_E,
-      DocumentSecurityFeature.OFFSET_DESIGN_H,
+      //Doc Body
+      19, 20, 21, 22, 23,
+      //Security Design
+      35, 36, 37, 38, 39, 40, 41, 42, 43, 44,
+      //Background
+      45, 46, 51,
+      //Ink Perso
+      1,
+      //SFPerso
+      8, 10, 12, 14, 16,
     ],
   },
   documentScore: null,

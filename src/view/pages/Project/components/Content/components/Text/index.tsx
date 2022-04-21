@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import * as styles from "./styles";
 
 export interface TextProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const Text: FC<TextProps> = (props) => {

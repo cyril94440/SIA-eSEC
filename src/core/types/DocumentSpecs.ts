@@ -3,7 +3,6 @@ import { DocumentType } from "./DocumentType";
 import { DocumentMaterial } from "./DocumentMaterial";
 import { DocumentStandardCompliance } from "./DocumentStandardCompliance";
 import { DocumentScoreTarget } from "./DocumentScoreTarget";
-import { DocumentSecurityFeature } from "./DocumentSecurityFeature";
 
 export interface DocumentSpecs {
   type: DocumentType;
@@ -11,5 +10,5 @@ export interface DocumentSpecs {
   standardCompliance: DocumentStandardCompliance;
   scoreTarget: DocumentScoreTarget;
   designAnswers: DocumentDesignAnswer[];
-  securityFeatures: DocumentSecurityFeature[];
+  securityFeatures: number[];
 }

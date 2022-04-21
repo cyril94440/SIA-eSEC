@@ -4,7 +4,7 @@ import * as styles from "./styles";
 export interface PanelProps {
   title?: string;
   square?: boolean;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const Panel: FC<PanelProps> = (props) => {
