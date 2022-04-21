@@ -3,11 +3,12 @@ import * as styles from "@@view/styles";
 
 export const root = css`
   margin-bottom: ${styles.getSize(7)};
-  max-width: ${styles.getSize(65)};
+  width: 60%;
+  min-width: ${styles.getSize(50)};
 `;
 
 export const rootFullWidth = css`
-  max-width: unset;
+  width: 100%;
 `;
 
 export const title = css`

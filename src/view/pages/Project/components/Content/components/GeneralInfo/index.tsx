@@ -25,7 +25,7 @@ export interface GeneralInfoProps {
 export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
   return (
     <Section title="1 - General Info">
-      <SectionItem title="Document Type" fullWidth={true}>
+      <SectionItem title="Document Type" fullWidth={false}>
         <CardSelect
           value={props.documentSpecs.type}
           items={[
@@ -53,7 +53,7 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
           onChange={(value) => props.onChangeDocumentType(value as DocumentType)}
         />
       </SectionItem>
-      <SectionItem title="Material" fullWidth={true}>
+      <SectionItem title="Material" fullWidth={false}>
         <CardSelect
           value={props.documentSpecs.material}
           items={[
@@ -71,7 +71,7 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
           onChange={(value) => props.onChangeDocumentMaterial(value as DocumentMaterial)}
         />
       </SectionItem>
-      <SectionItem title="Standard Compliance" fullWidth={true}>
+      <SectionItem title="Standard Compliance" fullWidth={false}>
         <Select
           value={props.documentSpecs.standardCompliance}
           items={[
@@ -86,7 +86,7 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
           onChange={props.onChangeDocumentStandardCompliance}
         />
       </SectionItem>
-      <SectionItem title="Score Target" fullWidth={true}>
+      <SectionItem title="Score Target" fullWidth={false}>
         <Select
           value={props.documentSpecs.scoreTarget}
           items={[DocumentScoreTarget.THEORICAL_MAXIMUM, DocumentScoreTarget.SIA_RECO]}
