@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { DocumentScore } from "@@core";
+import * as rpc from "@@rpc/shared";
 import {
   DocumentScoreDistributionRadar,
   DocumentScoreLevelsCoverageRadar,
@@ -10,7 +10,7 @@ import { DownloadReport, Header, Icao, Overall, Panel, PanelGroup } from "./comp
 import * as styles from "./styles";
 
 export interface ScoresProps {
-  documentScore: DocumentScore | null;
+  documentScore: rpc.TNScore | null;
   onDownloadReportClick: () => void;
   onIcaoMissingFeaturesClick: () => void;
 }
@@ -25,33 +25,73 @@ export const Scores: FC<ScoresProps> = (props) => {
       <Header />
       <PanelGroup>
         <Panel title="Overall score">
-          <Overall value={props.documentScore.value} />
+          <Overall value={props.documentScore.totalScore} />
         </Panel>
         <Panel>
           <Icao onMissingFeaturesClick={props.onIcaoMissingFeaturesClick} />
         </Panel>
         <Panel square={true} title="Overall Security">
           <DocumentScoreOverallRadar
-            value={props.documentScore.overall}
-            targetValue={props.documentScore.overallTarget}
+            value={{
+              design: 80,
+              distribution: 75,
+              levelsCoverage: 75,
+              threatsProtection: 50,
+            }}
+            targetValue={{
+              design: 75,
+              distribution: 70,
+              levelsCoverage: 75,
+              threatsProtection: 75,
+            }}
           />
         </Panel>
         <Panel square={true} title="Distribution of features">
           <DocumentScoreDistributionRadar
-            value={props.documentScore.distribution}
-            targetValue={props.documentScore.distributionTarget}
+            value={{
+              body: 80,
+              design: 85,
+              personalization: 60,
+            }}
+            targetValue={{
+              body: 40,
+              design: 60,
+              personalization: 80,
+            }}
           />
         </Panel>
         <Panel square={true} title="Protection against threats">
           <DocumentScoreThreatsProtectionRadar
-            value={props.documentScore.threatsProtection}
-            targetValue={props.documentScore.threatsProtectionTarget}
+            value={{
+              alteration: 60,
+              counterfeit: 70,
+              imposter: 35,
+              recycling: 65,
+              stealing: 0,
+            }}
+            targetValue={{
+              alteration: 80,
+              counterfeit: 60,
+              imposter: 20,
+              recycling: 15,
+              stealing: 15,
+            }}
           />
         </Panel>
         <Panel square={true} title="Security level coverage">
           <DocumentScoreLevelsCoverageRadar
-            value={props.documentScore.levelsCoverage}
-            targetValue={props.documentScore.levelsCoverageTarget}
+            value={{
+              level1: 60,
+              level2: 70,
+              level3: 70,
+              madsv: 80,
+            }}
+            targetValue={{
+              level1: 85,
+              level2: 70,
+              level3: 60,
+              madsv: 20,
+            }}
           />
         </Panel>
       </PanelGroup>

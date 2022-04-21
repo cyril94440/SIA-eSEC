@@ -20,8 +20,8 @@
     "isolatedModules": true,
     "paths": {
       "@@core": ["core"],
-      "@@api/common": ["api/common"],
-      "@@api/server": ["api/server"],
+      "@@rpc/server": ["rpc/server"],
+      "@@rpc/shared": ["rpc/shared"],
       "@@store": ["store"],
       "@@thunks": ["thunks"],
       "@@view/app": ["view/app"],

@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useMemo } from "react";
-import * as api from "@@api/common";
+import * as rpc from "@@rpc/shared";
 import { formatPageTitle } from "@@core";
 import * as thunks from "@@thunks";
 import { AppLayout } from "@@view/containers";
@@ -22,25 +22,18 @@ export const Project: NextPage<ProjectProps> = (props) => {
   const documentScore = useAppSelector((state) => state.project.documentScore);
 
   const documentDesignQuestionsInfo = useMemo(
-    () => JSON.parse(props.documentDesignQuestionsInfoJson) as api.DocumentDesignQuestion[],
+    () => JSON.parse(props.documentDesignQuestionsInfoJson) as rpc.DocumentDesignQuestion[],
     [props.documentDesignQuestionsInfoJson]
   );
 
   const documentSecurityFeaturesInfo = useMemo(
-    () => JSON.parse(props.documentSecurityFeaturesInfoJson) as api.SecurityFeature[],
+    () => JSON.parse(props.documentSecurityFeaturesInfoJson) as rpc.SecurityFeature[],
     [props.documentSecurityFeaturesInfoJson]
   );
-
-  // console.log("documentDesignQuestionsInfo", documentDesignQuestionsInfo);
-  // console.log("documentSecurityFeaturesInfo", documentSecurityFeaturesInfo);
 
   useEffect(() => {
     dispatch(thunks.projectLoad());
   }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(thunks.projectChangeDocumentDesignQuestions(documentDesignQuestionsInfo));
-  }, [dispatch, documentDesignQuestionsInfo]);
 
   return (
     <>

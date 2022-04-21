@@ -1,6 +1,6 @@
 import { FC } from "react";
-import * as api from "@@api/common";
-import { DocumentDesignAnswer, DocumentSpecs } from "@@core";
+import * as rpc from "@@rpc/shared";
+import { DocumentSpecs } from "@@core";
 import { CommentsWrap, RadioGroup } from "@@view/components";
 import { Label } from "../Label";
 import { Text } from "../Text";
@@ -9,8 +9,8 @@ import { SectionItem } from "../SectionItem";
 
 export interface DocumentDesignProps {
   documentSpecs: DocumentSpecs;
-  documentDesignQuestionsInfo: api.DocumentDesignQuestion[];
-  onChangeDocumentDesignAnswer: (value: DocumentDesignAnswer) => void;
+  documentDesignQuestionsInfo: rpc.DocumentDesignQuestion[];
+  onChangeDocumentDesignAnswer: (value: rpc.DocumentDesignFormAnswer) => void;
 }
 
 export const DocumentDesign: FC<DocumentDesignProps> = (props) => {
@@ -26,7 +26,7 @@ export const DocumentDesign: FC<DocumentDesignProps> = (props) => {
         </Text>
       </SectionItem>
       {props.documentDesignQuestionsInfo.map((question, questionIndex) => {
-        const value = props.documentSpecs.designAnswers.find((a) => a.questionId === question.id)?.answerId ?? null;
+        const value = props.documentSpecs.designAnswers.find((a) => a.idQuestion === question.id)?.idAnswer ?? null;
         return (
           <SectionItem key={question.id} fullWidth={false}>
             <Label>{`${questionIndex + 1} - ${question.questionTitle}`}</Label>
@@ -40,7 +40,7 @@ export const DocumentDesign: FC<DocumentDesignProps> = (props) => {
                   };
                 })}
                 onChange={(answerId: number) => {
-                  props.onChangeDocumentDesignAnswer({ questionId: question.id, answerId });
+                  props.onChangeDocumentDesignAnswer({ idQuestion: question.id, idAnswer: answerId });
                 }}
               />
             </CommentsWrap>

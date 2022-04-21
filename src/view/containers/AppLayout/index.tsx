@@ -4,7 +4,6 @@ import { FC, ReactNode, useContext } from "react";
 import { routes } from "@@core";
 import * as thunks from "@@thunks";
 import { Icons } from "@@view/components";
-import { LocalStorageContext } from "@@view/contexts";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import { Main, Sidenav, SidenavHeader, SidenavItem, SidenavSection, SidenavToggle } from "./components";
 import * as styles from "./styles";
@@ -17,7 +16,6 @@ export interface AppLayoutProps {
 export const AppLayout: FC<AppLayoutProps> = (props) => {
   const dispatch = useAppDispatch();
   const sidenavMinimized = useAppSelector((state) => state.app.sidenavMinimized);
-  const localStorage = useContext(LocalStorageContext);
   const router = useRouter();
   return (
     <div css={styles.root}>
@@ -82,7 +80,7 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
         <SidenavToggle
           minimized={sidenavMinimized}
           onClick={() => {
-            dispatch(thunks.appToggleSidenav({ localStorage }));
+            dispatch(thunks.appToggleSidenav());
           }}
         />
       </Sidenav>

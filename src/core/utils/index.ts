@@ -1,4 +1,3 @@
-export * from "./calculateDocumentScore";
 export * from "./formatDocumentMaterialString";
 export * from "./formatDocumentScoreTargetString";
 export * from "./formatDocumentSecurityFeatureCategoryString";

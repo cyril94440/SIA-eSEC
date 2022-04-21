@@ -1,4 +1,4 @@
-import { SFCategory, sFCategoryToJSON } from "@@api/common";
+import { SFCategory, sFCategoryToJSON } from "@@rpc/shared";
 
 export function formatDocumentSecurityFeatureCategoryString(value: SFCategory): string {
   switch (value) {
@@ -10,8 +10,6 @@ export function formatDocumentSecurityFeatureCategoryString(value: SFCategory): 
       return "Printed";
     case SFCategory.Structure:
       return "Structure";
-    case SFCategory.UNRECOGNIZED:
-      return "Unrecognized";
     default:
       throw new Error(`Unhandled document security feature category: "${sFCategoryToJSON(value)}"`);
   }

@@ -1,7 +1,6 @@
 import { FC } from "react";
-import * as api from "@@api/common";
+import * as rpc from "@@rpc/shared";
 import {
-  DocumentDesignAnswer,
   DocumentMaterial,
   DocumentScoreTarget,
   DocumentSpecs,
@@ -16,15 +15,15 @@ export interface ContentProps {
   title: string;
   status: ProjectStatus;
   documentSpecs: DocumentSpecs;
-  documentDesignQuestionsInfo: api.DocumentDesignQuestion[];
-  documentSecurityFeaturesInfo: api.SecurityFeature[];
+  documentDesignQuestionsInfo: rpc.DocumentDesignQuestion[];
+  documentSecurityFeaturesInfo: rpc.SecurityFeature[];
   onRenameClick: () => void;
   onEncryptionInfoClick: () => void;
   onChangeDocumentType: (value: DocumentType) => void;
   onChangeDocumentMaterial: (value: DocumentMaterial) => void;
   onChangeDocumentStandardCompliance: (value: DocumentStandardCompliance) => void;
   onChangeDocumentScoreTarget: (value: DocumentScoreTarget) => void;
-  onChangeDocumentDesignAnswer: (value: DocumentDesignAnswer) => void;
+  onChangeDocumentDesignAnswer: (value: rpc.DocumentDesignFormAnswer) => void;
   onChangeDocumentSecurityFeatures: (value: number[]) => void;
 }
 

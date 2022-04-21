@@ -1,4 +1,4 @@
-import { SFLocation, sFLocationToJSON } from "@@api/common";
+import { SFLocation, sFLocationToJSON } from "@@rpc/shared";
 
 export function formatDocumentSecurityFeatureLocationString(value: SFLocation): string {
   switch (value) {
@@ -12,8 +12,6 @@ export function formatDocumentSecurityFeatureLocationString(value: SFLocation): 
       return "Security Design";
     case SFLocation.SFPersonalization:
       return "Security Feature Personalization";
-    case SFLocation.UNRECOGNIZED:
-      return "Unrecognized";
     default:
       throw new Error(`Unhandled document security feature location: "${sFLocationToJSON(value)}"`);
   }

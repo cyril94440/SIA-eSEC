@@ -1,5 +1,5 @@
-import { FC } from "react";
-import * as api from "@@api/common";
+import { FC, Fragment } from "react";
+import * as rpc from "@@rpc/shared";
 import {
   formatDocumentSecurityFeatureCategoryString,
   formatDocumentSecurityFeatureLocationString,
@@ -13,21 +13,19 @@ import { SectionItem } from "../SectionItem";
 
 export interface SecurityFeaturesProps {
   documentSpecs: DocumentSpecs;
-  documentSecurityFeaturesInfo: api.SecurityFeature[];
+  documentSecurityFeaturesInfo: rpc.SecurityFeature[];
   onChangeDocumentSecurityFeatures: (value: number[]) => void;
 }
 
 export const SecurityFeatures: FC<SecurityFeaturesProps> = (props) => {
   const documentSecurityFeaturesTree = buildDocumentSecurityFeatureTree(props.documentSecurityFeaturesInfo);
-  console.log("documentSecurityFeaturesTree", documentSecurityFeaturesTree);
+  // console.log("documentSecurityFeaturesTree", documentSecurityFeaturesTree);
   return (
     <Section title="3 - Security Features">
       {documentSecurityFeaturesTree.categoryNodes.map((categoryNode) => {
         return (
-          <>
-            <SectionHeader key={categoryNode.item}>
-              {formatDocumentSecurityFeatureCategoryString(categoryNode.item)}
-            </SectionHeader>
+          <Fragment key={categoryNode.item}>
+            <SectionHeader>{formatDocumentSecurityFeatureCategoryString(categoryNode.item)}</SectionHeader>
             {categoryNode.locationNodes.map((locationNode) => {
               const featureIds = locationNode.features.map((f) => f.id);
               const featureMap = new Map(locationNode.features.map((f) => [f.id, f]));
@@ -50,7 +48,7 @@ export const SecurityFeatures: FC<SecurityFeaturesProps> = (props) => {
                 </SectionItem>
               );
             })}
-          </>
+          </Fragment>
         );
       })}
     </Section>

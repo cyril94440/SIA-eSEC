@@ -1,8 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
-import * as api from "@@api/common";
+import * as rpc from "@@rpc/shared";
 import {
   DocumentMaterial,
-  DocumentScore,
   DocumentScoreTarget,
   DocumentSpecs,
   DocumentStandardCompliance,
@@ -15,8 +14,7 @@ interface ProjectState {
   title: string;
   status: ProjectStatus;
   documentSpecs: DocumentSpecs;
-  documentScore: DocumentScore | null;
-  documentDesignQuestions: api.DocumentDesignQuestion[] | null;
+  documentScore: rpc.TNScore | null;
 }
 
 const initialState: ProjectState = {
@@ -42,7 +40,6 @@ const initialState: ProjectState = {
     ],
   },
   documentScore: null,
-  documentDesignQuestions: null,
 };
 
 export const project = createReducer(initialState, (builder) => {
@@ -62,9 +59,9 @@ export const project = createReducer(initialState, (builder) => {
     .addCase(actions.projectSetDocumentDesignAnswer, (state, action) => {
       const newItem = action.payload;
       const answers = state.documentSpecs.designAnswers;
-      const answersMap = new Map(answers.map((a) => [a.questionId, a]));
-      answersMap.delete(newItem.questionId);
-      answersMap.set(newItem.questionId, newItem);
+      const answersMap = new Map(answers.map((a) => [a.idQuestion, a]));
+      answersMap.delete(newItem.idQuestion);
+      answersMap.set(newItem.idQuestion, newItem);
       state.documentSpecs.designAnswers = Array.from(answersMap.values());
     })
     .addCase(actions.projectSetDocumentSecurityFeatures, (state, action) => {
@@ -72,8 +69,5 @@ export const project = createReducer(initialState, (builder) => {
     })
     .addCase(actions.projectSetDocumentScore, (state, action) => {
       state.documentScore = action.payload;
-    })
-    .addCase(actions.projectSetDocumentDesignQuestions, (state, action) => {
-      state.documentDesignQuestions = action.payload;
     });
 });

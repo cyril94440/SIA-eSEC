@@ -1,16 +1,16 @@
 import { GetStaticProps } from "next";
-import * as api from "@@api/server";
+import * as rpc from "@@rpc/server";
 import { Project, ProjectProps } from "@@view/pages";
 
 export const getStaticProps: GetStaticProps<ProjectProps> = async () => {
-  const client = api.createClient();
+  const client = rpc.createDatabaseClient();
 
   const [documentDesignQuestionsInfo, documentSecurityFeaturesInfo] = await Promise.all([
-    api
-      .getPromise<api.GetDocumentDesignQuestionsResponse>((cb) => client.getDocumentDesignQuestions({}, cb))
+    rpc
+      .getPromise<rpc.GetDocumentDesignQuestionsResponse>((cb) => client.getDocumentDesignQuestions({}, cb))
       .then((res) => res.questions),
-    api
-      .getPromise<api.GetSecurityFeaturesResponse>((cb) => client.getSecurityFeatures({}, cb))
+    rpc
+      .getPromise<rpc.GetSecurityFeaturesResponse>((cb) => client.getSecurityFeatures({}, cb))
       .then((res) => res.securityFeatures),
   ]);
 

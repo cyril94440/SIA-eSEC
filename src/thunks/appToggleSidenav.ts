@@ -1,14 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { LocalStorage } from "@@core";
+import { localStorage } from "@@core";
 import { actions, AppState } from "@@store";
 
-export interface AppToggleSidenavArgs {
-  localStorage: LocalStorage;
-}
-
-export const appToggleSidenav = createAsyncThunk<void, AppToggleSidenavArgs>(
+export const appToggleSidenav = createAsyncThunk<void, void>(
   "appToggleSidenav",
-  async ({ localStorage }, { dispatch, getState }) => {
+  async (args, { dispatch, getState }) => {
     const state = getState() as AppState;
     const minimized = !state.app.sidenavMinimized;
     dispatch(actions.appSetSidenavMinimized(minimized));

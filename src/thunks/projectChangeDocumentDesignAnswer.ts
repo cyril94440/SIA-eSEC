@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { DocumentDesignAnswer } from "@@core";
+import * as rpc from "@@rpc/shared";
 import { actions } from "@@store";
 import { projectUpdateDocumentScore } from "./projectUpdateDocumentScore";
 
-export const projectChangeDocumentDesignAnswer = createAsyncThunk<void, DocumentDesignAnswer>(
+export const projectChangeDocumentDesignAnswer = createAsyncThunk<void, rpc.DocumentDesignFormAnswer>(
   "projectChangeDocumentDesignAnswer",
   async (value, { dispatch }) => {
     dispatch(actions.projectSetDocumentDesignAnswer(value));

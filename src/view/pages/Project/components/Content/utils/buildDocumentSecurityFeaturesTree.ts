@@ -1,22 +1,22 @@
 import { sort } from "fast-sort";
-import * as api from "@@api/common";
+import * as rpc from "@@rpc/shared";
 
 export interface DocumentSecurityFeatureTree {
   categoryNodes: DocumentSecurityFeatureCategoryNode[];
 }
 
 export interface DocumentSecurityFeatureCategoryNode {
-  item: api.SFCategory;
+  item: rpc.SFCategory;
   locationNodes: DocumentSecurityFeatureLocationNode[];
 }
 
 export interface DocumentSecurityFeatureLocationNode {
-  item: api.SFLocation;
-  features: api.SecurityFeature[];
+  item: rpc.SFLocation;
+  features: rpc.SecurityFeature[];
 }
 
-export function buildDocumentSecurityFeatureTree(features: api.SecurityFeature[]): DocumentSecurityFeatureTree {
-  const categoryMap = new Map<api.SFCategory, Map<api.SFLocation, api.SecurityFeature[]>>();
+export function buildDocumentSecurityFeatureTree(features: rpc.SecurityFeature[]): DocumentSecurityFeatureTree {
+  const categoryMap = new Map<rpc.SFCategory, Map<rpc.SFLocation, rpc.SecurityFeature[]>>();
 
   features.forEach((feature) => {
     let locationMap = categoryMap.get(feature.category);
