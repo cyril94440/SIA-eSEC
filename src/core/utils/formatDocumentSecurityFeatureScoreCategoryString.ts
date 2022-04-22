@@ -11,11 +11,11 @@ export function formatDocumentSecurityFeatureScoreCategoryString(value: SFScoreC
     case SFScoreCategory.Impostor:
       return "Impostor";
     case SFScoreCategory.Level1:
-      return "Level1";
+      return "Level 1";
     case SFScoreCategory.Level2:
-      return "Level2";
+      return "Level 2";
     case SFScoreCategory.Level3:
-      return "Level3";
+      return "Level 3";
     case SFScoreCategory.Recycling:
       return "Recycling";
     case SFScoreCategory.Stealing:

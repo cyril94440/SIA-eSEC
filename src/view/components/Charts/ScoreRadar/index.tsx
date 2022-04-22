@@ -5,15 +5,14 @@ import { Radar } from "react-chartjs-2";
 Chart.register(Filler, LineElement, PointElement, RadialLinearScale);
 
 export interface ScoreRadarProps {
-  values: number[];
-  targetValues: number[];
   labels: string[];
+  values: number[];
+  targetValues?: number[];
 }
 
 export const ScoreRadar: FC<ScoreRadarProps> = (props) => {
   const data = {
-    // labels: props.labels,
-    labels: props.labels.map((_) => ""),
+    labels: props.labels,
     datasets: [
       {
         data: props.values,

@@ -16,23 +16,23 @@ export interface ScoresProps {
 }
 
 const allLocations = [
-  { value: rpc.SFLocation.DocumentBody, target: 4.0 },
-  { value: rpc.SFLocation.InksBackground, target: 7.0 },
-  { value: rpc.SFLocation.InksTechPersonalization, target: 5.0 },
-  { value: rpc.SFLocation.SecurityDesign, target: 6.0 },
-  { value: rpc.SFLocation.SFPersonalization, target: 8.0 },
+  { value: rpc.SFLocation.DocumentBody },
+  { value: rpc.SFLocation.InksBackground },
+  { value: rpc.SFLocation.InksTechPersonalization },
+  { value: rpc.SFLocation.SecurityDesign },
+  { value: rpc.SFLocation.SFPersonalization },
 ];
 
 const allScoreCategories = [
-  { value: rpc.SFScoreCategory.ABC, target: 5.0 },
-  { value: rpc.SFScoreCategory.Alteration, target: 6.0 },
-  { value: rpc.SFScoreCategory.Counterfeit, target: 7.0 },
-  { value: rpc.SFScoreCategory.Impostor, target: 8.0 },
-  { value: rpc.SFScoreCategory.Level1, target: 8.5 },
-  { value: rpc.SFScoreCategory.Level2, target: 7.0 },
-  { value: rpc.SFScoreCategory.Level3, target: 6.0 },
-  { value: rpc.SFScoreCategory.Recycling, target: 3.0 },
-  { value: rpc.SFScoreCategory.Stealing, target: 4.0 },
+  { value: rpc.SFScoreCategory.ABC },
+  { value: rpc.SFScoreCategory.Alteration },
+  { value: rpc.SFScoreCategory.Counterfeit },
+  { value: rpc.SFScoreCategory.Impostor },
+  { value: rpc.SFScoreCategory.Level1 },
+  { value: rpc.SFScoreCategory.Level2 },
+  { value: rpc.SFScoreCategory.Level3 },
+  { value: rpc.SFScoreCategory.Recycling },
+  { value: rpc.SFScoreCategory.Stealing },
 ];
 
 export const Scores: FC<ScoresProps> = (props) => {
@@ -58,7 +58,6 @@ export const Scores: FC<ScoresProps> = (props) => {
               props.documentScore.securityFeaturesScore!.protectionScore!.score,
               props.documentScore.securityFeaturesScore!.levelScore!.score,
             ]}
-            targetValues={[7.0, 7.5, 7.5]}
           />
         </Panel>
         <Panel square={true} title="Distribution of features">
@@ -66,7 +65,6 @@ export const Scores: FC<ScoresProps> = (props) => {
             const items = allLocations
               .map((l) => ({
                 value: l.value,
-                target: l.target,
                 score: props.documentScore!.securityFeaturesScore!.locationScore!.scorePerLoc[l.value] ?? null,
               }))
               .filter(({ score }) => score !== null);
@@ -75,7 +73,6 @@ export const Scores: FC<ScoresProps> = (props) => {
               <ScoreRadar
                 labels={items.map(({ value }) => formatDocumentSecurityFeatureLocationString(value))}
                 values={items.map(({ score }) => score)}
-                targetValues={items.map(({ target }) => target)}
               />
             );
           })}
@@ -85,7 +82,6 @@ export const Scores: FC<ScoresProps> = (props) => {
             const items = allScoreCategories
               .map((c) => ({
                 category: c.value,
-                target: c.target,
                 score:
                   props.documentScore!.securityFeaturesScore!.protectionScore!.categoryScores[c.value]?.score ?? null,
               }))
@@ -95,7 +91,6 @@ export const Scores: FC<ScoresProps> = (props) => {
               <ScoreRadar
                 labels={items.map(({ category }) => formatDocumentSecurityFeatureScoreCategoryString(category))}
                 values={items.map(({ score }) => score)}
-                targetValues={items.map(({ target }) => target)}
               />
             );
           })}
@@ -105,7 +100,6 @@ export const Scores: FC<ScoresProps> = (props) => {
             const items = allScoreCategories
               .map((c) => ({
                 category: c.value,
-                target: c.target,
                 score: props.documentScore!.securityFeaturesScore!.levelScore!.categoryScores[c.value]?.score ?? null,
               }))
               .filter(({ score }) => score !== null);
@@ -114,7 +108,6 @@ export const Scores: FC<ScoresProps> = (props) => {
               <ScoreRadar
                 labels={items.map(({ category }) => formatDocumentSecurityFeatureScoreCategoryString(category))}
                 values={items.map(({ score }) => score)}
-                targetValues={items.map(({ target }) => target)}
               />
             );
           })}
