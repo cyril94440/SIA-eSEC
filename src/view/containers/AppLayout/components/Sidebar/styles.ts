@@ -6,6 +6,6 @@ export const root = css`
   top: 0;
   bottom: 0;
   right: 0;
-  width: ${styles.getSize(60)};
+  width: ${styles.getSize(59)};
   overflow-y: auto;
 `;

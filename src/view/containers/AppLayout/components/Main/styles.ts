@@ -7,5 +7,5 @@ export const root = css`
 `;
 
 export const rootWithSidebar = css`
-  margin-right: ${styles.getSize(60)};
+  margin-right: ${styles.getSize(59)};
 `;
