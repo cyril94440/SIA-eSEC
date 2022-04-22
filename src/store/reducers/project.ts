@@ -1,20 +1,14 @@
 import { createReducer } from "@reduxjs/toolkit";
 import * as rpc from "@@rpc/shared";
-import {
-  DocumentMaterial,
-  DocumentScoreTarget,
-  DocumentSpecs,
-  DocumentStandardCompliance,
-  DocumentType,
-  ProjectStatus,
-} from "@@core";
+import { DocumentScoreTarget, DocumentSpecs, DocumentStandardCompliance, DocumentType, ProjectStatus } from "@@core";
 import * as actions from "../actions";
 
-interface ProjectState {
+export interface ProjectState {
   title: string;
   status: ProjectStatus;
   documentSpecs: DocumentSpecs;
   documentScore: rpc.TNScore | null;
+  documentSecurityFeaturesInfo: rpc.SecurityFeature[];
 }
 
 const initialState: ProjectState = {
@@ -22,7 +16,7 @@ const initialState: ProjectState = {
   status: ProjectStatus.ONGOING,
   documentSpecs: {
     type: DocumentType.PASSPORT,
-    material: DocumentMaterial.PAPER,
+    material: rpc.SFMaterial.Paper,
     standardCompliance: DocumentStandardCompliance.EU_PASSPORT,
     scoreTarget: DocumentScoreTarget.SIA_RECO,
     designAnswers: [],
@@ -40,6 +34,7 @@ const initialState: ProjectState = {
     ],
   },
   documentScore: null,
+  documentSecurityFeaturesInfo: [],
 };
 
 export const project = createReducer(initialState, (builder) => {
@@ -66,6 +61,9 @@ export const project = createReducer(initialState, (builder) => {
     })
     .addCase(actions.projectSetDocumentSecurityFeatures, (state, action) => {
       state.documentSpecs.securityFeatures = action.payload;
+    })
+    .addCase(actions.projectSetDocumentSecurityFeaturesInfo, (state, action) => {
+      state.documentSecurityFeaturesInfo = action.payload;
     })
     .addCase(actions.projectSetDocumentScore, (state, action) => {
       state.documentScore = action.payload;

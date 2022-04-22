@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-interface ProfileState {
+export interface ProfileState {
   userName: string;
 }
 

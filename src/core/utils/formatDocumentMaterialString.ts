@@ -1,10 +1,10 @@
-import { DocumentMaterial } from "../types";
+import { SFMaterial } from "@@rpc/shared";
 
-export function formatDocumentMaterialString(value: DocumentMaterial): string {
+export function formatDocumentMaterialString(value: SFMaterial): string {
   switch (value) {
-    case DocumentMaterial.PAPER:
+    case SFMaterial.Paper:
       return "Paper";
-    case DocumentMaterial.PLASTIC:
+    case SFMaterial.Plastic:
       return "Plastic";
     default:
       return "Unrecognized";

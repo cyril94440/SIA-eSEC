@@ -1,13 +1,6 @@
 import { FC } from "react";
 import * as rpc from "@@rpc/shared";
-import {
-  DocumentMaterial,
-  DocumentScoreTarget,
-  DocumentSpecs,
-  DocumentStandardCompliance,
-  DocumentType,
-  ProjectStatus,
-} from "@@core";
+import { DocumentScoreTarget, DocumentSpecs, DocumentStandardCompliance, DocumentType, ProjectStatus } from "@@core";
 import { DocumentDesign, GeneralInfo, Header, SecurityFeatures, Status } from "./components";
 import * as styles from "./styles";
 
@@ -20,7 +13,7 @@ export interface ContentProps {
   onRenameClick: () => void;
   onEncryptionInfoClick: () => void;
   onChangeDocumentType: (value: DocumentType) => void;
-  onChangeDocumentMaterial: (value: DocumentMaterial) => void;
+  onChangeDocumentMaterial: (value: rpc.SFMaterial) => void;
   onChangeDocumentStandardCompliance: (value: DocumentStandardCompliance) => void;
   onChangeDocumentScoreTarget: (value: DocumentScoreTarget) => void;
   onChangeDocumentDesignAnswer: (value: rpc.DocumentDesignFormAnswer) => void;

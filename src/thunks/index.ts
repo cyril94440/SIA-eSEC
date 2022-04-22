@@ -5,6 +5,7 @@ export * from "./projectChangeDocumentDesignAnswer";
 export * from "./projectChangeDocumentMaterial";
 export * from "./projectChangeDocumentScoreTarget";
 export * from "./projectChangeDocumentSecurityFeatures";
+export * from "./projectChangeDocumentSecurityFeaturesInfo";
 export * from "./projectChangeDocumentStandardCompliance";
 export * from "./projectChangeDocumentType";
 export * from "./projectDownloadReport";

@@ -5,7 +5,9 @@ import {
   formatDocumentSecurityFeatureLocationString,
   DocumentSpecs,
 } from "@@core";
+import { getProjectActiveSecurityFeatures } from "@@store";
 import { CommentsWrap, MultiSelect } from "@@view/components";
+import { useAppSelector } from "@@view/hooks";
 import { buildDocumentSecurityFeatureTree } from "../../utils";
 import { Section } from "../Section";
 import { SectionHeader } from "../SectionHeader";
@@ -18,7 +20,8 @@ export interface SecurityFeaturesProps {
 }
 
 export const SecurityFeatures: FC<SecurityFeaturesProps> = (props) => {
-  const documentSecurityFeaturesTree = buildDocumentSecurityFeatureTree(props.documentSecurityFeaturesInfo);
+  const activeFeaturesInfo = useAppSelector((state) => getProjectActiveSecurityFeatures(state));
+  const documentSecurityFeaturesTree = buildDocumentSecurityFeatureTree(activeFeaturesInfo);
   return (
     <Section title="3 - Security Features">
       {documentSecurityFeaturesTree.categoryNodes.map((categoryNode) => {

@@ -1,14 +1,13 @@
-import * as rpc from "@@rpc/shared";
+import { SFMaterial, DocumentDesignFormAnswer } from "@@rpc/shared";
 import { DocumentType } from "./DocumentType";
-import { DocumentMaterial } from "./DocumentMaterial";
 import { DocumentStandardCompliance } from "./DocumentStandardCompliance";
 import { DocumentScoreTarget } from "./DocumentScoreTarget";
 
 export interface DocumentSpecs {
   type: DocumentType;
-  material: DocumentMaterial;
+  material: SFMaterial;
   standardCompliance: DocumentStandardCompliance;
   scoreTarget: DocumentScoreTarget;
-  designAnswers: rpc.DocumentDesignFormAnswer[];
+  designAnswers: DocumentDesignFormAnswer[];
   securityFeatures: number[];
 }

@@ -34,6 +34,10 @@ export const Project: NextPage<ProjectProps> = (props) => {
     dispatch(thunks.projectLoad());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(thunks.projectChangeDocumentSecurityFeaturesInfo(documentSecurityFeaturesInfo));
+  }, [dispatch, documentSecurityFeaturesInfo]);
+
   return (
     <>
       <Head>

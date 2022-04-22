@@ -1,15 +1,15 @@
 import { FC } from "react";
 import {
-  formatDocumentMaterialString,
-  formatDocumentScoreTargetString,
-  formatDocumentStandardComplianceString,
-  formatDocumentTypeString,
-  DocumentMaterial,
   DocumentScoreTarget,
   DocumentSpecs,
   DocumentStandardCompliance,
   DocumentType,
+  formatDocumentMaterialString,
+  formatDocumentScoreTargetString,
+  formatDocumentStandardComplianceString,
+  formatDocumentTypeString,
 } from "@@core";
+import { SFMaterial } from "@@rpc/shared";
 import { CardSelect, Icons, Select } from "@@view/components";
 import { Section } from "../Section";
 import { SectionItem } from "../SectionItem";
@@ -17,7 +17,7 @@ import { SectionItem } from "../SectionItem";
 export interface GeneralInfoProps {
   documentSpecs: DocumentSpecs;
   onChangeDocumentType: (value: DocumentType) => void;
-  onChangeDocumentMaterial: (value: DocumentMaterial) => void;
+  onChangeDocumentMaterial: (value: SFMaterial) => void;
   onChangeDocumentStandardCompliance: (value: DocumentStandardCompliance) => void;
   onChangeDocumentScoreTarget: (value: DocumentScoreTarget) => void;
 }
@@ -25,7 +25,7 @@ export interface GeneralInfoProps {
 export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
   return (
     <Section title="1 - General Info">
-      <SectionItem title="Document Type" fullWidth={false}>
+      <SectionItem title="Document Type" fullWidth={true}>
         <CardSelect
           value={props.documentSpecs.type}
           items={[
@@ -53,22 +53,22 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
           onChange={(value) => props.onChangeDocumentType(value as DocumentType)}
         />
       </SectionItem>
-      <SectionItem title="Material" fullWidth={false}>
+      <SectionItem title="Material" fullWidth={true}>
         <CardSelect
-          value={props.documentSpecs.material}
+          value={props.documentSpecs.material.toString()}
           items={[
             {
-              value: DocumentMaterial.PLASTIC,
+              value: SFMaterial.Plastic.toString(),
               Icon: Icons.DocumentMaterialPlastic,
-              label: formatDocumentMaterialString(DocumentMaterial.PLASTIC),
+              label: formatDocumentMaterialString(SFMaterial.Plastic),
             },
             {
-              value: DocumentMaterial.PAPER,
+              value: SFMaterial.Paper.toString(),
               Icon: Icons.DocumentMaterialPaper,
-              label: formatDocumentMaterialString(DocumentMaterial.PAPER),
+              label: formatDocumentMaterialString(SFMaterial.Paper),
             },
           ]}
-          onChange={(value) => props.onChangeDocumentMaterial(value as DocumentMaterial)}
+          onChange={(value) => props.onChangeDocumentMaterial(Number.parseInt(value, 10) as SFMaterial)}
         />
       </SectionItem>
       <SectionItem title="Standard Compliance" fullWidth={false}>
