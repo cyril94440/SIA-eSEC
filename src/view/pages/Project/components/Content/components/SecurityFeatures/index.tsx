@@ -23,7 +23,7 @@ export const SecurityFeatures: FC<SecurityFeaturesProps> = (props) => {
   const activeFeaturesInfo = useAppSelector((state) => getProjectActiveSecurityFeatures(state));
   const documentSecurityFeaturesTree = buildDocumentSecurityFeatureTree(activeFeaturesInfo);
   return (
-    <Section title="3 - Security Features">
+    <Section>
       {documentSecurityFeaturesTree.categoryNodes.map((categoryNode) => {
         return (
           <Fragment key={categoryNode.item}>

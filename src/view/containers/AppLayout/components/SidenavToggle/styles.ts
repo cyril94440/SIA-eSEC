@@ -15,7 +15,7 @@ export const root = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 9px;
+  padding: ${styles.getSize(3 / 4)};
 
   &:hover {
     background: ${styles.COLOR_PRIMARY_20};

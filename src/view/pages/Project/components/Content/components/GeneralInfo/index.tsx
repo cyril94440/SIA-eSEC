@@ -24,7 +24,7 @@ export interface GeneralInfoProps {
 
 export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
   return (
-    <Section title="1 - General Info">
+    <Section>
       <SectionItem title="Document Type" fullWidth={true}>
         <CardSelect
           value={props.documentSpecs.type}

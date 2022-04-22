@@ -15,7 +15,7 @@ export interface DocumentDesignProps {
 
 export const DocumentDesign: FC<DocumentDesignProps> = (props) => {
   return (
-    <Section title="2 - Document Design">
+    <Section>
       <SectionItem fullWidth={true}>
         <Text>
           Document Design security refers to the physical features, techniques, and characteristics of documents
