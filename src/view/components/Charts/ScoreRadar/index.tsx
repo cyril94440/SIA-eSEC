@@ -59,5 +59,6 @@ export const ScoreRadar: FC<ScoreRadarProps> = (props) => {
     },
   };
 
-  return <Radar data={data} options={options} />;
+  // TODO: not updated under safari (15.2), forced through a random key
+  return <Radar key={Math.random()} data={data} options={options} />;
 };
