@@ -5,13 +5,15 @@ import { routes } from "@@core";
 import * as thunks from "@@thunks";
 import { Icons } from "@@view/components";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
-import { Main, Sidebar, Sidenav, SidenavHeader, SidenavItem, SidenavSection, SidenavToggle } from "./components";
+import { Main, Sidebar, Sidenav, SidenavHeader, SidenavItem, SidenavSection, SideToggle } from "./components";
 import * as styles from "./styles";
 
 export interface AppLayoutProps {
   mainCss?: SerializedStyles;
   children?: ReactNode;
   sidebar?: ReactNode;
+  sidebarCollapsed?: boolean;
+  onToggleSidebar?: (collapsed: boolean) => void;
 }
 
 export const AppLayout: FC<AppLayoutProps> = (props) => {
@@ -78,17 +80,29 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
             }}
           />
         </SidenavSection>
-        <SidenavToggle
+        <SideToggle
+          placement="left"
           minimized={sidenavMinimized}
           onClick={() => {
             dispatch(thunks.appToggleSidenav());
           }}
         />
       </Sidenav>
-      <Main css={props.mainCss} withSidebar={!!props.sidebar}>
+      <Main css={props.mainCss} withSidebar={!!props.sidebar} sideBarCollapsed={props.sidebarCollapsed}>
         {props.children}
       </Main>
-      {props.sidebar && <Sidebar>{props.sidebar}</Sidebar>}
+      {props.sidebar && (
+        <Sidebar collapsed={props.sidebarCollapsed ?? false}>
+          {props.sidebar}
+          <SideToggle
+            placement="right"
+            minimized={props.sidebarCollapsed ?? false}
+            onClick={() => {
+              props.onToggleSidebar?.(!(props.sidebarCollapsed ?? false));
+            }}
+          />
+        </Sidebar>
+      )}
     </div>
   );
 };

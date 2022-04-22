@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import * as rpc from "@@rpc/shared";
 import { formatPageTitle } from "@@core";
 import * as thunks from "@@thunks";
@@ -19,6 +19,7 @@ export const Project: NextPage<ProjectProps> = (props) => {
   const status = useAppSelector((state) => state.project.status);
   const documentSpecs = useAppSelector((state) => state.project.documentSpecs);
   const documentScore = useAppSelector((state) => state.project.documentScore);
+  const [scoresCollapsed, setScoresCollapsed] = useState(false);
 
   const documentDesignQuestionsInfo = useMemo(
     () => JSON.parse(props.documentDesignQuestionsInfoJson) as rpc.DocumentDesignQuestion[],
@@ -46,6 +47,7 @@ export const Project: NextPage<ProjectProps> = (props) => {
       <AppLayout
         sidebar={
           <Scores
+            collapsed={scoresCollapsed}
             documentScore={documentScore}
             onDownloadReportClick={() => {
               dispatch(thunks.projectDownloadReport());
@@ -55,6 +57,10 @@ export const Project: NextPage<ProjectProps> = (props) => {
             }}
           />
         }
+        sidebarCollapsed={scoresCollapsed}
+        onToggleSidebar={(collapsed) => {
+          setScoresCollapsed(collapsed);
+        }}
       >
         <Content
           title={title}

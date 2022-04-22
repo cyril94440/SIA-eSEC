@@ -7,5 +7,8 @@ export const root = css`
   bottom: 0;
   right: 0;
   width: ${styles.getSize(59)};
-  overflow-y: auto;
+`;
+
+export const rootCollapsed = css`
+  width: ${styles.getSize(6)};
 `;

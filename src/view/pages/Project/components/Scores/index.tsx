@@ -10,6 +10,7 @@ import { DownloadReport, Header, Icao, Overall, Panel, PanelGroup } from "./comp
 import * as styles from "./styles";
 
 export interface ScoresProps {
+  collapsed: boolean;
   documentScore: rpc.TNScore | null;
   onDownloadReportClick: () => void;
   onIcaoMissingFeaturesClick: () => void;
@@ -36,7 +37,7 @@ const allScoreCategories = [
 ];
 
 export const Scores: FC<ScoresProps> = (props) => {
-  if (!props.documentScore) {
+  if (!props.documentScore || props.collapsed) {
     return <div css={styles.root}></div>;
   }
 

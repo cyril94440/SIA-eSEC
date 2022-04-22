@@ -6,4 +6,6 @@ export const root = css`
   padding-right: ${styles.getSize(5)};
   padding-top: ${styles.getSize(10)};
   background: ${styles.COLOR_NEUTRAL_BLUE};
+  height: 100%;
+  overflow-y: auto;
 `;

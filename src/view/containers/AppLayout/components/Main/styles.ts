@@ -9,3 +9,7 @@ export const root = css`
 export const rootWithSidebar = css`
   margin-right: ${styles.getSize(59)};
 `;
+
+export const rootWithSidebarCollapsed = css`
+  margin-right: ${styles.getSize(6)};
+`;
