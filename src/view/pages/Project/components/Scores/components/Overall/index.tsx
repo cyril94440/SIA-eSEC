@@ -10,7 +10,7 @@ export const Overall: FC<OverallProps> = (props) => {
   return (
     <>
       <div css={styles.value}>{props.value.toFixed(0)}</div>
-      <Progress value={props.value} />
+      <Progress value={props.value * 10} />
     </>
   );
 };

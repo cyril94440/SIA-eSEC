@@ -45,13 +45,13 @@ export const ScoreRadar: FC<ScoreRadarProps> = (props) => {
       r: {
         beginAtZero: true,
         suggestedMin: 0,
-        suggestedMax: 100,
+        suggestedMax: 10,
         grid: {
           color: "#f4f4f4",
         },
         ticks: {
           color: "#666",
-          stepSize: 10,
+          stepSize: 1,
           font: {
             size: 8,
           },

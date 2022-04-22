@@ -16,23 +16,23 @@ export interface ScoresProps {
 }
 
 const allLocations = [
-  { value: rpc.SFLocation.DocumentBody, target: 40 },
-  { value: rpc.SFLocation.InksBackground, target: 70 },
-  { value: rpc.SFLocation.InksTechPersonalization, target: 50 },
-  { value: rpc.SFLocation.SecurityDesign, target: 60 },
-  { value: rpc.SFLocation.SFPersonalization, target: 80 },
+  { value: rpc.SFLocation.DocumentBody, target: 4.0 },
+  { value: rpc.SFLocation.InksBackground, target: 7.0 },
+  { value: rpc.SFLocation.InksTechPersonalization, target: 5.0 },
+  { value: rpc.SFLocation.SecurityDesign, target: 6.0 },
+  { value: rpc.SFLocation.SFPersonalization, target: 8.0 },
 ];
 
 const allScoreCategories = [
-  { value: rpc.SFScoreCategory.ABC, target: 50 },
-  { value: rpc.SFScoreCategory.Alteration, target: 60 },
-  { value: rpc.SFScoreCategory.Counterfeit, target: 70 },
-  { value: rpc.SFScoreCategory.Impostor, target: 80 },
-  { value: rpc.SFScoreCategory.Level1, target: 85 },
-  { value: rpc.SFScoreCategory.Level2, target: 70 },
-  { value: rpc.SFScoreCategory.Level3, target: 60 },
-  { value: rpc.SFScoreCategory.Recycling, target: 30 },
-  { value: rpc.SFScoreCategory.Stealing, target: 40 },
+  { value: rpc.SFScoreCategory.ABC, target: 5.0 },
+  { value: rpc.SFScoreCategory.Alteration, target: 6.0 },
+  { value: rpc.SFScoreCategory.Counterfeit, target: 7.0 },
+  { value: rpc.SFScoreCategory.Impostor, target: 8.0 },
+  { value: rpc.SFScoreCategory.Level1, target: 8.5 },
+  { value: rpc.SFScoreCategory.Level2, target: 7.0 },
+  { value: rpc.SFScoreCategory.Level3, target: 6.0 },
+  { value: rpc.SFScoreCategory.Recycling, target: 3.0 },
+  { value: rpc.SFScoreCategory.Stealing, target: 4.0 },
 ];
 
 export const Scores: FC<ScoresProps> = (props) => {
@@ -45,7 +45,7 @@ export const Scores: FC<ScoresProps> = (props) => {
       <Header />
       <PanelGroup>
         <Panel title="Overall score">
-          <Overall value={props.documentScore.totalScore * 10} />
+          <Overall value={props.documentScore.totalScore} />
         </Panel>
         <Panel>
           <Icao onMissingFeaturesClick={props.onIcaoMissingFeaturesClick} />
@@ -54,11 +54,11 @@ export const Scores: FC<ScoresProps> = (props) => {
           <ScoreRadar
             labels={["Location", "Protection", "Level"]}
             values={[
-              props.documentScore.securityFeaturesScore!.locationScore!.score * 10,
-              props.documentScore.securityFeaturesScore!.protectionScore!.score * 10,
-              props.documentScore.securityFeaturesScore!.levelScore!.score * 10,
+              props.documentScore.securityFeaturesScore!.locationScore!.score,
+              props.documentScore.securityFeaturesScore!.protectionScore!.score,
+              props.documentScore.securityFeaturesScore!.levelScore!.score,
             ]}
-            targetValues={[70, 75, 75]}
+            targetValues={[7.0, 7.5, 7.5]}
           />
         </Panel>
         <Panel square={true} title="Distribution of features">
@@ -74,7 +74,7 @@ export const Scores: FC<ScoresProps> = (props) => {
             return (
               <ScoreRadar
                 labels={items.map(({ value }) => formatDocumentSecurityFeatureLocationString(value))}
-                values={items.map(({ score }) => score * 10)}
+                values={items.map(({ score }) => score)}
                 targetValues={items.map(({ target }) => target)}
               />
             );
@@ -94,7 +94,7 @@ export const Scores: FC<ScoresProps> = (props) => {
             return (
               <ScoreRadar
                 labels={items.map(({ category }) => formatDocumentSecurityFeatureScoreCategoryString(category))}
-                values={items.map(({ score }) => score * 10)}
+                values={items.map(({ score }) => score)}
                 targetValues={items.map(({ target }) => target)}
               />
             );
@@ -113,7 +113,7 @@ export const Scores: FC<ScoresProps> = (props) => {
             return (
               <ScoreRadar
                 labels={items.map(({ category }) => formatDocumentSecurityFeatureScoreCategoryString(category))}
-                values={items.map(({ score }) => score * 10)}
+                values={items.map(({ score }) => score)}
                 targetValues={items.map(({ target }) => target)}
               />
             );
