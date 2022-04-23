@@ -37,7 +37,7 @@ export const Select = <TItem,>(props: SelectProps<TItem>) => {
               return (
                 <div
                   key={props.itemId(item)}
-                  css={styles.item}
+                  css={[styles.item, item === props.value && styles.itemSelected]}
                   onClick={() => {
                     if (hideRef.current) {
                       hideRef.current();
@@ -47,9 +47,7 @@ export const Select = <TItem,>(props: SelectProps<TItem>) => {
                   }}
                 >
                   {props.itemContent?.(item, selected) ?? (
-                    <div css={[styles.defaultItemContent, item === props.value && styles.defaultItemContentSelected]}>
-                      {props.itemText(item)}
-                    </div>
+                    <div css={styles.defaultItemContent}>{props.itemText(item)}</div>
                   )}
                 </div>
               );

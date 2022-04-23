@@ -28,12 +28,29 @@ export const content = css`
   background: ${styles.COLOR_NEUTRAL_BLUE};
   border-radius: ${styles.getSize(1)};
   margin-top: ${styles.getSize(1)};
+  overflow: hidden;
 `;
 
 export const item = css`
   position: relative;
+
+  &:hover {
+    color: ${styles.COLOR_WHITE};
+    background: ${styles.COLOR_PRIMARY_60_50};
+  }
+
   &:not(:last-child) {
     border-bottom: 1px solid ${styles.COLOR_NEUTRAL_95};
+  }
+`;
+
+export const itemSelected = css`
+  color: ${styles.COLOR_WHITE};
+  background: ${styles.COLOR_PRIMARY_60};
+
+  &:hover {
+    color: ${styles.COLOR_WHITE};
+    background: ${styles.COLOR_PRIMARY_60};
   }
 `;
 
@@ -45,10 +62,4 @@ export const defaultItemContent = css`
   align-items: center;
   cursor: pointer;
   user-select: none;
-`;
-
-export const defaultItemContentSelected = css`
-  color: ${styles.COLOR_WHITE};
-  background: ${styles.COLOR_PRIMARY_60};
-  border-radius: ${styles.getSize(1)};
 `;
