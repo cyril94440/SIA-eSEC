@@ -37,14 +37,13 @@ export const item = css`
 `;
 
 export const defaultItemContent = css`
-  ${styles.fontMedium14};
+  ${styles.fontRegular14};
   height: ${styles.getSize(6)};
   padding: 0 ${styles.getSize(2)};
   display: flex;
   align-items: center;
   cursor: pointer;
   user-select: none;
-  color: ${styles.COLOR_NEUTRAL_80};
 `;
 
 export const defaultItemContentSelected = css`
