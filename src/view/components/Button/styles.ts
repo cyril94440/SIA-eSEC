@@ -14,6 +14,10 @@ export const root = css`
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
+
+  &:hover {
+    background: ${styles.COLOR_PRIMARY_20};
+  }
 `;
 
 export const rootSecondary = css`
@@ -24,6 +28,10 @@ export const rootSecondary = css`
   color: ${styles.COLOR_PRIMARY_36};
   background: unset;
   border: 1px solid ${styles.COLOR_PRIMARY_36};
+
+  &:hover {
+    background: ${styles.COLOR_PRIMARY_90};
+  }
 `;
 
 export const rootFullWidth = css`
