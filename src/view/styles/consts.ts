@@ -27,7 +27,7 @@ export const FONT_REGULAR_12_LINE_HEIGHT = "150%";
 
 export const FONT_REGULAR_14_SIZE = "14px";
 export const FONT_REGULAR_14_WEIGHT = 400;
-export const FONT_REGULAR_14_LINE_HEIGHT = "150%";
+export const FONT_REGULAR_14_LINE_HEIGHT = "120%";
 
 export const FONT_REGULAR_20_SIZE = "20px";
 export const FONT_REGULAR_20_WEIGHT = 400;

@@ -37,5 +37,5 @@ export const encryptionInfoIcon = css`
 `;
 
 export const encryptionInfoText = css`
-  ${styles.fontRegular12};
+  ${styles.fontRegular14};
 `;
