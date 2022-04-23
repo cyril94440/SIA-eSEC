@@ -2,6 +2,7 @@ export const COLOR_PRIMARY_20 = "#003E66";
 export const COLOR_PRIMARY_36 = "#006FB7";
 export const COLOR_PRIMARY_60 = "#33AFFF";
 export const COLOR_PRIMARY_90 = "#CCEBFF";
+export const COLOR_PRIMARY_60_50 = "#33AFFF80";
 
 export const COLOR_NEUTRAL_60 = "#97979B";
 export const COLOR_NEUTRAL_70 = "#AFAFB6";

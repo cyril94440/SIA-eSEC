@@ -41,7 +41,9 @@ export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
                   <div css={[styles.itemIcon, styles.itemIconChecked]}>
                     <Icons.CheckboxChecked />
                   </div>
-                  <div css={[styles.itemContent, styles.itemContentSelected]}>{props.itemContent(item, true)}</div>
+                  <div css={[styles.itemContent, styles.itemContentSelected]} className={styles.unsetColorOnHover}>
+                    {props.itemContent(item, true)}
+                  </div>
                 </div>
               ))}
             </div>
@@ -61,10 +63,12 @@ export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
                     props.onChange(newValue);
                   }}
                 >
-                  <div css={styles.itemIcon}>
+                  <div css={styles.itemIcon} className={styles.unsetColorOnHover}>
                     <Icons.CheckboxUnchecked />
                   </div>
-                  <div css={styles.itemContent}>{props.itemContent(item, false)}</div>
+                  <div css={styles.itemContent} className={styles.unsetColorOnHover}>
+                    {props.itemContent(item, false)}
+                  </div>
                 </div>
               ))}
             </div>

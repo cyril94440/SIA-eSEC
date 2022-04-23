@@ -1,6 +1,8 @@
 import { css } from "@emotion/react";
 import * as styles from "@@view/styles";
 
+export const unsetColorOnHover = "unsetColorOnHover";
+
 export const control = css`
   display: flex;
   flex-direction: column;
@@ -46,6 +48,16 @@ export const item = css`
   padding: ${styles.getSize(1.5)} ${styles.getSize(2)};
   cursor: pointer;
   user-select: none;
+
+  &:hover {
+    color: ${styles.COLOR_WHITE};
+    background-color: ${styles.COLOR_PRIMARY_60_50};
+
+    .${unsetColorOnHover} {
+      color: unset;
+    }
+  }
+
   &:not(:last-child) {
     border-bottom: 1px solid ${styles.COLOR_NEUTRAL_95};
   }
@@ -74,4 +86,5 @@ export const itemContentSelected = css`
 export const itemList = css`
   background: ${styles.COLOR_NEUTRAL_BLUE};
   border-radius: ${styles.getSize(1)};
+  overflow: hidden;
 `;
