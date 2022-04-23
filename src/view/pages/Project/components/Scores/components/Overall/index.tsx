@@ -9,7 +9,7 @@ export interface OverallProps {
 export const Overall: FC<OverallProps> = (props) => {
   return (
     <>
-      <div css={styles.value}>{props.value.toFixed(0)}</div>
+      <div css={styles.value}>{Math.floor(props.value)}</div>
       <Progress value={props.value * 10} />
     </>
   );
