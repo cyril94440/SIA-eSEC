@@ -25,13 +25,11 @@ export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
     <>
       <GenericDropdown
         fullWidth={true}
-        renderControl={(toggle, visible) => {
+        renderControl={(toggle, expanded) => {
           return (
-            <div css={styles.control}>
-              <div css={styles.input} onClick={toggle}>
-                <div css={styles.inputText}>{props.title}</div>
-                <div css={styles.inputIcon}>{visible ? <Icons.ChevronDown /> : <Icons.ChevronRight />}</div>
-              </div>
+            <div css={styles.input} onClick={toggle}>
+              <div css={styles.inputText}>{props.title}</div>
+              <div css={styles.inputIcon}>{expanded ? <Icons.ChevronDown /> : <Icons.ChevronRight />}</div>
             </div>
           );
         }}

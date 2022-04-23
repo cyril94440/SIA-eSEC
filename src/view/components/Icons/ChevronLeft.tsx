@@ -6,7 +6,7 @@ export const ChevronLeft: Icon = (props) => (
     props={props}
     viewBox="0 0 8 14"
     content={(color) => (
-      <path stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M7 13L1 7L7 1" />
+      <path stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M7 13L1 7L7 1" />
     )}
   />
 );

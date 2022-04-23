@@ -20,7 +20,8 @@ export const controlText = css`
 `;
 
 export const controlIcon = css`
-  width: ${styles.getSize(1.5)};
+  width: ${styles.getSize(2)};
+  height: ${styles.getSize(2)};
 `;
 
 export const content = css`

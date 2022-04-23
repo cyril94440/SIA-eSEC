@@ -8,21 +8,21 @@ export interface GenericDropdownProps {
 }
 
 export interface GenericDropdownRenderControl {
-  (toggle: () => void, visible: boolean): React.ReactNode;
+  (toggle: () => void, expanded: boolean): React.ReactNode;
 }
 
 export interface GenericDropdownRenderContent {
-  (hide: () => void): React.ReactNode;
+  (collapse: () => void): React.ReactNode;
 }
 
 export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
   const rootRef = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  const handleHide = useCallback(() => setVisible(false), [setVisible]);
-  const handleToggle = useCallback(() => setVisible((x) => !x), [setVisible]);
+  const [expanded, setExpanded] = useState(false);
+  const handleCollapse = useCallback(() => setExpanded(false), [setExpanded]);
+  const handleToggle = useCallback(() => setExpanded((x) => !x), [setExpanded]);
 
   useEffect(() => {
-    if (!visible) {
+    if (!expanded) {
       return;
     }
 
@@ -30,20 +30,25 @@ export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
       const rootNode = rootRef.current!;
       const targetNode = event.target as Node;
       if (document.contains(targetNode) && !rootNode.contains(targetNode)) {
-        setVisible(false);
+        setExpanded(false);
       }
     };
 
     document.addEventListener("click", listener);
-    return () => document.removeEventListener("click", listener);
-  }, [visible]);
+    document.addEventListener("wheel", listener);
+
+    return () => {
+      document.removeEventListener("click", listener);
+      document.removeEventListener("wheel", listener);
+    };
+  }, [expanded]);
 
   return (
     <div ref={rootRef} css={styles.root}>
-      {props.renderControl(handleToggle, visible)}
-      {visible && (
+      {props.renderControl(handleToggle, expanded)}
+      {expanded && (
         <div css={[styles.contentContainer, props.fullWidth && styles.contentContainerStretch]}>
-          {props.renderContent(handleHide)}
+          {props.renderContent(handleCollapse)}
         </div>
       )}
     </div>

@@ -3,18 +3,6 @@ import * as styles from "@@view/styles";
 
 export const unsetColorOnHover = "unsetColorOnHover";
 
-export const control = css`
-  display: flex;
-  flex-direction: column;
-  gap: ${styles.getSize(3)};
-`;
-
-export const content = css`
-  padding-bottom: ${styles.getSize(1)};
-  background-color: ${styles.COLOR_WHITE};
-  margin-top: ${styles.getSize(1)};
-`;
-
 export const input = css`
   display: flex;
   flex-direction: row;
@@ -34,8 +22,14 @@ export const inputText = css`
 `;
 
 export const inputIcon = css`
-  width: ${styles.getSize(1.5)};
-  height: ${styles.getSize(1.5)};
+  width: ${styles.getSize(2)};
+  height: ${styles.getSize(2)};
+`;
+
+export const content = css`
+  padding-bottom: ${styles.getSize(1)};
+  background-color: ${styles.COLOR_WHITE};
+  margin-top: ${styles.getSize(2)};
 `;
 
 export const item = css`
@@ -85,5 +79,5 @@ export const itemList = css`
   background: ${styles.COLOR_NEUTRAL_BLUE};
   border-radius: ${styles.getSize(1)};
   overflow: hidden;
-  margin-top: ${styles.getSize(1)};
+  margin-top: ${styles.getSize(2)};
 `;

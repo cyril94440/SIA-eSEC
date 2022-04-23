@@ -1,7 +1,7 @@
 import { FC } from "react";
 import * as rpc from "@@rpc/shared";
 import { DocumentSpecs } from "@@core";
-import { CommentsWrap, RadioGroup } from "@@view/components";
+import { CommentsWrap, RadioGroup, RadioSelect } from "@@view/components";
 import { Label } from "../Label";
 import { Text } from "../Text";
 import { Section } from "../Section";
@@ -29,9 +29,9 @@ export const DocumentDesign: FC<DocumentDesignProps> = (props) => {
         const value = props.documentSpecs.designAnswers.find((a) => a.idQuestion === question.id)?.idAnswer ?? null;
         return (
           <SectionItem key={question.id} fullWidth={false}>
-            <Label>{`${questionIndex + 1} - ${question.questionTitle}`}</Label>
             <CommentsWrap text="No comments yet">
-              <RadioGroup
+              <RadioSelect
+                title={`${questionIndex + 1} - ${question.questionTitle}`}
                 value={value}
                 items={question.answers.map((answer) => {
                   return {

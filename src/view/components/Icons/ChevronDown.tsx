@@ -6,7 +6,7 @@ export const ChevronDown: Icon = (props) => (
     props={props}
     viewBox="0 0 14 8"
     content={(color) => (
-      <path stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M13 1L7 7L1 1" />
+      <path stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" d="M13 1L7 7L1 1" />
     )}
   />
 );
