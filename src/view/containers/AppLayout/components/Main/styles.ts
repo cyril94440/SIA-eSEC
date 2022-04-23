@@ -11,5 +11,5 @@ export const rootWithSidebar = css`
 `;
 
 export const rootWithSidebarCollapsed = css`
-  margin-right: ${styles.getSize(6)};
+  margin-right: ${styles.getSize(4)};
 `;

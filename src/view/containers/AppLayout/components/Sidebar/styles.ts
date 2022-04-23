@@ -10,5 +10,5 @@ export const root = css`
 `;
 
 export const rootCollapsed = css`
-  width: ${styles.getSize(6)};
+  width: ${styles.getSize(4)};
 `;

@@ -26,5 +26,5 @@ export const rootLeft = css`
 `;
 
 export const rootRight = css`
-  left: ${styles.getSize(3 / 2)};
+  left: ${styles.getSize(-3 / 2)};
 `;
