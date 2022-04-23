@@ -16,22 +16,11 @@ const initialState: ProjectState = {
   status: ProjectStatus.ONGOING,
   documentSpecs: {
     type: DocumentType.PASSPORT,
-    material: rpc.SFMaterial.Paper,
+    material: rpc.SFMaterial.Plastic,
     standardCompliance: DocumentStandardCompliance.EU_PASSPORT,
     scoreTarget: DocumentScoreTarget.SIA_RECO,
     designAnswers: [],
-    securityFeatures: [
-      //Doc Body
-      19, 20, 21, 22, 23,
-      //Security Design
-      35, 36, 37, 38, 39, 40, 41, 42, 43, 44,
-      //Background
-      45, 46, 51,
-      //Ink Perso
-      1,
-      //SFPerso
-      8, 10, 12, 14, 16,
-    ],
+    securityFeatures: [],
   },
   documentScore: null,
   documentSecurityFeaturesInfo: [],
