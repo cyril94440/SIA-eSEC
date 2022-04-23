@@ -12,9 +12,6 @@ export const control = css`
 export const content = css`
   padding-bottom: ${styles.getSize(1)};
   background-color: ${styles.COLOR_WHITE};
-`;
-
-export const contentWithTopMargin = css`
   margin-top: ${styles.getSize(1)};
 `;
 
@@ -38,6 +35,7 @@ export const inputText = css`
 
 export const inputIcon = css`
   width: ${styles.getSize(1.5)};
+  height: ${styles.getSize(1.5)};
 `;
 
 export const item = css`
@@ -87,4 +85,5 @@ export const itemList = css`
   background: ${styles.COLOR_NEUTRAL_BLUE};
   border-radius: ${styles.getSize(1)};
   overflow: hidden;
+  margin-top: ${styles.getSize(1)};
 `;

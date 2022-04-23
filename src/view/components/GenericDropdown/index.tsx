@@ -33,6 +33,7 @@ export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
         setVisible(false);
       }
     };
+
     document.addEventListener("click", listener);
     return () => document.removeEventListener("click", listener);
   }, [visible]);
