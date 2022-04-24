@@ -27,6 +27,11 @@ export const inputIcon = css`
   flex: none;
   width: ${styles.getSize(2)};
   height: ${styles.getSize(2)};
+  transition: transform 200ms;
+`;
+
+export const inputIconExpanded = css`
+  transform: rotate(90deg);
 `;
 
 export const content = css`

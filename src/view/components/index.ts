@@ -3,7 +3,6 @@ export * from "./CardSelect";
 export * from "./Charts";
 export * from "./CommentsWrap";
 export * from "./ContentList";
-export * from "./GenericAccordion";
 export * from "./GenericDropdown";
 export * from "./Icon";
 export * from "./Icons";

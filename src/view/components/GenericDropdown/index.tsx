@@ -46,11 +46,15 @@ export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
   return (
     <div ref={rootRef} css={styles.root}>
       {props.renderControl(handleToggle, expanded)}
-      {expanded && (
-        <div css={[styles.contentContainer, props.fullWidth && styles.contentContainerStretch]}>
-          {props.renderContent(handleCollapse)}
-        </div>
-      )}
+      <div
+        css={[
+          styles.contentContainer,
+          expanded && styles.contentContainerExpanded,
+          props.fullWidth && styles.contentContainerFullWidth,
+        ]}
+      >
+        {expanded && props.renderContent(handleCollapse)}
+      </div>
     </div>
   );
 };

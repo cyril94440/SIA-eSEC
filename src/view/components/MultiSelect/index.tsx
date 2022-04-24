@@ -29,7 +29,9 @@ export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
           return (
             <div css={styles.input} onClick={toggle}>
               <div css={styles.inputText}>{props.title}</div>
-              <div css={styles.inputIcon}>{expanded ? <Icons.ChevronDown /> : <Icons.ChevronRight />}</div>
+              <div css={[styles.inputIcon, expanded && styles.inputIconExpanded]}>
+                <Icons.ChevronRight />
+              </div>
             </div>
           );
         }}

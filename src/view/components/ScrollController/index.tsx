@@ -10,22 +10,29 @@ import {
   useContext,
   useRef,
   useMemo,
+  useLayoutEffect,
 } from "react";
 
-export interface ScrollHandler {
-  (element: Element): void;
+interface ScrollContextValue {
+  container: Element | null;
+  handlers: Set<ScrollHandler>;
 }
 
-const ScrollContext = createContext<Set<ScrollHandler> | null>(null);
+const ScrollContext = createContext<ScrollContextValue | null>(null);
+
+export interface ScrollHandler {
+  (container: Element): void;
+}
 
 export interface ScrollControllerProps {
-  children: (elementRef: RefCallback<Element>) => ReactNode;
+  children: (containerRef: RefCallback<Element>) => ReactNode;
 }
 
 export const ScrollController: FC<ScrollControllerProps> = (props) => {
-  const handlers = useMemo(() => new Set<ScrollHandler>(), []);
   const [container, setContainer] = useState<Element | null>(null);
   const containerRef = useCallback((element: Element) => setContainer(element), []);
+  const handlers = useMemo(() => new Set<ScrollHandler>(), []);
+  const contextValue = useMemo(() => ({ container, handlers }), [container, handlers]);
 
   useEffect(() => {
     if (!container) {
@@ -41,18 +48,22 @@ export const ScrollController: FC<ScrollControllerProps> = (props) => {
     return () => container.removeEventListener("scroll", listener);
   }, [handlers, container]);
 
-  return <ScrollContext.Provider value={handlers}>{props.children(containerRef)}</ScrollContext.Provider>;
+  return <ScrollContext.Provider value={contextValue}>{props.children(containerRef)}</ScrollContext.Provider>;
 };
 
 export function useScrollClient(handler: ScrollHandler): void {
-  const handlers = useContext(ScrollContext);
+  const contextValue = useContext(ScrollContext);
+
   useEffect(() => {
-    if (!handlers) {
-      return;
-    }
-    handlers.add(handler);
+    const handlers = contextValue?.handlers;
+    handlers?.add(handler);
     return () => {
-      handlers.delete(handler);
+      handlers?.delete(handler);
     };
-  }, [handlers, handler]);
+  }, [contextValue, handler]);
+
+  useLayoutEffect(() => {
+    const container = contextValue?.container;
+    container && handler(container);
+  }, [contextValue, handler]);
 }

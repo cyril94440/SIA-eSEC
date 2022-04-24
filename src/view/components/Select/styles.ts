@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import * as styles from "@@view/styles";
 
-export const control = css`
+export const input = css`
   height: ${styles.getSize(6)};
   padding: 0 ${styles.getSize(2)};
   border-radius: ${styles.getSize(1)};
@@ -13,15 +13,20 @@ export const control = css`
   align-items: center;
 `;
 
-export const controlText = css`
+export const inputText = css`
   ${styles.fontRegular14};
   flex: 1;
   line-height: 1;
 `;
 
-export const controlIcon = css`
+export const inputIcon = css`
   width: ${styles.getSize(2)};
   height: ${styles.getSize(2)};
+  transition: transform 200ms;
+`;
+
+export const inputIconExpanded = css`
+  transform: rotate(90deg);
 `;
 
 export const content = css`

@@ -20,7 +20,9 @@ export const RadioSelect = <TValue,>(props: RadioSelectProps<TValue>) => {
           return (
             <div css={styles.input} onClick={toggle}>
               <div css={styles.inputTitle}>{props.title}</div>
-              <div css={styles.inputIcon}>{expanded ? <Icons.ChevronDown /> : <Icons.ChevronRight />}</div>
+              <div css={[styles.inputIcon, expanded && styles.inputIconExpanded]}>
+                <Icons.ChevronRight />
+              </div>
             </div>
           );
         }}

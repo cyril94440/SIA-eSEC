@@ -1,4 +1,3 @@
-export * from "./AccordionHeader";
 export * from "./DocumentDesign";
 export * from "./GeneralInfo";
 export * from "./Header";

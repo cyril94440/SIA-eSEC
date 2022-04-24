@@ -18,12 +18,12 @@ export const Select = <TItem,>(props: SelectProps<TItem>) => {
   return (
     <GenericDropdown
       fullWidth={true}
-      renderControl={(toggle) => {
+      renderControl={(toggle, expanded) => {
         return (
-          <div css={styles.control} onClick={toggle}>
-            <div css={styles.controlText}>{valueText}</div>
-            <div css={styles.controlIcon}>
-              <Icons.ChevronDown />
+          <div css={styles.input} onClick={toggle}>
+            <div css={styles.inputText}>{valueText}</div>
+            <div css={[styles.inputIcon, expanded && styles.inputIconExpanded]}>
+              <Icons.ChevronRight />
             </div>
           </div>
         );
