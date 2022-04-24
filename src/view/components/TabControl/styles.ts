@@ -1,8 +1,6 @@
 import { css } from "@emotion/react";
 import * as styles from "@@view/styles";
 
-export const root = css``;
-
 export const tabs = css`
   display: flex;
   flex-flow: row nowrap;
@@ -20,11 +18,10 @@ export const tab = css`
   cursor: pointer;
   user-select: none;
   opacity: 0.5;
+  transition: opacity 250ms;
 `;
 
 export const tabActive = css`
   cursor: unset;
   opacity: unset;
 `;
-
-export const content = css``;

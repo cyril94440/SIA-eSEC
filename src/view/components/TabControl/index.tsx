@@ -1,11 +1,12 @@
 import { FC, ReactNode, useRef, useState } from "react";
+import { ContentList } from "../ContentList";
 import { useScrollClient } from "../ScrollController";
 import { StickedContainer } from "../StickedContainer";
 import * as styles from "./styles";
 
 export interface TabControlProps {
   items: TabControlItem[];
-  activeItem: string;
+  activeItemKey: string;
   stickedTabs?: boolean;
   tabsXPadding?: string;
   onChangeActiveItem: (value: string) => void;
@@ -27,23 +28,25 @@ export const TabControl: FC<TabControlProps> = (props) => {
     setStickedTabs(stickedTabs);
   });
 
-  const activeContent = props.items.find((item) => item.key === props.activeItem)?.content() ?? null;
   return (
-    <div css={styles.root}>
+    <>
       <div ref={tabsRef}>
         <Tabs
           items={props.items}
-          activeItem={props.activeItem}
+          activeItemKey={props.activeItemKey}
           tabsXPadding={props.tabsXPadding}
           onChangeActiveItem={props.onChangeActiveItem}
         />
       </div>
-      <div css={styles.content}>{activeContent}</div>
+      <ContentList
+        items={props.items.map((i) => ({ key: i.key, value: i.content }))}
+        activeItemKey={props.activeItemKey}
+      />
       {stickedTabs && (
         <StickedContainer>
           <Tabs
             items={props.items}
-            activeItem={props.activeItem}
+            activeItemKey={props.activeItemKey}
             tabsXPadding={props.tabsXPadding}
             onChangeActiveItem={(value) => {
               props.onChangeActiveItem(value);
@@ -52,13 +55,13 @@ export const TabControl: FC<TabControlProps> = (props) => {
           />
         </StickedContainer>
       )}
-    </div>
+    </>
   );
 };
 
 interface TabsProps {
   items: TabControlItem[];
-  activeItem: string;
+  activeItemKey: string;
   tabsXPadding: string | undefined;
   onChangeActiveItem: (value: string) => void;
 }
@@ -73,7 +76,7 @@ const Tabs: FC<TabsProps> = (props) => {
       }}
     >
       {props.items.map((item) => {
-        const active = item.key === props.activeItem;
+        const active = item.key === props.activeItemKey;
         return (
           <div
             key={item.key}

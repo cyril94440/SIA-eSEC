@@ -79,7 +79,7 @@ export const Content: FC<ContentProps> = (props) => {
                 ),
               },
             ]}
-            activeItem={tabControlActiveItem}
+            activeItemKey={tabControlActiveItem}
             stickedTabs={true}
             tabsXPadding={styles.tabsXPadding}
             onChangeActiveItem={(item) => setTabControlActiveItem(item as TabControlItem)}
