@@ -8,9 +8,9 @@ export interface SectionProps {
 
 export const Section: FC<SectionProps> = (props) => {
   return (
-    <>
+    <div css={styles.root}>
       {props.title && <div css={styles.title}>{props.title}</div>}
       {props.children}
-    </>
+    </div>
   );
 };

@@ -11,4 +11,7 @@ export * from "./MultiSelect";
 export * from "./Progress";
 export * from "./RadioGroup";
 export * from "./RadioSelect";
+export * from "./ScrollController";
 export * from "./Select";
+export * from "./StickedContainer";
+export * from "./TabControl";

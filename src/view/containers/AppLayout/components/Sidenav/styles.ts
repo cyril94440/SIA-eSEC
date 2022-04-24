@@ -8,6 +8,7 @@ export const root = css`
   color: ${styles.COLOR_WHITE};
   background: ${styles.COLOR_PRIMARY_36};
   position: relative;
+  z-index: 1;
 `;
 
 export const rootMinimized = css`

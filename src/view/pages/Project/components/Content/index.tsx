@@ -1,11 +1,11 @@
 import { FC, useRef, useState } from "react";
 import * as rpc from "@@rpc/shared";
 import { DocumentScoreTarget, DocumentSpecs, DocumentStandardCompliance, DocumentType, ProjectStatus } from "@@core";
-import { GenericAccordion } from "@@view/components";
-import { AccordionHeader, DocumentDesign, GeneralInfo, Header, SecurityFeatures, Status } from "./components";
+import { ScrollController, TabControl } from "@@view/components";
+import { DocumentDesign, GeneralInfo, Header, Section, SecurityFeatures, Status } from "./components";
 import * as styles from "./styles";
 
-enum AccordionItem {
+enum TabControlItem {
   GeneralInfo = "GeneralInfo",
   DocumentDesign = "DocumentDesign",
   SecurityFeatures = "SecurityFeatures",
@@ -28,69 +28,64 @@ export interface ContentProps {
 }
 
 export const Content: FC<ContentProps> = (props) => {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const [activeAccordionItem, setActiveAccordionItem] = useState<AccordionItem | null>(AccordionItem.GeneralInfo);
+  const [tabControlActiveItem, setTabControlActiveItem] = useState(TabControlItem.GeneralInfo);
   return (
-    <div ref={rootRef} css={styles.root}>
-      <Status value={props.status} />
-      <Header
-        title={props.title}
-        onRenameClick={props.onRenameClick}
-        onEncryptionInfoClick={props.onEncryptionInfoClick}
-      />
-      <GenericAccordion
-        items={[
-          {
-            key: AccordionItem.GeneralInfo,
-            expanded: activeAccordionItem === AccordionItem.GeneralInfo,
-            header: (expanded, click) => (
-              <AccordionHeader title="1 - General Info" expanded={expanded} onClick={click} />
-            ),
-            content: () => (
-              <GeneralInfo
-                documentSpecs={props.documentSpecs}
-                onChangeDocumentType={props.onChangeDocumentType}
-                onChangeDocumentMaterial={props.onChangeDocumentMaterial}
-                onChangeDocumentStandardCompliance={props.onChangeDocumentStandardCompliance}
-                onChangeDocumentScoreTarget={props.onChangeDocumentScoreTarget}
-              />
-            ),
-          },
-          {
-            key: AccordionItem.DocumentDesign,
-            expanded: activeAccordionItem === AccordionItem.DocumentDesign,
-            header: (expanded, click) => (
-              <AccordionHeader title="2 - Document Design" expanded={expanded} onClick={click} />
-            ),
-            content: () => (
-              <DocumentDesign
-                documentSpecs={props.documentSpecs}
-                documentDesignQuestionsInfo={props.documentDesignQuestionsInfo}
-                onChangeDocumentDesignAnswer={props.onChangeDocumentDesignAnswer}
-              />
-            ),
-          },
-          {
-            key: AccordionItem.SecurityFeatures,
-            expanded: activeAccordionItem === AccordionItem.SecurityFeatures,
-            header: (expanded, click) => (
-              <AccordionHeader title="3 - Security Features" expanded={expanded} onClick={click} />
-            ),
-            content: () => (
-              <SecurityFeatures
-                documentSpecs={props.documentSpecs}
-                documentSecurityFeaturesInfo={props.documentSecurityFeaturesInfo}
-                onChangeDocumentSecurityFeatures={props.onChangeDocumentSecurityFeatures}
-              />
-            ),
-          },
-        ]}
-        onItemClick={(key) => {
-          const item = key as AccordionItem;
-          rootRef.current?.scrollIntoView();
-          setActiveAccordionItem(activeAccordionItem !== item ? item : null);
-        }}
-      />
-    </div>
+    <ScrollController>
+      {(containerRef) => (
+        <div ref={containerRef} css={styles.root}>
+          <Section>
+            <Status value={props.status} />
+            <Header
+              title={props.title}
+              onRenameClick={props.onRenameClick}
+              onEncryptionInfoClick={props.onEncryptionInfoClick}
+            />
+          </Section>
+          <TabControl
+            items={[
+              {
+                key: TabControlItem.GeneralInfo,
+                title: "1 - General Info",
+                content: () => (
+                  <GeneralInfo
+                    documentSpecs={props.documentSpecs}
+                    onChangeDocumentType={props.onChangeDocumentType}
+                    onChangeDocumentMaterial={props.onChangeDocumentMaterial}
+                    onChangeDocumentStandardCompliance={props.onChangeDocumentStandardCompliance}
+                    onChangeDocumentScoreTarget={props.onChangeDocumentScoreTarget}
+                  />
+                ),
+              },
+              {
+                key: TabControlItem.DocumentDesign,
+                title: "2 - Document Design",
+                content: () => (
+                  <DocumentDesign
+                    documentSpecs={props.documentSpecs}
+                    documentDesignQuestionsInfo={props.documentDesignQuestionsInfo}
+                    onChangeDocumentDesignAnswer={props.onChangeDocumentDesignAnswer}
+                  />
+                ),
+              },
+              {
+                key: TabControlItem.SecurityFeatures,
+                title: "3 - Security Features",
+                content: () => (
+                  <SecurityFeatures
+                    documentSpecs={props.documentSpecs}
+                    documentSecurityFeaturesInfo={props.documentSecurityFeaturesInfo}
+                    onChangeDocumentSecurityFeatures={props.onChangeDocumentSecurityFeatures}
+                  />
+                ),
+              },
+            ]}
+            activeItem={tabControlActiveItem}
+            stickedTabs={true}
+            tabsXPadding={styles.tabsXPadding}
+            onChangeActiveItem={(item) => setTabControlActiveItem(item as TabControlItem)}
+          />
+        </div>
+      )}
+    </ScrollController>
   );
 };

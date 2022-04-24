@@ -7,6 +7,7 @@ export const root = css`
   bottom: 0;
   right: 0;
   width: ${styles.getSize(59)};
+  z-index: 1;
 `;
 
 export const rootCollapsed = css`

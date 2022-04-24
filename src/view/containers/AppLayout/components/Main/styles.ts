@@ -4,6 +4,7 @@ import * as styles from "@@view/styles";
 export const root = css`
   flex: 1;
   overflow-y: auto;
+  z-index: 0;
 `;
 
 export const rootWithSidebar = css`
