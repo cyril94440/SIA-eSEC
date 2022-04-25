@@ -1,7 +1,7 @@
 # Install dependencies only when needed
 FROM node:alpine AS deps
 WORKDIR /app
-COPY package.json ./
+COPY package.json yarn.lock ./
 RUN yarn install --production --network-timeout 1000000
 RUN yarn add --dev typescript @types/node
 # ==================================================================
