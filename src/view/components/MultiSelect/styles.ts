@@ -71,6 +71,12 @@ export const itemIconChecked = css`
   color: ${styles.COLOR_PRIMARY_60};
 `;
 
+export const itemIconClose = css`
+  width: ${styles.getSize(1.25)};
+  height: ${styles.getSize(1.25)};
+  color: ${styles.COLOR_GREY_BLUE};
+`;
+
 export const itemContent = css`
   flex: 1;
   ${styles.fontRegular14};

@@ -5,6 +5,7 @@ import { ChecksGrid } from "./ChecksGrid";
 import { ChevronDown } from "./ChevronDown";
 import { ChevronLeft } from "./ChevronLeft";
 import { ChevronRight } from "./ChevronRight";
+import { Close } from "./Close";
 import { Dashboard } from "./Dashboard";
 import { DocumentMaterialPaper } from "./DocumentMaterialPaper";
 import { DocumentMaterialPlastic } from "./DocumentMaterialPlastic";
@@ -30,6 +31,7 @@ export const Icons = {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
+  Close,
   Dashboard,
   DocumentMaterialPaper,
   DocumentMaterialPlastic,

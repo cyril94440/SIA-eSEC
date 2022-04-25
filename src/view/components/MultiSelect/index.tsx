@@ -45,6 +45,7 @@ export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
                     item={item}
                     itemContent={props.itemContent}
                     selected={valueSet.has(item)}
+                    useCloseIcon={false}
                     onChange={(selected) => handleChange(item, selected)}
                   />
                 ))}
@@ -61,6 +62,7 @@ export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
               item={item}
               itemContent={props.itemContent}
               selected={true}
+              useCloseIcon={true}
               onChange={(selected) => handleChange(item, selected)}
             />
           ))}
@@ -74,6 +76,7 @@ interface ItemProps<TItem> {
   item: TItem;
   itemContent: (item: TItem, selected: boolean) => ReactNode;
   selected: boolean;
+  useCloseIcon: boolean;
   onChange: (selected: boolean) => void;
 }
 
@@ -81,10 +84,18 @@ const Item = <TItem,>(props: ItemProps<TItem>) => {
   return (
     <div css={styles.item} onClick={() => props.onChange(!props.selected)}>
       <div
-        css={[styles.itemIcon, props.selected && styles.itemIconChecked]}
-        className={!props.selected ? styles.unsetColorOnHover : undefined}
+        css={[styles.itemIcon, props.selected && styles.itemIconChecked, props.useCloseIcon && styles.itemIconClose]}
+        className={!props.selected || props.useCloseIcon ? styles.unsetColorOnHover : undefined}
       >
-        {props.selected ? <Icons.CheckboxChecked /> : <Icons.CheckboxUnchecked />}
+        {props.selected ? (
+          props.useCloseIcon ? (
+            <Icons.Close />
+          ) : (
+            <Icons.CheckboxChecked />
+          )
+        ) : (
+          <Icons.CheckboxUnchecked />
+        )}
       </div>
       <div
         css={[styles.itemContent, props.selected && styles.itemContentSelected]}
