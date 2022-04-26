@@ -18,8 +18,19 @@ export interface GenericDropdownRenderContent {
 export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
   const rootRef = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
-  const handleCollapse = useCallback(() => setExpanded(false), [setExpanded]);
-  const handleToggle = useCallback(() => setExpanded((x) => !x), [setExpanded]);
+  const [collapsing, setCollapsing] = useState(false);
+
+  const expand = useCallback(() => {
+    setExpanded(true);
+  }, []);
+
+  const collapse = useCallback(() => {
+    setCollapsing(true);
+    setTimeout(() => {
+      setExpanded(false);
+      setCollapsing(false);
+    }, 100);
+  }, []);
 
   useEffect(() => {
     if (!expanded) {
@@ -30,7 +41,7 @@ export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
       const rootNode = rootRef.current!;
       const targetNode = event.target as Node;
       if (document.contains(targetNode) && !rootNode.contains(targetNode)) {
-        setExpanded(false);
+        collapse();
       }
     };
 
@@ -41,19 +52,20 @@ export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
       document.removeEventListener("click", listener);
       document.removeEventListener("wheel", listener);
     };
-  }, [expanded]);
+  }, [expanded, collapse]);
 
   return (
     <div ref={rootRef} css={styles.root}>
-      {props.renderControl(handleToggle, expanded)}
+      {props.renderControl(expanded ? collapse : expand, expanded)}
       <div
         css={[
           styles.contentContainer,
           expanded && styles.contentContainerExpanded,
+          collapsing && styles.contentContainerCollapsing,
           props.fullWidth && styles.contentContainerFullWidth,
         ]}
       >
-        {expanded && props.renderContent(handleCollapse)}
+        {expanded && props.renderContent(collapse)}
       </div>
     </div>
   );
