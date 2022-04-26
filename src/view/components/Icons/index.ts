@@ -6,6 +6,7 @@ import { ChevronDown } from "./ChevronDown";
 import { ChevronLeft } from "./ChevronLeft";
 import { ChevronRight } from "./ChevronRight";
 import { Close } from "./Close";
+import { Comment } from "./Comment";
 import { Dashboard } from "./Dashboard";
 import { DocumentMaterialPaper } from "./DocumentMaterialPaper";
 import { DocumentMaterialPlastic } from "./DocumentMaterialPlastic";
@@ -32,6 +33,7 @@ export const Icons = {
   ChevronLeft,
   ChevronRight,
   Close,
+  Comment,
   Dashboard,
   DocumentMaterialPaper,
   DocumentMaterialPlastic,

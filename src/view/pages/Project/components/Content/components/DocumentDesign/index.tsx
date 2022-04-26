@@ -56,7 +56,7 @@ const QuestionItem: FC<QuestionItemProps> = (props) => {
   const value = props.documentSpecs.designAnswers.find((a) => a.idQuestion === props.question.id)?.idAnswer ?? null;
   return (
     <div css={[styles.accentItem, accentClientResult.muted && styles.accentItemMuted]}>
-      <CommentsWrap text="No comments yet">
+      <CommentsWrap>
         <RadioSelect
           title={`${props.index + 1} - ${props.question.questionTitle}`}
           value={value}

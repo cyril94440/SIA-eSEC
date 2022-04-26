@@ -78,7 +78,7 @@ export const FeatureItem: FC<FeatureItemProps> = (props) => {
   return (
     <div css={[styles.accentItem, accentClientResult.muted && styles.accentItemMuted]}>
       <SectionItem title={formatDocumentSecurityFeatureLocationString(props.locationNode.item)} fullWidth={false}>
-        <CommentsWrap text="No comments yet">
+        <CommentsWrap>
           <MultiSelect<number>
             title="Select your feature"
             value={props.documentSpecs.securityFeatures}
