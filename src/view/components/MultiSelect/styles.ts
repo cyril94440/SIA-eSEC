@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import * as styles from "@@view/styles";
 
-export const unsetColorOnHover = "unsetColorOnHover";
+export const itemHoverColor = "itemHoverColor";
 
 export const input = css`
   display: flex;
@@ -47,11 +47,10 @@ export const item = css`
   user-select: none;
 
   &:hover {
-    color: ${styles.COLOR_WHITE};
     background-color: ${styles.COLOR_PRIMARY_60_50};
 
-    .${unsetColorOnHover} {
-      color: unset;
+    .${itemHoverColor} {
+      color: ${styles.COLOR_WHITE};
     }
   }
 

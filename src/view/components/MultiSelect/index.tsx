@@ -10,6 +10,7 @@ export interface MultiSelectProps<TItem> {
   itemId: (item: TItem) => string;
   itemContent: (item: TItem, selected: boolean) => ReactNode;
   onChange: (value: TItem[]) => void;
+  onDropdownToggle?: (expanded: boolean) => void;
 }
 
 export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
@@ -53,6 +54,7 @@ export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
             </div>
           );
         }}
+        onToggle={props.onDropdownToggle}
       />
       {selectedItems.length > 0 && (
         <div css={styles.itemList}>
@@ -81,26 +83,16 @@ interface ItemProps<TItem> {
 }
 
 const Item = <TItem,>(props: ItemProps<TItem>) => {
+  const Icon = props.selected ? (props.useCloseIcon ? Icons.Close : Icons.CheckboxChecked) : Icons.CheckboxUnchecked;
   return (
     <div css={styles.item} onClick={() => props.onChange(!props.selected)}>
       <div
         css={[styles.itemIcon, props.selected && styles.itemIconChecked, props.useCloseIcon && styles.itemIconClose]}
-        className={!props.selected || props.useCloseIcon ? styles.unsetColorOnHover : undefined}
+        className={Icon !== Icons.CheckboxChecked ? styles.itemHoverColor : undefined}
       >
-        {props.selected ? (
-          props.useCloseIcon ? (
-            <Icons.Close />
-          ) : (
-            <Icons.CheckboxChecked />
-          )
-        ) : (
-          <Icons.CheckboxUnchecked />
-        )}
+        <Icon />
       </div>
-      <div
-        css={[styles.itemContent, props.selected && styles.itemContentSelected]}
-        className={styles.unsetColorOnHover}
-      >
+      <div css={[styles.itemContent, props.selected && styles.itemContentSelected]} className={styles.itemHoverColor}>
         {props.itemContent(props.item, props.selected)}
       </div>
     </div>

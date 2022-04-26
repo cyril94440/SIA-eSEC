@@ -7,6 +7,12 @@ export const root = css`
   gap: ${styles.getSize(2)};
 `;
 
+export const content = css`
+  background-color: ${styles.COLOR_WHITE};
+  padding-bottom: ${styles.getSize(1)};
+  margin-top: ${styles.getSize(2)};
+`;
+
 export const input = css`
   display: flex;
   align-items: center;
@@ -32,10 +38,4 @@ export const inputIcon = css`
 
 export const inputIconExpanded = css`
   transform: rotate(90deg);
-`;
-
-export const content = css`
-  background-color: ${styles.COLOR_WHITE};
-  padding-bottom: ${styles.getSize(1)};
-  margin-top: ${styles.getSize(2)};
 `;

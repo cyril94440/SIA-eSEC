@@ -1,3 +1,4 @@
+export * from "./AccentController";
 export * from "./Button";
 export * from "./CardSelect";
 export * from "./Charts";

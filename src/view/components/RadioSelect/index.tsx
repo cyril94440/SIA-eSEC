@@ -8,6 +8,7 @@ export interface RadioSelectProps<TValue> {
   value: TValue | null;
   items: RadioGroupItemProps<TValue>[];
   onChange: (value: TValue) => void;
+  onDropdownToggle?: (expanded: boolean) => void;
 }
 
 export const RadioSelect = <TValue,>(props: RadioSelectProps<TValue>) => {
@@ -40,6 +41,7 @@ export const RadioSelect = <TValue,>(props: RadioSelectProps<TValue>) => {
             </div>
           );
         }}
+        onToggle={props.onDropdownToggle}
       />
       {selectedItem && <RadioGroup value={props.value} items={[selectedItem]} onChange={() => {}} />}
     </div>

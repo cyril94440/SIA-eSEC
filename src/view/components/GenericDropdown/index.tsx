@@ -5,6 +5,7 @@ export interface GenericDropdownProps {
   fullWidth?: boolean;
   renderControl: GenericDropdownRenderControl;
   renderContent: GenericDropdownRenderContent;
+  onToggle?: (expanded: boolean) => void;
 }
 
 export interface GenericDropdownRenderControl {
@@ -23,15 +24,17 @@ export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
 
   const expand = useCallback(() => {
     setExpanded(true);
-  }, []);
+    props.onToggle?.(true);
+  }, [props.onToggle]);
 
   const collapse = useCallback(() => {
     setCollapsing(true);
     setTimeout(() => {
       setExpanded(false);
       setCollapsing(false);
+      props.onToggle?.(false);
     }, 100);
-  }, []);
+  }, [props.onToggle]);
 
   useEffect(() => {
     if (!expanded) {
