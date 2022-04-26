@@ -17,6 +17,7 @@ export interface GenericDropdownRenderContent {
 
 export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
   const rootRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
   const [collapsing, setCollapsing] = useState(false);
 
@@ -54,6 +55,10 @@ export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
     };
   }, [expanded, collapse]);
 
+  useEffect(() => {
+    expanded && scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [expanded]);
+
   return (
     <div ref={rootRef} css={styles.root}>
       {props.renderControl(expanded ? collapse : expand, expanded)}
@@ -66,6 +71,7 @@ export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
         ]}
       >
         {expanded && props.renderContent(collapse)}
+        <div ref={scrollRef}></div>
       </div>
     </div>
   );
