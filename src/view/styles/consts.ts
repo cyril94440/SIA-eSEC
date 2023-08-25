@@ -21,6 +21,7 @@ export const COLOR_SUCCESS_90 = "#DEFDCE";
 export const COLOR_GREY_BLUE = "#274E68";
 export const COLOR_NEUTRAL_BLUE = "#F7FAFC";
 export const COLOR_WHITE = "#FFFFFF";
+export const COLOR_RED = "#EB5757";
 
 export const FONT_REGULAR_12_SIZE = "12px";
 export const FONT_REGULAR_12_WEIGHT = 400;
