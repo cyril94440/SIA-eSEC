@@ -47,6 +47,12 @@ export const rootWithIcon = css`
   }
 `;
 
+export const rootOnlyIcon = css`
+  background-color: unset;
+  width: ${styles.getSize(3.5)};
+  height: ${styles.getSize(3.5)};
+`;
+
 export const rootFullWidth = css`
   display: flex;
   justify-content: center;

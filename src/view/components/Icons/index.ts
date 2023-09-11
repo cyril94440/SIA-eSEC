@@ -19,6 +19,7 @@ import { Edit } from "./Edit";
 import { Faq } from "./Faq";
 import { FileUp } from "./FileUp";
 import { Group } from "./Group";
+import { Key } from "./Key";
 import { Lock } from "./Lock";
 import { Logout } from "./Logout";
 import { Notifications } from "./Notifications";
@@ -26,6 +27,8 @@ import { Person } from "./Person";
 import { RadioActive } from "./RadioActive";
 import { RadioInactive } from "./RadioInactive";
 import { Save } from "./Save";
+import { Search } from "./Search";
+import { Thrash } from "./Thrash";
 
 export const Icons = {
   App,
@@ -49,6 +52,7 @@ export const Icons = {
   Faq,
   FileUp,
   Group,
+  Key,
   Lock,
   Logout,
   Notifications,
@@ -56,4 +60,6 @@ export const Icons = {
   RadioActive,
   RadioInactive,
   Save,
+  Search,
+  Thrash,
 };

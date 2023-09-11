@@ -7,3 +7,4 @@ export * from "./Profile";
 export * from "./Project";
 export * from "./Subscription";
 export * from "./Login";
+export * from "./AdminPanel";

@@ -71,6 +71,16 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
           />
         </SidenavSection>
         <SidenavSection>
+          {/* TODO : VERIFY THAT USER IS ADMIN TO SEE THIS ITEM */}
+          {"user_is_admin" === "user_is_admin" && (
+            <SidenavItem
+              Icon={Icons.Lock}
+              title="Admin panel"
+              minimized={sidenavMinimized}
+              link={{ href: routes.ADMIN_PANEL }}
+              active={router.pathname === routes.ADMIN_PANEL}
+            />
+          )}
           <SidenavItem
             Icon={Icons.Logout}
             title="Log out"

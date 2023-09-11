@@ -6,6 +6,7 @@ export * from "./CommentsWrap";
 export * from "./ContentList";
 export * from "./GenericDropdown";
 export * from "./Icon";
+export * from "./IconButton";
 export * from "./Icons";
 export * from "./IconWrap";
 export * from "./MultiSelect";
