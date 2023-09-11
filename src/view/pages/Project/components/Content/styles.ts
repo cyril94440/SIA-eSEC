@@ -9,3 +9,7 @@ export const root = css`
 `;
 
 export const tabsXPadding = styles.getSize(5);
+
+export const exportButton = css`
+  margin-bottom: ${styles.getSize(3)};
+`;

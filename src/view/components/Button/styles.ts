@@ -18,6 +18,8 @@ export const root = css`
   &:hover {
     background: ${styles.COLOR_PRIMARY_20};
   }
+
+  transition: background 200ms;
 `;
 
 export const rootSecondary = css`
@@ -34,7 +36,24 @@ export const rootSecondary = css`
   }
 `;
 
+export const rootWithIcon = css`
+  background-color: ${styles.COLOR_NEUTRAL_BLUE};
+  color: ${styles.COLOR_GREY_BLUE};
+  ${styles.fontMedium20};
+
+  &:hover {
+    // COLOR_NEUTRAL_BLUE 10% darker
+    background-color: #d2e3ee;
+  }
+`;
+
 export const rootFullWidth = css`
   display: flex;
   justify-content: center;
+`;
+
+export const icon = css`
+  width: ${styles.getSize(3.5)};
+  height: ${styles.getSize(3.5)};
+  margin-right: ${styles.getSize(3)};
 `;

@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from "react";
 import * as rpc from "@@rpc/shared";
 import { DocumentScoreTarget, DocumentSpecs, DocumentStandardCompliance, DocumentType, ProjectStatus } from "@@core";
-import { ScrollController, TabControl } from "@@view/components";
+import { Button, ButtonKind, Icons, ScrollController, TabControl } from "@@view/components";
 import { DocumentDesign, GeneralInfo, Header, Section, SecurityFeatures, Status } from "./components";
 import * as styles from "./styles";
 
@@ -40,6 +40,14 @@ export const Content: FC<ContentProps> = (props) => {
               onRenameClick={props.onRenameClick}
               onEncryptionInfoClick={props.onEncryptionInfoClick}
             />
+            <div css={styles.exportButton}>
+              <Button
+                kind={ButtonKind.WithIcon}
+                icon={<Icons.FileUp />}
+                title="Save data for later"
+                onClick={() => alert("Implement export function")}
+              />
+            </div>
           </Section>
           <TabControl
             items={[

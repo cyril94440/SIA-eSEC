@@ -55,7 +55,7 @@ export const DialogOverlay = css`
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   inset: 0;
-  animation: ${overlayShow} 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: ${overlayShow} 350ms cubic-bezier(0.16, 1, 0.3, 1);
 `;
 
 export const DialogContent = css`
@@ -70,7 +70,7 @@ export const DialogContent = css`
   max-width: ${styles.getSize(125)};
   max-height: ${styles.getSize(88)};
   padding: ${styles.getSize(4)};
-  animation: ${contentShow} 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: ${contentShow} 350ms cubic-bezier(0.16, 1, 0.3, 1);
   overflow-y: auto;
   &:focus {
     outline: none;
