@@ -70,6 +70,7 @@ export const paginationContainer = css`
   justify-content: space-between;
   background-color: ${styles.COLOR_NEUTRAL_BLUE};
   padding: ${styles.getSize(2)} ${styles.getSize(3)};
+  margin-top: -${styles.getSize(0.2)};
 `;
 
 export const pageSelector = css`
