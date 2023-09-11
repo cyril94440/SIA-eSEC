@@ -24,4 +24,17 @@ export const global = css`
     color: ${consts.COLOR_GREY_BLUE};
     background: ${consts.COLOR_WHITE};
   }
+
+  .ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+  }
+
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
+  }
 `;
