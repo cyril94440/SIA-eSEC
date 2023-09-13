@@ -84,7 +84,6 @@ export const searchContainer = css`
   align-items: center;
   position: relative;
   width: fit-content;
-  margin-bottom: ${styles.getSize(2)};
 `;
 
 export const searchInput = css`
@@ -132,6 +131,7 @@ export const topBar = css`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: ${styles.getSize(2)};
 `;
 
 export const newUser = css`
