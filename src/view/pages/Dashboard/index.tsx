@@ -4,19 +4,20 @@ import { useRouter } from "next/router";
 import { formatPageTitle } from "@@core";
 import { Button, ButtonKind, Icons } from "@@view/components";
 import { AppLayout } from "@@view/containers";
-import { useAppSelector } from "@@view/hooks";
 import * as styles from "./styles";
+import { useSession } from "next-auth/react";
 
 export const Dashboard: NextPage = () => {
   const router = useRouter();
-  const userName = useAppSelector((state) => state.profile.userName);
+  const { data: session } = useSession();
+  const username = session?.user?.name;
   return (
     <>
       <Head>
         <title>{formatPageTitle("Dashboard")}</title>
       </Head>
       <AppLayout mainCss={styles.root}>
-        <div css={styles.mainTitle}>{`Welcome back, ${userName}`}</div>
+        <div css={styles.mainTitle}>{`Welcome back, ${username}`}</div>
         <br />
         <div css={styles.description}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore

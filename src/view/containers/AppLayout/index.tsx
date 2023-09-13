@@ -7,6 +7,7 @@ import { Icons } from "@@view/components";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import { Main, Sidebar, Sidenav, SidenavHeader, SidenavItem, SidenavSection, SideToggle } from "./components";
 import * as styles from "./styles";
+import { useSession } from "next-auth/react";
 
 export interface AppLayoutProps {
   mainCss?: SerializedStyles;
@@ -20,6 +21,8 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
   const dispatch = useAppDispatch();
   const sidenavMinimized = useAppSelector((state) => state.app.sidenavMinimized);
   const router = useRouter();
+  const { data: session } = useSession();
+
   return (
     <div css={styles.root}>
       <Sidenav minimized={sidenavMinimized}>
@@ -71,8 +74,7 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
           />
         </SidenavSection>
         <SidenavSection>
-          {/* TODO : VERIFY THAT USER IS ADMIN TO SEE THIS ITEM */}
-          {"user_is_admin" === "user_is_admin" && (
+          {session?.user?.role === "ADMIN" && (
             <SidenavItem
               Icon={Icons.Lock}
               title="Admin panel"

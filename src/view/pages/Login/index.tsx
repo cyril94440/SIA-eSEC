@@ -6,6 +6,9 @@ import * as styles from "./styles";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as buttonStyles from "../../components/Button/styles";
 import { useState } from "react";
+import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 type LoginInputs = {
   email: string;
@@ -19,13 +22,36 @@ export const Login: NextPage = () => {
     watch,
     formState: { errors },
   } = useForm<LoginInputs>();
+  const router = useRouter();
 
   const [submitting, setSubmitting] = useState(false);
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
     setSubmitting(true);
-    // Simulate a 1.5s delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log(data);
+
+    try {
+      await toast
+        .promise(
+          signIn("credentials", {
+            email: data.email,
+            password: data.password,
+            redirect: false,
+          }),
+          {
+            loading: "Signing in...",
+            success: (data) => {
+              if (!data?.ok) throw new Error("Failed to sign in");
+              return "Signed in successfully";
+            },
+            error: "Failed to sign in. Please verify your email and password and try again.",
+          }
+        )
+        .then((res) => {
+          if (res?.ok) router.push("/dashboard");
+        });
+    } catch (error: any) {
+      toast.error("An error occured, please try again.");
+    }
+
     setSubmitting(false);
   };
 

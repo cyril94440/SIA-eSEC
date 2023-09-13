@@ -8,14 +8,19 @@ import { store } from "@@store";
 import * as thunks from "@@thunks";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import * as styles from "@@view/styles";
+import { SessionProvider } from "next-auth/react";
+import { Toaster } from "react-hot-toast";
 
 export const App: FC<AppProps> = (props) => {
   return (
     <>
-      <EmotionGlobal styles={styles.global} />
-      <ReduxProvider store={store}>
-        <AppInner {...props} />
-      </ReduxProvider>
+      <SessionProvider session={props.pageProps.session}>
+        <Toaster position="top-right" reverseOrder={false} />
+        <EmotionGlobal styles={styles.global} />
+        <ReduxProvider store={store}>
+          <AppInner {...props} />
+        </ReduxProvider>
+      </SessionProvider>
     </>
   );
 };
