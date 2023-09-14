@@ -3,12 +3,22 @@ import { MailContent } from "core/types";
 import { validateEmail } from "lib/utils/validate-email";
 import type { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
+import { getToken } from "next-auth/jwt";
 
 type ResponseData = {
   message: string;
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
+  const userToken = await getToken({ req });
+  const isAuthenticated = !!userToken;
+
+  const isAdmin = isAuthenticated && userToken.role === "ADMIN";
+
+  if (!isAuthenticated || !isAdmin) {
+    return res.status(401).end();
+  }
+
   if (req.method !== "POST") {
     return res.status(405).end();
   }

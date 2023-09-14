@@ -13,6 +13,7 @@ import { Icons } from "../Icons";
 import { DebouncedInput } from "../DebounceInput";
 import { RankingInfo, rankItem } from "@tanstack/match-sorter-utils";
 import AddUser from "./components/add-user";
+import toast from "react-hot-toast";
 declare module "@tanstack/table-core" {
   interface FilterFns {
     fuzzy: FilterFn<unknown>;
@@ -38,6 +39,32 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
 export const UserTable = () => {
   const [data, setData] = React.useState(() => [...defaultData]);
   const [globalFilter, setGlobalFilter] = React.useState("");
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const response = await fetch("/api/users", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+        const users = await response.json();
+        setData(users);
+      } catch (error) {
+        toast.error("An error occured, please try again.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchUsers();
+  }, []);
 
   const table = useReactTable({
     data,

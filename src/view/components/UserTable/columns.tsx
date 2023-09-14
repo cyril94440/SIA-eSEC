@@ -2,6 +2,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { Icons } from "../Icons";
 import { IconButton } from "../IconButton";
 import * as styles from "../UserTable/styles";
+import { DeleteUser } from "./components/delete/delete-user";
 
 export type User = {
   id: string;
@@ -351,11 +352,7 @@ export const columns = [
           icon={<Icons.Key />}
           onClick={() => alert("Reset password for id : " + info.getValue())}
         />
-        <IconButton
-          customStyles={styles.deleteUserIcon}
-          icon={<Icons.Thrash />}
-          onClick={() => alert("Delete with id : " + info.getValue())}
-        />
+        <DeleteUser id={info.getValue()} />
       </div>
     ),
     header: () => (
