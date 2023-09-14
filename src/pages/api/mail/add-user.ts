@@ -8,15 +8,6 @@ type ResponseData = {
   message: string;
 };
 
-/**
- * Sign up procecess:
- *
- * (1) An admin can create a new user in the admin panel by sending an email to the user.
- * (2) The user will receive this email containing a link to add his username and password.
- * (3) Once that's done, the user is created in the database.
- *
- * This route handles the (1) and (2) step.
- */
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
   if (req.method !== "POST") {
     return res.status(405).end();
@@ -46,6 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     {
       email: req.body.email,
       role: req.body.role,
+      action: "create-user",
     },
     process.env.JWT_PRIVATE_KEY,
     {
@@ -55,9 +47,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
   const mailContent: MailContent = {
     toEmail: req.body.email,
-    subject: "Welcome to eSec!",
-    text: `You received an invite to join eSec! Click the link below to activate your account.
-    http://localhost:3000/activate?token=${token}
+    subject: "Welcome to eSec !",
+    text: `You received an invite to join eSec!
+    
+    
+    Click here to activate your account: http://localhost:3000/activate?token=${token}
     `,
   };
 

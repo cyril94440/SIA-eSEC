@@ -10,7 +10,9 @@ export default async function middleware(req: NextRequest, event: NextFetchEvent
 
   // Let unauthenticated users access the activate page to sign up but redirect authenticated users to dashboard
   if (req.nextUrl.pathname.startsWith("/activate")) {
-    return !isAuthenticated ? NextResponse.next() : NextResponse.redirect(new URL("/dashboard", req.url));
+    return !isAuthenticated && req.nextUrl.searchParams.get("token")
+      ? NextResponse.next()
+      : NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
   // Prevent logged in users from accessing the login page
