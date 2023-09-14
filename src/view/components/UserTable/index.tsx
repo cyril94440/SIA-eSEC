@@ -12,7 +12,7 @@ import * as styles from "./styles";
 import { Icons } from "../Icons";
 import { DebouncedInput } from "../DebounceInput";
 import { RankingInfo, rankItem } from "@tanstack/match-sorter-utils";
-import { Button } from "../Button";
+import AddUser from "./components/add-user";
 declare module "@tanstack/table-core" {
   interface FilterFns {
     fuzzy: FilterFn<unknown>;
@@ -69,9 +69,7 @@ export const UserTable = () => {
             <Icons.Search />
           </span>
         </div>
-        <div css={styles.newUser} onClick={() => alert("New User")}>
-          New User
-        </div>
+        <AddUser />
       </div>
       <table css={styles.table}>
         <thead css={styles.tableHeader}>

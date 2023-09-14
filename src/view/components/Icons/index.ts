@@ -1,5 +1,6 @@
 import { App } from "./App";
 import { BadgePlus } from "./BadgePlus";
+import { Check } from "./Check";
 import { CheckboxChecked } from "./CheckboxChecked";
 import { CheckboxUnchecked } from "./CheckboxUnchecked";
 import { ChecksGrid } from "./ChecksGrid";
@@ -33,6 +34,7 @@ import { Thrash } from "./Thrash";
 export const Icons = {
   App,
   BadgePlus,
+  Check,
   CheckboxChecked,
   CheckboxUnchecked,
   ChecksGrid,

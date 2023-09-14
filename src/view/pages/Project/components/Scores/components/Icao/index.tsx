@@ -1,8 +1,7 @@
 import { FC } from "react";
 import * as styles from "./styles";
-import * as Dialog from "@radix-ui/react-dialog";
-import { Icons } from "@@view/components";
 import { FeatureItem } from "./FeatureItem";
+import Dialog from "view/components/Dialog";
 
 export interface IcaoProps {
   onMissingFeaturesClick: () => void;
@@ -80,35 +79,27 @@ export const Icao: FC<IcaoProps> = (props) => {
       <div css={styles.status}>
         ICAO: <span css={styles.statusValue}>Not complete</span>
       </div>
-      <Dialog.Root>
-        <Dialog.Trigger asChild>
+      <Dialog>
+        <Dialog.Trigger>
           <div css={styles.missingFeatures} onClick={props.onMissingFeaturesClick}>
             Missing features
           </div>
         </Dialog.Trigger>
-        <Dialog.Portal>
-          <Dialog.Overlay css={styles.DialogOverlay} />
-          <Dialog.Content css={styles.DialogContent}>
-            <Dialog.Title css={styles.DialogTitle}>
-              ICAO: <span css={styles.red}>Not complete</span>
-            </Dialog.Title>
-            <Dialog.Description css={styles.DialogDescription}>
-              Here’s a list of all the missing features you need to complete your ICAO.
-              <div css={[styles.red]}>
-                Total of missing features: {fakeData.reduce((acc, item) => acc + item.features.length, 0)}
-              </div>
-            </Dialog.Description>
-            {fakeData.map((item, index) => (
-              <FeatureItem key={index} category={item.category} features={item.features} />
-            ))}
-            <Dialog.Close asChild>
-              <button aria-label="Close" css={styles.IconButton}>
-                <Icons.Close />
-              </button>
-            </Dialog.Close>
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
+        <Dialog.Title>
+          ICAO: <span css={styles.red}>Not complete</span>
+        </Dialog.Title>
+        <Dialog.Description>
+          Here’s a list of all the missing features you need to complete your ICAO.
+          <span css={[styles.red]}>
+            Total of missing features: {fakeData.reduce((acc, item) => acc + item.features.length, 0)}
+          </span>
+        </Dialog.Description>
+        <Dialog.Body>
+          {fakeData.map((item, index) => (
+            <FeatureItem key={index} category={item.category} features={item.features} />
+          ))}
+        </Dialog.Body>
+      </Dialog>
     </div>
   );
 };

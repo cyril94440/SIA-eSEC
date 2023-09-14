@@ -133,16 +133,3 @@ export const topBar = css`
   justify-content: space-between;
   margin-bottom: ${styles.getSize(2)};
 `;
-
-export const newUser = css`
-  color: ${styles.COLOR_WHITE};
-  background-color: ${styles.COLOR_PRIMARY_36};
-  transition: background-color 200ms;
-  padding: ${styles.getSize(1)} ${styles.getSize(4)};
-  border-radius: ${styles.getSize(1 / 2)};
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${styles.COLOR_PRIMARY_20};
-  }
-`;
