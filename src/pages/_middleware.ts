@@ -15,6 +15,13 @@ export default async function middleware(req: NextRequest, event: NextFetchEvent
       : NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
+  // Let authenticated users access the reset password page if it has a token
+  if (req.nextUrl.pathname.startsWith("/reset-password")) {
+    return isAuthenticated && req.nextUrl.searchParams.get("token")
+      ? NextResponse.next()
+      : NextResponse.redirect(new URL("/login", req.url));
+  }
+
   // Prevent logged in users from accessing the login page
   if (req.nextUrl.pathname.startsWith("/login") && isAuthenticated) {
     return NextResponse.redirect(new URL("/dashboard", req.url));

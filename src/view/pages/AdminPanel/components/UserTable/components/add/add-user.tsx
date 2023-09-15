@@ -2,7 +2,7 @@ import React from "react";
 import Dialog from "view/components/Dialog";
 import * as styles from "./add-user-styles";
 import { SubmitHandler, useForm } from "react-hook-form";
-import * as buttonStyles from "../../Button/styles";
+import * as buttonStyles from "../../../../../../components/Button/styles";
 import { Icons } from "view/components/Icons";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";

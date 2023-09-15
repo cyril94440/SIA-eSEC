@@ -28,6 +28,11 @@ export const cell = css`
   padding: ${styles.getSize(2)} ${styles.getSize(3)};
 `;
 
+export const loadingCell = css`
+  padding: ${styles.getSize(2)} ${styles.getSize(3)};
+  text-align: center;
+`;
+
 export const pageButtonsContainer = css`
   display: flex;
   flex-direction: row;

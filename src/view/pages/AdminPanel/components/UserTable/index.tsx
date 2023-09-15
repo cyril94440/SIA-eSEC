@@ -7,13 +7,14 @@ import {
   FilterFn,
   getFilteredRowModel,
 } from "@tanstack/react-table";
-import { columns, defaultData } from "./columns";
+import { User, columns } from "./columns";
 import * as styles from "./styles";
-import { Icons } from "../Icons";
-import { DebouncedInput } from "../DebounceInput";
+import { Icons } from "../../../../components/Icons";
+import { DebouncedInput } from "../../../../components/DebounceInput";
 import { RankingInfo, rankItem } from "@tanstack/match-sorter-utils";
-import AddUser from "./components/add-user";
+import AddUser from "./components/add/add-user";
 import toast from "react-hot-toast";
+
 declare module "@tanstack/table-core" {
   interface FilterFns {
     fuzzy: FilterFn<unknown>;
@@ -37,7 +38,7 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
 };
 
 export const UserTable = () => {
-  const [data, setData] = React.useState(() => [...defaultData]);
+  const [data, setData] = React.useState<User[]>([]);
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [loading, setLoading] = React.useState(true);
 
@@ -54,7 +55,7 @@ export const UserTable = () => {
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
-        const users = await response.json();
+        const users = (await response.json()) as User[];
         setData(users);
       } catch (error) {
         toast.error("An error occured, please try again.");
@@ -111,15 +112,23 @@ export const UserTable = () => {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr css={styles.row} key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td css={styles.cell} key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
+          {table.getRowModel().rows.length === 0 ? (
+            <tr>
+              <td css={styles.loadingCell} colSpan={table.getAllColumns().length}>
+                {loading ? "Loading..." : "No users."}
+              </td>
             </tr>
-          ))}
+          ) : (
+            table.getRowModel().rows.map((row) => (
+              <tr css={styles.row} key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td css={styles.cell} key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))
+          )}
         </tbody>
         <tfoot>
           {table.getFooterGroups().map((footerGroup) => (

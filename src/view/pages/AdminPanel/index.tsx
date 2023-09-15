@@ -3,7 +3,7 @@ import Head from "next/head";
 import { formatPageTitle } from "@@core";
 import { AppLayout } from "@@view/containers";
 import * as styles from "./styles";
-import { UserTable } from "view/components/UserTable";
+import { UserTable } from "./components/UserTable";
 
 export const AdminPanel: NextPage = () => {
   return (

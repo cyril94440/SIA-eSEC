@@ -26,14 +26,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   }
 
   /**
-   * Check that body contains email and role, and are valid
+   * Check that body contains id and email, and that email is valid
    */
-  if (!req.body.email || !req.body.role) {
-    return res.status(400).json({ message: "Missing email or role." });
-  }
-
-  if (req.body.role !== "USER" && req.body.role !== "ADMIN") {
-    return res.status(400).json({ message: "Invalid role." });
+  if (!req.body.id && !req.body.email) {
+    return res.status(400).json({ message: "Missing parameters." });
   }
 
   if (!validateEmail(req.body.email)) {
@@ -46,11 +42,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   if (!process.env.JWT_PRIVATE_KEY) {
     return res.status(500).json({ message: "Security issue has been detected." });
   }
+
   const token = jwt.sign(
     {
+      id: req.body.id,
       email: req.body.email,
-      role: req.body.role,
-      action: "create-user",
+      action: "reset-password",
     },
     process.env.JWT_PRIVATE_KEY,
     {
@@ -60,11 +57,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
   const mailContent: MailContent = {
     toEmail: req.body.email,
-    subject: "Welcome to eSec !",
-    text: `You received an invite to join eSec!
+    subject: "Reset your password",
+    text: `Hi, 
     
     
-    Click here to activate your account: http://localhost:3000/activate?token=${token}
+    Click here to reset your password: ${process.env.NEXTAUTH_URL}/reset-password?token=${token}
     `,
   };
 
