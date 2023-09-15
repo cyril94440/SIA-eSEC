@@ -17,7 +17,7 @@ export const Dashboard: NextPage = () => {
         <title>{formatPageTitle("Dashboard")}</title>
       </Head>
       <AppLayout mainCss={styles.root}>
-        <div css={styles.mainTitle}>{`Welcome back, ${username}`}</div>
+        <div css={styles.mainTitle}>{`Welcome back${username && `, ${username}`}`}</div>
         <br />
         <div css={styles.description}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
