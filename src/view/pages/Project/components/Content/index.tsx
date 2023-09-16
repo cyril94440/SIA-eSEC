@@ -15,9 +15,10 @@ export interface ContentProps {
   title: string;
   status: ProjectStatus;
   documentSpecs: DocumentSpecs;
-  documentDesignQuestionsInfo: rpc.DocumentDesignQuestion[];
-  documentSecurityFeaturesInfo: rpc.SecurityFeature[];
+  designQuestions: rpc.DocumentDesignQuestion[];
+  securityFeatures: rpc.SecurityFeature[];
   onRenameClick: () => void;
+  onExportClick: () => void;
   onEncryptionInfoClick: () => void;
   onChangeDocumentType: (value: DocumentType) => void;
   onChangeDocumentMaterial: (value: rpc.SFMaterial) => void;
@@ -38,16 +39,9 @@ export const Content: FC<ContentProps> = (props) => {
             <Header
               title={props.title}
               onRenameClick={props.onRenameClick}
+              onExportClick={props.onExportClick}
               onEncryptionInfoClick={props.onEncryptionInfoClick}
             />
-            <div css={styles.exportButton}>
-              <Button
-                kind={ButtonKind.WithIcon}
-                icon={<Icons.FileUp />}
-                title="Save data for later"
-                onClick={() => alert("Implement export function")}
-              />
-            </div>
           </Section>
           <TabControl
             items={[
@@ -70,8 +64,8 @@ export const Content: FC<ContentProps> = (props) => {
                 content: () => (
                   <DocumentDesign
                     documentSpecs={props.documentSpecs}
-                    documentDesignQuestionsInfo={props.documentDesignQuestionsInfo}
-                    onChangeDocumentDesignAnswer={props.onChangeDocumentDesignAnswer}
+                    designQuestions={props.designQuestions}
+                    onChangeDesignAnswer={props.onChangeDocumentDesignAnswer}
                   />
                 ),
               },
@@ -81,8 +75,8 @@ export const Content: FC<ContentProps> = (props) => {
                 content: () => (
                   <SecurityFeatures
                     documentSpecs={props.documentSpecs}
-                    documentSecurityFeaturesInfo={props.documentSecurityFeaturesInfo}
-                    onChangeDocumentSecurityFeatures={props.onChangeDocumentSecurityFeatures}
+                    securityFeatures={props.securityFeatures}
+                    onChange={props.onChangeDocumentSecurityFeatures}
                   />
                 ),
               },

@@ -29,7 +29,7 @@ export const Dashboard: NextPage = () => {
         <div css={styles.buttonsContainer}>
           <Button
             title="Start from scratch"
-            kind={ButtonKind.WithIcon}
+            kind={ButtonKind.Secondary}
             onClick={() => {
               router.push("/project");
             }}
@@ -38,7 +38,7 @@ export const Dashboard: NextPage = () => {
           <div css={styles.or}>or</div>
           <Button
             title="Load data from file"
-            kind={ButtonKind.WithIcon}
+            kind={ButtonKind.Secondary}
             onClick={() => {
               alert("Implement the import file functionality");
             }}

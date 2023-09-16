@@ -1,4 +1,4 @@
-import { Chart, Filler, LineElement, PointElement, RadialLinearScale } from "chart.js";
+import { Chart, ChartData, Filler, LineElement, PointElement, RadialLinearScale } from "chart.js";
 import { FC } from "react";
 import { Radar } from "react-chartjs-2";
 
@@ -11,7 +11,7 @@ export interface ScoreRadarProps {
 }
 
 export const ScoreRadar: FC<ScoreRadarProps> = (props) => {
-  const data = {
+  const data: ChartData<"radar"> = {
     labels: props.labels,
     datasets: [
       {
@@ -24,7 +24,7 @@ export const ScoreRadar: FC<ScoreRadarProps> = (props) => {
         pointRadius: 1.5,
       },
       {
-        data: props.targetValues,
+        data: props.targetValues ?? [],
         fill: true,
         animation: false,
         backgroundColor: "rgba(222,3,43,0.3)",

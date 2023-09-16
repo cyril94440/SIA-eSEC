@@ -9,5 +9,5 @@ export interface DocumentSpecs {
   standardCompliance: DocumentStandardCompliance;
   scoreTarget: DocumentScoreTarget;
   designAnswers: DocumentDesignFormAnswer[];
-  securityFeatures: number[];
+  securityFeatureIds: number[];
 }

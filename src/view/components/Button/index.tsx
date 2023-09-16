@@ -1,18 +1,18 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import * as styles from "./styles";
 
 export interface ButtonProps {
   title: string;
   kind?: ButtonKind;
+  icon?: ReactNode;
   fullWidth?: boolean;
   onClick: () => void;
-  icon?: React.ReactNode;
 }
 
 export enum ButtonKind {
   Primary = "Primary",
   Secondary = "Secondary",
-  WithIcon = "WithIcon",
+  Info = "Info",
 }
 
 export const Button: FC<ButtonProps> = (props) => {
@@ -22,13 +22,14 @@ export const Button: FC<ButtonProps> = (props) => {
     <div
       css={[
         styles.root,
+        kind === ButtonKind.Primary && styles.rootPrimary,
         kind === ButtonKind.Secondary && styles.rootSecondary,
-        kind === ButtonKind.WithIcon && styles.rootWithIcon,
+        kind === ButtonKind.Info && styles.rootInfo,
         fullWidth && styles.rootFullWidth,
       ]}
       onClick={props.onClick}
     >
-      {kind === ButtonKind.WithIcon && <div css={styles.icon}>{props.icon}</div>}
+      {kind === ButtonKind.Secondary && <div css={styles.icon}>{props.icon}</div>}
       {props.title}
     </div>
   );

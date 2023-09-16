@@ -5,7 +5,7 @@ import { projectUpdateDocumentScore } from "./projectUpdateDocumentScore";
 export const projectChangeDocumentSecurityFeatures = createAsyncThunk<void, number[]>(
   "projectChangeDocumentSecurityFeatures",
   async (value, { dispatch }) => {
-    dispatch(actions.projectSetDocumentSecurityFeatures(value));
+    dispatch(actions.projectSetDocumentSecurityFeatureIds(value));
     dispatch(projectUpdateDocumentScore());
   }
 );

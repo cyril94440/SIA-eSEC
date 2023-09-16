@@ -5,7 +5,7 @@ import { Project, ProjectProps } from "@@view/pages";
 export const getStaticProps: GetStaticProps<ProjectProps> = async () => {
   const client = rpc.createDatabaseClient();
 
-  const [documentDesignQuestionsInfo, documentSecurityFeaturesInfo] = await Promise.all([
+  const [designQuestions, securityFeatures] = await Promise.all([
     rpc
       .getPromise<rpc.GetDocumentDesignQuestionsResponse>((cb) => client.getDocumentDesignQuestions({}, cb))
       .then((res) => res.questions),
@@ -16,8 +16,8 @@ export const getStaticProps: GetStaticProps<ProjectProps> = async () => {
 
   return {
     props: {
-      documentDesignQuestionsInfoJson: JSON.stringify(documentDesignQuestionsInfo),
-      documentSecurityFeaturesInfoJson: JSON.stringify(documentSecurityFeaturesInfo),
+      designQuestionsJson: JSON.stringify(designQuestions),
+      securityFeaturesJson: JSON.stringify(securityFeatures),
     },
     revalidate: 60,
   };

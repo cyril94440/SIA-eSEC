@@ -1,3 +1,4 @@
+export * from "./buildProjectFile";
 export * from "./formatDocumentMaterialString";
 export * from "./formatDocumentScoreTargetString";
 export * from "./formatDocumentSecurityFeatureCategoryString";

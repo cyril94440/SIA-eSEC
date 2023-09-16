@@ -9,26 +9,26 @@ import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import { Content, Scores } from "./components";
 
 export interface ProjectProps {
-  documentDesignQuestionsInfoJson: string;
-  documentSecurityFeaturesInfoJson: string;
+  designQuestionsJson: string;
+  securityFeaturesJson: string;
 }
 
 export const Project: NextPage<ProjectProps> = (props) => {
   const dispatch = useAppDispatch();
-  const title = useAppSelector((state) => state.project.title);
-  const status = useAppSelector((state) => state.project.status);
-  const documentSpecs = useAppSelector((state) => state.project.documentSpecs);
-  const documentScore = useAppSelector((state) => state.project.documentScore);
+  const title = useAppSelector((state) => state.project.specs.title);
+  const status = useAppSelector((state) => state.project.specs.status);
+  const score = useAppSelector((state) => state.project.score);
+  const documentSpecs = useAppSelector((state) => state.project.specs.document);
   const [scoresCollapsed, setScoresCollapsed] = useState(false);
 
-  const documentDesignQuestionsInfo = useMemo(
-    () => JSON.parse(props.documentDesignQuestionsInfoJson) as rpc.DocumentDesignQuestion[],
-    [props.documentDesignQuestionsInfoJson]
+  const designQuestions = useMemo(
+    () => JSON.parse(props.designQuestionsJson) as rpc.DocumentDesignQuestion[],
+    [props.designQuestionsJson]
   );
 
-  const documentSecurityFeaturesInfo = useMemo(
-    () => JSON.parse(props.documentSecurityFeaturesInfoJson) as rpc.SecurityFeature[],
-    [props.documentSecurityFeaturesInfoJson]
+  const securityFeatures = useMemo(
+    () => JSON.parse(props.securityFeaturesJson) as rpc.SecurityFeature[],
+    [props.securityFeaturesJson]
   );
 
   useEffect(() => {
@@ -36,8 +36,8 @@ export const Project: NextPage<ProjectProps> = (props) => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(thunks.projectChangeDocumentSecurityFeaturesInfo(documentSecurityFeaturesInfo));
-  }, [dispatch, documentSecurityFeaturesInfo]);
+    dispatch(thunks.projectChangeSecurityFeatures(securityFeatures));
+  }, [dispatch, securityFeatures]);
 
   return (
     <>
@@ -47,8 +47,8 @@ export const Project: NextPage<ProjectProps> = (props) => {
       <AppLayout
         sidebar={
           <Scores
+            value={score}
             collapsed={scoresCollapsed}
-            documentScore={documentScore}
             onDownloadReportClick={() => {
               dispatch(thunks.projectDownloadReport());
             }}
@@ -66,10 +66,13 @@ export const Project: NextPage<ProjectProps> = (props) => {
           title={title}
           status={status}
           documentSpecs={documentSpecs}
-          documentDesignQuestionsInfo={documentDesignQuestionsInfo}
-          documentSecurityFeaturesInfo={documentSecurityFeaturesInfo}
+          designQuestions={designQuestions}
+          securityFeatures={securityFeatures}
           onRenameClick={() => {
             dispatch(thunks.projectRename());
+          }}
+          onExportClick={() => {
+            dispatch(thunks.projectExport());
           }}
           onEncryptionInfoClick={() => {
             dispatch(thunks.projectViewEncryptionInfo());

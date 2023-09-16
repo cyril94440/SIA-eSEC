@@ -3,10 +3,10 @@ import { SecurityFeature } from "@@rpc/shared";
 import { actions } from "@@store";
 import { projectUpdateDocumentScore } from "./projectUpdateDocumentScore";
 
-export const projectChangeDocumentSecurityFeaturesInfo = createAsyncThunk<void, SecurityFeature[]>(
-  "projectChangeDocumentSecurityFeaturesInfo",
+export const projectChangeSecurityFeatures = createAsyncThunk<void, SecurityFeature[]>(
+  "projectChangeSecurityFeatures",
   async (value, { dispatch }) => {
-    dispatch(actions.projectSetDocumentSecurityFeaturesInfo(value));
+    dispatch(actions.projectSetSecurityFeatures(value));
     dispatch(projectUpdateDocumentScore());
   }
 );

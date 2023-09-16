@@ -10,8 +10,8 @@ import { DownloadReport, Header, Icao, Overall, Panel, PanelGroup } from "./comp
 import * as styles from "./styles";
 
 export interface ScoresProps {
+  value: rpc.TNScore | null;
   collapsed: boolean;
-  documentScore: rpc.TNScore | null;
   onDownloadReportClick: () => void;
   onIcaoMissingFeaturesClick: () => void;
 }
@@ -37,7 +37,7 @@ const allScoreCategories = [
 ];
 
 export const Scores: FC<ScoresProps> = (props) => {
-  if (!props.documentScore || props.collapsed) {
+  if (!props.value || props.collapsed) {
     return <div css={styles.root}></div>;
   }
 
@@ -46,7 +46,7 @@ export const Scores: FC<ScoresProps> = (props) => {
       <Header />
       <PanelGroup>
         <Panel title="Overall score">
-          <Overall value={props.documentScore.totalScore} />
+          <Overall value={props.value.totalScore} />
         </Panel>
         <Panel>
           <Icao onMissingFeaturesClick={props.onIcaoMissingFeaturesClick} />
@@ -55,9 +55,9 @@ export const Scores: FC<ScoresProps> = (props) => {
           <ScoreRadar
             labels={["Location", "Protection", "Level"]}
             values={[
-              props.documentScore.securityFeaturesScore!.locationScore!.score,
-              props.documentScore.securityFeaturesScore!.protectionScore!.score,
-              props.documentScore.securityFeaturesScore!.levelScore!.score,
+              props.value.securityFeaturesScore!.locationScore!.score,
+              props.value.securityFeaturesScore!.protectionScore!.score,
+              props.value.securityFeaturesScore!.levelScore!.score,
             ]}
           />
         </Panel>
@@ -66,7 +66,7 @@ export const Scores: FC<ScoresProps> = (props) => {
             const items = allLocations
               .map((l) => ({
                 value: l.value,
-                score: props.documentScore!.securityFeaturesScore!.locationScore!.scorePerLoc[l.value] ?? null,
+                score: props.value!.securityFeaturesScore!.locationScore!.scorePerLoc[l.value] ?? null,
               }))
               .filter(({ score }) => score !== null);
 
@@ -83,8 +83,7 @@ export const Scores: FC<ScoresProps> = (props) => {
             const items = allScoreCategories
               .map((c) => ({
                 category: c.value,
-                score:
-                  props.documentScore!.securityFeaturesScore!.protectionScore!.categoryScores[c.value]?.score ?? null,
+                score: props.value!.securityFeaturesScore!.protectionScore!.categoryScores[c.value]?.score ?? null,
               }))
               .filter(({ score }) => score !== null);
 
@@ -101,7 +100,7 @@ export const Scores: FC<ScoresProps> = (props) => {
             const items = allScoreCategories
               .map((c) => ({
                 category: c.value,
-                score: props.documentScore!.securityFeaturesScore!.levelScore!.categoryScores[c.value]?.score ?? null,
+                score: props.value!.securityFeaturesScore!.levelScore!.categoryScores[c.value]?.score ?? null,
               }))
               .filter(({ score }) => score !== null);
 

@@ -9,8 +9,8 @@ import * as styles from "./styles";
 
 export interface DocumentDesignProps {
   documentSpecs: DocumentSpecs;
-  documentDesignQuestionsInfo: rpc.DocumentDesignQuestion[];
-  onChangeDocumentDesignAnswer: (value: rpc.DocumentDesignFormAnswer) => void;
+  designQuestions: rpc.DocumentDesignQuestion[];
+  onChangeDesignAnswer: (value: rpc.DocumentDesignFormAnswer) => void;
 }
 
 export const DocumentDesign: FC<DocumentDesignProps> = (props) => {
@@ -26,7 +26,7 @@ export const DocumentDesign: FC<DocumentDesignProps> = (props) => {
             deceptive alterations has increased significantly.
           </Text>
         </SectionItem>
-        {props.documentDesignQuestionsInfo.map((question, index) => {
+        {props.designQuestions.map((question, index) => {
           return (
             <SectionItem key={question.id} fullWidth={false}>
               <QuestionItem
@@ -34,7 +34,7 @@ export const DocumentDesign: FC<DocumentDesignProps> = (props) => {
                 documentSpecs={props.documentSpecs}
                 question={question}
                 index={index}
-                onChangeDocumentDesignAnswer={props.onChangeDocumentDesignAnswer}
+                onChangeDocumentDesignAnswer={props.onChangeDesignAnswer}
               />
             </SectionItem>
           );

@@ -20,8 +20,8 @@ import * as styles from "./styles";
 
 export interface SecurityFeaturesProps {
   documentSpecs: DocumentSpecs;
-  documentSecurityFeaturesInfo: rpc.SecurityFeature[];
-  onChangeDocumentSecurityFeatures: (value: number[]) => void;
+  securityFeatures: rpc.SecurityFeature[];
+  onChange: (value: number[]) => void;
 }
 
 export const SecurityFeatures: FC<SecurityFeaturesProps> = (props) => {
@@ -40,7 +40,7 @@ export const SecurityFeatures: FC<SecurityFeaturesProps> = (props) => {
                     key={locationNode.item}
                     locationNode={locationNode}
                     documentSpecs={props.documentSpecs}
-                    onChangeDocumentSecurityFeatures={props.onChangeDocumentSecurityFeatures}
+                    onChange={props.onChange}
                   />
                 );
               })}
@@ -55,7 +55,7 @@ export const SecurityFeatures: FC<SecurityFeaturesProps> = (props) => {
 export interface FeatureItemProps {
   locationNode: DocumentSecurityFeatureLocationNode;
   documentSpecs: DocumentSpecs;
-  onChangeDocumentSecurityFeatures: (value: number[]) => void;
+  onChange: (value: number[]) => void;
 }
 
 export interface HeaderItemProps {
@@ -81,11 +81,11 @@ export const FeatureItem: FC<FeatureItemProps> = (props) => {
         <CommentsWrap>
           <MultiSelect<number>
             title="Select your feature"
-            value={props.documentSpecs.securityFeatures}
+            value={props.documentSpecs.securityFeatureIds}
             items={featureIds}
             itemId={(id) => id.toString()}
             itemContent={(id) => featureMap.get(id)?.title}
-            onChange={(ids) => props.onChangeDocumentSecurityFeatures(ids)}
+            onChange={(ids) => props.onChange(ids)}
             onDropdownToggle={(expanded) => {
               if (expanded) {
                 accentClientResult.acquire();

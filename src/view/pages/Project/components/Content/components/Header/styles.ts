@@ -39,3 +39,8 @@ export const encryptionInfoIcon = css`
 export const encryptionInfoText = css`
   ${styles.fontRegular14};
 `;
+
+export const exportButton = css`
+  margin-top: ${styles.getSize(3)};
+  margin-bottom: ${styles.getSize(3)};
+`;
