@@ -2,7 +2,7 @@
 
 Install `yarn`, [`buf`](https://docs.buf.build/installation)
 
-### Development
+#### Development
 
 `yarn`
 
@@ -10,7 +10,7 @@ Install `yarn`, [`buf`](https://docs.buf.build/installation)
 
 `yarn dev`
 
-### Production
+#### Production
 
 `yarn`
 
@@ -20,7 +20,7 @@ Install `yarn`, [`buf`](https://docs.buf.build/installation)
 
 `yarn start`
 
-### Docker setup
+### MySQL setup
 
 #### Create the container
 
@@ -44,3 +44,18 @@ mysql> FLUSH PRIVILEGES;
 ```
 
 Everything's done ! ✅
+
+### Database setup
+
+#### Development
+
+```
+npx dotenv -e .env.development -- prisma migrate dev
+npx dotenv -e .env.development -- prisma db seed
+```
+
+#### Production
+
+```
+...
+```
