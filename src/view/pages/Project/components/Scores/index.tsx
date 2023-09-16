@@ -13,7 +13,6 @@ export interface ScoresProps {
   value: rpc.TNScore | null;
   collapsed: boolean;
   onDownloadReportClick: () => void;
-  onIcaoMissingFeaturesClick: () => void;
 }
 
 const allLocations = [
@@ -49,7 +48,7 @@ export const Scores: FC<ScoresProps> = (props) => {
           <Overall value={props.value.totalScore} />
         </Panel>
         <Panel>
-          <Icao onMissingFeaturesClick={props.onIcaoMissingFeaturesClick} />
+          <Icao />
         </Panel>
         <Panel square={true} title="Overall Security">
           <ScoreRadar

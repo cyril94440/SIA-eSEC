@@ -52,9 +52,6 @@ export const Project: NextPage<ProjectProps> = (props) => {
             onDownloadReportClick={() => {
               dispatch(Thunks.projectDownloadReport());
             }}
-            onIcaoMissingFeaturesClick={() => {
-              dispatch(Thunks.projectViewMissingFeatures());
-            }}
           />
         }
         sidebarCollapsed={scoresCollapsed}

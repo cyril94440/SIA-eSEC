@@ -3,9 +3,7 @@ import * as styles from "./styles";
 import { FeatureItem } from "./FeatureItem";
 import Dialog from "view/components/Dialog";
 
-export interface IcaoProps {
-  onMissingFeaturesClick: () => void;
-}
+export interface IcaoProps {}
 
 const fakeData = [
   {
@@ -73,7 +71,7 @@ const fakeData = [
   },
 ];
 
-export const Icao: FC<IcaoProps> = (props) => {
+export const Icao: FC<IcaoProps> = () => {
   return (
     <div css={styles.root}>
       <div css={styles.status}>
@@ -81,9 +79,7 @@ export const Icao: FC<IcaoProps> = (props) => {
       </div>
       <Dialog>
         <Dialog.Trigger>
-          <div css={styles.missingFeatures} onClick={props.onMissingFeaturesClick}>
-            Missing features
-          </div>
+          <div css={styles.missingFeatures}>Missing features</div>
         </Dialog.Trigger>
         <Dialog.Title>
           ICAO: <span css={styles.red}>Not complete</span>
@@ -102,15 +98,4 @@ export const Icao: FC<IcaoProps> = (props) => {
       </Dialog>
     </div>
   );
-};
-
-const modalStyle = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
 };

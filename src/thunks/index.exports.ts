@@ -16,4 +16,3 @@ export * from "./projectRename";
 export * from "./projectSave";
 export * from "./projectUpdateDocumentScore";
 export * from "./projectViewEncryptionInfo";
-export * from "./projectViewMissingFeatures";
