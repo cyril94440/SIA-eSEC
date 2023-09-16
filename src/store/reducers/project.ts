@@ -28,6 +28,16 @@ const initialState: ProjectState = {
 
 export const project = createReducer(initialState, (builder) => {
   builder
+    .addCase(actions.projectInitEmpty, () => {
+      return initialState;
+    })
+    .addCase(actions.projectInitExisting, (_, action) => {
+      return {
+        specs: action.payload,
+        score: null,
+        securityFeatures: [],
+      };
+    })
     .addCase(actions.projectSetScore, (state, action) => {
       state.score = action.payload;
     })

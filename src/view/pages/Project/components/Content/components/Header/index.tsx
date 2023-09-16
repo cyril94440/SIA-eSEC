@@ -5,8 +5,8 @@ import * as styles from "./styles";
 export interface HeaderProps {
   title: string;
   onRenameClick: () => void;
-  onExportClick: () => void;
   onEncryptionInfoClick: () => void;
+  onSaveClick: () => void;
 }
 
 export const Header: FC<HeaderProps> = (props) => {
@@ -32,7 +32,7 @@ export const Header: FC<HeaderProps> = (props) => {
           kind={ButtonKind.Secondary}
           icon={<Icons.FileUp />}
           title="Save data for later"
-          onClick={props.onExportClick}
+          onClick={props.onSaveClick}
         />
       </div>
     </div>

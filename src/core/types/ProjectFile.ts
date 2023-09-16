@@ -1,6 +1,6 @@
 export namespace ProjectFile {
   export type Root = {
-    version: "1";
+    version: 1;
     content: V1.Content;
   };
 

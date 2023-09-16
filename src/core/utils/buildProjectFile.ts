@@ -10,7 +10,7 @@ import {
 
 export function buildProjectFile(specs: ProjectSpecs): ProjectFile.Root {
   return {
-    version: "1",
+    version: 1,
     content: {
       title: specs.title,
       status: formatStatus(specs.status),

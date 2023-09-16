@@ -1,7 +1,9 @@
 import { createAction } from "@reduxjs/toolkit";
 import * as rpc from "@@rpc/shared";
-import { DocumentScoreTarget, DocumentStandardCompliance, DocumentType } from "@@core";
+import { DocumentScoreTarget, DocumentStandardCompliance, DocumentType, ProjectSpecs } from "@@core";
 
+export const projectInitEmpty = createAction("projectInitEmpty");
+export const projectInitExisting = createAction<ProjectSpecs>("projectInitExisting");
 export const projectSetScore = createAction<rpc.TNScore>("projectSetScore");
 export const projectSetSecurityFeatures = createAction<rpc.SecurityFeature[]>("projectSetSecurityFeatures");
 export const projectSetDocumentType = createAction<DocumentType>("projectSetDocumentType");

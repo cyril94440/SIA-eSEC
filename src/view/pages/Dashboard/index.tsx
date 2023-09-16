@@ -1,15 +1,18 @@
 import { NextPage } from "next";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { formatPageTitle } from "@@core";
+import { Thunks } from "@@thunks";
 import { Button, ButtonKind, Icons } from "@@view/components";
 import { AppLayout } from "@@view/containers";
+import { useAppDispatch } from "@@view/hooks";
 import * as styles from "./styles";
-import { useSession } from "next-auth/react";
 
 export const Dashboard: NextPage = () => {
   const router = useRouter();
   const { data: session } = useSession();
+  const dispatch = useAppDispatch();
   const username = session?.user?.name;
   return (
     <>
@@ -30,19 +33,15 @@ export const Dashboard: NextPage = () => {
           <Button
             title="Start from scratch"
             kind={ButtonKind.Secondary}
-            onClick={() => {
-              router.push("/project");
-            }}
             icon={<Icons.BadgePlus />}
+            onClick={() => dispatch(Thunks.appNewProject({ router }))}
           />
           <div css={styles.or}>or</div>
           <Button
             title="Load data from file"
             kind={ButtonKind.Secondary}
-            onClick={() => {
-              alert("Implement the import file functionality");
-            }}
             icon={<Icons.FileUp />}
+            onClick={() => dispatch(Thunks.appLoadProject({ router }))}
           />
         </div>
       </AppLayout>

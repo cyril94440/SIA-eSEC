@@ -5,7 +5,7 @@ import { AppProps } from "next/app";
 import { useEffect, FC } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import { store } from "@@store";
-import * as thunks from "@@thunks";
+import { Thunks } from "@@thunks";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import * as styles from "@@view/styles";
 import { SessionProvider } from "next-auth/react";
@@ -30,7 +30,7 @@ const AppInner: FC<AppProps> = (props) => {
   const loaded = useAppSelector((state) => state.app.loaded);
 
   useEffect(() => {
-    dispatch(thunks.appLoad());
+    dispatch(Thunks.appLoad());
   }, [dispatch]);
 
   if (!loaded) {

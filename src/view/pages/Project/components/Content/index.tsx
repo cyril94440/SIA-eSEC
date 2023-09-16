@@ -1,7 +1,7 @@
-import { FC, useRef, useState } from "react";
+import { FC, useState } from "react";
 import * as rpc from "@@rpc/shared";
 import { DocumentScoreTarget, DocumentSpecs, DocumentStandardCompliance, DocumentType, ProjectStatus } from "@@core";
-import { Button, ButtonKind, Icons, ScrollController, TabControl } from "@@view/components";
+import { ScrollController, TabControl } from "@@view/components";
 import { DocumentDesign, GeneralInfo, Header, Section, SecurityFeatures, Status } from "./components";
 import * as styles from "./styles";
 
@@ -18,8 +18,8 @@ export interface ContentProps {
   designQuestions: rpc.DocumentDesignQuestion[];
   securityFeatures: rpc.SecurityFeature[];
   onRenameClick: () => void;
-  onExportClick: () => void;
   onEncryptionInfoClick: () => void;
+  onSaveClick: () => void;
   onChangeDocumentType: (value: DocumentType) => void;
   onChangeDocumentMaterial: (value: rpc.SFMaterial) => void;
   onChangeDocumentStandardCompliance: (value: DocumentStandardCompliance) => void;
@@ -39,8 +39,8 @@ export const Content: FC<ContentProps> = (props) => {
             <Header
               title={props.title}
               onRenameClick={props.onRenameClick}
-              onExportClick={props.onExportClick}
               onEncryptionInfoClick={props.onEncryptionInfoClick}
+              onSaveClick={props.onSaveClick}
             />
           </Section>
           <TabControl

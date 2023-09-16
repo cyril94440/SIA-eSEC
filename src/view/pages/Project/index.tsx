@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useEffect, useMemo, useState } from "react";
 import * as rpc from "@@rpc/shared";
 import { formatPageTitle } from "@@core";
-import * as thunks from "@@thunks";
+import { Thunks } from "@@thunks";
 import { AppLayout } from "@@view/containers";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import { Content, Scores } from "./components";
@@ -32,11 +32,11 @@ export const Project: NextPage<ProjectProps> = (props) => {
   );
 
   useEffect(() => {
-    dispatch(thunks.projectLoad());
+    dispatch(Thunks.projectLoad());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(thunks.projectChangeSecurityFeatures(securityFeatures));
+    dispatch(Thunks.projectChangeSecurityFeatures(securityFeatures));
   }, [dispatch, securityFeatures]);
 
   return (
@@ -50,10 +50,10 @@ export const Project: NextPage<ProjectProps> = (props) => {
             value={score}
             collapsed={scoresCollapsed}
             onDownloadReportClick={() => {
-              dispatch(thunks.projectDownloadReport());
+              dispatch(Thunks.projectDownloadReport());
             }}
             onIcaoMissingFeaturesClick={() => {
-              dispatch(thunks.projectViewMissingFeatures());
+              dispatch(Thunks.projectViewMissingFeatures());
             }}
           />
         }
@@ -69,31 +69,31 @@ export const Project: NextPage<ProjectProps> = (props) => {
           designQuestions={designQuestions}
           securityFeatures={securityFeatures}
           onRenameClick={() => {
-            dispatch(thunks.projectRename());
-          }}
-          onExportClick={() => {
-            dispatch(thunks.projectExport());
+            dispatch(Thunks.projectRename());
           }}
           onEncryptionInfoClick={() => {
-            dispatch(thunks.projectViewEncryptionInfo());
+            dispatch(Thunks.projectViewEncryptionInfo());
+          }}
+          onSaveClick={() => {
+            dispatch(Thunks.projectSave());
           }}
           onChangeDocumentType={(value) => {
-            dispatch(thunks.projectChangeDocumentType(value));
+            dispatch(Thunks.projectChangeDocumentType(value));
           }}
           onChangeDocumentMaterial={(value) => {
-            dispatch(thunks.projectChangeDocumentMaterial(value));
+            dispatch(Thunks.projectChangeDocumentMaterial(value));
           }}
           onChangeDocumentStandardCompliance={(value) => {
-            dispatch(thunks.projectChangeDocumentStandardCompliance(value));
+            dispatch(Thunks.projectChangeDocumentStandardCompliance(value));
           }}
           onChangeDocumentScoreTarget={(value) => {
-            dispatch(thunks.projectChangeDocumentScoreTarget(value));
+            dispatch(Thunks.projectChangeDocumentScoreTarget(value));
           }}
           onChangeDocumentDesignAnswer={(value) => {
-            dispatch(thunks.projectChangeDocumentDesignAnswer(value));
+            dispatch(Thunks.projectChangeDocumentDesignAnswer(value));
           }}
           onChangeDocumentSecurityFeatures={(value) => {
-            dispatch(thunks.projectChangeDocumentSecurityFeatures(value));
+            dispatch(Thunks.projectChangeDocumentSecurityFeatures(value));
           }}
         />
       </AppLayout>

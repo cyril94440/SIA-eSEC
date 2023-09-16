@@ -2,7 +2,7 @@ import { SerializedStyles } from "@emotion/utils";
 import { useRouter } from "next/router";
 import { FC, ReactNode, useContext } from "react";
 import { routes } from "@@core";
-import * as thunks from "@@thunks";
+import { Thunks } from "@@thunks";
 import { Icons } from "@@view/components";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import { Main, Sidebar, Sidenav, SidenavHeader, SidenavItem, SidenavSection, SideToggle } from "./components";
@@ -88,7 +88,7 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
             title="Log out"
             minimized={sidenavMinimized}
             onClick={() => {
-              dispatch(thunks.appLogout());
+              dispatch(Thunks.appLogout());
             }}
           />
         </SidenavSection>
@@ -96,7 +96,7 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
           placement="left"
           minimized={sidenavMinimized}
           onClick={() => {
-            dispatch(thunks.appToggleSidenav());
+            dispatch(Thunks.appToggleSidenav());
           }}
         />
       </Sidenav>
