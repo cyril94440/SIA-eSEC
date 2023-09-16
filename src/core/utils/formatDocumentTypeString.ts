@@ -10,7 +10,5 @@ export function formatDocumentTypeString(value: DocumentType): string {
       return "Other";
     case DocumentType.PASSPORT:
       return "Passport";
-    default:
-      return "Unrecognized";
   }
 }

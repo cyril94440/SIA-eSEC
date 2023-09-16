@@ -6,7 +6,5 @@ export function formatDocumentMaterialString(value: SFMaterial): string {
       return "Paper";
     case SFMaterial.Plastic:
       return "Plastic";
-    default:
-      return "Unrecognized";
   }
 }

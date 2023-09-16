@@ -6,7 +6,5 @@ export function formatDocumentScoreTargetString(value: DocumentScoreTarget): str
       return "SIA Reco";
     case DocumentScoreTarget.THEORICAL_MAXIMUM:
       return "Theorical maximum";
-    default:
-      return "Unrecognized";
   }
 }

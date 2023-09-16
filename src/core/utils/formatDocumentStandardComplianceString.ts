@@ -12,7 +12,5 @@ export function formatDocumentStandardComplianceString(value: DocumentStandardCo
       return "EU Resident permit";
     case DocumentStandardCompliance.ICAO:
       return "ICAO";
-    default:
-      return "Unrecognized";
   }
 }

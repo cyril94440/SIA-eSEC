@@ -20,7 +20,5 @@ export function formatDocumentSecurityFeatureScoreCategoryString(value: SFScoreC
       return "Recycling";
     case SFScoreCategory.Stealing:
       return "Stealing";
-    default:
-      return "Unrecognized";
   }
 }

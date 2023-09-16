@@ -10,7 +10,5 @@ export function formatDocumentSecurityFeatureCategoryString(value: SFCategory): 
       return "Printed";
     case SFCategory.Structure:
       return "Structure";
-    default:
-      return "Unrecognized";
   }
 }

@@ -12,7 +12,5 @@ export function formatDocumentSecurityFeatureLocationString(value: SFLocation): 
       return "Security Design";
     case SFLocation.SFPersonalization:
       return "Security Feature Personalization";
-    default:
-      return "Unrecognized";
   }
 }
