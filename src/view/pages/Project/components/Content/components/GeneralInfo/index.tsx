@@ -8,6 +8,7 @@ import {
   formatDocumentScoreTargetString,
   formatDocumentStandardComplianceString,
   formatDocumentTypeString,
+  isDocumentMaterialValid,
 } from "@@core";
 import { SFMaterial } from "@@rpc/shared";
 import { CardSelect, Icons, Select } from "@@view/components";
@@ -39,16 +40,6 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
               Icon: Icons.DocumentTypeIdCard,
               label: formatDocumentTypeString(DocumentType.ID_CARD),
             },
-            {
-              value: DocumentType.DRIVING_LICENSE,
-              Icon: Icons.DocumentTypeDriving,
-              label: formatDocumentTypeString(DocumentType.DRIVING_LICENSE),
-            },
-            {
-              value: DocumentType.OTHER,
-              Icon: Icons.DocumentTypeOther,
-              label: formatDocumentTypeString(DocumentType.OTHER),
-            },
           ]}
           onChange={(value) => props.onChangeDocumentType(value as DocumentType)}
         />
@@ -56,18 +47,21 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
       <SectionItem title="Material" fullWidth={true}>
         <CardSelect
           value={props.documentSpecs.material.toString()}
-          items={[
-            {
-              value: SFMaterial.Plastic.toString(),
-              Icon: Icons.DocumentMaterialPlastic,
-              label: formatDocumentMaterialString(SFMaterial.Plastic),
-            },
-            {
-              value: SFMaterial.Paper.toString(),
-              Icon: Icons.DocumentMaterialPaper,
-              label: formatDocumentMaterialString(SFMaterial.Paper),
-            },
-          ]}
+          items={
+            //
+            [
+              { value: SFMaterial.Plastic, icon: Icons.DocumentMaterialPlastic },
+              { value: SFMaterial.Paper, icon: Icons.DocumentMaterialPaper },
+            ].map(({ value, icon }) => {
+              return isDocumentMaterialValid(value, props.documentSpecs.type)
+                ? {
+                    value: value.toString(),
+                    Icon: icon,
+                    label: formatDocumentMaterialString(value),
+                  }
+                : null;
+            })
+          }
           onChange={(value) => props.onChangeDocumentMaterial(Number.parseInt(value, 10) as SFMaterial)}
         />
       </SectionItem>

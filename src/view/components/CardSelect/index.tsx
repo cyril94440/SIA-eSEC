@@ -4,7 +4,7 @@ import * as styles from "./styles";
 
 export interface CardSelectProps {
   value: string;
-  items: CardSelectItem[];
+  items: (CardSelectItem | null)[];
   onChange: (value: string) => void;
 }
 
@@ -18,6 +18,9 @@ export const CardSelect: FC<CardSelectProps> = (props) => {
   return (
     <div css={styles.root}>
       {props.items.map((item) => {
+        if (!item) {
+          return null;
+        }
         const selected = item.value === props.value;
         return (
           <div key={item.value} css={styles.item}>
