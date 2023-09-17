@@ -9,6 +9,7 @@ export * from "./formatDocumentTypeString";
 export * from "./formatPageTitle";
 export * from "./formatProjectStatusString";
 export * from "./getDefaultDocumentMaterial";
+export * from "./getUserToken";
 export * from "./isDocumentMaterialValid";
 export * from "./parseProjectFile";
 export * from "./ret";

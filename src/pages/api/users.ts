@@ -1,13 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { db } from "lib/db";
 import { User } from "next-auth";
-import { getToken } from "next-auth/jwt";
+import { getUserToken, UserRole } from "@@core";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<User[]>) {
-  const token = await getToken({ req });
+  const token = await getUserToken({ req });
   const isAuthenticated = !!token;
-
-  const isAdmin = isAuthenticated && token.role === "ADMIN";
+  const isAdmin = isAuthenticated && token?.role === UserRole.Admin;
 
   if (!isAuthenticated || !isAdmin) {
     return res.status(401).end();

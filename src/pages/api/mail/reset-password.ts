@@ -1,9 +1,7 @@
-import sendMail from "core/services/email";
-import { MailContent } from "core/types";
 import { validateEmail } from "lib/utils/validate-email";
 import type { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
-import { getToken } from "next-auth/jwt";
+import { getUserToken, MailContent, sendMail, UserJWT, UserRole } from "@@core";
 
 type ResponseData = {
   message: string;
@@ -17,9 +15,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   /**
    * Check that user is an admin
    */
-  const userToken = await getToken({ req });
-  const isAuthenticated = !!userToken;
-  const isAdmin = isAuthenticated && userToken.role === "ADMIN";
+  const token = await getUserToken({ req });
+  const isAuthenticated = !!token;
+  const isAdmin = isAuthenticated && token?.role === UserRole.Admin;
 
   if (!isAuthenticated || !isAdmin) {
     return res.status(401).end();
@@ -43,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     return res.status(500).json({ message: "Security issue has been detected." });
   }
 
-  const token = jwt.sign(
+  const resetPasswordToken = jwt.sign(
     {
       id: req.body.id,
       email: req.body.email,
@@ -61,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     text: `Hi, 
     
     
-    Click here to reset your password: ${process.env.NEXTAUTH_URL}/reset-password?token=${token}
+    Click here to reset your password: ${process.env.NEXTAUTH_URL}/reset-password?token=${resetPasswordToken}
     `,
   };
 

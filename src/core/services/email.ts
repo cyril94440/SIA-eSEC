@@ -1,7 +1,7 @@
 import { MailContent, MailResponse } from "core/types";
 import nodemailer from "nodemailer";
 
-const sendMail = async (mailContent: MailContent): Promise<MailResponse> => {
+export const sendMail = async (mailContent: MailContent): Promise<MailResponse> => {
   const { NODEMAILER_EMAIL, NODEMAILER_PASSWORD, NODE_ENV, EMAIL_ADDRESS_DEBUG } = process.env;
 
   const transporter = nodemailer.createTransport({
@@ -28,5 +28,3 @@ const sendMail = async (mailContent: MailContent): Promise<MailResponse> => {
     return { success: false, message: "An error occurred while attempting to send email" };
   }
 };
-
-export default sendMail;

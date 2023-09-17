@@ -1,12 +1,11 @@
-import { getToken } from "next-auth/jwt";
 import { withAuth } from "next-auth/middleware";
 import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
+import { getUserToken, UserRole } from "@@core";
 
 export default async function middleware(req: NextRequest, event: NextFetchEvent) {
-  const token = await getToken({ req });
+  const token = await getUserToken({ req });
   const isAuthenticated = !!token;
-
-  const isAdmin = isAuthenticated && token.role === "ADMIN";
+  const isAdmin = isAuthenticated && token?.role === UserRole.Admin;
 
   // Let unauthenticated users access the activate page to sign up but redirect authenticated users to dashboard
   if (req.nextUrl.pathname.startsWith("/activate")) {

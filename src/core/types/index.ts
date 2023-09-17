@@ -7,3 +7,5 @@ export * from "./Mail";
 export * from "./ProjectFile";
 export * from "./ProjectSpecs";
 export * from "./ProjectStatus";
+export * from "./UserJWT";
+export * from "./UserRole";

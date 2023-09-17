@@ -1,8 +1,9 @@
+import { compare } from "bcrypt";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { UserJWT } from "@@core";
 import { db } from "lib/db";
-import { compare } from "bcrypt";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
@@ -59,13 +60,14 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   callbacks: {
-    async session({ token, session }: { token: any; session: any }) {
-      if (token) {
-        session.user!.name = token.username;
-        session.user!.email = token.email;
-        session.user!.image = token.image;
-        session.user!.role = token.role;
-      }
+    async session(params) {
+      const token = params.token as any as UserJWT;
+      const session = params.session;
+
+      session.user!.name = token.username;
+      session.user!.email = token.email;
+      session.user!.image = token.image;
+      session.user!.role = token.role;
 
       return session;
     },
