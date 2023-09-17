@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { NextRouter } from "next/router";
 import selectFiles from "select-files";
+import { Api } from "@@core/api/client";
 import { ProjectFile } from "@@core/project-file";
 import { actions } from "@@store";
 import { projectUpdateDocumentScore } from "./projectUpdateDocumentScore";
@@ -15,11 +16,15 @@ export const appLoadProject = createAsyncThunk<void, { router: NextRouter }>(
       return;
     }
 
-    const json = await file.text();
-    const data = JSON.parse(json) as ProjectFile.Root;
-    const specs = ProjectFile.parse(data);
+    const content = await file.text();
+    const res = await Api.projectFileDecode({ content, password: "password" });
 
-    dispatch(actions.projectInitExisting(specs));
+    if (!res.success) {
+      console.log(res.error);
+      return;
+    }
+
+    dispatch(actions.projectInitExisting(res.data.specs));
     dispatch(projectUpdateDocumentScore());
     await params.router.push("/project");
   }
