@@ -1,18 +1,18 @@
 import { createReducer } from "@reduxjs/toolkit";
-import * as rpc from "../../core/rpc/shared";
 import {
   DocumentScoreTarget,
   DocumentStandardCompliance,
   DocumentType,
   ProjectSpecs,
   ProjectStatus,
-} from "../../core/project";
+} from "@@core/project";
+import { Rpc } from "@@core/rpc/shared";
 import * as actions from "../actions";
 
 export interface ProjectState {
   specs: ProjectSpecs;
-  score: rpc.TNScore | null;
-  securityFeatures: rpc.SecurityFeature[];
+  score: Rpc.TNScore | null;
+  securityFeatures: Rpc.SecurityFeature[];
 }
 
 const initialState: ProjectState = {
@@ -21,7 +21,7 @@ const initialState: ProjectState = {
     status: ProjectStatus.ONGOING,
     document: {
       type: DocumentType.PASSPORT,
-      material: rpc.SFMaterial.Plastic,
+      material: Rpc.SFMaterial.Plastic,
       standardCompliance: DocumentStandardCompliance.EU_PASSPORT,
       scoreTarget: DocumentScoreTarget.SIA_RECO,
       designAnswers: [],

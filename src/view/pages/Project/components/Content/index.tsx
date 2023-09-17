@@ -1,12 +1,12 @@
 import { FC, useState } from "react";
-import * as rpc from "../../../../../core/rpc/shared";
 import {
   DocumentScoreTarget,
   DocumentSpecs,
   DocumentStandardCompliance,
   DocumentType,
   ProjectStatus,
-} from "../../../../../core/project";
+} from "@@core/project";
+import { Rpc } from "@@core/rpc/shared";
 import { ScrollController, TabControl } from "@@view/components";
 import { DocumentDesign, GeneralInfo, Header, Section, SecurityFeatures, Status } from "./components";
 import * as styles from "./styles";
@@ -21,16 +21,16 @@ export interface ContentProps {
   title: string;
   status: ProjectStatus;
   documentSpecs: DocumentSpecs;
-  designQuestions: rpc.DocumentDesignQuestion[];
-  securityFeatures: rpc.SecurityFeature[];
+  designQuestions: Rpc.DocumentDesignQuestion[];
+  securityFeatures: Rpc.SecurityFeature[];
   onRenameClick: () => void;
   onEncryptionInfoClick: () => void;
   onSaveClick: () => void;
   onChangeDocumentType: (value: DocumentType) => void;
-  onChangeDocumentMaterial: (value: rpc.SFMaterial) => void;
+  onChangeDocumentMaterial: (value: Rpc.SFMaterial) => void;
   onChangeDocumentStandardCompliance: (value: DocumentStandardCompliance) => void;
   onChangeDocumentScoreTarget: (value: DocumentScoreTarget) => void;
-  onChangeDocumentDesignAnswer: (value: rpc.DocumentDesignFormAnswer) => void;
+  onChangeDocumentDesignAnswer: (value: Rpc.DocumentDesignFormAnswer) => void;
   onChangeDocumentSecurityFeatures: (value: number[]) => void;
 }
 

@@ -1,24 +1,24 @@
-import { SFScoreCategory } from "../../rpc/shared";
+import { Rpc } from "@@core/rpc/shared";
 
-export function formatDocumentSecurityFeatureScoreCategoryString(value: SFScoreCategory): string {
+export function formatDocumentSecurityFeatureScoreCategoryString(value: Rpc.SFScoreCategory): string {
   switch (value) {
-    case SFScoreCategory.ABC:
+    case Rpc.SFScoreCategory.ABC:
       return "ABC";
-    case SFScoreCategory.Alteration:
+    case Rpc.SFScoreCategory.Alteration:
       return "Alteration";
-    case SFScoreCategory.Counterfeit:
+    case Rpc.SFScoreCategory.Counterfeit:
       return "Counterfeit";
-    case SFScoreCategory.Impostor:
+    case Rpc.SFScoreCategory.Impostor:
       return "Impostor";
-    case SFScoreCategory.Level1:
+    case Rpc.SFScoreCategory.Level1:
       return "Level 1";
-    case SFScoreCategory.Level2:
+    case Rpc.SFScoreCategory.Level2:
       return "Level 2";
-    case SFScoreCategory.Level3:
+    case Rpc.SFScoreCategory.Level3:
       return "Level 3";
-    case SFScoreCategory.Recycling:
+    case Rpc.SFScoreCategory.Recycling:
       return "Recycling";
-    case SFScoreCategory.Stealing:
+    case Rpc.SFScoreCategory.Stealing:
       return "Stealing";
   }
 }

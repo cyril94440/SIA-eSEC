@@ -1,10 +1,10 @@
 import { FC, Fragment } from "react";
-import * as rpc from "../../../../../../../core/rpc/shared";
 import {
   formatDocumentSecurityFeatureCategoryString,
   formatDocumentSecurityFeatureLocationString,
   DocumentSpecs,
-} from "../../../../../../../core/project";
+} from "@@core/project";
+import { Rpc } from "@@core/rpc/shared";
 import { getProjectActiveSecurityFeatures } from "@@store";
 import { AccentController, CommentsWrap, MultiSelect, useAccentClient } from "@@view/components";
 import { useAppSelector } from "@@view/hooks";
@@ -20,7 +20,7 @@ import * as styles from "./styles";
 
 export interface SecurityFeaturesProps {
   documentSpecs: DocumentSpecs;
-  securityFeatures: rpc.SecurityFeature[];
+  securityFeatures: Rpc.SecurityFeature[];
   onChange: (value: number[]) => void;
 }
 

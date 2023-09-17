@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { DocumentType, getDefaultDocumentMaterial, isDocumentMaterialValid } from "../core/project";
+import { DocumentType, getDefaultDocumentMaterial, isDocumentMaterialValid } from "@@core/project";
 import { actions, RootState } from "@@store";
 import { projectUpdateDocumentScore } from "./projectUpdateDocumentScore";
 

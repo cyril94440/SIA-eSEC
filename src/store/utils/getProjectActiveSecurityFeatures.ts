@@ -1,7 +1,7 @@
-import { SecurityFeature } from "../../core/rpc/shared";
+import { Rpc } from "@@core/rpc/shared";
 import { RootState } from "../reducers";
 
-export function getProjectActiveSecurityFeatures(state: RootState): SecurityFeature[] {
+export function getProjectActiveSecurityFeatures(state: RootState): Rpc.SecurityFeature[] {
   return (
     state.project.securityFeatures.filter((f) =>
       f.materialsCompatible.some((m) => m === state.project.specs.document.material)

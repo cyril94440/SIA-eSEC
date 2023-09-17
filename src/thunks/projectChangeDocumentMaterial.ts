@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { SFMaterial } from "../core/rpc/shared";
+import { Rpc } from "@@core/rpc/shared";
 import { actions } from "@@store";
 import { projectUpdateDocumentScore } from "./projectUpdateDocumentScore";
 
-export const projectChangeDocumentMaterial = createAsyncThunk<void, SFMaterial>(
+export const projectChangeDocumentMaterial = createAsyncThunk<void, Rpc.SFMaterial>(
   "projectChangeDocumentMaterial",
   async (value, { dispatch }) => {
     dispatch(actions.projectSetDocumentMaterial(value));

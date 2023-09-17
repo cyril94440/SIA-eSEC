@@ -1,8 +1,8 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useMemo, useState } from "react";
-import * as rpc from "../../../core/rpc/shared";
 import { formatPageTitle } from "@@core/base";
+import { Rpc } from "@@core/rpc/shared";
 import { Thunks } from "@@thunks";
 import { AppLayout } from "@@view/containers";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
@@ -22,12 +22,12 @@ export const Project: NextPage<ProjectProps> = (props) => {
   const [scoresCollapsed, setScoresCollapsed] = useState(false);
 
   const designQuestions = useMemo(
-    () => JSON.parse(props.designQuestionsJson) as rpc.DocumentDesignQuestion[],
+    () => JSON.parse(props.designQuestionsJson) as Rpc.DocumentDesignQuestion[],
     [props.designQuestionsJson]
   );
 
   const securityFeatures = useMemo(
-    () => JSON.parse(props.securityFeaturesJson) as rpc.SecurityFeature[],
+    () => JSON.parse(props.securityFeaturesJson) as Rpc.SecurityFeature[],
     [props.securityFeaturesJson]
   );
 

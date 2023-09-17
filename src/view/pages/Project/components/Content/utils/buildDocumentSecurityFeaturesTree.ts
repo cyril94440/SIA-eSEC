@@ -1,22 +1,22 @@
 import { sort } from "fast-sort";
-import * as rpc from "../../../../../../core/rpc/shared";
+import { Rpc } from "@@core/rpc/shared";
 
 export interface DocumentSecurityFeatureTree {
   categoryNodes: DocumentSecurityFeatureCategoryNode[];
 }
 
 export interface DocumentSecurityFeatureCategoryNode {
-  item: rpc.SFCategory;
+  item: Rpc.SFCategory;
   locationNodes: DocumentSecurityFeatureLocationNode[];
 }
 
 export interface DocumentSecurityFeatureLocationNode {
-  item: rpc.SFLocation;
-  features: rpc.SecurityFeature[];
+  item: Rpc.SFLocation;
+  features: Rpc.SecurityFeature[];
 }
 
-export function buildDocumentSecurityFeatureTree(features: rpc.SecurityFeature[]): DocumentSecurityFeatureTree {
-  const categoryMap = new Map<rpc.SFCategory, Map<rpc.SFLocation, rpc.SecurityFeature[]>>();
+export function buildDocumentSecurityFeatureTree(features: Rpc.SecurityFeature[]): DocumentSecurityFeatureTree {
+  const categoryMap = new Map<Rpc.SFCategory, Map<Rpc.SFLocation, Rpc.SecurityFeature[]>>();
 
   features.forEach((feature) => {
     let locationMap = categoryMap.get(feature.category);

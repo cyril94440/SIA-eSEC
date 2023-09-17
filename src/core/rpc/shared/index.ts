@@ -1,2 +1,1 @@
-export * from "./gen/esec_engine";
-export * from "./gen/esec_score";
+export * as Rpc from "./index.exports";

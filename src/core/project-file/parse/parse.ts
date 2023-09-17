@@ -1,4 +1,4 @@
-import { ProjectSpecs } from "../../project/types";
+import { ProjectSpecs } from "@@core/project";
 import { Root } from "../types";
 import { parseV1 } from "./parsers/parse-v1";
 

@@ -1,11 +1,11 @@
-import { DocumentDesignFormAnswer, SFMaterial } from "../../../rpc/shared";
+import { Rpc } from "@@core/rpc/shared";
 import {
   DocumentScoreTarget,
   DocumentStandardCompliance,
   DocumentType,
   ProjectSpecs,
   ProjectStatus,
-} from "../../../project/types";
+} from "@@core/project";
 import { V1 } from "../../types";
 
 export function parseV1(content: V1.Content): ProjectSpecs {
@@ -43,12 +43,12 @@ function parseDocumentType(value: V1.DocumentType): DocumentType {
   }
 }
 
-function parseDocumentMaterial(value: V1.DocumentMaterial): SFMaterial {
+function parseDocumentMaterial(value: V1.DocumentMaterial): Rpc.SFMaterial {
   switch (value) {
     case "paper":
-      return SFMaterial.Paper;
+      return Rpc.SFMaterial.Paper;
     case "plastic":
-      return SFMaterial.Plastic;
+      return Rpc.SFMaterial.Plastic;
   }
 }
 
@@ -76,7 +76,7 @@ function parseDocumentStandardCompliance(value: V1.DocumentStandardCompliance): 
   }
 }
 
-function parseDocumentDesignAnswers(value: V1.DocumentDesignAnswer[]): DocumentDesignFormAnswer[] {
+function parseDocumentDesignAnswers(value: V1.DocumentDesignAnswer[]): Rpc.DocumentDesignFormAnswer[] {
   return value.map((v) => ({
     idAnswer: v.answerId,
     idQuestion: v.questionId,

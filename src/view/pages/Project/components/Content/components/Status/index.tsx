@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { formatProjectStatusString, ProjectStatus } from "../../../../../../../core/project";
+import { formatProjectStatusString, ProjectStatus } from "@@core/project";
 import * as styles from "./styles";
 
 export interface StatusProps {

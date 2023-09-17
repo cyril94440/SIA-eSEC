@@ -1,6 +1,6 @@
 import { FC } from "react";
-import * as rpc from "../../../../../../../core/rpc/shared";
-import { DocumentSpecs } from "../../../../../../../core/project";
+import { DocumentSpecs } from "@@core/project";
+import { Rpc } from "@@core/rpc/shared";
 import { AccentController, CommentsWrap, RadioSelect, useAccentClient } from "@@view/components";
 import { Text } from "../Text";
 import { Section } from "../Section";
@@ -9,8 +9,8 @@ import * as styles from "./styles";
 
 export interface DocumentDesignProps {
   documentSpecs: DocumentSpecs;
-  designQuestions: rpc.DocumentDesignQuestion[];
-  onChangeDesignAnswer: (value: rpc.DocumentDesignFormAnswer) => void;
+  designQuestions: Rpc.DocumentDesignQuestion[];
+  onChangeDesignAnswer: (value: Rpc.DocumentDesignFormAnswer) => void;
 }
 
 export const DocumentDesign: FC<DocumentDesignProps> = (props) => {
@@ -46,9 +46,9 @@ export const DocumentDesign: FC<DocumentDesignProps> = (props) => {
 
 export interface QuestionItemProps {
   documentSpecs: DocumentSpecs;
-  question: rpc.DocumentDesignQuestion;
+  question: Rpc.DocumentDesignQuestion;
   index: number;
-  onChangeDocumentDesignAnswer: (value: rpc.DocumentDesignFormAnswer) => void;
+  onChangeDocumentDesignAnswer: (value: Rpc.DocumentDesignFormAnswer) => void;
 }
 
 const QuestionItem: FC<QuestionItemProps> = (props) => {

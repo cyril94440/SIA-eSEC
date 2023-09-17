@@ -9,8 +9,8 @@ import {
   formatDocumentStandardComplianceString,
   formatDocumentTypeString,
   isDocumentMaterialValid,
-} from "../../../../../../../core/project";
-import { SFMaterial } from "../../../../../../../core/rpc/shared";
+} from "@@core/project";
+import { Rpc } from "@@core/rpc/shared";
 import { CardSelect, Icons, Select } from "@@view/components";
 import { Section } from "../Section";
 import { SectionItem } from "../SectionItem";
@@ -18,7 +18,7 @@ import { SectionItem } from "../SectionItem";
 export interface GeneralInfoProps {
   documentSpecs: DocumentSpecs;
   onChangeDocumentType: (value: DocumentType) => void;
-  onChangeDocumentMaterial: (value: SFMaterial) => void;
+  onChangeDocumentMaterial: (value: Rpc.SFMaterial) => void;
   onChangeDocumentStandardCompliance: (value: DocumentStandardCompliance) => void;
   onChangeDocumentScoreTarget: (value: DocumentScoreTarget) => void;
 }
@@ -50,8 +50,8 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
           items={
             //
             [
-              { value: SFMaterial.Plastic, icon: Icons.DocumentMaterialPlastic },
-              { value: SFMaterial.Paper, icon: Icons.DocumentMaterialPaper },
+              { value: Rpc.SFMaterial.Plastic, icon: Icons.DocumentMaterialPlastic },
+              { value: Rpc.SFMaterial.Paper, icon: Icons.DocumentMaterialPaper },
             ].map(({ value, icon }) => {
               return isDocumentMaterialValid(value, props.documentSpecs.type)
                 ? {
@@ -62,7 +62,7 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
                 : null;
             })
           }
-          onChange={(value) => props.onChangeDocumentMaterial(Number.parseInt(value, 10) as SFMaterial)}
+          onChange={(value) => props.onChangeDocumentMaterial(Number.parseInt(value, 10) as Rpc.SFMaterial)}
         />
       </SectionItem>
       <SectionItem title="Standard Compliance" fullWidth={false}>

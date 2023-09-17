@@ -13,15 +13,13 @@ import { Toaster } from "react-hot-toast";
 
 export const App: FC<AppProps> = (props) => {
   return (
-    <>
-      <SessionProvider session={props.pageProps.session}>
-        <Toaster position="top-right" reverseOrder={false} />
-        <EmotionGlobal styles={styles.global} />
-        <ReduxProvider store={store}>
-          <AppInner {...props} />
-        </ReduxProvider>
-      </SessionProvider>
-    </>
+    <SessionProvider session={props.pageProps.session}>
+      <Toaster position="top-right" reverseOrder={false} />
+      <EmotionGlobal styles={styles.global} />
+      <ReduxProvider store={store}>
+        <AppInner {...props} />
+      </ReduxProvider>
+    </SessionProvider>
   );
 };
 

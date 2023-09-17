@@ -1,14 +1,14 @@
-import { SFCategory } from "../../rpc/shared";
+import { Rpc } from "@@core/rpc/shared";
 
-export function formatDocumentSecurityFeatureCategoryString(value: SFCategory): string {
+export function formatDocumentSecurityFeatureCategoryString(value: Rpc.SFCategory): string {
   switch (value) {
-    case SFCategory.Material:
+    case Rpc.SFCategory.Material:
       return "Material";
-    case SFCategory.Personalization:
+    case Rpc.SFCategory.Personalization:
       return "Personalization";
-    case SFCategory.Printed:
+    case Rpc.SFCategory.Printed:
       return "Printed";
-    case SFCategory.Structure:
+    case Rpc.SFCategory.Structure:
       return "Structure";
   }
 }

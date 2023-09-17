@@ -1,8 +1,8 @@
-import * as rpc from "../rpc/shared";
+import { Rpc } from "@@core/rpc/shared";
 import { ApiResult } from "./types";
 
 class Api {
-  async computeScores(req: rpc.ComputeScoreRequest): Promise<rpc.ComputeScoreResponse> {
+  async computeScores(req: Rpc.ComputeScoreRequest): Promise<Rpc.ComputeScoreResponse> {
     return this.makePost("compute-scores", req);
   }
 

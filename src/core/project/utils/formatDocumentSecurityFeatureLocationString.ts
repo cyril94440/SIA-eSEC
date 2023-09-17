@@ -1,16 +1,16 @@
-import { SFLocation } from "../../rpc/shared";
+import { Rpc } from "@@core/rpc/shared";
 
-export function formatDocumentSecurityFeatureLocationString(value: SFLocation): string {
+export function formatDocumentSecurityFeatureLocationString(value: Rpc.SFLocation): string {
   switch (value) {
-    case SFLocation.DocumentBody:
+    case Rpc.SFLocation.DocumentBody:
       return "Document Body";
-    case SFLocation.InksBackground:
+    case Rpc.SFLocation.InksBackground:
       return "Inks Background";
-    case SFLocation.InksTechPersonalization:
+    case Rpc.SFLocation.InksTechPersonalization:
       return "Inks Tech Personalization";
-    case SFLocation.SecurityDesign:
+    case Rpc.SFLocation.SecurityDesign:
       return "Security Design";
-    case SFLocation.SFPersonalization:
+    case Rpc.SFLocation.SFPersonalization:
       return "Security Feature Personalization";
   }
 }

@@ -1,16 +1,16 @@
 import { NextApiHandler } from "next";
 import { ApiResult } from "@@core/api";
-import * as rpc from "../../core/rpc/server";
+import { Rpc } from "@@core/rpc/server";
 
-const handler: NextApiHandler<ApiResult<rpc.ComputeScoreResponse>> = async (req, res) => {
+const handler: NextApiHandler<ApiResult<Rpc.ComputeScoreResponse>> = async (req, res) => {
   if (req.method !== "POST") {
     res.status(405).end();
     return;
   }
 
-  const client = rpc.createComputeScoreClient();
-  const scoreRequest = JSON.parse(req.body) as rpc.ComputeScoreRequest;
-  const scoreResponse = await rpc.getPromise<rpc.ComputeScoreResponse>((cb) => client.computeScores(scoreRequest, cb));
+  const client = Rpc.createComputeScoreClient();
+  const scoreRequest = JSON.parse(req.body) as Rpc.ComputeScoreRequest;
+  const scoreResponse = await Rpc.getPromise<Rpc.ComputeScoreResponse>((cb) => client.computeScores(scoreRequest, cb));
 
   res.status(200).json({
     success: true,

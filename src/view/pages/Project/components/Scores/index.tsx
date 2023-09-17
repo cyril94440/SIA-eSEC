@@ -1,38 +1,38 @@
 import { FC } from "react";
+import { ret } from "@@core/base";
 import {
   formatDocumentSecurityFeatureLocationString,
   formatDocumentSecurityFeatureScoreCategoryString,
-} from "../../../../../core/project";
-import { ret } from "@@core/base";
-import * as rpc from "../../../../../core/rpc/shared";
+} from "@@core/project";
+import { Rpc } from "@@core/rpc/shared";
 import { ScoreRadar } from "@@view/components";
 import { DownloadReport, Header, Icao, Overall, Panel, PanelGroup } from "./components";
 import * as styles from "./styles";
 
 export interface ScoresProps {
-  value: rpc.TNScore | null;
+  value: Rpc.TNScore | null;
   collapsed: boolean;
   onDownloadReportClick: () => void;
 }
 
 const allLocations = [
-  { value: rpc.SFLocation.DocumentBody },
-  { value: rpc.SFLocation.InksBackground },
-  { value: rpc.SFLocation.InksTechPersonalization },
-  { value: rpc.SFLocation.SecurityDesign },
-  { value: rpc.SFLocation.SFPersonalization },
+  { value: Rpc.SFLocation.DocumentBody },
+  { value: Rpc.SFLocation.InksBackground },
+  { value: Rpc.SFLocation.InksTechPersonalization },
+  { value: Rpc.SFLocation.SecurityDesign },
+  { value: Rpc.SFLocation.SFPersonalization },
 ];
 
 const allScoreCategories = [
-  { value: rpc.SFScoreCategory.ABC },
-  { value: rpc.SFScoreCategory.Alteration },
-  { value: rpc.SFScoreCategory.Counterfeit },
-  { value: rpc.SFScoreCategory.Impostor },
-  { value: rpc.SFScoreCategory.Level1 },
-  { value: rpc.SFScoreCategory.Level2 },
-  { value: rpc.SFScoreCategory.Level3 },
-  { value: rpc.SFScoreCategory.Recycling },
-  { value: rpc.SFScoreCategory.Stealing },
+  { value: Rpc.SFScoreCategory.ABC },
+  { value: Rpc.SFScoreCategory.Alteration },
+  { value: Rpc.SFScoreCategory.Counterfeit },
+  { value: Rpc.SFScoreCategory.Impostor },
+  { value: Rpc.SFScoreCategory.Level1 },
+  { value: Rpc.SFScoreCategory.Level2 },
+  { value: Rpc.SFScoreCategory.Level3 },
+  { value: Rpc.SFScoreCategory.Recycling },
+  { value: Rpc.SFScoreCategory.Stealing },
 ];
 
 export const Scores: FC<ScoresProps> = (props) => {

@@ -1,10 +1,10 @@
-import { SFMaterial } from "../../rpc/shared";
+import { Rpc } from "@@core/rpc/shared";
 
-export function formatDocumentMaterialString(value: SFMaterial): string {
+export function formatDocumentMaterialString(value: Rpc.SFMaterial): string {
   switch (value) {
-    case SFMaterial.Paper:
+    case Rpc.SFMaterial.Paper:
       return "Paper";
-    case SFMaterial.Plastic:
+    case Rpc.SFMaterial.Plastic:
       return "Plastic";
   }
 }

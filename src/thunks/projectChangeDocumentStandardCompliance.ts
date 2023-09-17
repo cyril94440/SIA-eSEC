@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { DocumentStandardCompliance } from "../core/project";
+import { DocumentStandardCompliance } from "@@core/project";
 import { actions } from "@@store";
 import { projectUpdateDocumentScore } from "./projectUpdateDocumentScore";
 
