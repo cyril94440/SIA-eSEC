@@ -1,7 +1,7 @@
 import { SerializedStyles } from "@emotion/utils";
 import { useRouter } from "next/router";
-import { FC, ReactNode, useContext } from "react";
-import { routes } from "@@core";
+import { FC, ReactNode } from "react";
+import { Routes } from "@@core/routes";
 import { Thunks } from "@@thunks";
 import { Icons } from "@@view/components";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
@@ -32,22 +32,22 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
             Icon={Icons.Dashboard}
             title="Dashboard"
             minimized={sidenavMinimized}
-            link={{ href: routes.DASHBOARD }}
-            active={router.pathname === routes.DASHBOARD}
+            link={{ href: Routes.DASHBOARD }}
+            active={router.pathname === Routes.DASHBOARD}
           />
           <SidenavItem
             Icon={Icons.Group}
             title="About us"
             minimized={sidenavMinimized}
-            link={{ href: routes.ABOUT_US }}
-            active={router.pathname === routes.ABOUT_US}
+            link={{ href: Routes.ABOUT_US }}
+            active={router.pathname === Routes.ABOUT_US}
           />
           <SidenavItem
             Icon={Icons.Faq}
             title="FAQ"
             minimized={sidenavMinimized}
-            link={{ href: routes.FAQ }}
-            active={router.pathname === routes.FAQ}
+            link={{ href: Routes.FAQ }}
+            active={router.pathname === Routes.FAQ}
           />
         </SidenavSection>
         <SidenavSection>
@@ -55,22 +55,22 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
             Icon={Icons.Notifications}
             title="Notifications"
             minimized={sidenavMinimized}
-            link={{ href: routes.NOTIFICATIONS }}
-            active={router.pathname === routes.NOTIFICATIONS}
+            link={{ href: Routes.NOTIFICATIONS }}
+            active={router.pathname === Routes.NOTIFICATIONS}
           />
           <SidenavItem
             Icon={Icons.Person}
             title="My profile"
             minimized={sidenavMinimized}
-            link={{ href: routes.PROFILE }}
-            active={router.pathname === routes.PROFILE}
+            link={{ href: Routes.PROFILE }}
+            active={router.pathname === Routes.PROFILE}
           />
           <SidenavItem
             Icon={Icons.ChecksGrid}
             title="My subscription"
             minimized={sidenavMinimized}
-            link={{ href: routes.SUBSCRIPTION }}
-            active={router.pathname === routes.SUBSCRIPTION}
+            link={{ href: Routes.SUBSCRIPTION }}
+            active={router.pathname === Routes.SUBSCRIPTION}
           />
         </SidenavSection>
         <SidenavSection>
@@ -79,8 +79,8 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
               Icon={Icons.Lock}
               title="Admin panel"
               minimized={sidenavMinimized}
-              link={{ href: routes.ADMIN_PANEL }}
-              active={router.pathname === routes.ADMIN_PANEL}
+              link={{ href: Routes.ADMIN_PANEL }}
+              active={router.pathname === Routes.ADMIN_PANEL}
             />
           )}
           <SidenavItem

@@ -1,6 +1,12 @@
 import { createReducer } from "@reduxjs/toolkit";
-import * as rpc from "@@rpc/shared";
-import { DocumentScoreTarget, DocumentStandardCompliance, DocumentType, ProjectSpecs, ProjectStatus } from "@@core";
+import * as rpc from "../../core/rpc/shared";
+import {
+  DocumentScoreTarget,
+  DocumentStandardCompliance,
+  DocumentType,
+  ProjectSpecs,
+  ProjectStatus,
+} from "../../core/project";
 import * as actions from "../actions";
 
 export interface ProjectState {

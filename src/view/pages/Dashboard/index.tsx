@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { formatPageTitle } from "@@core";
+import { formatPageTitle } from "@@core/base";
 import { Thunks } from "@@thunks";
 import { Button, ButtonKind, Icons } from "@@view/components";
 import { AppLayout } from "@@view/containers";

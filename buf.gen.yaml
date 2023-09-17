@@ -1,7 +1,7 @@
 version: v1
 plugins:
   - name: server
-    out: ./src/rpc/server/gen
+    out: ./src/core/rpc/server/gen
     strategy: all
     path: ./node_modules/ts-proto/protoc-gen-ts_proto
     opt:
@@ -11,7 +11,7 @@ plugins:
       - unrecognizedEnum=false
 
   - name: shared
-    out: ./src/rpc/shared/gen
+    out: ./src/core/rpc/shared/gen
     strategy: all
     path: ./node_modules/ts-proto/protoc-gen-ts_proto
     opt:

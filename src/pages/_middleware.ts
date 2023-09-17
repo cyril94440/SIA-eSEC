@@ -1,6 +1,6 @@
 import { withAuth } from "next-auth/middleware";
 import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
-import { getUserToken, UserRole } from "@@core";
+import { getUserToken, UserRole } from "@@core/auth";
 
 export default async function middleware(req: NextRequest, event: NextFetchEvent) {
   const token = await getUserToken({ req });

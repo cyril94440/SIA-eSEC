@@ -1,6 +1,12 @@
 import { FC, useState } from "react";
-import * as rpc from "@@rpc/shared";
-import { DocumentScoreTarget, DocumentSpecs, DocumentStandardCompliance, DocumentType, ProjectStatus } from "@@core";
+import * as rpc from "../../../../../core/rpc/shared";
+import {
+  DocumentScoreTarget,
+  DocumentSpecs,
+  DocumentStandardCompliance,
+  DocumentType,
+  ProjectStatus,
+} from "../../../../../core/project";
 import { ScrollController, TabControl } from "@@view/components";
 import { DocumentDesign, GeneralInfo, Header, Section, SecurityFeatures, Status } from "./components";
 import * as styles from "./styles";

@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { formatPageTitle } from "@@core";
+import { formatPageTitle } from "@@core/base";
 import { Icons } from "@@view/components";
 import * as styles from "./styles";
 import { SubmitHandler, useForm } from "react-hook-form";

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { db } from "lib/db";
 import { User } from "next-auth";
-import { getUserToken, UserRole } from "@@core";
+import { getUserToken, UserRole } from "@@core/auth";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<User[]>) {
   const token = await getUserToken({ req });

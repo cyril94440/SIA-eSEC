@@ -9,8 +9,8 @@ import {
   formatDocumentStandardComplianceString,
   formatDocumentTypeString,
   isDocumentMaterialValid,
-} from "@@core";
-import { SFMaterial } from "@@rpc/shared";
+} from "../../../../../../../core/project";
+import { SFMaterial } from "../../../../../../../core/rpc/shared";
 import { CardSelect, Icons, Select } from "@@view/components";
 import { Section } from "../Section";
 import { SectionItem } from "../SectionItem";

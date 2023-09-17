@@ -2,9 +2,9 @@ import { FC } from "react";
 import {
   formatDocumentSecurityFeatureLocationString,
   formatDocumentSecurityFeatureScoreCategoryString,
-  ret,
-} from "@@core";
-import * as rpc from "@@rpc/shared";
+} from "../../../../../core/project";
+import { ret } from "@@core/base";
+import * as rpc from "../../../../../core/rpc/shared";
 import { ScoreRadar } from "@@view/components";
 import { DownloadReport, Header, Icao, Overall, Panel, PanelGroup } from "./components";
 import * as styles from "./styles";

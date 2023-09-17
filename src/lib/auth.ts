@@ -2,7 +2,7 @@ import { compare } from "bcrypt";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { UserJWT } from "@@core";
+import { UserJWT } from "@@core/auth";
 import { db } from "lib/db";
 
 export const authOptions: NextAuthOptions = {

@@ -1,6 +1,6 @@
 import { FC } from "react";
-import * as rpc from "@@rpc/shared";
-import { DocumentSpecs } from "@@core";
+import * as rpc from "../../../../../../../core/rpc/shared";
+import { DocumentSpecs } from "../../../../../../../core/project";
 import { AccentController, CommentsWrap, RadioSelect, useAccentClient } from "@@view/components";
 import { Text } from "../Text";
 import { Section } from "../Section";

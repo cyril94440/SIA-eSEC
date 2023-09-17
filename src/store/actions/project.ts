@@ -1,6 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
-import * as rpc from "@@rpc/shared";
-import { DocumentScoreTarget, DocumentStandardCompliance, DocumentType, ProjectSpecs } from "@@core";
+import * as rpc from "../../core/rpc/shared";
+import { DocumentScoreTarget, DocumentStandardCompliance, DocumentType, ProjectSpecs } from "../../core/project";
 
 export const projectInitEmpty = createAction("projectInitEmpty");
 export const projectInitExisting = createAction<ProjectSpecs>("projectInitExisting");

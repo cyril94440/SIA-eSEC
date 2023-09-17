@@ -1,10 +1,10 @@
 import { FC, Fragment } from "react";
-import * as rpc from "@@rpc/shared";
+import * as rpc from "../../../../../../../core/rpc/shared";
 import {
   formatDocumentSecurityFeatureCategoryString,
   formatDocumentSecurityFeatureLocationString,
   DocumentSpecs,
-} from "@@core";
+} from "../../../../../../../core/project";
 import { getProjectActiveSecurityFeatures } from "@@store";
 import { AccentController, CommentsWrap, MultiSelect, useAccentClient } from "@@view/components";
 import { useAppSelector } from "@@view/hooks";

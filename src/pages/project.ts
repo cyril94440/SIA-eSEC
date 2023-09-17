@@ -1,5 +1,5 @@
 import { GetStaticProps } from "next";
-import * as rpc from "@@rpc/server";
+import * as rpc from "../core/rpc/server";
 import { Project, ProjectProps } from "@@view/pages";
 
 export const getStaticProps: GetStaticProps<ProjectProps> = async () => {

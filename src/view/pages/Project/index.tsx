@@ -1,8 +1,8 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useMemo, useState } from "react";
-import * as rpc from "@@rpc/shared";
-import { formatPageTitle } from "@@core";
+import * as rpc from "../../../core/rpc/shared";
+import { formatPageTitle } from "@@core/base";
 import { Thunks } from "@@thunks";
 import { AppLayout } from "@@view/containers";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";

@@ -1,4 +1,4 @@
-import { SecurityFeature } from "@@rpc/shared";
+import { SecurityFeature } from "../../core/rpc/shared";
 import { RootState } from "../reducers";
 
 export function getProjectActiveSecurityFeatures(state: RootState): SecurityFeature[] {

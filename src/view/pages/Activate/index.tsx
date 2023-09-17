@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { formatPageTitle } from "@@core";
+import { formatPageTitle } from "@@core/base";
 import * as styles from "./styles";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";

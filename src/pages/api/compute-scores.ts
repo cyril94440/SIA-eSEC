@@ -1,6 +1,6 @@
 import { NextApiHandler } from "next";
-import { ApiResult } from "@@core";
-import * as rpc from "@@rpc/server";
+import { ApiResult } from "@@core/api";
+import * as rpc from "../../core/rpc/server";
 
 const handler: NextApiHandler<ApiResult<rpc.ComputeScoreResponse>> = async (req, res) => {
   if (req.method !== "POST") {

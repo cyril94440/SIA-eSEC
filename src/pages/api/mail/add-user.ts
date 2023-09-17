@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 import { validateEmail } from "lib/utils/validate-email";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getToken } from "next-auth/jwt";
-import { getUserToken, MailContent, sendMail, UserJWT, UserRole } from "@@core";
+import { getUserToken, UserRole } from "@@core/auth";
+import { MailContent, sendMail } from "@@core/mail";
 
 type ResponseData = {
   message: string;

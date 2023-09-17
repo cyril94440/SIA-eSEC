@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { localStorage } from "@@core";
+import { localStorage } from "@@core/local-storage";
 import { actions, RootState } from "@@store";
 
 export const appToggleSidenav = createAsyncThunk<void, void>(

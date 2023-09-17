@@ -1,5 +1,5 @@
 import { sort } from "fast-sort";
-import * as rpc from "@@rpc/shared";
+import * as rpc from "../../../../../../core/rpc/shared";
 
 export interface DocumentSecurityFeatureTree {
   categoryNodes: DocumentSecurityFeatureCategoryNode[];
