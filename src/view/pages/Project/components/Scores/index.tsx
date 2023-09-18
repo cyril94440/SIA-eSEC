@@ -8,6 +8,7 @@ import { Rpc } from "@@core/rpc/shared";
 import { ScoreRadar } from "@@view/components";
 import { DownloadReport, Header, Icao, Overall, Panel, PanelGroup } from "./components";
 import * as styles from "./styles";
+import { CheckpointBar } from "view/components/CheckpointBar";
 
 export interface ScoresProps {
   value: Rpc.TNScore | null;
@@ -40,6 +41,12 @@ export const Scores: FC<ScoresProps> = (props) => {
     return <div css={styles.root}></div>;
   }
 
+  console.log("Scores : ", {
+    1: props.value.securityFeaturesScore!.locationScore!.score,
+    2: props.value.securityFeaturesScore!.protectionScore!.score,
+    3: props.value.securityFeaturesScore!.levelScore!.score,
+  });
+
   return (
     <div css={styles.root}>
       <Header />
@@ -50,17 +57,29 @@ export const Scores: FC<ScoresProps> = (props) => {
         <Panel>
           <Icao />
         </Panel>
-        <Panel square={true} title="Overall Security">
-          <ScoreRadar
+        <Panel title="Overall Security">
+          {/* <ScoreRadar
             labels={["Location", "Protection", "Level"]}
             values={[
               props.value.securityFeaturesScore!.locationScore!.score,
               props.value.securityFeaturesScore!.protectionScore!.score,
               props.value.securityFeaturesScore!.levelScore!.score,
             ]}
-          />
+          /> */}
+          <div css={styles.barContainer}>
+            <div css={styles.barTitle}>Location</div>
+            <CheckpointBar progression={props.value.securityFeaturesScore!.locationScore!.score * 10} />
+          </div>
+          <div css={styles.barContainer}>
+            <div css={styles.barTitle}>Protection</div>
+            <CheckpointBar progression={props.value.securityFeaturesScore!.protectionScore!.score * 10} />
+          </div>
+          <div css={styles.barContainer}>
+            <div css={styles.barTitle}>Level</div>
+            <CheckpointBar progression={props.value.securityFeaturesScore!.levelScore!.score * 10} />
+          </div>
         </Panel>
-        <Panel square={true} title="Distribution of features">
+        <Panel title="Distribution of features">
           {ret(() => {
             const items = allLocations
               .map((l) => ({
@@ -69,15 +88,24 @@ export const Scores: FC<ScoresProps> = (props) => {
               }))
               .filter(({ score }) => score !== null);
 
-            return (
-              <ScoreRadar
-                labels={items.map(({ value }) => formatDocumentSecurityFeatureLocationString(value))}
-                values={items.map(({ score }) => score)}
-              />
-            );
+            console.log("items in score radar: ", items);
+            return items.map(({ value, score }) => {
+              return (
+                <div key={Math.random()} css={styles.barContainer}>
+                  <div css={styles.barTitle}>{formatDocumentSecurityFeatureLocationString(value)}</div>
+                  <CheckpointBar progression={score * 10} />
+                </div>
+              );
+            });
+            // return (
+            //   <ScoreRadar
+            //     labels={items.map(({ value }) => formatDocumentSecurityFeatureLocationString(value))}
+            //     values={items.map(({ score }) => score)}
+            //   />
+            // );
           })}
         </Panel>
-        <Panel square={true} title="Protection against threats">
+        <Panel title="Protection against threats">
           {ret(() => {
             const items = allScoreCategories
               .map((c) => ({
@@ -86,15 +114,23 @@ export const Scores: FC<ScoresProps> = (props) => {
               }))
               .filter(({ score }) => score !== null);
 
-            return (
-              <ScoreRadar
-                labels={items.map(({ category }) => formatDocumentSecurityFeatureScoreCategoryString(category))}
-                values={items.map(({ score }) => score)}
-              />
-            );
+            return items.map(({ category, score }) => {
+              return (
+                <div key={Math.random()} css={styles.barContainer}>
+                  <div css={styles.barTitle}>{formatDocumentSecurityFeatureScoreCategoryString(category)}</div>
+                  <CheckpointBar progression={score * 10} />
+                </div>
+              );
+            });
+            // return (
+            //   <ScoreRadar
+            //     labels={items.map(({ category }) => formatDocumentSecurityFeatureScoreCategoryString(category))}
+            //     values={items.map(({ score }) => score)}
+            //   />
+            // );
           })}
         </Panel>
-        <Panel square={true} title="Security level coverage">
+        <Panel title="Security level coverage">
           {ret(() => {
             const items = allScoreCategories
               .map((c) => ({
@@ -103,12 +139,20 @@ export const Scores: FC<ScoresProps> = (props) => {
               }))
               .filter(({ score }) => score !== null);
 
-            return (
-              <ScoreRadar
-                labels={items.map(({ category }) => formatDocumentSecurityFeatureScoreCategoryString(category))}
-                values={items.map(({ score }) => score)}
-              />
-            );
+            return items.map(({ category, score }) => {
+              return (
+                <div key={Math.random()} css={styles.barContainer}>
+                  <div css={styles.barTitle}>{formatDocumentSecurityFeatureScoreCategoryString(category)}</div>
+                  <CheckpointBar progression={score * 10} />
+                </div>
+              );
+            });
+            // return (
+            //   <ScoreRadar
+            //     labels={items.map(({ category }) => formatDocumentSecurityFeatureScoreCategoryString(category))}
+            //     values={items.map(({ score }) => score)}
+            //   />
+            // );
           })}
         </Panel>
       </PanelGroup>

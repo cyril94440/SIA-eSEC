@@ -9,3 +9,11 @@ export const root = css`
   height: 100%;
   overflow-y: auto;
 `;
+
+export const barContainer = css`
+  margin-bottom: ${styles.getSize(3)};
+`;
+
+export const barTitle = css`
+  ${styles.fontMedium16}
+`;

@@ -1,20 +1,24 @@
 import { css } from "@emotion/react";
+import * as styles from "@@view/styles";
 
 const barHeight = 8; // Adjust as needed
-const barBackground = "grey";
-const checkpointSize = 18; // Adjust as needed
+const barBackground = styles.COLOR_NEUTRAL_95;
+const checkpointSize = 14; // Adjust as needed
 
 export const container = css`
   position: relative;
-  background-color: ${barBackground};
   height: ${barHeight}px;
   border-radius: ${barHeight / 2}px;
+  display: flex;
+  background-color: ${barBackground};
+  margin-top: ${styles.getSize(1)};
+  margin-bottom: ${styles.getSize(1)};
 `;
 
-export const progressBar = (color: string, progression: number) => css`
+export const progressBarSegment = (color: string, width: number) => css`
   background-color: ${color};
   height: ${barHeight}px;
-  width: ${progression}%;
+  width: ${width}%;
   border-radius: ${barHeight / 2}px;
   transition: width 200ms;
 `;
@@ -29,7 +33,7 @@ export const checkpoint = (color: string, isCheck: boolean, percentage: number) 
   height: ${checkpointSize}px;
   border-radius: 50%;
   transition: background-color 200ms;
-  box-shadow: 0 0 0 1px white; // This creates the "cut out" effect. Adjust the 3px value to control the border's thickness.
+  box-shadow: 0 0 0 1px white; // This creates the "cut out" effect
 `;
 
 export const checkpointTooltip = css`
