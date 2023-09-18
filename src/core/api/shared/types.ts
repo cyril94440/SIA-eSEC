@@ -19,3 +19,7 @@ export interface ProjectFileDecodeParams {
 export interface ProjectFileDecodeResult {
   specs: ProjectSpecs;
 }
+
+export interface ResetPasswordResult {
+  message: string;
+}
