@@ -9,6 +9,8 @@ export const root = css`
   white-space: nowrap;
   transition: background 200ms;
   border-radius: ${styles.getSize(1 / 2)};
+  cursor: pointer;
+
   &:disabled {
     cursor: not-allowed;
   }
