@@ -5,6 +5,10 @@ import { Icons } from "../Icons";
 
 interface Props {
   children: ReactNode;
+  open?: boolean;
+  fullWidth?: boolean;
+  background?: "default" | "white";
+  onOpenChange?: (value: boolean) => void;
 }
 
 type DialogChild = ReactElement<Props & { children?: ReactNode }>;
@@ -16,13 +20,13 @@ type DialogComponents = {
   Body: FC<{ children: ReactNode }>;
 };
 
-const Dialog: FC<Props> & DialogComponents = ({ children }) => {
+export const Dialog: FC<Props> & DialogComponents = (props) => {
   let trigger = null;
   let title = null;
   let description = null;
   let body = null;
 
-  React.Children.forEach(children, (child) => {
+  React.Children.forEach(props.children, (child) => {
     if (React.isValidElement<DialogChild>(child) && typeof child.type !== "string") {
       const component = child.type as React.ComponentType & { displayName?: string };
 
@@ -46,16 +50,22 @@ const Dialog: FC<Props> & DialogComponents = ({ children }) => {
   });
 
   return (
-    <RadixDialog.Root>
+    <RadixDialog.Root open={props.open} onOpenChange={props.onOpenChange}>
       {trigger}
       <RadixDialog.Portal>
-        <RadixDialog.Overlay css={styles.DialogOverlay} />
-        <RadixDialog.Content css={styles.DialogContent}>
+        <RadixDialog.Overlay css={styles.dialogOverlay} />
+        <RadixDialog.Content
+          css={[
+            styles.dialogContent,
+            props.fullWidth && styles.dialogContentFullWidth,
+            props.background === "white" && styles.dialogContentBackgroundWhite,
+          ]}
+        >
           {title}
           {description}
           {body}
           <RadixDialog.Close asChild>
-            <button aria-label="Close" css={styles.IconButton}>
+            <button aria-label="Close" css={styles.iconButton}>
               <Icons.Close />
             </button>
           </RadixDialog.Close>
@@ -64,30 +74,33 @@ const Dialog: FC<Props> & DialogComponents = ({ children }) => {
     </RadixDialog.Root>
   );
 };
+
 Dialog.displayName = "Dialog";
 
 // Trigger
 Dialog.Trigger = function ({ children }) {
   return <RadixDialog.Trigger asChild>{children}</RadixDialog.Trigger>;
 };
+
 Dialog.Trigger.displayName = "Dialog.Trigger";
 
 // Title
 Dialog.Title = function ({ children }) {
-  return <RadixDialog.Title css={styles.DialogTitle}>{children}</RadixDialog.Title>;
+  return <RadixDialog.Title css={styles.dialogTitle}>{children}</RadixDialog.Title>;
 };
+
 Dialog.Title.displayName = "Dialog.Title";
 
 // Description
 Dialog.Description = function ({ children }) {
-  return <RadixDialog.Description css={styles.DialogDescription}>{children}</RadixDialog.Description>;
+  return <RadixDialog.Description css={styles.dialogDescription}>{children}</RadixDialog.Description>;
 };
+
 Dialog.Description.displayName = "Dialog.Description";
 
 // Body
 Dialog.Body = function ({ children }) {
   return <div>{children}</div>;
 };
-Dialog.Body.displayName = "Dialog.Body";
 
-export default Dialog;
+Dialog.Body.displayName = "Dialog.Body";

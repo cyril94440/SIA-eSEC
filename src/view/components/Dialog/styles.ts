@@ -21,14 +21,14 @@ export const contentShow = keyframes`
  }
 `;
 
-export const DialogOverlay = css`
+export const dialogOverlay = css`
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   inset: 0;
   animation: ${overlayShow} 350ms cubic-bezier(0.16, 1, 0.3, 1);
 `;
 
-export const DialogContent = css`
+export const dialogContent = css`
   background-color: ${styles.COLOR_NEUTRAL_BLUE};
   border-radius: 6px;
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
@@ -36,8 +36,6 @@ export const DialogContent = css`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90vw;
-  max-width: ${styles.getSize(125)};
   max-height: ${styles.getSize(88)};
   padding: ${styles.getSize(4)};
   animation: ${contentShow} 350ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -47,12 +45,21 @@ export const DialogContent = css`
   }
 `;
 
-export const DialogTitle = css`
+export const dialogContentFullWidth = css`
+  width: 90vw;
+  max-width: ${styles.getSize(125)};
+`;
+
+export const dialogContentBackgroundWhite = css`
+  background-color: white;
+`;
+
+export const dialogTitle = css`
   margin: 0;
   ${styles.fontMedium40};
 `;
 
-export const DialogDescription = css`
+export const dialogDescription = css`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -61,7 +68,7 @@ export const DialogDescription = css`
   ${styles.fontRegular14};
 `;
 
-export const IconButton = css`
+export const iconButton = css`
   border: none;
   background-color: transparent;
   height: 25px;

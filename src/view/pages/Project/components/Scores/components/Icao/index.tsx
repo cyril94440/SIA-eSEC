@@ -1,7 +1,7 @@
 import { FC } from "react";
+import { Dialog } from "@@view/components";
 import * as styles from "./styles";
 import { FeatureItem } from "./FeatureItem";
-import Dialog from "view/components/Dialog";
 
 export interface IcaoProps {}
 
@@ -77,7 +77,7 @@ export const Icao: FC<IcaoProps> = () => {
       <div css={styles.status}>
         ICAO: <span css={styles.statusValue}>Not complete</span>
       </div>
-      <Dialog>
+      <Dialog fullWidth={true}>
         <Dialog.Trigger>
           <div css={styles.missingFeatures}>Missing features</div>
         </Dialog.Trigger>

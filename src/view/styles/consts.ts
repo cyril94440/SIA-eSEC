@@ -18,9 +18,10 @@ export const COLOR_SUCCESS_30 = "#359405";
 export const COLOR_SUCCESS_40 = "#47C806";
 export const COLOR_SUCCESS_90 = "#DEFDCE";
 
+export const COLOR_BLACK = "#041026";
+export const COLOR_WHITE = "#FFFFFF";
 export const COLOR_GREY_BLUE = "#274E68";
 export const COLOR_NEUTRAL_BLUE = "#F7FAFC";
-export const COLOR_WHITE = "#FFFFFF";
 
 export const COLOR_RED_90 = "#D34E4E";
 export const COLOR_RED = "#EB5757";

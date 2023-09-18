@@ -13,6 +13,4 @@ export * from "./projectChangeSecurityFeatures";
 export * from "./projectDownloadReport";
 export * from "./projectLoad";
 export * from "./projectRename";
-export * from "./projectSave";
 export * from "./projectUpdateDocumentScore";
-export * from "./projectViewEncryptionInfo";

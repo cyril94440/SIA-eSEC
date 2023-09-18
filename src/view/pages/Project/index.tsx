@@ -1,9 +1,15 @@
+import FileSaver from "file-saver";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useMemo, useState } from "react";
+import { useStore } from "react-redux";
+import { Api } from "@@core/api/client";
 import { formatPageTitle } from "@@core/base";
+import { ProjectFile } from "@@core/project-file";
 import { Rpc } from "@@core/rpc/shared";
+import { RootState } from "@@store";
 import { Thunks } from "@@thunks";
+import { ProjectFileDialog } from "@@view/components";
 import { AppLayout } from "@@view/containers";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import { Content, Scores } from "./components";
@@ -14,11 +20,13 @@ export interface ProjectProps {
 }
 
 export const Project: NextPage<ProjectProps> = (props) => {
+  const store = useStore();
   const dispatch = useAppDispatch();
   const title = useAppSelector((state) => state.project.specs.title);
   const status = useAppSelector((state) => state.project.specs.status);
   const score = useAppSelector((state) => state.project.score);
   const documentSpecs = useAppSelector((state) => state.project.specs.document);
+  const [saveDialogOpen, setSaveDialogOpen] = useState(false);
   const [scoresCollapsed, setScoresCollapsed] = useState(false);
 
   const designQuestions = useMemo(
@@ -30,6 +38,21 @@ export const Project: NextPage<ProjectProps> = (props) => {
     () => JSON.parse(props.securityFeaturesJson) as Rpc.SecurityFeature[],
     [props.securityFeaturesJson]
   );
+
+  const handleSaveProjectFile = async (password: string): Promise<string | null> => {
+    const state = store.getState() as RootState;
+    const specs = state.project.specs;
+    const res = await Api.projectFileEncode({ specs, password });
+
+    if (!res.success) {
+      return res.error;
+    }
+
+    const blob = new Blob([res.data.content], { type: "text/plain; charset=utf-8" });
+    const filename = `${specs.title}.${ProjectFile.FILE_EXT}`;
+    FileSaver.saveAs(blob, filename);
+    return null;
+  };
 
   useEffect(() => {
     dispatch(Thunks.projectLoad());
@@ -69,10 +92,10 @@ export const Project: NextPage<ProjectProps> = (props) => {
             dispatch(Thunks.projectRename());
           }}
           onEncryptionInfoClick={() => {
-            dispatch(Thunks.projectViewEncryptionInfo());
+            // TODO:
           }}
           onSaveClick={() => {
-            dispatch(Thunks.projectSave());
+            setSaveDialogOpen(true);
           }}
           onChangeDocumentType={(value) => {
             dispatch(Thunks.projectChangeDocumentType(value));
@@ -94,6 +117,12 @@ export const Project: NextPage<ProjectProps> = (props) => {
           }}
         />
       </AppLayout>
+      <ProjectFileDialog
+        open={saveDialogOpen}
+        mode={"save"}
+        handler={handleSaveProjectFile}
+        onOpenChange={setSaveDialogOpen}
+      />
     </>
   );
 };

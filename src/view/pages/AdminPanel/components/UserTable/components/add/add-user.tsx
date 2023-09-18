@@ -1,11 +1,10 @@
-import React from "react";
-import Dialog from "view/components/Dialog";
-import * as styles from "./add-user-styles";
-import { SubmitHandler, useForm } from "react-hook-form";
-import * as buttonStyles from "../../../../../../components/Button/styles";
-import { Icons } from "view/components/Icons";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { Dialog, Icons } from "@@view/components";
+import * as styles from "./add-user-styles";
+import * as buttonStyles from "../../../../../../components/Button/styles"; // TODO: remove it (encapsulation problem)
 
 type AddUserInputs = {
   email: string;
@@ -22,7 +21,7 @@ export default function AddUser() {
     formState: { errors },
   } = useForm<AddUserInputs>();
 
-  const [submitting, setSubmitting] = React.useState<SubmitState>("idle");
+  const [submitting, setSubmitting] = useState<SubmitState>("idle");
   const router = useRouter();
 
   const onSubmit: SubmitHandler<AddUserInputs> = async (data) => {
@@ -55,7 +54,7 @@ export default function AddUser() {
   };
 
   return (
-    <Dialog>
+    <Dialog fullWidth={true}>
       <Dialog.Trigger>
         <div css={styles.newUser}>New User</div>
       </Dialog.Trigger>
