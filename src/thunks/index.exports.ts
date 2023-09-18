@@ -10,7 +10,6 @@ export * from "./projectChangeDocumentSecurityFeatures";
 export * from "./projectChangeDocumentStandardCompliance";
 export * from "./projectChangeDocumentType";
 export * from "./projectChangeSecurityFeatures";
-export * from "./projectDownloadReport";
 export * from "./projectLoad";
 export * from "./projectRename";
 export * from "./projectUpdateDocumentScore";

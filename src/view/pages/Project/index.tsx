@@ -7,12 +7,14 @@ import { Api } from "@@core/api/client";
 import { formatPageTitle } from "@@core/base";
 import { ProjectFile } from "@@core/project-file";
 import { Rpc } from "@@core/rpc/shared";
-import { RootState } from "@@store";
+import { RootState, getProjectActiveSecurityFeatures } from "@@store";
 import { Thunks } from "@@thunks";
 import { ProjectFileDialog } from "@@view/components";
 import { AppLayout } from "@@view/containers";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import { Content, Scores } from "./components";
+import { generatePdfBlob } from "./utils/generate-pdf-blob";
+import { buildDocumentSecurityFeatureTree } from "./components/Content/utils";
 
 export interface ProjectProps {
   designQuestionsJson: string;
@@ -28,6 +30,8 @@ export const Project: NextPage<ProjectProps> = (props) => {
   const documentSpecs = useAppSelector((state) => state.project.specs.document);
   const [saveDialogOpen, setSaveDialogOpen] = useState(false);
   const [scoresCollapsed, setScoresCollapsed] = useState(false);
+  const activeFeaturesInfo = useAppSelector((state) => getProjectActiveSecurityFeatures(state));
+  const documentSecurityFeaturesTree = buildDocumentSecurityFeatureTree(activeFeaturesInfo);
 
   const designQuestions = useMemo(
     () => JSON.parse(props.designQuestionsJson) as Rpc.DocumentDesignQuestion[],
@@ -62,21 +66,26 @@ export const Project: NextPage<ProjectProps> = (props) => {
     dispatch(Thunks.projectChangeSecurityFeatures(securityFeatures));
   }, [dispatch, securityFeatures]);
 
+  const handleDownloadPdf = async () => {
+    const blob = await generatePdfBlob(
+      title,
+      status,
+      score,
+      documentSpecs,
+      designQuestions,
+      securityFeatures,
+      documentSecurityFeaturesTree
+    );
+    FileSaver.saveAs(blob, `${title}.pdf`);
+  };
+
   return (
     <>
       <Head>
         <title>{formatPageTitle(title)}</title>
       </Head>
       <AppLayout
-        sidebar={
-          <Scores
-            value={score}
-            collapsed={scoresCollapsed}
-            onDownloadReportClick={() => {
-              dispatch(Thunks.projectDownloadReport());
-            }}
-          />
-        }
+        sidebar={<Scores value={score} collapsed={scoresCollapsed} onDownloadReportClick={handleDownloadPdf} />}
         sidebarCollapsed={scoresCollapsed}
         onToggleSidebar={(collapsed) => {
           setScoresCollapsed(collapsed);
