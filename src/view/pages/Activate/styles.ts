@@ -79,7 +79,6 @@ const spin = keyframes`
 export const spinnerContainer = css`
   position: relative;
   margin-top: ${styles.getSize(8)};
-  background-color: red;
   width: fit-content;
   height: fit-content;
 `;

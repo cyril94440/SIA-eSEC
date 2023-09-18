@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Icons } from "@@view/components";
 import * as buttonStyles from "../../components/Button/styles";
+import { Api } from "@@core/api/client";
 
 type ResetPasswordInputs = {
   oldPassword: string;
@@ -32,21 +33,18 @@ export const ResetPassword: NextPage = () => {
   const onSubmit: SubmitHandler<ResetPasswordInputs> = async (data) => {
     setSubmitting("submitting");
     try {
-      const response = await fetch("/api/auth/reset-password", {
-        body: JSON.stringify({
-          token: token as string,
-          oldPassword: data.oldPassword,
-          password: data.password,
-        }),
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const res = await Api.authResetPassword({
+        token: token as string,
+        oldPassword: data.oldPassword,
+        password: data.password,
       });
 
-      if (!response.ok) {
-        throw new Error();
+      if (!res.success) {
+        toast.error(res.error);
+        setSubmitting("idle");
+        return;
       }
+
       setSubmitting("success");
       toast.success("Your password has been reset successfully! Redirecting to dashboard...");
       setTimeout(() => {

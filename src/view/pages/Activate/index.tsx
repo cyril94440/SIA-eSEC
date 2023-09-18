@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Icons } from "@@view/components";
 import * as buttonStyles from "../../components/Button/styles";
+import { Api } from "@@core/api/client";
 
 type SignUpInputs = {
   username: string;
@@ -48,32 +49,27 @@ export const Activate: NextPage = () => {
   const onSubmit: SubmitHandler<SignUpInputs> = async (data) => {
     setSubmitting("submitting");
     try {
-      await fetch("/api/auth/sign-up", {
-        body: JSON.stringify({
-          token: token as string,
-          email: tokenPayload?.email,
-          role: tokenPayload?.role,
-          username: data.username,
-          password: data.password,
-          confirmPassword: data.confirmPassword,
-        }),
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => {
-          if (res.status === 200) return res.json();
-          throw new Error();
-        })
-        .then(() => {
-          setSubmitting("success");
-          toast.success("Signed up successfully. Redirecting you to login page...");
-          setTimeout(() => {
-            router.push("/login");
-          }, 1000);
-          return;
-        });
+      const res = await Api.authSignup({
+        token: token as string,
+        email: tokenPayload?.email,
+        role: tokenPayload?.role,
+        username: data.username,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+      });
+
+      if (!res.success) {
+        toast.error(res.error);
+        setSubmitting("idle");
+        return;
+      }
+
+      setSubmitting("success");
+      toast.success("Signed up successfully. Redirecting you to login page...");
+      setTimeout(() => {
+        router.push("/login");
+      }, 1000);
+      return;
     } catch (error) {
       setSubmitting("idle");
       console.log("Error : ", error);
