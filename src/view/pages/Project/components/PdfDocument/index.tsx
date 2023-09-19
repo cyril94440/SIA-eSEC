@@ -5,6 +5,9 @@ import {
   ProjectStatus,
   formatDocumentMaterialString,
   formatDocumentScoreTargetString,
+  formatDocumentSecurityFeatureCategoryString,
+  formatDocumentSecurityFeatureLocationString,
+  formatDocumentSecurityFeatureScoreCategoryString,
   formatDocumentStandardComplianceString,
   formatDocumentTypeString,
   formatProjectStatusString,
@@ -12,6 +15,7 @@ import {
 import { FC } from "react";
 import { Rpc } from "@@core/rpc/shared";
 import { DocumentSecurityFeatureTree } from "../Content/utils";
+import { allLocations, allScoreCategories } from "../Scores";
 
 interface PdfDocumentProps {
   title: string;
@@ -24,33 +28,58 @@ interface PdfDocumentProps {
 }
 
 export const PdfDocument: FC<PdfDocumentProps> = (props) => {
-  console.log("security features id:", props.documentSpecs.securityFeatureIds);
-  console.log("all security features: ", props.securityFeatures);
+  let currentCategory: number | null = null;
+  let currentLocation: number | null = null;
 
-  props.documentSecurityFeaturesTree.categoryNodes.map((node) => {
-    console.log("node", node);
-  });
+  const sortedFeatures = props.securityFeatures
+    .filter((feature) => props.documentSpecs.securityFeatureIds.includes(feature.id))
+    .sort((a, b) => {
+      if (a.category === b.category) {
+        return a.location - b.location;
+      }
+      return a.category - b.category;
+    });
+
+  const disitrubtionOfFeaturesItems = allLocations
+    .map((l) => ({
+      value: l.value,
+      score: props.score!.securityFeaturesScore!.locationScore!.scorePerLoc[l.value] ?? null,
+    }))
+    .filter(({ score }) => score !== null);
+
+  const protectionAgainstThreatsItems = allScoreCategories
+    .map((c) => ({
+      category: c.value,
+      score: props.score!.securityFeaturesScore!.protectionScore!.categoryScores[c.value]?.score ?? null,
+    }))
+    .filter(({ score }) => score !== null);
+
+  const securityLevelCoverage = allScoreCategories
+    .map((c) => ({
+      category: c.value,
+      score: props.score!.securityFeaturesScore!.levelScore!.categoryScores[c.value]?.score ?? null,
+    }))
+    .filter(({ score }) => score !== null);
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text style={styles.title}>{props.title}</Text>
-          <Text style={styles.status}>Status: {formatProjectStatusString(props.status)}</Text>
-        </View>
-        <View style={styles.splitSection}>
-          <View style={styles.sectionChild}>
-            <Text style={styles.splitTitle}>
-              Score:{" "}
-              <Text style={styles.inlineScore}>
-                {props.score?.totalScore ? Math.round((props.score?.totalScore + Number.EPSILON) * 100) / 10 : 0} %
-              </Text>
-            </Text>
+          <View style={[styles.noGap, styles.littleMarginBottom]}>
+            <Text style={styles.title}>{props.title}</Text>
+            <Text style={styles.status}>Status: {formatProjectStatusString(props.status)}</Text>
           </View>
-          <View style={styles.sectionChild}>
-            <Text style={styles.splitTitle}>
-              ICAO: <Text style={styles.inlineIcao}>Not complete</Text>
-            </Text>
+          <View style={styles.noGap}>
+            <Text style={styles.splitTitle}>Total score</Text>
+            <CheckpointBar
+              progression={
+                props.score?.totalScore ? Math.round((props.score?.totalScore + Number.EPSILON) * 100) / 10 : 0
+              }
+            />
           </View>
+          <Text style={styles.splitTitle}>
+            ICAO: <Text style={styles.inlineIcao}>Not complete</Text>
+          </Text>
         </View>
         <View style={styles.section}>
           <Text style={styles.subtitle}>General Info</Text>
@@ -95,22 +124,97 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
         {props.documentSpecs.securityFeatureIds.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.subtitle}>Security features</Text>
-            <View style={styles.questionContainer}>
-              {props.securityFeatures
-                .filter((feature) => props.documentSpecs.securityFeatureIds.includes(feature.id))
-                .map((feature) => {
-                  return (
-                    <View style={styles.noGap} key={feature.id} wrap={false}>
-                      {1 + 1 === 3 && (
-                        <Text style={styles.question}>TODO: retrieve the title of the security question</Text>
-                      )}
-                      <Text style={styles.answer}>{feature.title}</Text>
-                    </View>
-                  );
-                })}
+            <View>
+              {sortedFeatures.map((feature) => {
+                const isNewCategory = currentCategory !== feature.category;
+                currentCategory = feature.category;
+                const isNewLocation = currentLocation !== feature.location;
+                currentLocation = feature.location;
+                return (
+                  <View style={styles.noGap} key={feature.id} wrap={false}>
+                    {isNewCategory && (
+                      <Text style={[styles.littleMarginBottom, styles.subtitle, styles.bigMarginTop]}>
+                        {formatDocumentSecurityFeatureCategoryString(feature.category)}
+                      </Text>
+                    )}
+                    {isNewLocation && (
+                      <Text style={[styles.marginTop, styles.question]}>
+                        Q: {formatDocumentSecurityFeatureLocationString(feature.location)}
+                      </Text>
+                    )}
+                    <Text style={[styles.littleMarginBottom, styles.securityAnswer]}>- {feature.title}</Text>
+                  </View>
+                );
+              })}
             </View>
           </View>
         )}
+        <View style={styles.section}>
+          <Text style={styles.subtitle}>Graph - Overall Security</Text>
+          <View style={styles.littleMarginBottom}>
+            <Text style={styles.barTitle}>Location</Text>
+            <CheckpointBar
+              progression={
+                props.score?.securityFeaturesScore?.locationScore?.score
+                  ? props.score?.securityFeaturesScore?.locationScore?.score * 10
+                  : 0
+              }
+            />
+          </View>
+          <View style={styles.littleMarginBottom}>
+            <Text style={styles.barTitle}>Protection</Text>
+            <CheckpointBar
+              progression={
+                props.score?.securityFeaturesScore?.protectionScore?.score
+                  ? props.score?.securityFeaturesScore?.protectionScore?.score * 10
+                  : 0
+              }
+            />
+          </View>
+          <View style={styles.littleMarginBottom}>
+            <Text style={styles.barTitle}>Level</Text>
+            <CheckpointBar
+              progression={
+                props.score?.securityFeaturesScore?.levelScore?.score
+                  ? props.score?.securityFeaturesScore?.levelScore?.score * 10
+                  : 0
+              }
+            />
+          </View>
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.subtitle}>Graph - Disitribution of features</Text>
+          {disitrubtionOfFeaturesItems.map(({ value, score }) => {
+            return (
+              <View key={Math.random()} style={styles.littleMarginBottom} wrap={false}>
+                <Text style={styles.barTitle}>{formatDocumentSecurityFeatureLocationString(value)}</Text>
+                <CheckpointBar progression={score * 10} />
+              </View>
+            );
+          })}
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.subtitle}>Graph - Protection against threats</Text>
+          {protectionAgainstThreatsItems.map(({ category, score }) => {
+            return (
+              <View key={Math.random()} style={styles.littleMarginBottom} wrap={false}>
+                <Text style={styles.barTitle}>{formatDocumentSecurityFeatureScoreCategoryString(category)}</Text>
+                <CheckpointBar progression={score * 10} />
+              </View>
+            );
+          })}
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.subtitle}>Graph - Security level coverage</Text>
+          {securityLevelCoverage.map(({ category, score }) => {
+            return (
+              <View key={Math.random()} style={styles.littleMarginBottom} wrap={false}>
+                <Text style={styles.barTitle}>{formatDocumentSecurityFeatureScoreCategoryString(category)}</Text>
+                <CheckpointBar progression={score * 10} />
+              </View>
+            );
+          })}
+        </View>
       </Page>
     </Document>
   );
@@ -187,4 +291,55 @@ const styles = StyleSheet.create({
     fontSize: globalStyles.FONT_MEDIUM_10_CAPS_SIZE,
     color: globalStyles.COLOR_PRIMARY_20,
   },
+  securityAnswer: {
+    fontSize: globalStyles.FONT_MEDIUM_10_CAPS_SIZE,
+    color: globalStyles.COLOR_PRIMARY_20,
+    gap: 0,
+    margin: 0,
+  },
+  bigMarginTop: {
+    marginTop: globalStyles.getSize(2),
+  },
+  marginTop: {
+    marginTop: globalStyles.getSize(1),
+  },
+  littleMarginBottom: {
+    marginBottom: globalStyles.getSize(1 / 2),
+  },
+  barTitle: {
+    fontSize: globalStyles.FONT_MEDIUM_10_CAPS_SIZE,
+    fontWeight: globalStyles.FONT_MEDIUM_10_CAPS_WEIGHT,
+    lineHeight: globalStyles.FONT_MEDIUM_10_CAPS_LINE_HEIGHT,
+  },
 });
+
+const CheckpointBar = ({ progression }: { progression: number }) => {
+  const barHeight = 6; // Adjust as needed
+  const barBackground = globalStyles.COLOR_NEUTRAL_95;
+
+  const redWidth = Math.min(progression, 34);
+  const yellowWidth = Math.max(0, Math.min(progression - 32, 32));
+  const greenWidth = Math.max(0, progression - 66);
+
+  const containerStyle = {
+    height: `${barHeight}px`,
+    backgroundColor: barBackground,
+    marginTop: globalStyles.getSize(1),
+    marginBottom: globalStyles.getSize(1),
+    maxWidth: "200px",
+  };
+
+  const progressBarSegmentStyle = (color: string, width: number) => ({
+    backgroundColor: color,
+    height: `${barHeight}px`,
+    width: `${width}%`,
+  });
+
+  return (
+    <View style={{ display: "flex", flexDirection: "row", ...containerStyle }}>
+      <View style={progressBarSegmentStyle(globalStyles.COLOR_RED, redWidth)}></View>
+      <View style={progressBarSegmentStyle(globalStyles.COLOR_YELLOW, yellowWidth)}></View>
+      <View style={progressBarSegmentStyle(globalStyles.COLOR_SUCCESS_40, greenWidth)}></View>
+    </View>
+  );
+};

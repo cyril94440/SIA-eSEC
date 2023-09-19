@@ -16,7 +16,7 @@ export interface ScoresProps {
   onDownloadReportClick: () => void;
 }
 
-const allLocations = [
+export const allLocations = [
   { value: Rpc.SFLocation.DocumentBody },
   { value: Rpc.SFLocation.InksBackground },
   { value: Rpc.SFLocation.InksTechPersonalization },
@@ -24,7 +24,7 @@ const allLocations = [
   { value: Rpc.SFLocation.SFPersonalization },
 ];
 
-const allScoreCategories = [
+export const allScoreCategories = [
   { value: Rpc.SFScoreCategory.ABC },
   { value: Rpc.SFScoreCategory.Alteration },
   { value: Rpc.SFScoreCategory.Counterfeit },

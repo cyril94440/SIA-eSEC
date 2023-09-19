@@ -1,6 +1,6 @@
 import { pdf } from "@react-pdf/renderer";
 import { PdfDocument } from "../components/PdfDocument";
-import { DocumentSpecs, ProjectSpecs, ProjectStatus } from "@@core/project";
+import { DocumentSpecs, ProjectStatus } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
 import { DocumentSecurityFeatureTree } from "../components/Content/utils";
 export const generatePdfBlob = async (
