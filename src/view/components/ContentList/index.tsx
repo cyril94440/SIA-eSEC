@@ -14,13 +14,22 @@ export interface ContentListItem {
 export const ContentList: FC<ContentListProps> = (props) => {
   const activeItemIndex = props.items.findIndex((item) => item.key === props.activeItemKey);
   return (
-    <div css={styles.root} style={{ transform: `translate(${activeItemIndex * -100}%)` }}>
+    <div
+      css={styles.root}
+      style={{
+        transform: `translate(${activeItemIndex * -100}%)`,
+      }}
+    >
       {props.items.map((item, itemIndex) => {
         return (
           <div
             key={item.key}
             css={[styles.item, item.key === props.activeItemKey && styles.itemActive]}
-            style={{ left: `${itemIndex * 100}%` }}
+            style={{
+              // without this, a horizontal bar appears because the "items" are invisible but still rendered
+              display: item.key !== props.activeItemKey ? "none" : undefined,
+              left: `${itemIndex * 100}%`,
+            }}
           >
             {item.value()}
           </div>
