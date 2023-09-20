@@ -391,7 +391,7 @@ type FilteredResult = {
   missingFeatures: Rpc.IcaoSecurityFeature[];
 }[];
 
-export const filterMissingFeatures = (
+const filterMissingFeatures = (
   icaoData: {
     icaoSecurityFeatures: Rpc.IcaoSecurityFeature[];
     icaoSecurityFeatureCategories: Rpc.IcaoSecurityFeatureCategory[];

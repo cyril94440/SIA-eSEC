@@ -15,7 +15,6 @@ import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import { Content, Scores } from "./components";
 import { generatePdfBlob } from "./utils/generate-pdf-blob";
 import { buildDocumentSecurityFeatureTree } from "./components/Content/utils";
-import { filterMissingFeatures } from "./components/PdfDocument";
 
 export interface ProjectProps {
   designQuestionsJson: string;
