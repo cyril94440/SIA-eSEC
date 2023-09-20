@@ -13,8 +13,6 @@ export const projectUpdateDocumentScore = createAsyncThunk<void, void>(
       securityFeaturesIDs: getProjectActiveSecurityFeatureIds(state),
     });
 
-    console.log("scoreResult", scoreResult);
-
     if (!scoreResult.success) {
       console.log(scoreResult.error);
       return;

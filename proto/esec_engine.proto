@@ -1,18 +1,18 @@
 syntax = "proto3";
 
 message GetDocumentDesignQuestionsRequest {}
-message GetDocumentDesignQuestionsResponse{
+message GetDocumentDesignQuestionsResponse {
     repeated DocumentDesignQuestion questions = 1;
 }
 
-message DocumentDesignQuestion{
+message DocumentDesignQuestion {
     int32 id = 1;
     string question_title = 2;
     optional string details = 3;
     repeated DocumentDesignAnswer answers = 4;
 }
 
-message DocumentDesignAnswer{
+message DocumentDesignAnswer {
     int32 id = 1;
     string answer_title = 2;
     float score = 3;
@@ -25,7 +25,7 @@ message GetSecurityFeaturesResponse{
     repeated SecurityFeature security_features = 1;
 }
 
-message SecurityFeature{
+message SecurityFeature {
     int32 id = 1;
     SFLocation location = 2;
     SFCategory category = 3;
@@ -35,29 +35,29 @@ message SecurityFeature{
     repeated SFScore scores = 7;
 }
 
-message SFScore{
+message SFScore {
     SFType type = 1;
     SFCategory category = 2;
     optional SFScoreSubCategory sub_category = 3;
     float score = 4;
 }
 
-enum SFLocation{
+enum SFLocation {
     SFPersonalization = 0;
 	InksTechPersonalization = 1;
-	DocumentBody = 2;
+	SFDocumentBody = 2;
 	InksBackground = 3;
 	SecurityDesign = 4;
 }
 
-enum SFCategory{
+enum SFCategory {
     Personalization = 0;
 	Structure = 1;
 	Printed = 2;
 	Material = 3;
 }
 
-enum SFMaterial{
+enum SFMaterial {
     Paper = 0;
     Plastic = 1;
 }
@@ -83,9 +83,11 @@ enum SFScoreCategory {
 enum SFScoreSubCategory {
 	LimitedMatTech = 0;
 	Reproduction = 1;
-	Other = 2;
-	Photo = 3;
-	Data = 4;
+
+	Photo = 2;
+	Data = 3;
+	DocumentBody = 4;
+
 	SpecialPersoTech = 5;
 	Tracking = 6;
 
@@ -94,8 +96,38 @@ enum SFScoreSubCategory {
 	Tilt = 9;
 }
 
+message GetIcaoDataRequest {}
+message GetIcaoDataResponse {
+    repeated IcaoSecurityFeature securityFeatures = 3;
+    repeated IcaoSecurityFeatureCategory securityFeatureCategories = 1;
+    repeated IcaoSecurityFeatureSubcategory securityFeatureSubcategories = 2;
+}
+
+enum IcaoSecurityFeatureType {
+    Basic = 0;
+    Additional = 1;
+}
+
+message IcaoSecurityFeature {
+    string code = 1;
+    string title = 2;
+    IcaoSecurityFeatureType type = 3;
+    string subcategoryCode = 4;
+    repeated int32 relatedEsecSecurityFeatureIds = 5;
+}
+
+message IcaoSecurityFeatureCategory {
+    string code = 1;
+    string title = 2;
+}
+
+message IcaoSecurityFeatureSubcategory {
+    string code = 1;
+    string title = 2;
+}
 
 service DatabaseService{
-    rpc GetDocumentDesignQuestions (GetDocumentDesignQuestionsRequest) returns (GetDocumentDesignQuestionsResponse){};
-    rpc GetSecurityFeatures (GetSecurityFeaturesRequest) returns (GetSecurityFeaturesResponse){};
+    rpc GetDocumentDesignQuestions (GetDocumentDesignQuestionsRequest) returns (GetDocumentDesignQuestionsResponse);
+    rpc GetSecurityFeatures (GetSecurityFeaturesRequest) returns (GetSecurityFeaturesResponse);
+    rpc GetIcaoData (GetIcaoDataRequest) returns (GetIcaoDataResponse);
 }

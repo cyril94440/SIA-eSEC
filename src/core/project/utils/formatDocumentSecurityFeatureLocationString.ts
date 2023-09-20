@@ -2,7 +2,7 @@ import { Rpc } from "@@core/rpc/shared";
 
 export function formatDocumentSecurityFeatureLocationString(value: Rpc.SFLocation): string {
   switch (value) {
-    case Rpc.SFLocation.DocumentBody:
+    case Rpc.SFLocation.SFDocumentBody:
       return "Document Body";
     case Rpc.SFLocation.InksBackground:
       return "Inks Background";

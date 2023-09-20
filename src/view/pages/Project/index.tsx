@@ -19,6 +19,9 @@ import { buildDocumentSecurityFeatureTree } from "./components/Content/utils";
 export interface ProjectProps {
   designQuestionsJson: string;
   securityFeaturesJson: string;
+  icaoSecurityFeaturesJson: string;
+  icaoSecurityFeatureCategoriesJson: string;
+  icaoSecurityFeatureSubcategoriesJson: string;
 }
 
 export const Project: NextPage<ProjectProps> = (props) => {
@@ -42,6 +45,23 @@ export const Project: NextPage<ProjectProps> = (props) => {
     () => JSON.parse(props.securityFeaturesJson) as Rpc.SecurityFeature[],
     [props.securityFeaturesJson]
   );
+
+  const icaoSecurityFeatures = useMemo(
+    () => JSON.parse(props.icaoSecurityFeaturesJson) as Rpc.IcaoSecurityFeature[],
+    [props.icaoSecurityFeaturesJson]
+  );
+
+  const icaoSecurityFeatureCategories = useMemo(
+    () => JSON.parse(props.icaoSecurityFeatureCategoriesJson) as Rpc.IcaoSecurityFeatureCategory[],
+    [props.icaoSecurityFeatureCategoriesJson]
+  );
+
+  const icaoSecurityFeatureSubcategories = useMemo(
+    () => JSON.parse(props.icaoSecurityFeatureSubcategoriesJson) as Rpc.IcaoSecurityFeatureSubcategory[],
+    [props.icaoSecurityFeatureSubcategoriesJson]
+  );
+
+  console.log("icaoData", { icaoSecurityFeatures, icaoSecurityFeatureCategories, icaoSecurityFeatureSubcategories });
 
   const handleSaveProjectFile = async (password: string): Promise<string | null> => {
     const state = store.getState() as RootState;
