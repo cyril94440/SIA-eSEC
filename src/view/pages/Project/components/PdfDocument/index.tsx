@@ -25,11 +25,17 @@ interface PdfDocumentProps {
   designQuestions: Rpc.DocumentDesignQuestion[];
   securityFeatures: Rpc.SecurityFeature[];
   documentSecurityFeaturesTree: DocumentSecurityFeatureTree;
+  icaoData: {
+    icaoSecurityFeatures: Rpc.IcaoSecurityFeature[];
+    icaoSecurityFeatureCategories: Rpc.IcaoSecurityFeatureCategory[];
+    icaoSecurityFeatureSubcategories: Rpc.IcaoSecurityFeatureSubcategory[];
+  };
 }
 
 export const PdfDocument: FC<PdfDocumentProps> = (props) => {
   let currentCategory: number | null = null;
   let currentLocation: number | null = null;
+  let currentIcaoCategory: string | null = null;
 
   const sortedFeatures = props.securityFeatures
     .filter((feature) => props.documentSpecs.securityFeatureIds.includes(feature.id))
@@ -61,6 +67,8 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
     }))
     .filter(({ score }) => score !== null);
 
+  const icaoMissingFeatures = filterMissingFeatures(props.icaoData, props.documentSpecs.securityFeatureIds);
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -78,7 +86,12 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
             />
           </View>
           <Text style={styles.splitTitle}>
-            ICAO: <Text style={styles.inlineIcao}>Not complete</Text>
+            ICAO:{" "}
+            {icaoMissingFeatures.length > 0 ? (
+              <Text style={styles.red}>Not complete</Text>
+            ) : (
+              <Text style={styles.success}>Complete</Text>
+            )}
           </Text>
         </View>
         <View style={styles.section}>
@@ -101,23 +114,51 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
             <Text style={styles.inlineData}>{formatDocumentScoreTargetString(props.documentSpecs.scoreTarget)}</Text>
           </Text>
         </View>
+        {icaoMissingFeatures.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.subtitle}>Missing ICAO features</Text>
+            <View>
+              {icaoMissingFeatures.map((feature) => {
+                const isNewCategory = currentIcaoCategory !== feature.category;
+                currentIcaoCategory = feature.category;
+                return (
+                  <View key={Math.random()} style={styles.noGap}>
+                    {isNewCategory && (
+                      <Text style={[styles.littleMarginBottom, styles.subtitle, styles.bigMarginTop]}>
+                        {feature.category}
+                      </Text>
+                    )}
+                    <Text style={[styles.marginTop, styles.question]}>{feature.subcategory}</Text>
+                    {feature.missingFeatures.map((missingFeature) => (
+                      <Text key={missingFeature.code} style={[styles.littleMarginBottom, styles.securityAnswer]}>
+                        - {missingFeature.title}
+                      </Text>
+                    ))}
+                  </View>
+                );
+              })}
+            </View>
+          </View>
+        )}
         {props.documentSpecs.designAnswers.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.subtitle}>Design questions</Text>
             <View style={styles.questionContainer}>
-              {props.documentSpecs.designAnswers.map((answer) => {
-                const question = props.designQuestions.find((q) => q.id === answer.idQuestion);
-                const selectedAnswer = question?.answers.find((a) => a.id === answer.idAnswer);
+              {[...props.documentSpecs.designAnswers]
+                .sort((a, b) => a.idQuestion - b.idQuestion)
+                .map((answer) => {
+                  const question = props.designQuestions.find((q) => q.id === answer.idQuestion);
+                  const selectedAnswer = question?.answers.find((a) => a.id === answer.idAnswer);
 
-                return (
-                  <View style={styles.noGap} key={answer.idQuestion} wrap={false}>
-                    <Text style={styles.question}>
-                      Q{answer.idQuestion + 1}: {question?.questionTitle}
-                    </Text>
-                    <Text style={styles.answer}>{selectedAnswer?.answerTitle}</Text>
-                  </View>
-                );
-              })}
+                  return (
+                    <View style={styles.noGap} key={answer.idQuestion} wrap={false}>
+                      <Text style={styles.question}>
+                        Q{answer.idQuestion + 1}: {question?.questionTitle}
+                      </Text>
+                      <Text style={styles.answer}>{selectedAnswer?.answerTitle}</Text>
+                    </View>
+                  );
+                })}
             </View>
           </View>
         )}
@@ -139,7 +180,7 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
                     )}
                     {isNewLocation && (
                       <Text style={[styles.marginTop, styles.question]}>
-                        Q: {formatDocumentSecurityFeatureLocationString(feature.location)}
+                        {formatDocumentSecurityFeatureLocationString(feature.location)}
                       </Text>
                     )}
                     <Text style={[styles.littleMarginBottom, styles.securityAnswer]}>- {feature.title}</Text>
@@ -271,10 +312,10 @@ const styles = StyleSheet.create({
   inputRow: {
     fontSize: globalStyles.FONT_MEDIUM_10_CAPS_SIZE,
   },
-  inlineScore: {
+  success: {
     color: globalStyles.COLOR_SUCCESS_40,
   },
-  inlineIcao: {
+  red: {
     color: globalStyles.COLOR_RED,
   },
   questionContainer: {
@@ -342,4 +383,47 @@ const CheckpointBar = ({ progression }: { progression: number }) => {
       <View style={progressBarSegmentStyle(globalStyles.COLOR_SUCCESS_40, greenWidth)}></View>
     </View>
   );
+};
+
+type FilteredResult = {
+  category: string;
+  subcategory: string;
+  missingFeatures: Rpc.IcaoSecurityFeature[];
+}[];
+
+export const filterMissingFeatures = (
+  icaoData: {
+    icaoSecurityFeatures: Rpc.IcaoSecurityFeature[];
+    icaoSecurityFeatureCategories: Rpc.IcaoSecurityFeatureCategory[];
+    icaoSecurityFeatureSubcategories: Rpc.IcaoSecurityFeatureSubcategory[];
+  },
+  arrayOfIds: number[]
+): FilteredResult => {
+  const filteredResults: FilteredResult = [];
+
+  icaoData.icaoSecurityFeatureCategories.forEach((category) => {
+    const relatedSubcategories = icaoData.icaoSecurityFeatureSubcategories.filter(
+      (sub) => sub.categoryCode === category.code
+    );
+
+    relatedSubcategories.forEach((subcat) => {
+      const candidateFeatures = icaoData.icaoSecurityFeatures.filter(
+        (feature) => feature.subcategoryCode === subcat.code
+      );
+
+      const missingFeatures = candidateFeatures.filter((feature) =>
+        feature.relatedEsecSecurityFeatureIds.every((id) => !arrayOfIds.includes(id))
+      );
+
+      if (missingFeatures.length > 0) {
+        filteredResults.push({
+          category: category.title,
+          subcategory: subcat.title,
+          missingFeatures,
+        });
+      }
+    });
+  });
+
+  return filteredResults;
 };

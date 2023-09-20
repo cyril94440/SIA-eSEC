@@ -10,7 +10,12 @@ export const generatePdfBlob = async (
   documentSpecs: DocumentSpecs,
   designQuestions: Rpc.DocumentDesignQuestion[],
   securityFeatures: Rpc.SecurityFeature[],
-  documentSecurityFeaturesTree: DocumentSecurityFeatureTree
+  documentSecurityFeaturesTree: DocumentSecurityFeatureTree,
+  icaoData: {
+    icaoSecurityFeatures: Rpc.IcaoSecurityFeature[];
+    icaoSecurityFeatureCategories: Rpc.IcaoSecurityFeatureCategory[];
+    icaoSecurityFeatureSubcategories: Rpc.IcaoSecurityFeatureSubcategory[];
+  }
 ): Promise<Blob> => {
   return await pdf(
     <PdfDocument
@@ -21,6 +26,7 @@ export const generatePdfBlob = async (
       designQuestions={designQuestions}
       securityFeatures={securityFeatures}
       documentSecurityFeaturesTree={documentSecurityFeaturesTree}
+      icaoData={icaoData}
     />
   ).toBlob();
 };

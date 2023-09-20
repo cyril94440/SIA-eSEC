@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import { Content, Scores } from "./components";
 import { generatePdfBlob } from "./utils/generate-pdf-blob";
 import { buildDocumentSecurityFeatureTree } from "./components/Content/utils";
+import { filterMissingFeatures } from "./components/PdfDocument";
 
 export interface ProjectProps {
   designQuestionsJson: string;
@@ -61,8 +62,6 @@ export const Project: NextPage<ProjectProps> = (props) => {
     [props.icaoSecurityFeatureSubcategoriesJson]
   );
 
-  console.log("icaoData", { icaoSecurityFeatures, icaoSecurityFeatureCategories, icaoSecurityFeatureSubcategories });
-
   const handleSaveProjectFile = async (password: string): Promise<string | null> => {
     const state = store.getState() as RootState;
     const specs = state.project.specs;
@@ -94,7 +93,8 @@ export const Project: NextPage<ProjectProps> = (props) => {
       documentSpecs,
       designQuestions,
       securityFeatures,
-      documentSecurityFeaturesTree
+      documentSecurityFeaturesTree,
+      { icaoSecurityFeatures, icaoSecurityFeatureCategories, icaoSecurityFeatureSubcategories }
     );
     FileSaver.saveAs(blob, `${title}.pdf`);
   };
