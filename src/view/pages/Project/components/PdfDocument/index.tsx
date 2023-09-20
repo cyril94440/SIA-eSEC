@@ -397,7 +397,7 @@ const filterMissingFeatures = (
     icaoSecurityFeatureCategories: Rpc.IcaoSecurityFeatureCategory[];
     icaoSecurityFeatureSubcategories: Rpc.IcaoSecurityFeatureSubcategory[];
   },
-  arrayOfIds: number[]
+  securityFeatureIds: number[]
 ): FilteredResult => {
   const filteredResults: FilteredResult = [];
 
@@ -412,7 +412,7 @@ const filterMissingFeatures = (
       );
 
       const missingFeatures = candidateFeatures.filter((feature) =>
-        feature.relatedEsecSecurityFeatureIds.every((id) => !arrayOfIds.includes(id))
+        feature.relatedEsecSecurityFeatureIds.every((id) => !securityFeatureIds.includes(id))
       );
 
       if (missingFeatures.length > 0) {
