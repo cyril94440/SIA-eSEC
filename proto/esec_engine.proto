@@ -124,6 +124,7 @@ message IcaoSecurityFeatureCategory {
 message IcaoSecurityFeatureSubcategory {
     string code = 1;
     string title = 2;
+    string categoryCode = 3;
 }
 
 service DatabaseService{
