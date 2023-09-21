@@ -69,10 +69,6 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
 
   const icaoMissingFeatures = filterMissingFeatures(props.documentSpecs, props.icaoData, props.securityFeatures);
 
-  console.log("icaoMissingFeatures", JSON.stringify(icaoMissingFeatures));
-  console.log("securityFeatures", JSON.stringify(props.securityFeatures));
-  console.log("securityFeatureIds", props.documentSpecs.securityFeatureIds);
-
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -405,7 +401,12 @@ const filterMissingFeatures = (
   securityFeatures: Rpc.SecurityFeature[]
 ): FilteredResult => {
   const filteredResults: FilteredResult = [];
-  const allSecurityFeatures = new Map(securityFeatures.map((f) => [f.id, f]));
+
+  const compatibleSecurityFeatureIds = new Set(
+    securityFeatures //
+      .filter((f) => f.materialsCompatible.includes(specs.material))
+      .map((f) => f.id)
+  );
 
   icaoData.icaoSecurityFeatureCategories.forEach((category) => {
     const relatedSubcategories = icaoData.icaoSecurityFeatureSubcategories.filter(
@@ -418,10 +419,9 @@ const filterMissingFeatures = (
       );
 
       const missingFeatures = candidateFeatures.filter((feature) => {
-        const actualRelatedIds = feature.relatedEsecSecurityFeatureIds.filter((id) => {
-          const f = allSecurityFeatures.get(id);
-          return !!f && f.materialsCompatible.includes(specs.material);
-        });
+        const actualRelatedIds = feature.relatedEsecSecurityFeatureIds.filter((id) =>
+          compatibleSecurityFeatureIds.has(id)
+        );
 
         if (actualRelatedIds.length === 0) {
           return false;
