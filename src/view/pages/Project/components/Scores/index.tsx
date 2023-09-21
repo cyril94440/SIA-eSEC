@@ -74,7 +74,7 @@ export const Scores: FC<ScoresProps> = (props) => {
 
             return items.map(({ value, score }) => {
               return (
-                <div key={Math.random()} css={styles.barContainer}>
+                <div key={value} css={styles.barContainer}>
                   <div css={styles.barTitle}>{formatDocumentSecurityFeatureLocationString(value)}</div>
                   <CheckpointBar progression={score * 10} />
                 </div>
@@ -93,7 +93,7 @@ export const Scores: FC<ScoresProps> = (props) => {
 
             return items.map(({ category, score }) => {
               return (
-                <div key={Math.random()} css={styles.barContainer}>
+                <div key={category} css={styles.barContainer}>
                   <div css={styles.barTitle}>{formatDocumentSecurityFeatureScoreCategoryString(category)}</div>
                   <CheckpointBar progression={score * 10} />
                 </div>
@@ -112,7 +112,7 @@ export const Scores: FC<ScoresProps> = (props) => {
 
             return items.map(({ category, score }) => {
               return (
-                <div key={Math.random()} css={styles.barContainer}>
+                <div key={category} css={styles.barContainer}>
                   <div css={styles.barTitle}>{formatDocumentSecurityFeatureScoreCategoryString(category)}</div>
                   <CheckpointBar progression={score * 10} />
                 </div>
