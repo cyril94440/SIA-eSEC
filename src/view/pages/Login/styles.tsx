@@ -4,6 +4,7 @@ import * as styles from "@@view/styles";
 export const logo = css`
   width: ${styles.getSize(12)};
   margin-bottom: ${styles.getSize(8)};
+  color: ${styles.COLOR_PRIMARY_36};
 `;
 
 export const container = css`
@@ -40,7 +41,7 @@ export const label = css`
   margin-bottom: ${styles.getSize(1)};
   font-size: ${styles.getSize(1.5)};
   text-align: left;
-  font-size: ${styles.FONT_MEDIUM_14_SIZE};
+  ${styles.fontMedium14};
 `;
 
 export const inputSubmit = css`
@@ -48,6 +49,8 @@ export const inputSubmit = css`
   width: ${styles.getSize(36)};
   height: ${styles.getSize(5)};
   font-size: ${styles.FONT_MEDIUM_14_SIZE};
+  background-color: ${styles.COLOR_PRIMARY_36};
+  color: ${styles.COLOR_WHITE};
 `;
 
 export const errorMsg = css`
