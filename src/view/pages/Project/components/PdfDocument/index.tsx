@@ -405,7 +405,7 @@ const filterMissingFeatures = (
   securityFeatures: Rpc.SecurityFeature[]
 ): FilteredResult => {
   const filteredResults: FilteredResult = [];
-  const allSecurityFeatureIds = new Map(securityFeatures.map((f) => [f.id, f]));
+  const allSecurityFeatures = new Map(securityFeatures.map((f) => [f.id, f]));
 
   icaoData.icaoSecurityFeatureCategories.forEach((category) => {
     const relatedSubcategories = icaoData.icaoSecurityFeatureSubcategories.filter(
@@ -419,7 +419,7 @@ const filterMissingFeatures = (
 
       const missingFeatures = candidateFeatures.filter((feature) => {
         const actualRelatedIds = feature.relatedEsecSecurityFeatureIds.filter((id) => {
-          const f = allSecurityFeatureIds.get(id);
+          const f = allSecurityFeatures.get(id);
           return !!f && f.materialsCompatible.includes(specs.material);
         });
 
