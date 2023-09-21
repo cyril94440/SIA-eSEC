@@ -5,16 +5,16 @@ import { useEffect, useMemo, useState } from "react";
 import { useStore } from "react-redux";
 import { Api } from "@@core/api/client";
 import { formatPageTitle } from "@@core/base";
+import { getDocumentSecurityFeatures, getDocumentSecurityFeatureTree, getDocumentIcaoStatus } from "@@core/project";
 import { ProjectFile } from "@@core/project-file";
 import { Rpc } from "@@core/rpc/shared";
-import { RootState, getProjectActiveSecurityFeatures } from "@@store";
+import { RootState } from "@@store";
 import { Thunks } from "@@thunks";
 import { ProjectFileDialog } from "@@view/components";
 import { AppLayout } from "@@view/containers";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import { Content, Scores } from "./components";
 import { generatePdfBlob } from "./utils/generate-pdf-blob";
-import { buildDocumentSecurityFeatureTree } from "./components/Content/utils";
 
 export interface ProjectProps {
   designQuestionsJson: string;
@@ -27,38 +27,62 @@ export interface ProjectProps {
 export const Project: NextPage<ProjectProps> = (props) => {
   const store = useStore();
   const dispatch = useAppDispatch();
-  const title = useAppSelector((state) => state.project.specs.title);
-  const status = useAppSelector((state) => state.project.specs.status);
+  const specs = useAppSelector((state) => state.project.specs);
   const score = useAppSelector((state) => state.project.score);
-  const documentSpecs = useAppSelector((state) => state.project.specs.document);
   const [saveDialogOpen, setSaveDialogOpen] = useState(false);
   const [scoresCollapsed, setScoresCollapsed] = useState(false);
-  const activeFeaturesInfo = useAppSelector((state) => getProjectActiveSecurityFeatures(state));
-  const documentSecurityFeaturesTree = buildDocumentSecurityFeatureTree(activeFeaturesInfo);
 
-  const designQuestions = useMemo(
+  const allDesignQuestions = useMemo(
     () => JSON.parse(props.designQuestionsJson) as Rpc.DocumentDesignQuestion[],
     [props.designQuestionsJson]
   );
 
-  const securityFeatures = useMemo(
+  const allSecurityFeatures = useMemo(
     () => JSON.parse(props.securityFeaturesJson) as Rpc.SecurityFeature[],
     [props.securityFeaturesJson]
   );
 
-  const icaoSecurityFeatures = useMemo(
+  const allIcaoSecurityFeatures = useMemo(
     () => JSON.parse(props.icaoSecurityFeaturesJson) as Rpc.IcaoSecurityFeature[],
     [props.icaoSecurityFeaturesJson]
   );
 
-  const icaoSecurityFeatureCategories = useMemo(
+  const allIcaoSecurityFeatureCategories = useMemo(
     () => JSON.parse(props.icaoSecurityFeatureCategoriesJson) as Rpc.IcaoSecurityFeatureCategory[],
     [props.icaoSecurityFeatureCategoriesJson]
   );
 
-  const icaoSecurityFeatureSubcategories = useMemo(
+  const allIcaoSecurityFeatureSubcategories = useMemo(
     () => JSON.parse(props.icaoSecurityFeatureSubcategoriesJson) as Rpc.IcaoSecurityFeatureSubcategory[],
     [props.icaoSecurityFeatureSubcategoriesJson]
+  );
+
+  const documentSecurityFeatures = useMemo(
+    () => getDocumentSecurityFeatures(specs, allSecurityFeatures),
+    [specs, allSecurityFeatures]
+  );
+
+  const documentSecurityFeaturesTree = useMemo(
+    () => getDocumentSecurityFeatureTree(specs, allSecurityFeatures),
+    [specs, allSecurityFeatures]
+  );
+
+  const icaoStatus = useMemo(
+    () =>
+      getDocumentIcaoStatus(
+        specs,
+        allSecurityFeatures,
+        allIcaoSecurityFeatures,
+        allIcaoSecurityFeatureCategories,
+        allIcaoSecurityFeatureSubcategories
+      ),
+    [
+      specs,
+      allSecurityFeatures,
+      allIcaoSecurityFeatures,
+      allIcaoSecurityFeatureCategories,
+      allIcaoSecurityFeatureSubcategories,
+    ]
   );
 
   const handleSaveProjectFile = async (password: string): Promise<string | null> => {
@@ -81,27 +105,25 @@ export const Project: NextPage<ProjectProps> = (props) => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(Thunks.projectChangeSecurityFeatures(securityFeatures));
-  }, [dispatch, securityFeatures]);
+    dispatch(Thunks.projectChangeSecurityFeatures(allSecurityFeatures));
+  }, [dispatch, allSecurityFeatures]);
 
   const handleDownloadPdf = async () => {
     const blob = await generatePdfBlob(
-      title,
-      status,
+      specs,
       score,
-      documentSpecs,
-      designQuestions,
-      securityFeatures,
+      documentSecurityFeatures,
       documentSecurityFeaturesTree,
-      { icaoSecurityFeatures, icaoSecurityFeatureCategories, icaoSecurityFeatureSubcategories }
+      allDesignQuestions,
+      icaoStatus
     );
-    FileSaver.saveAs(blob, `${title}.pdf`);
+    FileSaver.saveAs(blob, `${specs.title}.pdf`);
   };
 
   return (
     <>
       <Head>
-        <title>{formatPageTitle(title)}</title>
+        <title>{formatPageTitle(specs.title)}</title>
       </Head>
       <AppLayout
         sidebar={<Scores value={score} collapsed={scoresCollapsed} onDownloadReportClick={handleDownloadPdf} />}
@@ -111,11 +133,9 @@ export const Project: NextPage<ProjectProps> = (props) => {
         }}
       >
         <Content
-          title={title}
-          status={status}
-          documentSpecs={documentSpecs}
-          designQuestions={designQuestions}
-          securityFeatures={securityFeatures}
+          specs={specs}
+          documentSecurityFeatureTree={documentSecurityFeaturesTree}
+          designQuestions={allDesignQuestions}
           onRenameClick={() => {
             dispatch(Thunks.projectRename());
           }}

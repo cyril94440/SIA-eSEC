@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { DocumentSpecs } from "@@core/project";
+import { ProjectSpecs } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
 import { AccentController, CommentsWrap, RadioSelect, useAccentClient } from "@@view/components";
 import { Text } from "../Text";
@@ -8,7 +8,7 @@ import { SectionItem } from "../SectionItem";
 import * as styles from "./styles";
 
 export interface DocumentDesignProps {
-  documentSpecs: DocumentSpecs;
+  specs: ProjectSpecs;
   designQuestions: Rpc.DocumentDesignQuestion[];
   onChangeDesignAnswer: (value: Rpc.DocumentDesignFormAnswer) => void;
 }
@@ -31,7 +31,7 @@ export const DocumentDesign: FC<DocumentDesignProps> = (props) => {
             <SectionItem key={question.id} fullWidth={false}>
               <QuestionItem
                 key={question.id}
-                documentSpecs={props.documentSpecs}
+                specs={props.specs}
                 question={question}
                 index={index}
                 onChangeDocumentDesignAnswer={props.onChangeDesignAnswer}
@@ -45,7 +45,7 @@ export const DocumentDesign: FC<DocumentDesignProps> = (props) => {
 };
 
 export interface QuestionItemProps {
-  documentSpecs: DocumentSpecs;
+  specs: ProjectSpecs;
   question: Rpc.DocumentDesignQuestion;
   index: number;
   onChangeDocumentDesignAnswer: (value: Rpc.DocumentDesignFormAnswer) => void;
@@ -53,7 +53,7 @@ export interface QuestionItemProps {
 
 const QuestionItem: FC<QuestionItemProps> = (props) => {
   const accentClientResult = useAccentClient();
-  const value = props.documentSpecs.designAnswers.find((a) => a.idQuestion === props.question.id)?.idAnswer ?? null;
+  const value = props.specs.document.designAnswers.find((a) => a.idQuestion === props.question.id)?.idAnswer ?? null;
   return (
     <div css={[styles.accentItem, accentClientResult.muted && styles.accentItemMuted]}>
       <CommentsWrap>

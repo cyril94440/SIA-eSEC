@@ -1,7 +1,6 @@
 import { FC } from "react";
 import {
   DocumentScoreTarget,
-  DocumentSpecs,
   DocumentStandardCompliance,
   DocumentType,
   formatDocumentMaterialString,
@@ -9,6 +8,7 @@ import {
   formatDocumentStandardComplianceString,
   formatDocumentTypeString,
   isDocumentMaterialValid,
+  ProjectSpecs,
 } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
 import { CardSelect, Icons, Select } from "@@view/components";
@@ -16,7 +16,7 @@ import { Section } from "../Section";
 import { SectionItem } from "../SectionItem";
 
 export interface GeneralInfoProps {
-  documentSpecs: DocumentSpecs;
+  specs: ProjectSpecs;
   onChangeDocumentType: (value: DocumentType) => void;
   onChangeDocumentMaterial: (value: Rpc.SFMaterial) => void;
   onChangeDocumentStandardCompliance: (value: DocumentStandardCompliance) => void;
@@ -28,7 +28,7 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
     <Section>
       <SectionItem title="Document Type" fullWidth={true}>
         <CardSelect
-          value={props.documentSpecs.type}
+          value={props.specs.document.type}
           items={[
             {
               value: DocumentType.PASSPORT,
@@ -46,14 +46,14 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
       </SectionItem>
       <SectionItem title="Material" fullWidth={true}>
         <CardSelect
-          value={props.documentSpecs.material.toString()}
+          value={props.specs.document.material.toString()}
           items={
             //
             [
               { value: Rpc.SFMaterial.Plastic, icon: Icons.DocumentMaterialPlastic },
               { value: Rpc.SFMaterial.Paper, icon: Icons.DocumentMaterialPaper },
             ].map(({ value, icon }) => {
-              return isDocumentMaterialValid(value, props.documentSpecs.type)
+              return isDocumentMaterialValid(value, props.specs.document.type)
                 ? {
                     value: value.toString(),
                     Icon: icon,
@@ -67,7 +67,7 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
       </SectionItem>
       <SectionItem title="Standard Compliance" fullWidth={false}>
         <Select
-          value={props.documentSpecs.standardCompliance}
+          value={props.specs.document.standardCompliance}
           items={[
             DocumentStandardCompliance.ECOWAS_ID_CARD,
             DocumentStandardCompliance.EU_ID_CARD,
@@ -82,7 +82,7 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
       </SectionItem>
       <SectionItem title="Score Target" fullWidth={false}>
         <Select
-          value={props.documentSpecs.scoreTarget}
+          value={props.specs.document.scoreTarget}
           items={[DocumentScoreTarget.THEORICAL_MAXIMUM, DocumentScoreTarget.SIA_RECO]}
           itemId={(item) => item}
           itemText={(item) => formatDocumentScoreTargetString(item)}

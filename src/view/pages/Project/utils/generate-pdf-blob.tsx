@@ -1,32 +1,24 @@
 import { pdf } from "@react-pdf/renderer";
 import { PdfDocument } from "../components/PdfDocument";
-import { DocumentSpecs, ProjectStatus } from "@@core/project";
+import { DocumentIcaoStatus, DocumentSecurityFeatureTree, ProjectSpecs } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
-import { DocumentSecurityFeatureTree } from "../components/Content/utils";
+
 export const generatePdfBlob = async (
-  title: string,
-  status: ProjectStatus,
+  specs: ProjectSpecs,
   score: Rpc.TNScore | null,
-  documentSpecs: DocumentSpecs,
+  documentSecurityFeatures: Rpc.SecurityFeature[],
+  documentSecurityFeatureTree: DocumentSecurityFeatureTree,
   designQuestions: Rpc.DocumentDesignQuestion[],
-  securityFeatures: Rpc.SecurityFeature[],
-  documentSecurityFeaturesTree: DocumentSecurityFeatureTree,
-  icaoData: {
-    icaoSecurityFeatures: Rpc.IcaoSecurityFeature[];
-    icaoSecurityFeatureCategories: Rpc.IcaoSecurityFeatureCategory[];
-    icaoSecurityFeatureSubcategories: Rpc.IcaoSecurityFeatureSubcategory[];
-  }
+  icaoStatus: DocumentIcaoStatus
 ): Promise<Blob> => {
   return await pdf(
     <PdfDocument
-      title={title}
-      status={status}
+      specs={specs}
       score={score}
-      documentSpecs={documentSpecs}
+      documentSecurityFeatures={documentSecurityFeatures}
+      documentSecurityFeatureTree={documentSecurityFeatureTree}
       designQuestions={designQuestions}
-      securityFeatures={securityFeatures}
-      documentSecurityFeaturesTree={documentSecurityFeaturesTree}
-      icaoData={icaoData}
+      icaoStatus={icaoStatus}
     />
   ).toBlob();
 };

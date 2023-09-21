@@ -12,7 +12,7 @@ import * as actions from "../actions";
 export interface ProjectState {
   specs: ProjectSpecs;
   score: Rpc.TNScore | null;
-  securityFeatures: Rpc.SecurityFeature[];
+  allSecurityFeatures: Rpc.SecurityFeature[];
 }
 
 const initialState: ProjectState = {
@@ -29,7 +29,7 @@ const initialState: ProjectState = {
     },
   },
   score: null,
-  securityFeatures: [],
+  allSecurityFeatures: [],
 };
 
 export const project = createReducer(initialState, (builder) => {
@@ -41,14 +41,14 @@ export const project = createReducer(initialState, (builder) => {
       return {
         specs: action.payload,
         score: null,
-        securityFeatures: [],
+        allSecurityFeatures: [],
       };
     })
     .addCase(actions.projectSetScore, (state, action) => {
       state.score = action.payload;
     })
     .addCase(actions.projectSetSecurityFeatures, (state, action) => {
-      state.securityFeatures = action.payload;
+      state.allSecurityFeatures = action.payload;
     })
     .addCase(actions.projectSetDocumentType, (state, action) => {
       state.specs.document.type = action.payload;

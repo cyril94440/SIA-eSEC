@@ -2,35 +2,29 @@ import { FC, Fragment } from "react";
 import {
   formatDocumentSecurityFeatureCategoryString,
   formatDocumentSecurityFeatureLocationString,
-  DocumentSpecs,
-} from "@@core/project";
-import { Rpc } from "@@core/rpc/shared";
-import { getProjectActiveSecurityFeatures } from "@@store";
-import { AccentController, CommentsWrap, MultiSelect, useAccentClient } from "@@view/components";
-import { useAppSelector } from "@@view/hooks";
-import {
-  buildDocumentSecurityFeatureTree,
+  DocumentSecurityFeatureTree,
   DocumentSecurityFeatureCategoryNode,
   DocumentSecurityFeatureLocationNode,
-} from "../../utils";
+  ProjectSpecs,
+} from "@@core/project";
+import { Rpc } from "@@core/rpc/shared";
+import { AccentController, CommentsWrap, MultiSelect, useAccentClient } from "@@view/components";
 import { Section } from "../Section";
 import { SectionHeader } from "../SectionHeader";
 import { SectionItem } from "../SectionItem";
 import * as styles from "./styles";
 
 export interface SecurityFeaturesProps {
-  documentSpecs: DocumentSpecs;
-  securityFeatures: Rpc.SecurityFeature[];
+  specs: ProjectSpecs;
+  documentSecurityFeatureTree: DocumentSecurityFeatureTree;
   onChange: (value: number[]) => void;
 }
 
 export const SecurityFeatures: FC<SecurityFeaturesProps> = (props) => {
-  const activeFeaturesInfo = useAppSelector((state) => getProjectActiveSecurityFeatures(state));
-  const documentSecurityFeaturesTree = buildDocumentSecurityFeatureTree(activeFeaturesInfo);
   return (
     <AccentController>
       <Section>
-        {documentSecurityFeaturesTree.categoryNodes.map((categoryNode) => {
+        {props.documentSecurityFeatureTree.categoryNodes.map((categoryNode) => {
           return (
             <Fragment key={categoryNode.item}>
               <HeaderItem categoryNode={categoryNode} />
@@ -38,8 +32,8 @@ export const SecurityFeatures: FC<SecurityFeaturesProps> = (props) => {
                 return (
                   <FeatureItem
                     key={locationNode.item}
+                    specs={props.specs}
                     locationNode={locationNode}
-                    documentSpecs={props.documentSpecs}
                     onChange={props.onChange}
                   />
                 );
@@ -53,8 +47,8 @@ export const SecurityFeatures: FC<SecurityFeaturesProps> = (props) => {
 };
 
 export interface FeatureItemProps {
+  specs: ProjectSpecs;
   locationNode: DocumentSecurityFeatureLocationNode;
-  documentSpecs: DocumentSpecs;
   onChange: (value: number[]) => void;
 }
 
@@ -81,7 +75,7 @@ export const FeatureItem: FC<FeatureItemProps> = (props) => {
         <CommentsWrap>
           <MultiSelect<number>
             title="Select your feature"
-            value={props.documentSpecs.securityFeatureIds}
+            value={props.specs.document.securityFeatureIds}
             items={featureIds}
             itemId={(id) => id.toString()}
             itemContent={(id) => featureMap.get(id)?.title}

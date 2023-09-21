@@ -1,8 +1,9 @@
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 import * as globalStyles from "@@view/styles";
 import {
-  DocumentSpecs,
-  ProjectStatus,
+  DocumentIcaoStatus,
+  DocumentSecurityFeatureTree,
+  ProjectSpecs,
   formatDocumentMaterialString,
   formatDocumentScoreTargetString,
   formatDocumentSecurityFeatureCategoryString,
@@ -12,33 +13,25 @@ import {
   formatDocumentTypeString,
   formatProjectStatusString,
 } from "@@core/project";
-import { FC } from "react";
+import { FC, Fragment } from "react";
 import { Rpc } from "@@core/rpc/shared";
-import { DocumentSecurityFeatureTree } from "../Content/utils";
 import { allLocations, allScoreCategories } from "../Scores";
 
 interface PdfDocumentProps {
-  title: string;
-  status: ProjectStatus;
+  specs: ProjectSpecs;
   score: Rpc.TNScore | null;
-  documentSpecs: DocumentSpecs;
+  documentSecurityFeatures: Rpc.SecurityFeature[];
+  documentSecurityFeatureTree: DocumentSecurityFeatureTree;
   designQuestions: Rpc.DocumentDesignQuestion[];
-  securityFeatures: Rpc.SecurityFeature[];
-  documentSecurityFeaturesTree: DocumentSecurityFeatureTree;
-  icaoData: {
-    icaoSecurityFeatures: Rpc.IcaoSecurityFeature[];
-    icaoSecurityFeatureCategories: Rpc.IcaoSecurityFeatureCategory[];
-    icaoSecurityFeatureSubcategories: Rpc.IcaoSecurityFeatureSubcategory[];
-  };
+  icaoStatus: DocumentIcaoStatus;
 }
 
 export const PdfDocument: FC<PdfDocumentProps> = (props) => {
   let currentCategory: number | null = null;
   let currentLocation: number | null = null;
-  let currentIcaoCategory: string | null = null;
 
-  const sortedFeatures = props.securityFeatures
-    .filter((feature) => props.documentSpecs.securityFeatureIds.includes(feature.id))
+  const sortedFeatures = props.documentSecurityFeatures
+    .filter((feature) => props.specs.document.securityFeatureIds.includes(feature.id))
     .sort((a, b) => {
       if (a.category === b.category) {
         return a.location - b.location;
@@ -67,15 +60,13 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
     }))
     .filter(({ score }) => score !== null);
 
-  const icaoMissingFeatures = filterMissingFeatures(props.documentSpecs, props.icaoData, props.securityFeatures);
-
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
           <View style={[styles.noGap, styles.littleMarginBottom]}>
-            <Text style={styles.title}>{props.title}</Text>
-            <Text style={styles.status}>Status: {formatProjectStatusString(props.status)}</Text>
+            <Text style={styles.title}>{props.specs.title}</Text>
+            <Text style={styles.status}>Status: {formatProjectStatusString(props.specs.status)}</Text>
           </View>
           <View style={styles.noGap}>
             <Text style={styles.splitTitle}>Total score</Text>
@@ -87,64 +78,72 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
           </View>
           <Text style={styles.splitTitle}>
             ICAO:{" "}
-            {icaoMissingFeatures.length > 0 ? (
-              <Text style={styles.red}>Not complete</Text>
-            ) : (
-              <Text style={styles.success}>Complete</Text>
-            )}
+            <Text style={props.icaoStatus.completed ? styles.success : styles.red}>
+              {props.icaoStatus.completed ? "Complete" : "Not complete"}
+            </Text>
           </Text>
         </View>
         <View style={styles.section}>
           <Text style={styles.subtitle}>General Info</Text>
           <Text style={styles.inputRow}>
-            Type: <Text style={styles.inlineData}>{formatDocumentTypeString(props.documentSpecs.type)}</Text>
+            Type: <Text style={styles.inlineData}>{formatDocumentTypeString(props.specs.document.type)}</Text>
           </Text>
           <Text style={styles.inputRow}>
             Material:{" "}
-            <Text style={styles.inlineData}>{formatDocumentMaterialString(props.documentSpecs.material)}</Text>
+            <Text style={styles.inlineData}>{formatDocumentMaterialString(props.specs.document.material)}</Text>
           </Text>
           <Text style={styles.inputRow}>
             Standart compliance:{" "}
             <Text style={styles.inlineData}>
-              {formatDocumentStandardComplianceString(props.documentSpecs.standardCompliance)}
+              {formatDocumentStandardComplianceString(props.specs.document.standardCompliance)}
             </Text>
           </Text>
           <Text style={styles.inputRow}>
             Score target:{" "}
-            <Text style={styles.inlineData}>{formatDocumentScoreTargetString(props.documentSpecs.scoreTarget)}</Text>
+            <Text style={styles.inlineData}>{formatDocumentScoreTargetString(props.specs.document.scoreTarget)}</Text>
           </Text>
         </View>
-        {icaoMissingFeatures.length > 0 && (
+        {!props.icaoStatus.completed && (
           <View style={styles.section}>
-            <Text style={styles.subtitle}>Missing ICAO features</Text>
+            <Text style={styles.subtitle}>Missing basic ICAO features</Text>
             <View>
-              {icaoMissingFeatures.map((feature) => {
-                const isNewCategory = currentIcaoCategory !== feature.category;
-                currentIcaoCategory = feature.category;
-                return (
-                  <View key={Math.random()} style={styles.noGap}>
-                    {isNewCategory && (
+              {props.icaoStatus.basic.categories
+                .filter((c) => !c.completed)
+                .map((c) => {
+                  return (
+                    <View key={c.item.code} style={styles.noGap}>
                       <Text style={[styles.littleMarginBottom, styles.subtitle, styles.bigMarginTop]}>
-                        {feature.category}
+                        {c.item.title}
                       </Text>
-                    )}
-                    <Text style={[styles.marginTop, styles.question]}>{feature.subcategory}</Text>
-                    {feature.missingFeatures.map((missingFeature) => (
-                      <Text key={missingFeature.code} style={[styles.littleMarginBottom, styles.securityAnswer]}>
-                        - {missingFeature.title}
-                      </Text>
-                    ))}
-                  </View>
-                );
-              })}
+                      {c.subcategories
+                        .filter((sc) => !sc.completed)
+                        .map((sc) => {
+                          return (
+                            <Fragment key={sc.item.code}>
+                              <Text style={[styles.marginY, styles.question]}>{sc.item.title}</Text>
+                              {sc.features
+                                .filter((f) => !f.completed)
+                                .map((f) => {
+                                  return (
+                                    <Text key={f.item.code} style={[styles.littleMarginBottom, styles.securityAnswer]}>
+                                      - {f.item.title}
+                                    </Text>
+                                  );
+                                })}
+                            </Fragment>
+                          );
+                        })}
+                    </View>
+                  );
+                })}
             </View>
           </View>
         )}
-        {props.documentSpecs.designAnswers.length > 0 && (
+        {props.specs.document.designAnswers.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.subtitle}>Design questions</Text>
             <View style={styles.questionContainer}>
-              {[...props.documentSpecs.designAnswers]
+              {[...props.specs.document.designAnswers]
                 .sort((a, b) => a.idQuestion - b.idQuestion)
                 .map((answer) => {
                   const question = props.designQuestions.find((q) => q.id === answer.idQuestion);
@@ -162,7 +161,7 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
             </View>
           </View>
         )}
-        {props.documentSpecs.securityFeatureIds.length > 0 && (
+        {props.specs.document.securityFeatureIds.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.subtitle}>Security features</Text>
             <View>
@@ -344,6 +343,10 @@ const styles = StyleSheet.create({
   marginTop: {
     marginTop: globalStyles.getSize(1),
   },
+  marginY: {
+    marginTop: globalStyles.getSize(1),
+    marginBottom: globalStyles.getSize(1),
+  },
   littleMarginBottom: {
     marginBottom: globalStyles.getSize(1 / 2),
   },
@@ -383,62 +386,4 @@ const CheckpointBar = ({ progression }: { progression: number }) => {
       <View style={progressBarSegmentStyle(globalStyles.COLOR_SUCCESS_40, greenWidth)}></View>
     </View>
   );
-};
-
-type FilteredResult = {
-  category: string;
-  subcategory: string;
-  missingFeatures: Rpc.IcaoSecurityFeature[];
-}[];
-
-const filterMissingFeatures = (
-  specs: DocumentSpecs,
-  icaoData: {
-    icaoSecurityFeatures: Rpc.IcaoSecurityFeature[];
-    icaoSecurityFeatureCategories: Rpc.IcaoSecurityFeatureCategory[];
-    icaoSecurityFeatureSubcategories: Rpc.IcaoSecurityFeatureSubcategory[];
-  },
-  securityFeatures: Rpc.SecurityFeature[]
-): FilteredResult => {
-  const filteredResults: FilteredResult = [];
-
-  const compatibleSecurityFeatureIds = new Set(
-    securityFeatures //
-      .filter((f) => f.materialsCompatible.includes(specs.material))
-      .map((f) => f.id)
-  );
-
-  icaoData.icaoSecurityFeatureCategories.forEach((category) => {
-    const relatedSubcategories = icaoData.icaoSecurityFeatureSubcategories.filter(
-      (sub) => sub.categoryCode === category.code
-    );
-
-    relatedSubcategories.forEach((subcat) => {
-      const candidateFeatures = icaoData.icaoSecurityFeatures.filter(
-        (feature) => feature.subcategoryCode === subcat.code
-      );
-
-      const missingFeatures = candidateFeatures.filter((feature) => {
-        const actualRelatedIds = feature.relatedEsecSecurityFeatureIds.filter((id) =>
-          compatibleSecurityFeatureIds.has(id)
-        );
-
-        if (actualRelatedIds.length === 0) {
-          return false;
-        }
-
-        return actualRelatedIds.every((id) => !specs.securityFeatureIds.includes(id));
-      });
-
-      if (missingFeatures.length > 0) {
-        filteredResults.push({
-          category: category.title,
-          subcategory: subcat.title,
-          missingFeatures,
-        });
-      }
-    });
-  });
-
-  return filteredResults;
 };

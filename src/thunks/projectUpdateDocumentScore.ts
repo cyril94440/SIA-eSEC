@@ -1,16 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Api } from "@@core/api/client";
-import { actions, getProjectActiveSecurityFeatureIds, RootState } from "@@store";
+import { getDocumentSelectedSecurityFeatures } from "@@core/project";
+import { actions, RootState } from "@@store";
 
 export const projectUpdateDocumentScore = createAsyncThunk<void, void>(
   "projectUpdateDocumentScore",
   async (_value, { dispatch, getState }) => {
     const state = getState() as RootState;
-    const specs = state.project.specs;
+    const { specs, allSecurityFeatures } = state.project;
 
     const scoreResult = await Api.projectComputeScores({
       documentDesignAnswers: specs.document.designAnswers,
-      securityFeaturesIDs: getProjectActiveSecurityFeatureIds(state),
+      securityFeaturesIDs: getDocumentSelectedSecurityFeatures(specs, allSecurityFeatures).map((f) => f.id),
     });
 
     if (!scoreResult.success) {

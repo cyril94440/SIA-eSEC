@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
 import {
   DocumentScoreTarget,
-  DocumentSpecs,
+  DocumentSecurityFeatureTree,
   DocumentStandardCompliance,
   DocumentType,
-  ProjectStatus,
+  ProjectSpecs,
 } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
 import { ScrollController, TabControl } from "@@view/components";
@@ -18,11 +18,9 @@ enum TabControlItem {
 }
 
 export interface ContentProps {
-  title: string;
-  status: ProjectStatus;
-  documentSpecs: DocumentSpecs;
+  specs: ProjectSpecs;
+  documentSecurityFeatureTree: DocumentSecurityFeatureTree;
   designQuestions: Rpc.DocumentDesignQuestion[];
-  securityFeatures: Rpc.SecurityFeature[];
   onRenameClick: () => void;
   onEncryptionInfoClick: () => void;
   onSaveClick: () => void;
@@ -41,9 +39,9 @@ export const Content: FC<ContentProps> = (props) => {
       {(containerRef) => (
         <div ref={containerRef} css={styles.root}>
           <Section>
-            <Status value={props.status} />
+            <Status value={props.specs.status} />
             <Header
-              title={props.title}
+              title={props.specs.title}
               onRenameClick={props.onRenameClick}
               onEncryptionInfoClick={props.onEncryptionInfoClick}
               onSaveClick={props.onSaveClick}
@@ -56,7 +54,7 @@ export const Content: FC<ContentProps> = (props) => {
                 title: "1 - General Info",
                 content: () => (
                   <GeneralInfo
-                    documentSpecs={props.documentSpecs}
+                    specs={props.specs}
                     onChangeDocumentType={props.onChangeDocumentType}
                     onChangeDocumentMaterial={props.onChangeDocumentMaterial}
                     onChangeDocumentStandardCompliance={props.onChangeDocumentStandardCompliance}
@@ -69,7 +67,7 @@ export const Content: FC<ContentProps> = (props) => {
                 title: "2 - Document Design",
                 content: () => (
                   <DocumentDesign
-                    documentSpecs={props.documentSpecs}
+                    specs={props.specs}
                     designQuestions={props.designQuestions}
                     onChangeDesignAnswer={props.onChangeDocumentDesignAnswer}
                   />
@@ -80,8 +78,8 @@ export const Content: FC<ContentProps> = (props) => {
                 title: "3 - Security Features",
                 content: () => (
                   <SecurityFeatures
-                    documentSpecs={props.documentSpecs}
-                    securityFeatures={props.securityFeatures}
+                    specs={props.specs}
+                    documentSecurityFeatureTree={props.documentSecurityFeatureTree}
                     onChange={props.onChangeDocumentSecurityFeatures}
                   />
                 ),
