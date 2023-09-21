@@ -13,7 +13,9 @@ import { Thunks } from "@@thunks";
 import { ProjectFileDialog } from "@@view/components";
 import { AppLayout } from "@@view/containers";
 import { useAppDispatch, useAppSelector } from "@@view/hooks";
-import { Content, Scores } from "./components";
+import { Content } from "./components/Content";
+import { Scores } from "./components/Scores";
+import { IcaoStatusDialog } from "./components/IcaoStatusDialog";
 import { generatePdfBlob } from "./utils/generate-pdf-blob";
 
 export interface ProjectProps {
@@ -29,8 +31,9 @@ export const Project: NextPage<ProjectProps> = (props) => {
   const dispatch = useAppDispatch();
   const specs = useAppSelector((state) => state.project.specs);
   const score = useAppSelector((state) => state.project.score);
-  const [saveDialogOpen, setSaveDialogOpen] = useState(false);
   const [scoresCollapsed, setScoresCollapsed] = useState(false);
+  const [saveDialogOpen, setSaveDialogOpen] = useState(false);
+  const [icaoStatusDialogOpen, setIcaoStatusDialogOpen] = useState(false);
 
   const allDesignQuestions = useMemo(
     () => JSON.parse(props.designQuestionsJson) as Rpc.DocumentDesignQuestion[],
@@ -100,15 +103,11 @@ export const Project: NextPage<ProjectProps> = (props) => {
     return null;
   };
 
-  useEffect(() => {
-    dispatch(Thunks.projectLoad());
-  }, [dispatch]);
+  const handleIcaoStatusClick = () => {
+    setIcaoStatusDialogOpen(true);
+  };
 
-  useEffect(() => {
-    dispatch(Thunks.projectChangeSecurityFeatures(allSecurityFeatures));
-  }, [dispatch, allSecurityFeatures]);
-
-  const handleDownloadPdf = async () => {
+  const handleDownloadReportClick = async () => {
     const blob = await generatePdfBlob(
       specs,
       score,
@@ -120,13 +119,29 @@ export const Project: NextPage<ProjectProps> = (props) => {
     FileSaver.saveAs(blob, `${specs.title}.pdf`);
   };
 
+  useEffect(() => {
+    dispatch(Thunks.projectLoad());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(Thunks.projectChangeSecurityFeatures(allSecurityFeatures));
+  }, [dispatch, allSecurityFeatures]);
+
   return (
     <>
       <Head>
         <title>{formatPageTitle(specs.title)}</title>
       </Head>
       <AppLayout
-        sidebar={<Scores value={score} collapsed={scoresCollapsed} onDownloadReportClick={handleDownloadPdf} />}
+        sidebar={
+          <Scores
+            value={score}
+            collapsed={scoresCollapsed}
+            icaoStatus={icaoStatus}
+            onIcaoStatusClick={handleIcaoStatusClick}
+            onDownloadReportClick={handleDownloadReportClick}
+          />
+        }
         sidebarCollapsed={scoresCollapsed}
         onToggleSidebar={(collapsed) => {
           setScoresCollapsed(collapsed);
@@ -170,6 +185,11 @@ export const Project: NextPage<ProjectProps> = (props) => {
         mode={"save"}
         handler={handleSaveProjectFile}
         onOpenChange={setSaveDialogOpen}
+      />
+      <IcaoStatusDialog //
+        open={icaoStatusDialogOpen}
+        status={icaoStatus}
+        onOpenChange={setIcaoStatusDialogOpen}
       />
     </>
   );

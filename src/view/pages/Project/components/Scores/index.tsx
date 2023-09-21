@@ -3,6 +3,7 @@ import { ret } from "@@core/base";
 import {
   formatDocumentSecurityFeatureLocationString,
   formatDocumentSecurityFeatureScoreCategoryString,
+  DocumentIcaoStatus,
 } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
 import { DownloadReport, Header, Icao, Overall, Panel, PanelGroup } from "./components";
@@ -12,6 +13,8 @@ import { CheckpointBar } from "view/components/CheckpointBar";
 export interface ScoresProps {
   value: Rpc.TNScore | null;
   collapsed: boolean;
+  icaoStatus: DocumentIcaoStatus;
+  onIcaoStatusClick: () => void;
   onDownloadReportClick: () => void;
 }
 
@@ -47,7 +50,7 @@ export const Scores: FC<ScoresProps> = (props) => {
           <Overall value={props.value.totalScore} />
         </Panel>
         <Panel>
-          <Icao />
+          <Icao status={props.icaoStatus} onStatusClick={props.onIcaoStatusClick} />
         </Panel>
         <Panel title="Overall Security">
           <div css={styles.barContainer}>

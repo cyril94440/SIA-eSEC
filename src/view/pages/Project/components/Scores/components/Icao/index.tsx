@@ -1,101 +1,24 @@
 import { FC } from "react";
-import { Dialog } from "@@view/components";
+import { DocumentIcaoStatus } from "@@core/project";
 import * as styles from "./styles";
-import { FeatureItem } from "./FeatureItem";
 
-export interface IcaoProps {}
+export interface IcaoProps {
+  status: DocumentIcaoStatus;
+  onStatusClick: () => void;
+}
 
-const fakeData = [
-  {
-    category: "Security",
-    features: [
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-    ],
-  },
-  {
-    category: "Authenticity",
-    features: ["Lorem ipsum dolor sit amet consectetur adipiscing elit"],
-  },
-  {
-    category: "Location",
-    features: [
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-    ],
-  },
-  {
-    category: "Security",
-    features: [
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-    ],
-  },
-  {
-    category: "Authenticity",
-    features: ["Lorem ipsum dolor sit amet consectetur adipiscing elit"],
-  },
-  {
-    category: "Location",
-    features: [
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-    ],
-  },
-  {
-    category: "Security",
-    features: [
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-    ],
-  },
-  {
-    category: "Authenticity",
-    features: ["Lorem ipsum dolor sit amet consectetur adipiscing elit"],
-  },
-  {
-    category: "Location",
-    features: [
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-      "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-    ],
-  },
-];
-
-export const Icao: FC<IcaoProps> = () => {
+export const Icao: FC<IcaoProps> = (props) => {
   return (
     <div css={styles.root}>
       <div css={styles.status}>
-        ICAO: <span css={styles.statusValue}>Not complete</span>
+        ICAO:{" "}
+        <span css={[props.status.completed ? styles.statusValueComplete : styles.statusValueNotComplete]}>
+          {props.status.completed ? "Complete" : "Not complete"}
+        </span>
       </div>
-      <Dialog fullWidth={true}>
-        <Dialog.Trigger>
-          <div css={styles.missingFeatures}>Missing features</div>
-        </Dialog.Trigger>
-        <Dialog.Title>
-          ICAO: <span css={styles.red}>Not complete</span>
-        </Dialog.Title>
-        <Dialog.Description>
-          Here’s a list of all the missing features you need to complete your ICAO.
-          <span css={[styles.red]}>
-            Total of missing features: {fakeData.reduce((acc, item) => acc + item.features.length, 0)}
-          </span>
-        </Dialog.Description>
-        <Dialog.Body>
-          {fakeData.map((item, index) => (
-            <FeatureItem key={index} category={item.category} features={item.features} />
-          ))}
-        </Dialog.Body>
-      </Dialog>
+      <div css={styles.missingFeatures} onClick={props.onStatusClick}>
+        {props.status.completed ? "Show status" : "Missing features"}
+      </div>
     </div>
   );
 };
