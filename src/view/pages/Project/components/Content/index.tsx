@@ -21,7 +21,7 @@ export interface ContentProps {
   specs: ProjectSpecs;
   documentSecurityFeatureTree: DocumentSecurityFeatureTree;
   designQuestions: Rpc.DocumentDesignQuestion[];
-  onRenameClick: () => void;
+  onRenameClick: (title: string) => void;
   onEncryptionInfoClick: () => void;
   onSaveClick: () => void;
   onChangeDocumentType: (value: DocumentType) => void;

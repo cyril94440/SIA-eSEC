@@ -44,6 +44,9 @@ export const project = createReducer(initialState, (builder) => {
         allSecurityFeatures: [],
       };
     })
+    .addCase(actions.projectSetTitle, (state, action) => {
+      state.specs.title = action.payload;
+    })
     .addCase(actions.projectSetScore, (state, action) => {
       state.score = action.payload;
     })

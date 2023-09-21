@@ -151,8 +151,8 @@ export const Project: NextPage<ProjectProps> = (props) => {
           specs={specs}
           documentSecurityFeatureTree={documentSecurityFeaturesTree}
           designQuestions={allDesignQuestions}
-          onRenameClick={() => {
-            dispatch(Thunks.projectRename());
+          onRenameClick={(value: string) => {
+            dispatch(Thunks.projectRename(value));
           }}
           onEncryptionInfoClick={() => {
             // TODO:

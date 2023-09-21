@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { actions } from "@@store";
 
-export const projectRename = createAsyncThunk<void, void>("projectRename", async (value, { dispatch }) => {
-  console.log("TODO: handle rename");
+export const projectRename = createAsyncThunk<void, string>("projectRename", async (value, { dispatch }) => {
+  dispatch(actions.projectSetTitle(value));
 });

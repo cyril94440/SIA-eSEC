@@ -1,10 +1,11 @@
 import { FC } from "react";
 import { Button, ButtonKind, Icons } from "@@view/components";
 import * as styles from "./styles";
+import { RenameDialog } from "./components/RenameDialog";
 
 export interface HeaderProps {
   title: string;
-  onRenameClick: () => void;
+  onRenameClick: (title: string) => void;
   onEncryptionInfoClick: () => void;
   onSaveClick: () => void;
 }
@@ -15,9 +16,7 @@ export const Header: FC<HeaderProps> = (props) => {
       <div css={styles.root}>
         <div css={styles.title}>
           <div css={styles.titleBody}>{props.title}</div>
-          <div css={styles.titleEditIcon} onClick={props.onRenameClick}>
-            <Icons.Edit />
-          </div>
+          <RenameDialog actualTitle={props.title} handleRename={props.onRenameClick} />
         </div>
         <div css={styles.encryptionInfo}>
           <div css={styles.encryptionInfoIcon}>
