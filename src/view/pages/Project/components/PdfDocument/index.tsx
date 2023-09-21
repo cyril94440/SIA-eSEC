@@ -67,7 +67,11 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
     }))
     .filter(({ score }) => score !== null);
 
-  const icaoMissingFeatures = filterMissingFeatures(props.icaoData, props.documentSpecs.securityFeatureIds);
+  const icaoMissingFeatures = filterMissingFeatures(props.documentSpecs, props.icaoData, props.securityFeatures);
+
+  console.log("icaoMissingFeatures", JSON.stringify(icaoMissingFeatures));
+  console.log("securityFeatures", JSON.stringify(props.securityFeatures));
+  console.log("securityFeatureIds", props.documentSpecs.securityFeatureIds);
 
   return (
     <Document>
@@ -392,14 +396,16 @@ type FilteredResult = {
 }[];
 
 const filterMissingFeatures = (
+  specs: DocumentSpecs,
   icaoData: {
     icaoSecurityFeatures: Rpc.IcaoSecurityFeature[];
     icaoSecurityFeatureCategories: Rpc.IcaoSecurityFeatureCategory[];
     icaoSecurityFeatureSubcategories: Rpc.IcaoSecurityFeatureSubcategory[];
   },
-  securityFeatureIds: number[]
+  securityFeatures: Rpc.SecurityFeature[]
 ): FilteredResult => {
   const filteredResults: FilteredResult = [];
+  const allSecurityFeatureIds = new Map(securityFeatures.map((f) => [f.id, f]));
 
   icaoData.icaoSecurityFeatureCategories.forEach((category) => {
     const relatedSubcategories = icaoData.icaoSecurityFeatureSubcategories.filter(
@@ -411,9 +417,18 @@ const filterMissingFeatures = (
         (feature) => feature.subcategoryCode === subcat.code
       );
 
-      const missingFeatures = candidateFeatures.filter((feature) =>
-        feature.relatedEsecSecurityFeatureIds.every((id) => !securityFeatureIds.includes(id))
-      );
+      const missingFeatures = candidateFeatures.filter((feature) => {
+        const actualRelatedIds = feature.relatedEsecSecurityFeatureIds.filter((id) => {
+          const f = allSecurityFeatureIds.get(id);
+          return !!f && f.materialsCompatible.includes(specs.material);
+        });
+
+        if (actualRelatedIds.length === 0) {
+          return false;
+        }
+
+        return actualRelatedIds.every((id) => !specs.securityFeatureIds.includes(id));
+      });
 
       if (missingFeatures.length > 0) {
         filteredResults.push({
