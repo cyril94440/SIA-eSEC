@@ -5,7 +5,7 @@ export enum UserRole {
 
 export interface UserJWT {
   id: string;
-  username: string;
+  fullname: string;
   email: string;
   image: string | null;
   role: UserRole;

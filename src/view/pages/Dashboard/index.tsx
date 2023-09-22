@@ -19,7 +19,7 @@ export const Dashboard: NextPage = () => {
   const dispatch = useAppDispatch();
   const [loadProjectFile, setLoadProjectFile] = useState<File | null>(null);
   const [loadProjectDialogOpen, setLoadProjectDialogOpen] = useState(false);
-  const username = session?.user?.name;
+  const fullname = session?.user?.name;
 
   const handleSelectProjectFile = async () => {
     const files = await selectFiles({ accept: `.${ProjectFile.FILE_EXT}`, multiple: false });
@@ -51,7 +51,7 @@ export const Dashboard: NextPage = () => {
         <title>{formatPageTitle("Dashboard")}</title>
       </Head>
       <AppLayout mainCss={styles.root}>
-        <div css={styles.mainTitle}>{`Welcome back${username && `, ${username}`}`}</div>
+        <div css={styles.mainTitle}>{`Welcome back${fullname && `, ${fullname}`}`}</div>
         <br />
         <div css={styles.description}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore

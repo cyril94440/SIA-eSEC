@@ -18,7 +18,7 @@ export const handler: NextApiHandler<ApiResult<SignUpResult>> = async (req, res)
     !req.body.email ||
     !req.body.password ||
     !req.body.confirmPassword ||
-    !req.body.username ||
+    !req.body.fullname ||
     !req.body.role
   ) {
     return res.status(200).json({ success: false, error: "Missing parameters." });
@@ -66,7 +66,7 @@ export const handler: NextApiHandler<ApiResult<SignUpResult>> = async (req, res)
     await db.user.create({
       data: {
         email: token.email,
-        username: req.body.username,
+        fullname: req.body.fullname,
         password: encryptedPassword,
         role: token.role,
       },

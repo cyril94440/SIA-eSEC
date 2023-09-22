@@ -35,7 +35,7 @@ export interface SignUpParameters {
   token: string;
   email: string;
   role: string;
-  username: string;
+  fullname: string;
   password: string;
   confirmPassword: string;
 }

@@ -10,7 +10,7 @@ async function main() {
     update: {},
     create: {
       email: "bob@prisma.io",
-      username: "Bob",
+      fullname: "Bobby Bob",
       password,
     },
   });
@@ -20,7 +20,7 @@ async function main() {
     update: {},
     create: {
       email: "admin@prisma.io",
-      username: "Admin",
+      fullname: "Mister Admin",
       password,
       role: "ADMIN",
     },

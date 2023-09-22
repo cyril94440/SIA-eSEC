@@ -7,7 +7,7 @@ import * as styles from "./styles";
 
 interface ResetPasswordProps {
   id: string;
-  username: string;
+  fullname: string;
   userEmail: string;
 }
 
@@ -58,7 +58,7 @@ export const ResetPassword: FC<ResetPasswordProps> = (props) => {
       </AlertDialog.Title>
       <AlertDialog.Description>
         Please confirm that you want to send an email to reset the password of{" "}
-        <span css={styles.username}>{props.username}</span>.
+        <span css={styles.fullname}>{props.fullname}</span>.
       </AlertDialog.Description>
       <AlertDialog.Action>
         <button css={styles.confirmButton} onClick={handleResetPassword}>

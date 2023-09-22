@@ -63,7 +63,7 @@ export default function AddUser() {
       </Dialog.Title>
       <Dialog.Description>
         Enter the email and the role of the user you want to add, then click the button below. <br />
-        The user will receive an email containing a link to complete his profile with his username and password.
+        The user will receive an email containing a link to complete his profile with his full name and password.
       </Dialog.Description>
       <Dialog.Body>
         <div css={styles.bodyContainer}>

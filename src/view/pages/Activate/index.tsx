@@ -13,7 +13,7 @@ import * as buttonStyles from "../../components/Button/styles";
 import { Api } from "@@core/api/client";
 
 type SignUpInputs = {
-  username: string;
+  fullname: string;
   password: string;
   confirmPassword: string;
 };
@@ -53,7 +53,7 @@ export const Activate: NextPage = () => {
         token: token as string,
         email: tokenPayload?.email,
         role: tokenPayload?.role,
-        username: data.username,
+        fullname: data.fullname,
         password: data.password,
         confirmPassword: data.confirmPassword,
       });
@@ -91,14 +91,14 @@ export const Activate: NextPage = () => {
         <form css={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
           <label css={styles.label}>Email</label>
           <input css={styles.input} value={tokenPayload?.email ?? ""} type="text" disabled={true} />
-          <label css={styles.label}>Username</label>
+          <label css={styles.label}>Full Name</label>
           <input
             css={styles.input}
             placeholder="What should we call you?"
             type="text"
-            {...register("username", { required: true })}
+            {...register("fullname", { required: true })}
           />
-          {errors.username && <span css={styles.errorMsg}>Email is required</span>}
+          {errors.fullname && <span css={styles.errorMsg}>Full Name is required</span>}
 
           <label css={styles.label}>Password</label>
           <input
@@ -131,7 +131,7 @@ export const Activate: NextPage = () => {
               type="submit"
               value={submitting !== "idle" ? "" : "Sign Up"}
               disabled={
-                !!(errors.username || errors.password || errors.confirmPassword) ||
+                !!(errors.fullname || errors.password || errors.confirmPassword) ||
                 submitting === "submitting" ||
                 submitting === "success"
               }

@@ -42,14 +42,14 @@ export const authOptions: NextAuthOptions = {
         console.log("✅ Successfully logged in, returned : ", {
           id: user.id,
           email: user.email,
-          username: user.username,
+          fullname: user.fullname,
           image: user.image,
         });
 
         return {
           id: user.id,
           email: user.email,
-          username: user.username,
+          fullname: user.fullname,
           image: user.image,
           role: user.role,
         };
@@ -64,7 +64,7 @@ export const authOptions: NextAuthOptions = {
       const token = params.token as any as UserJWT;
       const session = params.session;
 
-      session.user!.name = token.username;
+      session.user!.name = token.fullname;
       session.user!.email = token.email;
       session.user!.image = token.image;
       session.user!.role = token.role;
@@ -88,7 +88,7 @@ export const authOptions: NextAuthOptions = {
 
       return {
         id: dbUser.id,
-        username: dbUser.username,
+        fullname: dbUser.fullname,
         email: dbUser.email,
         image: dbUser.image,
         role: dbUser.role,

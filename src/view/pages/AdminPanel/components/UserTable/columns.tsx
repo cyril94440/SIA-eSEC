@@ -4,7 +4,7 @@ import { ResetPassword } from "./components/reset-password/reset-password";
 
 export type User = {
   id: string;
-  username: string;
+  fullname: string;
   email: string;
   role: UserRole;
 };
@@ -17,10 +17,10 @@ export enum UserRole {
 const columnHelper = createColumnHelper<User>();
 
 export const columns = [
-  columnHelper.accessor((row) => row.username, {
-    id: "username",
+  columnHelper.accessor((row) => row.fullname, {
+    id: "fullname",
     cell: (info) => <span>{info.getValue()}</span>,
-    header: () => <span>Username</span>,
+    header: () => <span>Full Name</span>,
   }),
   columnHelper.accessor((row) => row.email, {
     id: "email",
@@ -35,7 +35,7 @@ export const columns = [
   columnHelper.accessor((row) => row.id, {
     id: "actions",
     cell: (info) => {
-      const { id, email, username } = info.row.original;
+      const { id, email, fullname } = info.row.original;
       return (
         <div
           style={{
@@ -45,7 +45,7 @@ export const columns = [
             gap: 12,
           }}
         >
-          <ResetPassword id={id} username={username} userEmail={email} />
+          <ResetPassword id={id} fullname={fullname} userEmail={email} />
           <DeleteUser id={id} />
         </div>
       );

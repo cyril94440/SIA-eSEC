@@ -30,6 +30,6 @@ export const confirmButton = css`
   }
 `;
 
-export const username = css`
+export const fullname = css`
   font-weight: ${styles.FONT_MEDIUM_32_WEIGHT};
 `;
