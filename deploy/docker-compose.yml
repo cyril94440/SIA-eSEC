@@ -1,0 +1,38 @@
+version: "3.1"
+
+services:
+  esec-db:
+    image: mysql/mysql-server:8.0
+    container_name: esec-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: esec-db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+
+  esec-engine:
+    image: 780933574146.dkr.ecr.eu-west-3.amazonaws.com/esec-engine
+    container_name: esec-engine
+    ports:
+      - "4000:4000"
+
+  esec-front:
+    image: 780933574146.dkr.ecr.eu-west-3.amazonaws.com/esec-front:latest
+    container_name: esec-front
+    environment:
+      NODE_ENV: production
+      RPC_ADDRESS: esec-engine:4000
+      DATABASE_URL: mysql://admin:rootpassword@esec-db:3306/esec-db
+      NEXTAUTH_SECRET: "GefZh6w@iVFcijwQzp3"
+      NEXTAUTH_URL: http://localhost:3000
+      NODEMAILER_EMAIL: esectool@gmail.com
+      NODEMAILER_PASSWORD: "ntlm cizs qfvr qsow"
+      EMAIL_ADDRESS_DEBUG: gaetandidderen@gmail.com
+      JWT_PRIVATE_KEY: "@pr9QiUu5R32rGMT9yBWmwGWE&GJ$ErzY*vaQF"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - esec-db
+      - esec-engine
