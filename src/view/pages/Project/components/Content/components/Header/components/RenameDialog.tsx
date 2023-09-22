@@ -17,6 +17,7 @@ export const RenameDialog: React.FC<RenameDialogProps> = (props) => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<RenameProjectInputs>({
     defaultValues: {
@@ -61,7 +62,7 @@ export const RenameDialog: React.FC<RenameDialogProps> = (props) => {
                 css={[styles.buttonRoot, styles.buttonRootFullWidth, styles.inputSubmit]}
                 type="submit"
                 value={"Update"}
-                disabled={!!errors.title}
+                disabled={watch("title").length === 0}
               />
             </div>
           </form>

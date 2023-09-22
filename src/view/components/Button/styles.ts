@@ -11,8 +11,15 @@ export const root = css`
   border-radius: ${styles.getSize(1 / 2)};
   cursor: pointer;
 
+  color: ${styles.COLOR_WHITE};
+  background-color: ${styles.COLOR_PRIMARY_36};
+
+  &:hover {
+    background-color: ${styles.COLOR_PRIMARY_20};
+  }
   &:disabled {
-    cursor: not-allowed;
+    color: ${styles.COLOR_NEUTRAL_80};
+    background-color: ${styles.COLOR_NEUTRAL_BLUE};
   }
 `;
 
