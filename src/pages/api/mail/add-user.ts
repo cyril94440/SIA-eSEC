@@ -63,7 +63,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     text: `You received an invite to join eSec!
     
     
-    Click here to activate your account: http://localhost:3000/activate?token=${activateToken}
+    Click here to activate your account: ${process.env.NEXTAUTH_URL}/activate?token=${activateToken}
     `,
   };
 
