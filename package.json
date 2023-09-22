@@ -13,7 +13,7 @@
   },
   "prisma": {
     "schema": "./src/lib/prisma/schema.prisma",
-    "seed": "dotenv -e .env.development -- ts-node --compiler-options {\"module\":\"CommonJS\"} ./src/lib/prisma/seed.ts"
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} ./src/lib/prisma/seed.ts"
   },
   "dependencies": {
     "@emotion/react": "11.9.0",
@@ -44,6 +44,7 @@
     "select-files": "1.0.1"
   },
   "devDependencies": {
+    "@bufbuild/buf": "^1.26.1",
     "@emotion/babel-plugin": "11.9.2",
     "@types/bcrypt": "^5.0.0",
     "@types/file-saver": "2.0.5",

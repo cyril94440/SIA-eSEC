@@ -1,17 +1,11 @@
-# Install dependencies only when needed
-FROM node:alpine AS deps
-WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn install --production --network-timeout 1000000
-RUN yarn add --dev typescript @types/node
-# ==================================================================
 # Rebuild the source code only when needed
 FROM node:alpine AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN yarn --network-timeout 1000000
+RUN yarn buf
 RUN yarn build
-RUN npm prune --production
+RUN yarn install --production --ignore-scripts --prefer-offline
 RUN yarn cache clean
 # ==================================================================
 # Production image, copy all the files and run next

@@ -1,8 +1,8 @@
-### Setup
+# Setup
 
-Install `yarn`, [`buf`](https://docs.buf.build/installation)
+## Development
 
-#### Development
+Install `yarn`
 
 `yarn`
 
@@ -10,15 +10,6 @@ Install `yarn`, [`buf`](https://docs.buf.build/installation)
 
 `yarn dev`
 
-#### Production
-
-`yarn`
-
-`yarn buf`
-
-`yarn build`
-
-`yarn start`
 
 ### MySQL setup
 
@@ -47,15 +38,23 @@ Everything's done ! ✅
 
 ### Database setup
 
-#### Development
-
 ```
 npx dotenv -e .env.development -- prisma migrate dev
 npx dotenv -e .env.development -- prisma db seed
 ```
 
-#### Production
+## Production
 
-```
-...
-```
+Add `.env`
+
+`yarn`
+
+`yarn buf`
+
+`yarn build`
+
+`yarn start`
+
+https://www.prisma.io/docs/guides/migrate/seed-database
+
+https://www.prisma.io/docs/reference/api-reference/command-reference#prisma-migrate
