@@ -74,7 +74,7 @@ export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
         ]}
       >
         {expanded && props.renderContent(collapse)}
-        <div ref={scrollRef}></div>
+        <div style={{ marginTop: 60 }} ref={scrollRef}></div>
       </div>
     </div>
   );
