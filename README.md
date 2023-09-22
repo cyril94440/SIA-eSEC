@@ -10,7 +10,6 @@ Install `yarn`
 
 `yarn dev`
 
-
 ### MySQL setup
 
 #### Create the container
@@ -58,3 +57,13 @@ Add `.env`
 https://www.prisma.io/docs/guides/migrate/seed-database
 
 https://www.prisma.io/docs/reference/api-reference/command-reference#prisma-migrate
+
+## Docker build
+
+Before proceeding with the build, make sure the esec-engine backend is up and running. You'll need to pass the URL of the backend as a build argument using Docker.
+
+To build the Docker image:
+
+```
+docker build . --build-arg RPC_ADDRESS=host.docker.internal:4000 -t esec
+```
