@@ -50,7 +50,7 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
             active={router.pathname === Routes.FAQ}
           />
         </SidenavSection>
-        <SidenavSection>
+        {/* <SidenavSection>
           <SidenavItem
             Icon={Icons.Notifications}
             title="Notifications"
@@ -72,7 +72,7 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
             link={{ href: Routes.SUBSCRIPTION }}
             active={router.pathname === Routes.SUBSCRIPTION}
           />
-        </SidenavSection>
+        </SidenavSection> */}
         <SidenavSection>
           {session?.user?.role === "ADMIN" && (
             <SidenavItem
