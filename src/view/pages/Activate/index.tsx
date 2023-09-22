@@ -11,6 +11,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Icons } from "@@view/components";
 import * as buttonStyles from "../../components/Button/styles";
 import { Api } from "@@core/api/client";
+import { signIn } from "next-auth/react";
 
 type SignUpInputs = {
   fullname: string;
@@ -65,10 +66,11 @@ export const Activate: NextPage = () => {
       }
 
       setSubmitting("success");
-      toast.success("Signed up successfully. Redirecting you to login page...");
-      setTimeout(() => {
-        router.push("/login");
-      }, 1000);
+      toast.success("Signed up successfully. Signing in...");
+      await signIn("credentials", {
+        email: tokenPayload?.email,
+        password: data.password,
+      });
       return;
     } catch (error) {
       setSubmitting("idle");
