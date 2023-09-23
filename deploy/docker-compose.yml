@@ -9,6 +9,8 @@ services:
       MYSQL_DATABASE: esec-db
       MYSQL_USER: user
       MYSQL_PASSWORD: password
+    volumes:
+      - /opt/mysql_data:/var/lib/mysql
     ports:
       - "3306:3306"
 
