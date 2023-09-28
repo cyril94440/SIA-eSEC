@@ -4,6 +4,7 @@ import * as styles from "./styles";
 import AlertDialog from "view/components/AlertDialog";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { Api } from "@@core/api/client";
 
 interface DeleteUserProps {
   id: string;
@@ -14,19 +15,12 @@ export const DeleteUser: FC<DeleteUserProps> = (props) => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch("/api/users", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: props.id,
-        }),
-      });
+      const response = await Api.deleteUser({ id: props.id });
 
-      if (!response.ok) {
-        throw new Error();
+      if (!response.success) {
+        throw new Error(response.error);
       }
+
       toast.success("User deleted successfully.");
       setTimeout(() => {
         router.reload();

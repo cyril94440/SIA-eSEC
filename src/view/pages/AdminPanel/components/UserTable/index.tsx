@@ -14,6 +14,7 @@ import { DebouncedInput } from "../../../../components/DebounceInput";
 import { RankingInfo, rankItem } from "@tanstack/match-sorter-utils";
 import AddUser from "./components/add/add-user";
 import toast from "react-hot-toast";
+import { Api } from "@@core/api/client";
 
 declare module "@tanstack/table-core" {
   interface FilterFns {
@@ -45,18 +46,11 @@ export const UserTable = () => {
   React.useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await fetch("/api/users", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);
+        const response = await Api.getUsers();
+        if (!response.success) {
+          throw new Error(response.error);
         }
-        const users = (await response.json()) as User[];
-        setData(users);
+        setData(response.data.users as any as User[]);
       } catch (error) {
         toast.error("An error occured, please try again.");
       } finally {

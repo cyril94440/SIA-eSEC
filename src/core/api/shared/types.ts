@@ -43,3 +43,24 @@ export interface SignUpParameters {
 export interface SignUpResult {
   message: string;
 }
+
+export interface UsersGetResult {
+  users: User[];
+}
+
+export interface UsersDeleteResult {
+  message: string;
+}
+
+export interface UsersDeleteParams {
+  id: string;
+}
+
+export interface UsersUpdateParameters {
+  id: string;
+  role: string;
+}
+
+export interface UsersUpdateResult {
+  message: string;
+}

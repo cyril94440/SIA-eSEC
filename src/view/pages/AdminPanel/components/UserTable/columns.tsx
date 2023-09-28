@@ -1,6 +1,7 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { DeleteUser } from "./components/delete/delete-user";
 import { ResetPassword } from "./components/reset-password/reset-password";
+import EditUser from "./components/edit/edit-user";
 
 export type User = {
   id: string;
@@ -35,7 +36,7 @@ export const columns = [
   columnHelper.accessor((row) => row.id, {
     id: "actions",
     cell: (info) => {
-      const { id, email, fullname } = info.row.original;
+      const { id, email, fullname, role } = info.row.original;
       return (
         <div
           style={{
@@ -45,6 +46,7 @@ export const columns = [
             gap: 12,
           }}
         >
+          <EditUser id={id} fullname={fullname} actualRole={role} />
           <ResetPassword id={id} fullname={fullname} userEmail={email} />
           <DeleteUser id={id} />
         </div>
