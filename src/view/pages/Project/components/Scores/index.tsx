@@ -42,6 +42,7 @@ export const Scores: FC<ScoresProps> = (props) => {
   if (!props.value || props.collapsed) {
     return <div css={styles.root}></div>;
   }
+  console.log(props.value);
   return (
     <div css={styles.root}>
       <Header />
@@ -64,6 +65,10 @@ export const Scores: FC<ScoresProps> = (props) => {
           <div css={styles.barContainer}>
             <div css={styles.barTitle}>Level</div>
             <CheckpointBar progression={props.value.securityFeaturesScore!.levelScore!.score * 10} />
+          </div>
+          <div css={styles.barContainer}>
+            <div css={styles.barTitle}>Document Design</div>
+            <CheckpointBar progression={props.value.documentDesignScore * 10} />
           </div>
         </Panel>
         <Panel title="Distribution of features">
