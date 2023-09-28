@@ -2,9 +2,8 @@ import { css, keyframes } from "@emotion/react";
 import * as styles from "@@view/styles";
 
 export const logo = css`
-  width: ${styles.getSize(12)};
+  width: ${styles.getSize(16)};
   margin-bottom: ${styles.getSize(8)};
-  color: ${styles.COLOR_PRIMARY_36};
 `;
 
 export const container = css`
