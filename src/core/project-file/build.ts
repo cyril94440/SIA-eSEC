@@ -6,11 +6,11 @@ import {
   ProjectSpecs,
   ProjectStatus,
 } from "@@core/project";
-import { Root, V1 } from "./types";
+import { Root, V2 } from "./types";
 
 export function build(specs: ProjectSpecs): Root {
   return {
-    version: 1,
+    version: 2,
     content: {
       title: specs.title,
       status: formatStatus(specs.status),
@@ -30,14 +30,14 @@ export function build(specs: ProjectSpecs): Root {
   };
 }
 
-function formatStatus(value: ProjectStatus): V1.Status {
+function formatStatus(value: ProjectStatus): V2.Status {
   switch (value) {
     case ProjectStatus.ONGOING:
       return "ongoing";
   }
 }
 
-function formatDocumentType(value: DocumentType): V1.DocumentType {
+function formatDocumentType(value: DocumentType): V2.DocumentType {
   switch (value) {
     case DocumentType.DRIVING_LICENSE:
       return "driving-license";
@@ -50,7 +50,7 @@ function formatDocumentType(value: DocumentType): V1.DocumentType {
   }
 }
 
-function formatDocumentMaterial(value: Rpc.SFMaterial): V1.DocumentMaterial {
+function formatDocumentMaterial(value: Rpc.SFMaterial): V2.DocumentMaterial {
   switch (value) {
     case Rpc.SFMaterial.Paper:
       return "paper";
@@ -59,16 +59,16 @@ function formatDocumentMaterial(value: Rpc.SFMaterial): V1.DocumentMaterial {
   }
 }
 
-function formatDocumentScoreTarget(value: DocumentScoreTarget): V1.DocumentScoreTarget {
+function formatDocumentScoreTarget(value: DocumentScoreTarget): V2.DocumentScoreTarget {
   switch (value) {
-    case DocumentScoreTarget.SIA_RECO:
-      return "sia-reco";
-    case DocumentScoreTarget.THEORICAL_MAXIMUM:
-      return "theorical-maximum";
+    case DocumentScoreTarget.ICAO:
+      return "icao";
+    case DocumentScoreTarget.None:
+      return "none";
   }
 }
 
-function formatDocumentStandardCompliance(value: DocumentStandardCompliance): V1.DocumentStandardCompliance {
+function formatDocumentStandardCompliance(value: DocumentStandardCompliance): V2.DocumentStandardCompliance {
   switch (value) {
     case DocumentStandardCompliance.ECOWAS_ID_CARD:
       return "ecowas-id-card";
@@ -83,7 +83,7 @@ function formatDocumentStandardCompliance(value: DocumentStandardCompliance): V1
   }
 }
 
-function formatDocumentDesignAnswers(value: Rpc.DocumentDesignFormAnswer[]): V1.DocumentDesignAnswer[] {
+function formatDocumentDesignAnswers(value: Rpc.DocumentDesignFormAnswer[]): V2.DocumentDesignAnswer[] {
   return value.map((v) => ({
     answerId: v.idAnswer,
     questionId: v.idQuestion,

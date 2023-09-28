@@ -6,9 +6,9 @@ import {
   ProjectSpecs,
   ProjectStatus,
 } from "@@core/project";
-import { V1 } from "../../types";
+import { V2 } from "../../types";
 
-export function parseV1(content: V1.Content): ProjectSpecs {
+export function parseV2(content: V2.Content): ProjectSpecs {
   return {
     title: content.title,
     status: parseStatus(content.status),
@@ -23,14 +23,14 @@ export function parseV1(content: V1.Content): ProjectSpecs {
   };
 }
 
-function parseStatus(value: V1.Status): ProjectStatus {
+function parseStatus(value: V2.Status): ProjectStatus {
   switch (value) {
     case "ongoing":
       return ProjectStatus.ONGOING;
   }
 }
 
-function parseDocumentType(value: V1.DocumentType): DocumentType {
+function parseDocumentType(value: V2.DocumentType): DocumentType {
   switch (value) {
     case "driving-license":
       return DocumentType.DRIVING_LICENSE;
@@ -43,7 +43,7 @@ function parseDocumentType(value: V1.DocumentType): DocumentType {
   }
 }
 
-function parseDocumentMaterial(value: V1.DocumentMaterial): Rpc.SFMaterial {
+function parseDocumentMaterial(value: V2.DocumentMaterial): Rpc.SFMaterial {
   switch (value) {
     case "paper":
       return Rpc.SFMaterial.Paper;
@@ -52,16 +52,16 @@ function parseDocumentMaterial(value: V1.DocumentMaterial): Rpc.SFMaterial {
   }
 }
 
-function parseDocumentScoreTarget(value: V1.DocumentScoreTarget): DocumentScoreTarget {
+function parseDocumentScoreTarget(value: V2.DocumentScoreTarget): DocumentScoreTarget {
   switch (value) {
-    case "sia-reco":
-      return DocumentScoreTarget.None;
-    case "theorical-maximum":
+    case "icao":
+      return DocumentScoreTarget.ICAO;
+    case "none":
       return DocumentScoreTarget.None;
   }
 }
 
-function parseDocumentStandardCompliance(value: V1.DocumentStandardCompliance): DocumentStandardCompliance {
+function parseDocumentStandardCompliance(value: V2.DocumentStandardCompliance): DocumentStandardCompliance {
   switch (value) {
     case "ecowas-id-card":
       return DocumentStandardCompliance.ECOWAS_ID_CARD;
@@ -76,7 +76,7 @@ function parseDocumentStandardCompliance(value: V1.DocumentStandardCompliance): 
   }
 }
 
-function parseDocumentDesignAnswers(value: V1.DocumentDesignAnswer[]): Rpc.DocumentDesignFormAnswer[] {
+function parseDocumentDesignAnswers(value: V2.DocumentDesignAnswer[]): Rpc.DocumentDesignFormAnswer[] {
   return value.map((v) => ({
     idAnswer: v.answerId,
     idQuestion: v.questionId,

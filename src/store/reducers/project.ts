@@ -23,7 +23,7 @@ const initialState: ProjectState = {
       type: DocumentType.PASSPORT,
       material: Rpc.SFMaterial.Plastic,
       standardCompliance: DocumentStandardCompliance.EU_PASSPORT,
-      scoreTarget: DocumentScoreTarget.SIA_RECO,
+      scoreTarget: DocumentScoreTarget.ICAO,
       designAnswers: [],
       securityFeatureIds: [],
     },

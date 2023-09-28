@@ -2,9 +2,9 @@ import { DocumentScoreTarget } from "../types";
 
 export function formatDocumentScoreTargetString(value: DocumentScoreTarget): string {
   switch (value) {
-    case DocumentScoreTarget.SIA_RECO:
-      return "SIA Reco";
-    case DocumentScoreTarget.THEORICAL_MAXIMUM:
-      return "Theorical maximum";
+    case DocumentScoreTarget.ICAO:
+      return "ICAO Doc 9393 (part 2)";
+    case DocumentScoreTarget.None:
+      return "None";
   }
 }

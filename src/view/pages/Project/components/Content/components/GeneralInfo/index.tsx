@@ -83,7 +83,7 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
       <SectionItem title="Score Target" fullWidth={false}>
         <Select
           value={props.specs.document.scoreTarget}
-          items={[DocumentScoreTarget.THEORICAL_MAXIMUM, DocumentScoreTarget.SIA_RECO]}
+          items={[DocumentScoreTarget.ICAO, DocumentScoreTarget.None]}
           itemId={(item) => item}
           itemText={(item) => formatDocumentScoreTargetString(item)}
           onChange={props.onChangeDocumentScoreTarget}
