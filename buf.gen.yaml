@@ -17,6 +17,6 @@ plugins:
     opt:
       - esModuleInterop=true
       - exportCommonSymbols=false
-      - onlyTypes=true
+      - onlyTypes=false
       - outputServices=none
       - unrecognizedEnum=false
