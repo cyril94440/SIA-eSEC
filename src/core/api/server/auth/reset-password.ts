@@ -27,11 +27,15 @@ export const handler: NextApiHandler<ApiResult<ResetPasswordResult>> = async (re
   try {
     // Verify the signature of the JWT
     resetToken = jwt.verify(req.body.token, process.env.JWT_PRIVATE_KEY) as JwtPayload;
+  } catch (error) {
+    return res.status(500).json({ success: false, error: "Token is either invalid or expired." });
+  }
 
+  try {
     // Check that user exists with the email stored in the token
     const user = await db.user.findUnique({
       where: {
-        email: resetToken.email ?? "",
+        email: resetToken.email,
       },
     });
 
@@ -39,33 +43,25 @@ export const handler: NextApiHandler<ApiResult<ResetPasswordResult>> = async (re
       return res.status(200).json({ success: false, error: "User not found." });
     }
 
-    // Verify that token contains the same email as the user
-    if (resetToken.email !== user.email) {
-      return res.status(400).json({ success: false, error: "Parameters do not match." });
-    }
-
     // Verify that token contains the correct action
     if (resetToken.action !== "reset-password") {
       return res.status(400).json({ success: false, error: "Invalid action." });
     }
-    try {
-      const encryptedNewPassword = await bcrypt.hash(req.body.password, 10);
-      await db.user.update({
-        where: {
-          id: user.id,
-        },
-        data: {
-          password: encryptedNewPassword,
-        },
-      });
-      return res.status(200).json({
-        success: true,
-        data: { message: "User successfully updated." },
-      });
-    } catch (error) {
-      return res.status(200).json({ success: false, error: "Could not update user." });
-    }
+
+    const encryptedNewPassword = await bcrypt.hash(req.body.password, 10);
+    await db.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        password: encryptedNewPassword,
+      },
+    });
+    return res.status(200).json({
+      success: true,
+      data: { message: "User successfully updated." },
+    });
   } catch (error) {
-    return res.status(500).json({ success: false, error: "Token is either invalid or expired." });
+    return res.status(200).json({ success: false, error: "Could not update user." });
   }
 };
