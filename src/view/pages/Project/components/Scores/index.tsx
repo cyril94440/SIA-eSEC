@@ -42,7 +42,6 @@ export const Scores: FC<ScoresProps> = (props) => {
   if (!props.value || props.collapsed) {
     return <div css={styles.root}></div>;
   }
-  console.log(props.value);
   return (
     <div css={styles.root}>
       <Header />

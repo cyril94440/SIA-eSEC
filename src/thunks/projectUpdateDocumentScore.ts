@@ -10,6 +10,7 @@ export const projectUpdateDocumentScore = createAsyncThunk<void, void>(
     const { specs, allSecurityFeatures } = state.project;
 
     const scoreResult = await Api.projectComputeScores({
+      material: specs.document.material,
       documentDesignAnswers: specs.document.designAnswers,
       securityFeaturesIDs: getDocumentSelectedSecurityFeatures(specs, allSecurityFeatures).map((f) => f.id),
     });

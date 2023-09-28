@@ -3,9 +3,11 @@ syntax = "proto3";
 import "esec_engine.proto";
 
 message ComputeScoreRequest {
-    repeated DocumentDesignFormAnswer document_design_answers = 1;
-    repeated int32 security_features_IDs = 2;
+    SFMaterial material = 1;
+    repeated DocumentDesignFormAnswer document_design_answers = 2;
+    repeated int32 security_features_IDs = 3;
 }
+
 message ComputeScoreResponse{
     TNScore scores = 1;
 }
