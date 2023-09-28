@@ -14,6 +14,11 @@ export default async function middleware(req: NextRequest, event: NextFetchEvent
       : NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
+  // Let unauthenticated users access the forgot password page
+  if (req.nextUrl.pathname.startsWith("/forgot-password")) {
+    return !isAuthenticated ? NextResponse.next() : NextResponse.redirect(new URL("/dashboard", req.url));
+  }
+
   // Let authenticated users access the reset password page if it has a token
   if (req.nextUrl.pathname.startsWith("/reset-password")) {
     return isAuthenticated && req.nextUrl.searchParams.get("token")

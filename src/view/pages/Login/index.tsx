@@ -9,6 +9,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 type LoginInputs = {
   email: string;
@@ -82,7 +83,9 @@ export const Login: NextPage = () => {
             {...register("password", { required: true })}
           />
           {errors.password && <span css={styles.errorMsg}>Password is required</span>}
-
+          <Link href="/forgot-password">
+            <a css={styles.forgotPassword}>Forgot password?</a>
+          </Link>
           <div css={styles.spinnerContainer}>
             <input
               css={[buttonStyles.root, buttonStyles.rootFullWidth, styles.inputSubmit]}

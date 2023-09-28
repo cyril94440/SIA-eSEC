@@ -25,9 +25,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   }
 
   /**
-   * Check that body contains id and email, and that email is valid
+   * Check that body contains email, and that email is valid
    */
-  if (!req.body.id && !req.body.email) {
+  if (!req.body.email) {
     return res.status(400).json({ message: "Missing parameters." });
   }
 
@@ -44,7 +44,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
   const resetPasswordToken = jwt.sign(
     {
-      id: req.body.id,
       email: req.body.email,
       action: "reset-password",
     },

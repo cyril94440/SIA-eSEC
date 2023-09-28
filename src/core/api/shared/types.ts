@@ -64,3 +64,15 @@ export interface UsersUpdateParameters {
 export interface UsersUpdateResult {
   message: string;
 }
+
+/**
+ * MAIL
+ */
+
+export interface MailForgotPasswordParameters {
+  email: string;
+}
+
+export interface MailForgotPasswordResult {
+  message: string;
+}

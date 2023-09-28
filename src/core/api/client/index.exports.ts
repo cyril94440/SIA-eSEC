@@ -4,3 +4,4 @@ export * from "./projectFileEncode";
 export * from "./authSignup";
 export * from "./authResetPassword";
 export * from "./users";
+export * from "./mail";

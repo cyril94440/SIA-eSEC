@@ -7,6 +7,18 @@ export const logo = css`
   color: ${styles.COLOR_PRIMARY_36};
 `;
 
+export const title = css`
+  ${styles.fontMedium32};
+  font-weight: 800;
+  margin-bottom: ${styles.getSize(2)};
+`;
+
+export const description = css`
+  ${styles.fontMedium14};
+  text-align: center;
+  max-width: ${styles.getSize(32)};
+`;
+
 export const container = css`
   display: flex;
   height: 100vh;
@@ -31,8 +43,11 @@ export const input = css`
 
   &::placeholder {
     color: ${styles.COLOR_NEUTRAL_80};
-    font-size: ${styles.getSize(1.5)};
-    font-weight: ${styles.FONT_MEDIUM_14_SIZE};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    font-style: italic;
   }
 `;
 
@@ -41,7 +56,7 @@ export const label = css`
   margin-bottom: ${styles.getSize(1)};
   font-size: ${styles.getSize(1.5)};
   text-align: left;
-  ${styles.fontMedium14};
+  font-size: ${styles.FONT_MEDIUM_14_SIZE};
 `;
 
 export const inputSubmit = css`
@@ -83,10 +98,20 @@ export const spinner = css`
   animation: ${spin} 1s linear infinite;
 }`;
 
-export const forgotPassword = css`
+export const successIcon = css`
+  color: ${styles.COLOR_WHITE};
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: ${styles.getSize(3.5)};
+  height: ${styles.getSize(3.5)};
+`;
+
+export const backToLogin = css`
   ${styles.fontMedium14};
   text-decoration: none;
-  text-align: right;
+  text-align: center;
   cursor: pointer;
   color: ${styles.COLOR_PRIMARY_20};
   margin-top: ${styles.getSize(2)};

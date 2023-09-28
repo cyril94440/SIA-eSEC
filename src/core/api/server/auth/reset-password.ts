@@ -43,8 +43,8 @@ export const handler: NextApiHandler<ApiResult<ResetPasswordResult>> = async (re
       // Verify the signature of the JWT
       resetToken = jwt.verify(req.body.token, process.env.JWT_PRIVATE_KEY) as JwtPayload;
 
-      // Verify that token contains the same id and email as the user
-      if (resetToken.id !== user.id || resetToken.email !== user.email) {
+      // Verify that token contains the same email as the user
+      if (resetToken.email !== user.email) {
         return res.status(400).json({ success: false, error: "Parameters do not match." });
       }
 
