@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { Dialog, Icons } from "@@view/components";
 import * as styles from "./add-user-styles";
 import * as buttonStyles from "../../../../../../components/Button/styles"; // TODO: remove it (encapsulation problem)
+import { Api } from "@@core/api/client";
 
 type AddUserInputs = {
   email: string;
@@ -28,25 +29,21 @@ export default function AddUser() {
     setSubmitting("submitting");
 
     try {
-      await fetch("/api/mail/add-user", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => {
-          if (res.status === 200) return res.json();
-          throw new Error("Failed to send email");
-        })
-        .then(() => {
-          setSubmitting("success");
-          toast.success("Email sent successfully! Page will reload.");
-          setTimeout(() => {
-            router.reload();
-          }, 1000);
-          return;
-        });
+      const response = await Api.sendAddUserMail({
+        email: data.email,
+        role: data.role,
+      });
+
+      if (!response.success) {
+        throw new Error(response.error);
+      }
+
+      setSubmitting("success");
+      toast.success("Email sent successfully! Page will reload.");
+      setTimeout(() => {
+        router.reload();
+      });
+      return;
     } catch (error) {
       setSubmitting("idle");
       toast.error("An error occured, please try again later.");

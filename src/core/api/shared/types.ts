@@ -23,7 +23,6 @@ export interface ProjectFileDecodeResult {
 
 export interface ResetPasswordParameters {
   token: string;
-  oldPassword: string;
   password: string;
 }
 
@@ -69,10 +68,27 @@ export interface UsersUpdateResult {
  * MAIL
  */
 
+export interface MailResetPasswordParameters {
+  email: string;
+}
+
+export interface MailResetPasswordResult {
+  message: string;
+}
+
 export interface MailForgotPasswordParameters {
   email: string;
 }
 
 export interface MailForgotPasswordResult {
+  message: string;
+}
+
+export interface MailAddUserParameters {
+  email: string;
+  role: "USER" | "ADMIN";
+}
+
+export interface MailAddUserResult {
   message: string;
 }

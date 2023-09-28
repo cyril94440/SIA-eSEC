@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
-import React, { FC } from "react";
+import { FC } from "react";
 import toast from "react-hot-toast";
 import AlertDialog from "view/components/AlertDialog";
 import { Icons } from "view/components/Icons";
 import * as styles from "./styles";
+import { Api } from "@@core/api/client";
 
 interface ResetPasswordProps {
   id: string;
@@ -11,38 +11,20 @@ interface ResetPasswordProps {
   userEmail: string;
 }
 
-type SubmitState = "idle" | "submitting" | "success";
-
 export const ResetPassword: FC<ResetPasswordProps> = (props) => {
-  const router = useRouter();
-  const [submitting, setSubmitting] = React.useState<SubmitState>("idle");
-
   const handleResetPassword = async () => {
-    setSubmitting("submitting");
     try {
-      const response = await fetch("/api/mail/reset-password", {
-        method: "POST",
-        body: JSON.stringify({
-          id: props.id,
-          email: props.userEmail,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const response = await Api.sendResetPasswordMail({
+        email: props.userEmail,
       });
 
-      if (!response.ok) {
-        throw new Error();
+      if (!response.success) {
+        throw new Error(response.error);
       }
 
-      setSubmitting("success");
-      toast.success("Email sent successfully! Page will reload.");
-      setTimeout(() => {
-        router.reload();
-      }, 1000);
+      toast.success("Email sent successfully!");
       return;
     } catch (error) {
-      setSubmitting("idle");
       toast.error("An error occured while attempting to send the email, please try again.");
     }
   };

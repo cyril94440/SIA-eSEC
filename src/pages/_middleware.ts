@@ -7,6 +7,10 @@ export default async function middleware(req: NextRequest, event: NextFetchEvent
   const isAuthenticated = !!token;
   const isAdmin = isAuthenticated && token?.role === UserRole.Admin;
 
+  if (req.nextUrl.pathname.startsWith("/api")) {
+    return NextResponse.next();
+  }
+
   // Let unauthenticated users access the activate page to sign up but redirect authenticated users to dashboard
   if (req.nextUrl.pathname.startsWith("/activate")) {
     return !isAuthenticated && req.nextUrl.searchParams.get("token")
@@ -19,9 +23,9 @@ export default async function middleware(req: NextRequest, event: NextFetchEvent
     return !isAuthenticated ? NextResponse.next() : NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
-  // Let authenticated users access the reset password page if it has a token
+  // Let users access the reset password page if it has a token
   if (req.nextUrl.pathname.startsWith("/reset-password")) {
-    return isAuthenticated && req.nextUrl.searchParams.get("token")
+    return req.nextUrl.searchParams.get("token")
       ? NextResponse.next()
       : NextResponse.redirect(new URL("/login", req.url));
   }

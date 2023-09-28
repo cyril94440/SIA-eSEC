@@ -12,7 +12,6 @@ import * as buttonStyles from "../../components/Button/styles";
 import { Api } from "@@core/api/client";
 
 type ResetPasswordInputs = {
-  oldPassword: string;
   password: string;
   confirmPassword: string;
 };
@@ -35,7 +34,6 @@ export const ResetPassword: NextPage = () => {
     try {
       const res = await Api.authResetPassword({
         token: token as string,
-        oldPassword: data.oldPassword,
         password: data.password,
       });
 
@@ -46,7 +44,7 @@ export const ResetPassword: NextPage = () => {
       }
 
       setSubmitting("success");
-      toast.success("Your password has been reset successfully! Redirecting to dashboard...");
+      toast.success("Your password has been reset successfully! Redirecting to login page...");
       setTimeout(() => {
         router.push("/dashboard");
       }, 1000);
@@ -70,15 +68,6 @@ export const ResetPassword: NextPage = () => {
         <div css={styles.title}>Reset Password</div>
         <div css={styles.description}>Please fill in the form below to reset your password</div>
         <form css={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
-          <label css={styles.label}>Old password</label>
-          <input
-            css={styles.input}
-            placeholder="Your old password"
-            type="password"
-            {...register("oldPassword", { required: true })}
-          />
-          {errors.oldPassword && <span css={styles.errorMsg}>Old password is required</span>}
-
           <label css={styles.label}>New Password</label>
           <input
             css={styles.input}
@@ -110,9 +99,7 @@ export const ResetPassword: NextPage = () => {
               type="submit"
               value={submitting !== "idle" ? "" : "Reset"}
               disabled={
-                !!(errors.oldPassword || errors.password || errors.confirmPassword) ||
-                submitting === "submitting" ||
-                submitting === "success"
+                !!(errors.password || errors.confirmPassword) || submitting === "submitting" || submitting === "success"
               }
             />
             {submitting === "submitting" && <span css={[styles.spinner]}></span>}

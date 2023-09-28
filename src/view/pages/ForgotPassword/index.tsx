@@ -4,7 +4,6 @@ import { formatPageTitle } from "@@core/base";
 import * as styles from "./styles";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { JwtPayload } from "jsonwebtoken";
 import toast from "react-hot-toast";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Icons } from "@@view/components";
@@ -31,26 +30,17 @@ export const ForgotPassword: NextPage = () => {
   const onSubmit: SubmitHandler<ForgotPasswordInputs> = async (data) => {
     setSubmitting("submitting");
     try {
-      await fetch("/api/mail/forgot-password", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => {
-          if (res.status === 200) return res.json();
-          throw new Error("Failed to send email");
-        })
-        .then(() => {
-          setSubmitting("success");
-          toast.success("Email sent successfully! Redirecting to login page...");
-          setTimeout(() => {
-            router.reload();
-          }, 1000);
-          return;
-        });
+      const response = await Api.sendForgotPasswordMail({ email: data.email });
 
+      if (!response.success) {
+        throw new Error(response.error);
+      }
+
+      setSubmitting("success");
+      toast.success("Email sent successfully! Redirecting to login page...");
+      setTimeout(() => {
+        router.reload();
+      }, 1000);
       return;
     } catch (error) {
       setSubmitting("idle");
