@@ -88,7 +88,7 @@ export const Project: NextPage<ProjectProps> = (props) => {
     ]
   );
 
-  const handleSaveProjectFile = async (password: string): Promise<string | null> => {
+  const handleSaveProjectFile = async (password: string, name?: string): Promise<string | null> => {
     const state = store.getState() as RootState;
     const specs = state.project.specs;
     const res = await Api.projectFileEncode({ specs, password });
@@ -98,7 +98,7 @@ export const Project: NextPage<ProjectProps> = (props) => {
     }
 
     const blob = new Blob([res.data.content], { type: "text/plain; charset=utf-8" });
-    const filename = `${specs.title}.${ProjectFile.FILE_EXT}`;
+    const filename = `${name ?? specs.title}.${ProjectFile.FILE_EXT}`;
     FileSaver.saveAs(blob, filename);
     return null;
   };

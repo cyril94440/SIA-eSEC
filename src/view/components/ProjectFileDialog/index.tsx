@@ -3,20 +3,37 @@ import { useForm } from "react-hook-form";
 import { formatErrorMessage, ret } from "@@core/base";
 import { Button, Dialog, Forms } from "@@view/components";
 import * as styles from "./styles";
+import { useStore } from "react-redux";
+import { RootState } from "@@store";
+import { useAppSelector } from "@@view/hooks";
 
 export interface ProjectFileDialogProps {
   open: boolean;
   mode: "save" | "load";
-  handler: (password: string) => Promise<string | null>;
+  handler: (password: string, name?: string) => Promise<string | null>;
   onOpenChange: (value: boolean) => void;
 }
 
 export const ProjectFileDialog: FC<ProjectFileDialogProps> = (props) => {
-  const form = useForm<{ password: string }>({
+  const specs = useAppSelector((state) => state.project.specs);
+
+  // Today as string in DD-MM-YYYY format
+  const today = new Date().toISOString().split("T")[0];
+  const form = useForm<{ name?: string; password: string }>({
     defaultValues: {
+      name: `${specs.title} - ${today}`,
       password: "",
     },
   });
+
+  useEffect(() => {
+    if (props.mode === "save") {
+      form.reset({
+        name: `${specs.title} - ${today}`,
+        password: "",
+      });
+    }
+  }, [specs]);
 
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -46,12 +63,12 @@ export const ProjectFileDialog: FC<ProjectFileDialogProps> = (props) => {
       <Dialog.Body>
         <div css={styles.body}>
           <form
-            onSubmit={form.handleSubmit(async ({ password }) => {
+            onSubmit={form.handleSubmit(async ({ name, password }) => {
               console.log("submit", password);
               setSubmitting(true);
               setErrorMessage("");
               try {
-                const errorMessage = await props.handler(password);
+                const errorMessage = await props.handler(password, name);
 
                 if (errorMessage) {
                   setErrorMessage(errorMessage);
@@ -66,6 +83,19 @@ export const ProjectFileDialog: FC<ProjectFileDialogProps> = (props) => {
               }
             })}
           >
+            {props.mode === "save" && (
+              <Forms.Label title={"File name"}>
+                <Forms.Input
+                  control={form.control}
+                  name={"name"}
+                  type={"text"}
+                  autoComplete={"off"}
+                  rules={{
+                    required: true,
+                  }}
+                />
+              </Forms.Label>
+            )}
             <Forms.Label title={"File password"}>
               <Forms.Input
                 control={form.control}
