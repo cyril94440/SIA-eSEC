@@ -7,7 +7,7 @@ import {
   FilterFn,
   getFilteredRowModel,
 } from "@tanstack/react-table";
-import { User, columns } from "./columns";
+import { User, UserRole, UserStatus, columns } from "./columns";
 import * as styles from "./styles";
 import { Icons } from "../../../../components/Icons";
 import { DebouncedInput } from "../../../../components/DebounceInput";
@@ -44,13 +44,47 @@ export const UserTable = () => {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    async function fetchUsers() {
+    async function fetchInvites() {
       try {
-        const response = await Api.getUsers();
+        const response = await Api.getInvites();
         if (!response.success) {
           throw new Error(response.error);
         }
-        setData(response.data.users as any as User[]);
+        return response.data.invites;
+      } catch (error) {
+        toast.error("An error occured, please try again.");
+      }
+    }
+    async function fetchUsers() {
+      try {
+        const response = await Api.getUsers();
+        const invites = await fetchInvites();
+        if (!response.success) {
+          throw new Error(response.error);
+        }
+
+        // Existing users marked as active
+        const usersWithStatus = response.data.users.map((user) => ({
+          ...user,
+          status: UserStatus.Active,
+        })) as any as User[];
+
+        console.log(invites);
+        // Loop through invites and add non-duplicate emails as new users with status Pending
+        if (invites) {
+          invites.forEach((invite) => {
+            if (!usersWithStatus.some((user) => user.email === invite.email)) {
+              usersWithStatus.push({
+                id: Math.random().toString(36).slice(2),
+                fullname: "Not defined",
+                email: invite.email,
+                role: UserRole.NotDefined,
+                status: UserStatus.Pending,
+              });
+            }
+          });
+        }
+        setData(usersWithStatus as any as User[]);
       } catch (error) {
         toast.error("An error occured, please try again.");
       } finally {

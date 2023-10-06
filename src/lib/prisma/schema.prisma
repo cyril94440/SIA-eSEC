@@ -47,6 +47,10 @@ model User {
     sessions  Session[]
 }
 
+model Invite {
+    email String @unique
+}
+
 enum Role {
     USER
     ADMIN

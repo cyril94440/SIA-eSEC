@@ -8,11 +8,18 @@ export type User = {
   fullname: string;
   email: string;
   role: UserRole;
+  status: UserStatus;
 };
+
+export enum UserStatus {
+  Pending = "pending",
+  Active = "active",
+}
 
 export enum UserRole {
   Admin = "admin",
   User = "user",
+  NotDefined = "not defined",
 }
 
 const columnHelper = createColumnHelper<User>();
@@ -33,10 +40,20 @@ export const columns = [
     cell: (info) => <span>{info.getValue().toUpperCase()}</span>,
     header: () => <span>Role</span>,
   }),
+  columnHelper.accessor((row) => row.status, {
+    id: "status",
+    cell: (info) => <span>{info.getValue().toUpperCase()}</span>,
+    header: () => <span>Status</span>,
+  }),
   columnHelper.accessor((row) => row.id, {
     id: "actions",
     cell: (info) => {
       const { id, email, fullname, role } = info.row.original;
+
+      if (role === UserRole.NotDefined) {
+        return null;
+      }
+
       return (
         <div
           style={{

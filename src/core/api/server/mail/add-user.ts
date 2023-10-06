@@ -5,6 +5,7 @@ import { validateEmail } from "lib/utils/validate-email";
 import jwt from "jsonwebtoken";
 import { UserRole } from "@@core/auth";
 import { MailContent, sendMail } from "@@core/mail";
+import { db } from "lib/db";
 
 export const handler: NextApiHandler<ApiResult<MailResetPasswordResult>> = async (req, res) => {
   await handleAuthenticated("POST", req, res, async (token) => {
@@ -63,6 +64,12 @@ export const handler: NextApiHandler<ApiResult<MailResetPasswordResult>> = async
     };
 
     const mailResponse = await sendMail(mailContent);
+
+    await db.invite.create({
+      data: {
+        email: req.body.email,
+      },
+    });
 
     if (!mailResponse.success) {
       return res.status(200).json({ success: false, error: "Failed to send email." });

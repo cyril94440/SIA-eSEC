@@ -6,7 +6,7 @@ import { Dialog, Icons } from "@@view/components";
 import * as styles from "./styles";
 import * as buttonStyles from "../../../../../../components/Button/styles"; // TODO: remove it (encapsulation problem)
 import { Api } from "@@core/api/client";
-import { UserRole } from "@@core/auth";
+import { UserRole } from "../../columns";
 
 interface EditUserProps {
   id: string;
@@ -15,7 +15,7 @@ interface EditUserProps {
 }
 
 type EditUserInputs = {
-  role: "USER" | "ADMIN";
+  role: UserRole;
 };
 
 type SubmitState = "idle" | "submitting" | "success";

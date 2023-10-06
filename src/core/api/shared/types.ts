@@ -1,5 +1,5 @@
 import { ProjectSpecs } from "@@core/project";
-import { User } from "@prisma/client";
+import { Invite, User } from "@prisma/client";
 
 export type ApiResult<Data> = { success: true; data: Data } | { success: false; error: string };
 
@@ -92,4 +92,11 @@ export interface MailAddUserParameters {
 
 export interface MailAddUserResult {
   message: string;
+}
+
+/**
+ * INVITES
+ */
+export interface InvitesGetResult {
+  invites: Invite[];
 }
