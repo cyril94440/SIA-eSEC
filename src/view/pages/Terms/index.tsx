@@ -3,25 +3,32 @@ import * as styles from "./styles";
 import Head from "next/head";
 import { formatPageTitle } from "@@core/base";
 import { Icons } from "@@view/components";
+import { useSession } from "next-auth/react";
+import { AppLayout } from "@@view/containers";
 export const Terms = () => {
-  return (
+  const { data: session } = useSession();
+
+  console.log(session);
+  const Content = () => (
     <>
       <Head>
         <title>{formatPageTitle("Terms and Conditions")}</title>
       </Head>
-      <div css={styles.backButtonContainer}>
-        <div css={styles.backIcon}>
-          <Icons.ChevronLeft />
+      {!session && (
+        <div css={styles.backButtonContainer}>
+          <div css={styles.backIcon}>
+            <Icons.ChevronLeft />
+          </div>
+          <button
+            css={styles.backButton}
+            onClick={() => {
+              window.history.back();
+            }}
+          >
+            Retour
+          </button>
         </div>
-        <button
-          css={styles.backButton}
-          onClick={() => {
-            window.history.back();
-          }}
-        >
-          Retour
-        </button>
-      </div>
+      )}
       <div css={styles.container}>
         <div css={styles.logo}>
           <Icons.App />
@@ -40,5 +47,13 @@ export const Terms = () => {
         </div>
       </div>
     </>
+  );
+
+  return !session ? (
+    <Content />
+  ) : (
+    <AppLayout mainCss={styles.root}>
+      <Content />
+    </AppLayout>
   );
 };
