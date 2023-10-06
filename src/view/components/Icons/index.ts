@@ -1,3 +1,4 @@
+import { Terms } from "./Terms";
 import { App } from "./App";
 import { BadgePlus } from "./BadgePlus";
 import { Check } from "./Check";
@@ -64,4 +65,5 @@ export const Icons = {
   Save,
   Search,
   Thrash,
+  Terms,
 };

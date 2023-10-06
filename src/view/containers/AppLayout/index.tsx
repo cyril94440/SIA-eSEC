@@ -49,6 +49,13 @@ export const AppLayout: FC<AppLayoutProps> = (props) => {
             link={{ href: Routes.FAQ }}
             active={router.pathname === Routes.FAQ}
           />
+          <SidenavItem
+            Icon={Icons.Terms}
+            title="Terms"
+            minimized={sidenavMinimized}
+            link={{ href: Routes.TERMS }}
+            active={router.pathname === Routes.TERMS}
+          />
         </SidenavSection>
         {/* <SidenavSection>
           <SidenavItem
