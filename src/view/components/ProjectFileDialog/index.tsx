@@ -17,7 +17,7 @@ export interface ProjectFileDialogProps {
 export const ProjectFileDialog: FC<ProjectFileDialogProps> = (props) => {
   const specs = useAppSelector((state) => state.project.specs);
 
-  // Today as string in DD-MM-YYYY format
+  // Today as string in YY-MM-DDDD format
   const today = new Date().toISOString().split("T")[0];
   const form = useForm<{ name?: string; password: string }>({
     defaultValues: {
