@@ -19,9 +19,14 @@ export const handler: NextApiHandler<ApiResult<SignUpResult>> = async (req, res)
     !req.body.password ||
     !req.body.confirmPassword ||
     !req.body.fullname ||
-    !req.body.role
+    !req.body.role ||
+    !req.body.acceptTermsAndConditions
   ) {
     return res.status(200).json({ success: false, error: "Missing parameters." });
+  }
+
+  if (!req.body.acceptTermsAndConditions) {
+    return res.status(200).json({ success: false, error: "You must accept terms and conditions." });
   }
 
   if (req.body.password !== req.body.confirmPassword) {

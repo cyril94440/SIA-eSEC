@@ -11,3 +11,4 @@ export * from "./AdminPanel";
 export * from "./Activate";
 export * from "./ResetPassword";
 export * from "./ForgotPassword";
+export * from "./Terms";

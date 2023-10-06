@@ -37,6 +37,7 @@ export interface SignUpParameters {
   fullname: string;
   password: string;
   confirmPassword: string;
+  acceptTermsAndConditions: boolean;
 }
 
 export interface SignUpResult {

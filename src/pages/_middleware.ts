@@ -11,6 +11,10 @@ export default async function middleware(req: NextRequest, event: NextFetchEvent
     return NextResponse.next();
   }
 
+  if (req.nextUrl.pathname.startsWith("/terms")) {
+    return NextResponse.next();
+  }
+
   // Let unauthenticated users access the activate page to sign up but redirect authenticated users to dashboard
   if (req.nextUrl.pathname.startsWith("/activate")) {
     return !isAuthenticated && req.nextUrl.searchParams.get("token")

@@ -12,11 +12,13 @@ import { Icons } from "@@view/components";
 import * as buttonStyles from "../../components/Button/styles";
 import { Api } from "@@core/api/client";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 type SignUpInputs = {
   fullname: string;
   password: string;
   confirmPassword: string;
+  acceptTermsAndConditions: boolean;
 };
 
 type SubmitState = "idle" | "submitting" | "success";
@@ -49,6 +51,13 @@ export const Activate: NextPage = () => {
 
   const onSubmit: SubmitHandler<SignUpInputs> = async (data) => {
     setSubmitting("submitting");
+
+    if (!data.acceptTermsAndConditions) {
+      toast.error("You must accept the Terms and Conditions to proceed.");
+      setSubmitting("idle");
+      return;
+    }
+
     try {
       const res = await Api.authSignup({
         token: token as string,
@@ -57,6 +66,7 @@ export const Activate: NextPage = () => {
         fullname: data.fullname,
         password: data.password,
         confirmPassword: data.confirmPassword,
+        acceptTermsAndConditions: data.acceptTermsAndConditions,
       });
 
       if (!res.success) {
@@ -128,6 +138,17 @@ export const Activate: NextPage = () => {
           {errors.confirmPassword && <span css={styles.errorMsg}>Passwords do not match</span>}
 
           <div css={styles.spinnerContainer}>
+            <div css={styles.checkboxContainer}>
+              <input
+                css={styles.checkbox}
+                type="checkbox"
+                id="acceptTermsAndConditions"
+                {...register("acceptTermsAndConditions")}
+              />
+              <label css={styles.checkboxLabel} htmlFor="acceptTermsAndConditions">
+                I agree to all <Link href={"/terms"}>Terms and Conditions</Link>.
+              </label>
+            </div>
             <input
               css={[buttonStyles.root, buttonStyles.rootFullWidth, styles.inputSubmit]}
               type="submit"

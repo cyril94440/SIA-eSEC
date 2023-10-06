@@ -54,7 +54,6 @@ export const input = css`
 export const label = css`
   margin-top: ${styles.getSize(3)};
   margin-bottom: ${styles.getSize(1)};
-  font-size: ${styles.getSize(1.5)};
   text-align: left;
   font-size: ${styles.FONT_MEDIUM_14_SIZE};
 `;
@@ -106,4 +105,24 @@ export const successIcon = css`
   transform: translate(-50%, -50%);
   width: ${styles.getSize(3.5)};
   height: ${styles.getSize(3.5)};
+`;
+
+export const checkboxContainer = css`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: ${styles.getSize(3)};
+`;
+
+export const checkbox = css`
+  margin-right: ${styles.getSize(1)};
+  background-color: ${styles.COLOR_RED};
+  width: ${styles.getSize(2)};
+  height: ${styles.getSize(2)};
+`;
+
+export const checkboxLabel = css`
+  ${styles.fontRegular12};
+  color: ${styles.COLOR_BLACK};
 `;
