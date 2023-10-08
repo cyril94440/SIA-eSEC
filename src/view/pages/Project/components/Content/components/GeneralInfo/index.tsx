@@ -2,12 +2,9 @@ import { FC } from "react";
 import {
   DocumentScoreTarget,
   DocumentStandardCompliance,
-  DocumentType,
-  formatDocumentMaterialString,
   formatDocumentScoreTargetString,
   formatDocumentStandardComplianceString,
   formatDocumentTypeString,
-  isDocumentMaterialValid,
   ProjectSpecs,
 } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
@@ -17,8 +14,7 @@ import { SectionItem } from "../SectionItem";
 
 export interface GeneralInfoProps {
   specs: ProjectSpecs;
-  onChangeDocumentType: (value: DocumentType) => void;
-  onChangeDocumentMaterial: (value: Rpc.SFMaterial) => void;
+  onChangeDocumentType: (value: Rpc.SFDocumentType) => void;
   onChangeDocumentStandardCompliance: (value: DocumentStandardCompliance) => void;
   onChangeDocumentScoreTarget: (value: DocumentScoreTarget) => void;
 }
@@ -28,41 +24,25 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
     <Section>
       <SectionItem title="Document Type" fullWidth={true}>
         <CardSelect
-          value={props.specs.document.type}
+          value={props.specs.document.type.toString()}
           items={[
             {
-              value: DocumentType.PASSPORT,
-              Icon: Icons.DocumentTypePassport,
-              label: formatDocumentTypeString(DocumentType.PASSPORT),
+              value: Rpc.SFDocumentType.Card.toString(),
+              Icon: Icons.DocumentTypeIdCard,
+              label: formatDocumentTypeString(Rpc.SFDocumentType.Card),
             },
             {
-              value: DocumentType.ID_CARD,
-              Icon: Icons.DocumentTypeIdCard,
-              label: formatDocumentTypeString(DocumentType.ID_CARD),
+              value: Rpc.SFDocumentType.PassportPaper.toString(),
+              Icon: Icons.DocumentTypePassport,
+              label: formatDocumentTypeString(Rpc.SFDocumentType.PassportPaper),
+            },
+            {
+              value: Rpc.SFDocumentType.PassportPlastic.toString(),
+              Icon: Icons.DocumentTypePassport,
+              label: formatDocumentTypeString(Rpc.SFDocumentType.PassportPlastic),
             },
           ]}
-          onChange={(value) => props.onChangeDocumentType(value as DocumentType)}
-        />
-      </SectionItem>
-      <SectionItem title="Material" fullWidth={true}>
-        <CardSelect
-          value={props.specs.document.material.toString()}
-          items={
-            //
-            [
-              { value: Rpc.SFMaterial.Plastic, icon: Icons.DocumentMaterialPlastic },
-              { value: Rpc.SFMaterial.Paper, icon: Icons.DocumentMaterialPaper },
-            ].map(({ value, icon }) => {
-              return isDocumentMaterialValid(value, props.specs.document.type)
-                ? {
-                    value: value.toString(),
-                    Icon: icon,
-                    label: formatDocumentMaterialString(value),
-                  }
-                : null;
-            })
-          }
-          onChange={(value) => props.onChangeDocumentMaterial(Number.parseInt(value, 10) as Rpc.SFMaterial)}
+          onChange={(value) => props.onChangeDocumentType(Number.parseInt(value, 10) as Rpc.SFDocumentType)}
         />
       </SectionItem>
       <SectionItem title="Standard Compliance" fullWidth={false}>

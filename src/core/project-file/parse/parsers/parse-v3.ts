@@ -1,14 +1,14 @@
 import { Rpc } from "@@core/rpc/shared";
 import { DocumentScoreTarget, DocumentStandardCompliance, ProjectSpecs, ProjectStatus } from "@@core/project";
-import { V2 } from "../../types";
+import { V3 } from "../../types";
 import { SFDocumentType } from "../../../rpc/shared/gen/esec_engine";
 
-export function parseV2(content: V2.Content): ProjectSpecs {
+export function parseV3(content: V3.Content): ProjectSpecs {
   return {
     title: content.title,
     status: parseStatus(content.status),
     document: {
-      type: parseDocumentType(content.document.type, content.document.material),
+      type: parseDocumentType(content.document.type),
       scoreTarget: parseDocumentScoreTarget(content.document.scoreTarget),
       standardCompliance: parseDocumentStandardCompliance(content.document.standardCompliance),
       designAnswers: parseDocumentDesignAnswers(content.document.design.answers),
@@ -17,26 +17,25 @@ export function parseV2(content: V2.Content): ProjectSpecs {
   };
 }
 
-function parseStatus(value: V2.Status): ProjectStatus {
+function parseStatus(value: V3.Status): ProjectStatus {
   switch (value) {
     case "ongoing":
       return ProjectStatus.ONGOING;
   }
 }
 
-function parseDocumentType(value: V2.DocumentType, material: V2.DocumentMaterial): Rpc.SFDocumentType {
-  if (value == "passport" && material == "paper") {
-    return SFDocumentType.PassportPaper;
+function parseDocumentType(value: V3.DocumentType): Rpc.SFDocumentType {
+  switch (value) {
+    case "card":
+      return SFDocumentType.Card;
+    case "passport-paper":
+      return SFDocumentType.PassportPaper;
+    case "passport-plastic":
+      return SFDocumentType.PassportPlastic;
   }
-
-  if (value == "passport" && material == "plastic") {
-    return SFDocumentType.PassportPaper;
-  }
-
-  return SFDocumentType.Card;
 }
 
-function parseDocumentScoreTarget(value: V2.DocumentScoreTarget): DocumentScoreTarget {
+function parseDocumentScoreTarget(value: V3.DocumentScoreTarget): DocumentScoreTarget {
   switch (value) {
     case "icao":
       return DocumentScoreTarget.ICAO;
@@ -45,7 +44,7 @@ function parseDocumentScoreTarget(value: V2.DocumentScoreTarget): DocumentScoreT
   }
 }
 
-function parseDocumentStandardCompliance(value: V2.DocumentStandardCompliance): DocumentStandardCompliance {
+function parseDocumentStandardCompliance(value: V3.DocumentStandardCompliance): DocumentStandardCompliance {
   switch (value) {
     case "ecowas-id-card":
       return DocumentStandardCompliance.ECOWAS_ID_CARD;
@@ -60,7 +59,7 @@ function parseDocumentStandardCompliance(value: V2.DocumentStandardCompliance): 
   }
 }
 
-function parseDocumentDesignAnswers(value: V2.DocumentDesignAnswer[]): Rpc.DocumentDesignFormAnswer[] {
+function parseDocumentDesignAnswers(value: V3.DocumentDesignAnswer[]): Rpc.DocumentDesignFormAnswer[] {
   return value.map((v) => ({
     idAnswer: v.answerId,
     idQuestion: v.questionId,

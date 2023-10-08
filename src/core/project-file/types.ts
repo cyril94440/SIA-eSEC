@@ -6,6 +6,10 @@ export type Root =
   | {
       version: 2;
       content: V2.Content;
+    }
+  | {
+      version: 3;
+      content: V3.Content;
     };
 
 export namespace V1 {
@@ -72,6 +76,46 @@ export namespace V2 {
   export interface Document {
     type: DocumentType;
     material: DocumentMaterial;
+    scoreTarget: DocumentScoreTarget;
+    standardCompliance: DocumentStandardCompliance;
+    design: DocumentDesign;
+    securityFeatures: DocumentSecurityFeatures;
+  }
+
+  export interface DocumentDesign {
+    answers: DocumentDesignAnswer[];
+  }
+
+  export interface DocumentDesignAnswer {
+    answerId: number;
+    questionId: number;
+  }
+
+  export interface DocumentSecurityFeatures {
+    ids: number[];
+  }
+}
+
+export namespace V3 {
+  export type Status = "ongoing";
+  export type DocumentType = "card" | "passport-paper" | "passport-plastic";
+  export type DocumentScoreTarget = "icao" | "none";
+
+  export type DocumentStandardCompliance =
+    | "ecowas-id-card"
+    | "eu-id-card"
+    | "eu-passport"
+    | "eu-resident-permit"
+    | "icao";
+
+  export interface Content {
+    title: string;
+    status: Status;
+    document: Document;
+  }
+
+  export interface Document {
+    type: DocumentType;
     scoreTarget: DocumentScoreTarget;
     standardCompliance: DocumentStandardCompliance;
     design: DocumentDesign;

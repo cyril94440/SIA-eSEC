@@ -1,4 +1,3 @@
-export * from "./formatDocumentMaterialString";
 export * from "./formatDocumentScoreTargetString";
 export * from "./formatDocumentSecurityFeatureCategoryString";
 export * from "./formatDocumentSecurityFeatureLocationString";
@@ -6,9 +5,7 @@ export * from "./formatDocumentSecurityFeatureScoreCategoryString";
 export * from "./formatDocumentStandardComplianceString";
 export * from "./formatDocumentTypeString";
 export * from "./formatProjectStatusString";
-export * from "./getDefaultDocumentMaterial";
 export * from "./getDocumentSecurityFeatures";
 export * from "./getDocumentSecurityFeatureTree";
 export * from "./getDocumentIcaoStatus";
 export * from "./getDocumentSelectedSecurityFeatures";
-export * from "./isDocumentMaterialValid";

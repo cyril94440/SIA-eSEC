@@ -5,5 +5,5 @@ export function getDocumentSecurityFeatures(
   specs: ProjectSpecs,
   allFeatures: Rpc.SecurityFeature[]
 ): Rpc.SecurityFeature[] {
-  return allFeatures.filter((f) => f.materialsCompatible.some((m) => m === specs.document.material));
+  return allFeatures.filter((f) => f.documentsCompatible.some((m) => m === specs.document.type));
 }

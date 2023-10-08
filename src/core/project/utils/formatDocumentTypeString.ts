@@ -1,14 +1,12 @@
-import { DocumentType } from "../types";
+import { Rpc } from "@@core/rpc/shared";
 
-export function formatDocumentTypeString(value: DocumentType): string {
+export function formatDocumentTypeString(value: Rpc.SFDocumentType): string {
   switch (value) {
-    case DocumentType.DRIVING_LICENSE:
-      return "Driving License";
-    case DocumentType.ID_CARD:
-      return "ID Card";
-    case DocumentType.OTHER:
-      return "Other";
-    case DocumentType.PASSPORT:
-      return "Passport";
+    case Rpc.SFDocumentType.Card:
+      return "Card";
+    case Rpc.SFDocumentType.PassportPaper:
+      return "Passport Paper";
+    case Rpc.SFDocumentType.PassportPlastic:
+      return "Passport Plastic";
   }
 }

@@ -3,7 +3,6 @@ import {
   DocumentScoreTarget,
   DocumentSecurityFeatureTree,
   DocumentStandardCompliance,
-  DocumentType,
   ProjectSpecs,
 } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
@@ -24,8 +23,7 @@ export interface ContentProps {
   onRenameClick: (title: string) => void;
   onEncryptionInfoClick: () => void;
   onSaveClick: () => void;
-  onChangeDocumentType: (value: DocumentType) => void;
-  onChangeDocumentMaterial: (value: Rpc.SFMaterial) => void;
+  onChangeDocumentType: (value: Rpc.SFDocumentType) => void;
   onChangeDocumentStandardCompliance: (value: DocumentStandardCompliance) => void;
   onChangeDocumentScoreTarget: (value: DocumentScoreTarget) => void;
   onChangeDocumentDesignAnswer: (value: Rpc.DocumentDesignFormAnswer) => void;
@@ -56,7 +54,6 @@ export const Content: FC<ContentProps> = (props) => {
                   <GeneralInfo
                     specs={props.specs}
                     onChangeDocumentType={props.onChangeDocumentType}
-                    onChangeDocumentMaterial={props.onChangeDocumentMaterial}
                     onChangeDocumentStandardCompliance={props.onChangeDocumentStandardCompliance}
                     onChangeDocumentScoreTarget={props.onChangeDocumentScoreTarget}
                   />

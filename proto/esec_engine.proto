@@ -2,133 +2,134 @@ syntax = "proto3";
 
 message GetDocumentDesignQuestionsRequest {}
 message GetDocumentDesignQuestionsResponse {
-    repeated DocumentDesignQuestion questions = 1;
+  repeated DocumentDesignQuestion questions = 1;
 }
 
 message DocumentDesignQuestion {
-    int32 id = 1;
-    string question_title = 2;
-    optional string details = 3;
-    repeated DocumentDesignAnswer answers = 4;
+  int32 id = 1;
+  string question_title = 2;
+  optional string details = 3;
+  repeated DocumentDesignAnswer answers = 4;
 }
 
 message DocumentDesignAnswer {
-    int32 id = 1;
-    string answer_title = 2;
-    float score = 3;
-    optional string recommendation = 4;
-    optional float score_cost_effectiveness = 5;
+  int32 id = 1;
+  string answer_title = 2;
+  float score = 3;
+  optional string recommendation = 4;
+  optional float score_cost_effectiveness = 5;
 }
 
 message GetSecurityFeaturesRequest {}
 message GetSecurityFeaturesResponse{
-    repeated SecurityFeature security_features = 1;
+  repeated SecurityFeature security_features = 1;
 }
 
 message SecurityFeature {
-    int32 id = 1;
-    SFLocation location = 2;
-    SFCategory category = 3;
-    repeated SFMaterial materials_compatible = 4;
-    string title = 5;
-    optional string description = 6;
-    repeated SFScore scores = 7;
+  int32 id = 1;
+  SFLocation location = 2;
+  SFCategory category = 3;
+  repeated SFDocumentType documents_compatible = 4;
+  string title = 5;
+  optional string description = 6;
+  repeated SFScore scores = 7;
 }
 
 message SFScore {
-    SFType type = 1;
-    SFCategory category = 2;
-    optional SFScoreSubCategory sub_category = 3;
-    float score = 4;
+  SFType type = 1;
+  SFScoreCategory category = 2;
+  optional SFScoreSubCategory sub_category = 3;
+  float score = 4;
 }
 
 enum SFLocation {
-    SFPersonalization = 0;
-	InksTechPersonalization = 1;
-	SFDocumentBody = 2;
-	InksBackground = 3;
-	SecurityDesign = 4;
+  SFPersonalization = 0;
+  InksTechPersonalization = 1;
+  SFDocumentBody = 2;
+  InksBackground = 3;
+  SecurityDesign = 4;
 }
 
 enum SFCategory {
-    Personalization = 0;
-	Structure = 1;
-	Printed = 2;
-	Material = 3;
+  Personalization = 0;
+  Structure = 1;
+  Printed = 2;
+  Material = 3;
 }
 
-enum SFMaterial {
-    Paper = 0;
-    Plastic = 1;
+enum SFDocumentType {
+  Card = 0;
+  PassportPaper = 1;
+  PassportPlastic = 2;
 }
 
 enum SFType {
-	Protection = 0;
-	Level = 1;
+  Protection = 0;
+  Level = 1;
 }
 
 enum SFScoreCategory {
-	Counterfeit = 0;
-	Alteration = 1;
-	Stealing = 2;
-	Recycling = 3;
-	Impostor = 4;
+  Counterfeit = 0;
+  Alteration = 1;
+  Stealing = 2;
+  Recycling = 3;
+  Impostor = 4;
 
-	Level1 = 5;
-	Level2 = 6;
-	Level3 = 7;
-	ABC = 8;
+  Level1 = 5;
+  Level2 = 6;
+  Level3 = 7;
+  ABC = 8;
 }
 
 enum SFScoreSubCategory {
-	LimitedMatTech = 0;
-	Reproduction = 1;
+  LimitedMatTech = 0;
+  Reproduction = 1;
 
-	Photo = 2;
-	Data = 3;
-	DocumentBody = 4;
+  Photo = 2;
+  Data = 3;
+  DocumentBody = 4;
 
-	SpecialPersoTech = 5;
-	Tracking = 6;
+  SpecialPersoTech = 5;
+  Tracking = 6;
 
-	Look = 7;
-	Feel = 8;
-	Tilt = 9;
+  Look = 7;
+  Feel = 8;
+  Tilt = 9;
 }
 
 message GetIcaoDataRequest {}
 message GetIcaoDataResponse {
-    repeated IcaoSecurityFeature securityFeatures = 3;
-    repeated IcaoSecurityFeatureCategory securityFeatureCategories = 1;
-    repeated IcaoSecurityFeatureSubcategory securityFeatureSubcategories = 2;
+  repeated IcaoSecurityFeature securityFeatures = 3;
+  repeated IcaoSecurityFeatureCategory securityFeatureCategories = 1;
+  repeated IcaoSecurityFeatureSubcategory securityFeatureSubcategories = 2;
 }
 
 enum IcaoSecurityFeatureType {
-    Basic = 0;
-    Additional = 1;
+  Basic = 0;
+  Additional = 1;
 }
 
 message IcaoSecurityFeature {
-    string code = 1;
-    string title = 2;
-    IcaoSecurityFeatureType type = 3;
-    string subcategoryCode = 4;
-    repeated int32 relatedEsecSecurityFeatureIds = 5;
+  string code = 1;
+  string title = 2;
+  IcaoSecurityFeatureType type = 3;
+  string subcategoryCode = 4;
+  repeated int32 relatedEsecSecurityFeatureIds = 5;
 }
 
 message IcaoSecurityFeatureCategory {
-    string code = 1;
-    string title = 2;
+  string code = 1;
+  string title = 2;
 }
 
 message IcaoSecurityFeatureSubcategory {
-    string code = 1;
-    string title = 2;
-    string categoryCode = 3;
+  string code = 1;
+  string title = 2;
+  string categoryCode = 3;
 }
 
 service DatabaseService{
-    rpc GetDocumentDesignQuestions (GetDocumentDesignQuestionsRequest) returns (GetDocumentDesignQuestionsResponse);
-    rpc GetSecurityFeatures (GetSecurityFeaturesRequest) returns (GetSecurityFeaturesResponse);
-    rpc GetIcaoData (GetIcaoDataRequest) returns (GetIcaoDataResponse);
+  rpc GetDocumentDesignQuestions (GetDocumentDesignQuestionsRequest) returns (GetDocumentDesignQuestionsResponse);
+  rpc GetSecurityFeatures (GetSecurityFeaturesRequest) returns (GetSecurityFeaturesResponse);
+  rpc GetIcaoData (GetIcaoDataRequest) returns (GetIcaoDataResponse);
 }

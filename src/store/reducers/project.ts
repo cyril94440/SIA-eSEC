@@ -1,11 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import {
-  DocumentScoreTarget,
-  DocumentStandardCompliance,
-  DocumentType,
-  ProjectSpecs,
-  ProjectStatus,
-} from "@@core/project";
+import { DocumentScoreTarget, DocumentStandardCompliance, ProjectSpecs, ProjectStatus } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
 import * as actions from "../actions";
 
@@ -20,8 +14,7 @@ const initialState: ProjectState = {
     title: "Test project",
     status: ProjectStatus.ONGOING,
     document: {
-      type: DocumentType.PASSPORT,
-      material: Rpc.SFMaterial.Plastic,
+      type: Rpc.SFDocumentType.Card,
       standardCompliance: DocumentStandardCompliance.EU_PASSPORT,
       scoreTarget: DocumentScoreTarget.ICAO,
       designAnswers: [],
@@ -55,9 +48,6 @@ export const project = createReducer(initialState, (builder) => {
     })
     .addCase(actions.projectSetDocumentType, (state, action) => {
       state.specs.document.type = action.payload;
-    })
-    .addCase(actions.projectSetDocumentMaterial, (state, action) => {
-      state.specs.document.material = action.payload;
     })
     .addCase(actions.projectSetDocumentStandardCompliance, (state, action) => {
       state.specs.document.standardCompliance = action.payload;

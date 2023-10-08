@@ -3,7 +3,7 @@ syntax = "proto3";
 import "esec_engine.proto";
 
 message ComputeScoreRequest {
-    SFMaterial material = 1;
+    SFDocumentType document_type = 1;
     repeated DocumentDesignFormAnswer document_design_answers = 2;
     repeated int32 security_features_IDs = 3;
 }
@@ -14,7 +14,7 @@ message ComputeScoreResponse{
 
 message DocumentDesignFormAnswer{
     int32 idQuestion =  1;
-	int32 idAnswer = 2;
+	  int32 idAnswer = 2;
 }
 
 message TNScore{ //Total Normalized Score

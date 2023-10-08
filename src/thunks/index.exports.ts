@@ -4,7 +4,6 @@ export * from "./appLogout";
 export * from "./appNewProject";
 export * from "./appToggleSidenav";
 export * from "./projectChangeDocumentDesignAnswer";
-export * from "./projectChangeDocumentMaterial";
 export * from "./projectChangeDocumentScoreTarget";
 export * from "./projectChangeDocumentSecurityFeatures";
 export * from "./projectChangeDocumentStandardCompliance";

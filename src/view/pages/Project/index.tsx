@@ -163,9 +163,6 @@ export const Project: NextPage<ProjectProps> = (props) => {
           onChangeDocumentType={(value) => {
             dispatch(Thunks.projectChangeDocumentType(value));
           }}
-          onChangeDocumentMaterial={(value) => {
-            dispatch(Thunks.projectChangeDocumentMaterial(value));
-          }}
           onChangeDocumentStandardCompliance={(value) => {
             dispatch(Thunks.projectChangeDocumentStandardCompliance(value));
           }}

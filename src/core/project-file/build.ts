@@ -1,22 +1,16 @@
+import { DocumentScoreTarget, DocumentStandardCompliance, ProjectSpecs, ProjectStatus } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
-import {
-  DocumentScoreTarget,
-  DocumentStandardCompliance,
-  DocumentType,
-  ProjectSpecs,
-  ProjectStatus,
-} from "@@core/project";
-import { Root, V2 } from "./types";
+import { Root, V3 } from "./types";
+import { SFDocumentType } from "../rpc/shared/gen/esec_engine";
 
 export function build(specs: ProjectSpecs): Root {
   return {
-    version: 2,
+    version: 3,
     content: {
       title: specs.title,
       status: formatStatus(specs.status),
       document: {
         type: formatDocumentType(specs.document.type),
-        material: formatDocumentMaterial(specs.document.material),
         scoreTarget: formatDocumentScoreTarget(specs.document.scoreTarget),
         standardCompliance: formatDocumentStandardCompliance(specs.document.standardCompliance),
         design: {
@@ -30,36 +24,25 @@ export function build(specs: ProjectSpecs): Root {
   };
 }
 
-function formatStatus(value: ProjectStatus): V2.Status {
+function formatStatus(value: ProjectStatus): V3.Status {
   switch (value) {
     case ProjectStatus.ONGOING:
       return "ongoing";
   }
 }
 
-function formatDocumentType(value: DocumentType): V2.DocumentType {
+function formatDocumentType(value: Rpc.SFDocumentType): V3.DocumentType {
   switch (value) {
-    case DocumentType.DRIVING_LICENSE:
-      return "driving-license";
-    case DocumentType.ID_CARD:
-      return "id-card";
-    case DocumentType.OTHER:
-      return "other";
-    case DocumentType.PASSPORT:
-      return "passport";
+    case SFDocumentType.Card:
+      return "card";
+    case SFDocumentType.PassportPaper:
+      return "passport-paper";
+    case SFDocumentType.PassportPlastic:
+      return "passport-plastic";
   }
 }
 
-function formatDocumentMaterial(value: Rpc.SFMaterial): V2.DocumentMaterial {
-  switch (value) {
-    case Rpc.SFMaterial.Paper:
-      return "paper";
-    case Rpc.SFMaterial.Plastic:
-      return "plastic";
-  }
-}
-
-function formatDocumentScoreTarget(value: DocumentScoreTarget): V2.DocumentScoreTarget {
+function formatDocumentScoreTarget(value: DocumentScoreTarget): V3.DocumentScoreTarget {
   switch (value) {
     case DocumentScoreTarget.ICAO:
       return "icao";
@@ -68,7 +51,7 @@ function formatDocumentScoreTarget(value: DocumentScoreTarget): V2.DocumentScore
   }
 }
 
-function formatDocumentStandardCompliance(value: DocumentStandardCompliance): V2.DocumentStandardCompliance {
+function formatDocumentStandardCompliance(value: DocumentStandardCompliance): V3.DocumentStandardCompliance {
   switch (value) {
     case DocumentStandardCompliance.ECOWAS_ID_CARD:
       return "ecowas-id-card";
@@ -83,7 +66,7 @@ function formatDocumentStandardCompliance(value: DocumentStandardCompliance): V2
   }
 }
 
-function formatDocumentDesignAnswers(value: Rpc.DocumentDesignFormAnswer[]): V2.DocumentDesignAnswer[] {
+function formatDocumentDesignAnswers(value: Rpc.DocumentDesignFormAnswer[]): V3.DocumentDesignAnswer[] {
   return value.map((v) => ({
     answerId: v.idAnswer,
     questionId: v.idQuestion,

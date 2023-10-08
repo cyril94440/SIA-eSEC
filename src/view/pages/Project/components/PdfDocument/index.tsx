@@ -4,7 +4,6 @@ import {
   DocumentIcaoStatus,
   DocumentSecurityFeatureTree,
   ProjectSpecs,
-  formatDocumentMaterialString,
   formatDocumentScoreTargetString,
   formatDocumentSecurityFeatureCategoryString,
   formatDocumentSecurityFeatureLocationString,
@@ -87,10 +86,6 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
           <Text style={styles.subtitle}>General Info</Text>
           <Text style={styles.inputRow}>
             Type: <Text style={styles.inlineData}>{formatDocumentTypeString(props.specs.document.type)}</Text>
-          </Text>
-          <Text style={styles.inputRow}>
-            Material:{" "}
-            <Text style={styles.inlineData}>{formatDocumentMaterialString(props.specs.document.material)}</Text>
           </Text>
           <Text style={styles.inputRow}>
             Standart compliance:{" "}

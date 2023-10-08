@@ -27,10 +27,11 @@ docker exec -it esec-db mysql -uroot -prootpassword
 Once you're inside the mysql container:
 
 ```
-mysql> use esec-db;
+mysql> USE esec-db;
 mysql> CREATE USER 'admin'@'%' IDENTIFIED BY 'rootpassword';
 mysql> GRANT ALL ON *.* TO 'admin'@'%';
 mysql> FLUSH PRIVILEGES;
+mysql> exit
 ```
 
 Everything's done ! ✅

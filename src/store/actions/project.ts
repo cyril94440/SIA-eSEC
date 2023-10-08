@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { DocumentScoreTarget, DocumentStandardCompliance, DocumentType, ProjectSpecs } from "@@core/project";
+import { DocumentScoreTarget, DocumentStandardCompliance, ProjectSpecs } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
 
 export const projectInitEmpty = createAction("projectInitEmpty");
@@ -7,8 +7,7 @@ export const projectInitExisting = createAction<ProjectSpecs>("projectInitExisti
 export const projectSetTitle = createAction<string>("projectSetTitle");
 export const projectSetScore = createAction<Rpc.TNScore>("projectSetScore");
 export const projectSetSecurityFeatures = createAction<Rpc.SecurityFeature[]>("projectSetSecurityFeatures");
-export const projectSetDocumentType = createAction<DocumentType>("projectSetDocumentType");
-export const projectSetDocumentMaterial = createAction<Rpc.SFMaterial>("projectSetDocumentMaterial");
+export const projectSetDocumentType = createAction<Rpc.SFDocumentType>("projectSetDocumentType");
 export const projectSetDocumentStandardCompliance = createAction<DocumentStandardCompliance>(
   "projectSetDocumentStandardCompliance"
 );

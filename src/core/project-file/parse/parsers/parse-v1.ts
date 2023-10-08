@@ -1,20 +1,14 @@
 import { Rpc } from "@@core/rpc/shared";
-import {
-  DocumentScoreTarget,
-  DocumentStandardCompliance,
-  DocumentType,
-  ProjectSpecs,
-  ProjectStatus,
-} from "@@core/project";
+import { DocumentScoreTarget, DocumentStandardCompliance, ProjectSpecs, ProjectStatus } from "@@core/project";
 import { V1 } from "../../types";
+import { SFDocumentType } from "../../../rpc/shared/gen/esec_engine";
 
 export function parseV1(content: V1.Content): ProjectSpecs {
   return {
     title: content.title,
     status: parseStatus(content.status),
     document: {
-      type: parseDocumentType(content.document.type),
-      material: parseDocumentMaterial(content.document.material),
+      type: parseDocumentType(content.document.type, content.document.material),
       scoreTarget: parseDocumentScoreTarget(content.document.scoreTarget),
       standardCompliance: parseDocumentStandardCompliance(content.document.standardCompliance),
       designAnswers: parseDocumentDesignAnswers(content.document.design.answers),
@@ -30,26 +24,16 @@ function parseStatus(value: V1.Status): ProjectStatus {
   }
 }
 
-function parseDocumentType(value: V1.DocumentType): DocumentType {
-  switch (value) {
-    case "driving-license":
-      return DocumentType.DRIVING_LICENSE;
-    case "id-card":
-      return DocumentType.ID_CARD;
-    case "other":
-      return DocumentType.OTHER;
-    case "passport":
-      return DocumentType.PASSPORT;
+function parseDocumentType(value: V1.DocumentType, material: V1.DocumentMaterial): Rpc.SFDocumentType {
+  if (value == "passport" && material == "paper") {
+    return SFDocumentType.PassportPaper;
   }
-}
 
-function parseDocumentMaterial(value: V1.DocumentMaterial): Rpc.SFMaterial {
-  switch (value) {
-    case "paper":
-      return Rpc.SFMaterial.Paper;
-    case "plastic":
-      return Rpc.SFMaterial.Plastic;
+  if (value == "passport" && material == "plastic") {
+    return SFDocumentType.PassportPaper;
   }
+
+  return SFDocumentType.Card;
 }
 
 function parseDocumentScoreTarget(value: V1.DocumentScoreTarget): DocumentScoreTarget {
