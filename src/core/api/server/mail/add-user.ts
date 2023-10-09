@@ -65,15 +65,16 @@ export const handler: NextApiHandler<ApiResult<MailResetPasswordResult>> = async
 
     const mailResponse = await sendMail(mailContent);
 
+    if (!mailResponse.success) {
+      return res.status(200).json({ success: false, error: "Failed to send email." });
+    }
+
     await db.invite.create({
       data: {
         email: req.body.email,
       },
     });
 
-    if (!mailResponse.success) {
-      return res.status(200).json({ success: false, error: "Failed to send email." });
-    }
     return res.status(200).json({ success: true, data: { message: mailResponse.message } });
   });
 };
