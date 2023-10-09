@@ -95,6 +95,12 @@ export const Login: NextPage = () => {
             />
             {submitting && <span css={[styles.spinner]}></span>}
           </div>
+          <div css={styles.signUpContainer}>
+            Don&apos;t have an account?{" "}
+            <a href="https://secureidentityalliance.org/contact" target="_blank" css={styles.signUp} rel="noreferrer">
+              Ask for it
+            </a>
+          </div>
         </form>
       </div>
     </>

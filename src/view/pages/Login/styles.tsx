@@ -90,3 +90,15 @@ export const forgotPassword = css`
   color: ${styles.COLOR_PRIMARY_20};
   margin-top: ${styles.getSize(2)};
 `;
+
+export const signUpContainer = css`
+  ${styles.fontMedium14};
+  text-align: center;
+  margin-top: ${styles.getSize(1)};
+`;
+
+export const signUp = css`
+  text-decoration: none;
+  cursor: pointer;
+  color: ${styles.COLOR_PRIMARY_20};
+`;
