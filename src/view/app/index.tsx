@@ -10,16 +10,19 @@ import { useAppDispatch, useAppSelector } from "@@view/hooks";
 import * as styles from "@@view/styles";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 export const App: FC<AppProps> = (props) => {
   return (
-    <SessionProvider session={props.pageProps.session}>
-      <Toaster position="top-right" reverseOrder={false} />
-      <EmotionGlobal styles={styles.global} />
-      <ReduxProvider store={store}>
-        <AppInner {...props} />
-      </ReduxProvider>
-    </SessionProvider>
+    <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY ?? ""}>
+      <SessionProvider session={props.pageProps.session}>
+        <Toaster position="top-right" reverseOrder={false} />
+        <EmotionGlobal styles={styles.global} />
+        <ReduxProvider store={store}>
+          <AppInner {...props} />
+        </ReduxProvider>
+      </SessionProvider>
+    </GoogleReCaptchaProvider>
   );
 };
 

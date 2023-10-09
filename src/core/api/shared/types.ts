@@ -23,6 +23,7 @@ export interface ProjectFileDecodeResult {
 
 export interface ResetPasswordParameters {
   token: string;
+  recaptchaToken: string;
   password: string;
 }
 
@@ -32,6 +33,7 @@ export interface ResetPasswordResult {
 
 export interface SignUpParameters {
   token: string;
+  recaptchaToken: string;
   email: string;
   role: string;
   fullname: string;

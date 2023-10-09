@@ -10,6 +10,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Icons } from "@@view/components";
 import * as buttonStyles from "../../components/Button/styles";
 import { Api } from "@@core/api/client";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 type ResetPasswordInputs = {
   password: string;
@@ -28,32 +29,46 @@ export const ResetPassword: NextPage = () => {
     watch,
     formState: { errors },
   } = useForm<ResetPasswordInputs>();
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const onSubmit: SubmitHandler<ResetPasswordInputs> = async (data) => {
     setSubmitting("submitting");
-    try {
-      const res = await Api.authResetPassword({
-        token: token as string,
-        password: data.password,
-      });
-
-      if (!res.success) {
-        toast.error(res.error);
-        setSubmitting("idle");
-        return;
-      }
-
-      setSubmitting("success");
-      toast.success("Your password has been reset successfully! Redirecting to login page...");
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1000);
-      return;
-    } catch (error) {
+    if (!executeRecaptcha) {
+      toast.error("Captcha is not loaded.");
       setSubmitting("idle");
-      console.log("Error : ", error);
-      toast.error("An error occured, please verify your inputs and try again.");
+      return;
     }
+
+    executeRecaptcha("reset-password")
+      .then(async (recaptchaToken) => {
+        try {
+          const res = await Api.authResetPassword({
+            token: token as string,
+            recaptchaToken,
+            password: data.password,
+          });
+
+          if (!res.success) {
+            toast.error(res.error);
+            setSubmitting("idle");
+            return;
+          }
+
+          setSubmitting("success");
+          toast.success("Your password has been reset successfully! Redirecting to login page...");
+          setTimeout(() => {
+            router.push("/dashboard");
+          }, 1000);
+          return;
+        } catch (error) {
+          setSubmitting("idle");
+          console.log("Error : ", error);
+          toast.error("An error occured, please verify your inputs and try again.");
+        }
+      })
+      .catch(() => {
+        toast.error("An error occured, please try again.");
+      });
   };
 
   return (

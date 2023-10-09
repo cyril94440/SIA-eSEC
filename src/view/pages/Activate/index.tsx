@@ -13,6 +13,7 @@ import * as buttonStyles from "../../components/Button/styles";
 import { Api } from "@@core/api/client";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 type SignUpInputs = {
   fullname: string;
@@ -28,6 +29,7 @@ export const Activate: NextPage = () => {
   const { token } = router.query;
   const [tokenPayload, setTokenPayload] = useState<JwtPayload | null>(null);
   const [submitting, setSubmitting] = useState<SubmitState>("idle");
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const {
     register,
@@ -58,35 +60,48 @@ export const Activate: NextPage = () => {
       return;
     }
 
-    try {
-      const res = await Api.authSignup({
-        token: token as string,
-        email: tokenPayload?.email,
-        role: tokenPayload?.role,
-        fullname: data.fullname,
-        password: data.password,
-        confirmPassword: data.confirmPassword,
-        acceptTermsAndConditions: data.acceptTermsAndConditions,
-      });
-
-      if (!res.success) {
-        toast.error(res.error);
-        setSubmitting("idle");
-        return;
-      }
-
-      setSubmitting("success");
-      toast.success("Signed up successfully. Signing in...");
-      await signIn("credentials", {
-        email: tokenPayload?.email,
-        password: data.password,
-      });
-      return;
-    } catch (error) {
+    if (!executeRecaptcha) {
+      toast.error("Captcha is not loaded.");
       setSubmitting("idle");
-      console.log("Error : ", error);
-      toast.error("An error occured, please try again.");
+      return;
     }
+
+    executeRecaptcha("signup")
+      .then(async (recaptchaToken) => {
+        try {
+          const res = await Api.authSignup({
+            token: token as string,
+            recaptchaToken,
+            email: tokenPayload?.email,
+            role: tokenPayload?.role,
+            fullname: data.fullname,
+            password: data.password,
+            confirmPassword: data.confirmPassword,
+            acceptTermsAndConditions: data.acceptTermsAndConditions,
+          });
+
+          if (!res.success) {
+            toast.error(res.error);
+            setSubmitting("idle");
+            return;
+          }
+
+          setSubmitting("success");
+          toast.success("Signed up successfully. Signing in...");
+          await signIn("credentials", {
+            email: tokenPayload?.email,
+            password: data.password,
+          });
+          return;
+        } catch (error) {
+          setSubmitting("idle");
+          console.log("Error : ", error);
+          toast.error("An error occured, please try again.");
+        }
+      })
+      .catch(() => {
+        toast.error("An error occured, please try again.");
+      });
   };
 
   return (
