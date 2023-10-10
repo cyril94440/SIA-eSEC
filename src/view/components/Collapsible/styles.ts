@@ -22,6 +22,7 @@ export const titleContent = css`
   font-size: ${styles.FONT_MEDIUM_20_SIZE};
   background: none;
   text-align: left;
+  max-width: 95%;
 `;
 
 export const titleIcon = css`

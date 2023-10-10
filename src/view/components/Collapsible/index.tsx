@@ -5,10 +5,10 @@ import { Icons } from "../Icons";
 
 interface CollapsibleProps {
   title: string;
-  answer: React.ReactNode;
+  children: React.ReactNode;
 }
 
-export const Collapsible: FC<CollapsibleProps> = ({ title, answer }) => {
+export const Collapsible: FC<CollapsibleProps> = ({ title, children }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const contentRef = React.useRef<HTMLDivElement>(null);
   const [height, setHeight] = React.useState(0);
@@ -21,7 +21,7 @@ export const Collapsible: FC<CollapsibleProps> = ({ title, answer }) => {
     if (contentRef.current) {
       setHeight(contentRef.current.scrollHeight);
     }
-  }, [answer]);
+  }, [children]);
 
   return (
     <div>
@@ -38,7 +38,7 @@ export const Collapsible: FC<CollapsibleProps> = ({ title, answer }) => {
         </div>
       </div>
       <div ref={contentRef} css={styles.collapseContainer} style={{ height: isOpen ? `${height}px` : "0px" }}>
-        <div css={styles.collapseContent}>{answer}</div>
+        <div css={styles.collapseContent}>{children}</div>
       </div>
       <div css={styles.divider} />
     </div>
