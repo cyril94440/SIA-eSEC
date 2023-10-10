@@ -87,7 +87,7 @@ export const forgotPassword = css`
   text-decoration: none;
   text-align: right;
   cursor: pointer;
-  color: ${styles.COLOR_PRIMARY_20};
+  color: ${styles.COLOR_PRIMARY_36};
   margin-top: ${styles.getSize(2)};
 `;
 
@@ -100,5 +100,5 @@ export const signUpContainer = css`
 export const signUp = css`
   text-decoration: none;
   cursor: pointer;
-  color: ${styles.COLOR_PRIMARY_20};
+  color: ${styles.COLOR_PRIMARY_36};
 `;
