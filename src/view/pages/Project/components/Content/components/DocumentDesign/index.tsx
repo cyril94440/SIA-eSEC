@@ -56,28 +56,26 @@ const QuestionItem: FC<QuestionItemProps> = (props) => {
   const value = props.specs.document.designAnswers.find((a) => a.idQuestion === props.question.id)?.idAnswer ?? null;
   return (
     <div css={[styles.accentItem, accentClientResult.muted && styles.accentItemMuted]}>
-      <CommentsWrap>
-        <RadioSelect
-          title={`${props.index + 1} - ${props.question.questionTitle}`}
-          value={value}
-          items={props.question.answers.map((answer) => {
-            return {
-              value: answer.id,
-              content: answer.answerTitle,
-            };
-          })}
-          onChange={(answerId: number) => {
-            props.onChangeDocumentDesignAnswer({ idQuestion: props.question.id, idAnswer: answerId });
-          }}
-          onDropdownToggle={(expanded) => {
-            if (expanded) {
-              accentClientResult.acquire();
-            } else {
-              accentClientResult.release();
-            }
-          }}
-        />
-      </CommentsWrap>
+      <RadioSelect
+        title={`${props.index + 1} - ${props.question.questionTitle}`}
+        value={value}
+        items={props.question.answers.map((answer) => {
+          return {
+            value: answer.id,
+            content: answer.answerTitle,
+          };
+        })}
+        onChange={(answerId: number) => {
+          props.onChangeDocumentDesignAnswer({ idQuestion: props.question.id, idAnswer: answerId });
+        }}
+        onDropdownToggle={(expanded) => {
+          if (expanded) {
+            accentClientResult.acquire();
+          } else {
+            accentClientResult.release();
+          }
+        }}
+      />
     </div>
   );
 };

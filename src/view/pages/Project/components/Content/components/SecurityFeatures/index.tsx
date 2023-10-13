@@ -72,23 +72,21 @@ export const FeatureItem: FC<FeatureItemProps> = (props) => {
   return (
     <div css={[styles.accentItem, accentClientResult.muted && styles.accentItemMuted]}>
       <SectionItem title={formatDocumentSecurityFeatureLocationString(props.locationNode.item)} fullWidth={false}>
-        <CommentsWrap>
-          <MultiSelect<number>
-            title="Select your feature"
-            value={props.specs.document.securityFeatureIds}
-            items={featureIds}
-            itemId={(id) => id.toString()}
-            itemContent={(id) => featureMap.get(id)?.title}
-            onChange={(ids) => props.onChange(ids)}
-            onDropdownToggle={(expanded) => {
-              if (expanded) {
-                accentClientResult.acquire();
-              } else {
-                accentClientResult.release();
-              }
-            }}
-          />
-        </CommentsWrap>
+        <MultiSelect<number>
+          title="Select your feature"
+          value={props.specs.document.securityFeatureIds}
+          items={featureIds}
+          itemId={(id) => id.toString()}
+          itemContent={(id) => featureMap.get(id)?.title}
+          onChange={(ids) => props.onChange(ids)}
+          onDropdownToggle={(expanded) => {
+            if (expanded) {
+              accentClientResult.acquire();
+            } else {
+              accentClientResult.release();
+            }
+          }}
+        />
       </SectionItem>
     </div>
   );
