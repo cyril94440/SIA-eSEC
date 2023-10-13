@@ -1,9 +1,7 @@
 import { FC } from "react";
 import {
-  DocumentScoreTarget,
-  DocumentStandardCompliance,
-  formatDocumentScoreTargetString,
-  formatDocumentStandardComplianceString,
+  DocumentStandardTarget,
+  formatDocumentStandardTargetString,
   formatDocumentTypeString,
   ProjectSpecs,
 } from "@@core/project";
@@ -15,8 +13,7 @@ import { SectionItem } from "../SectionItem";
 export interface GeneralInfoProps {
   specs: ProjectSpecs;
   onChangeDocumentType: (value: Rpc.SFDocumentType) => void;
-  onChangeDocumentStandardCompliance: (value: DocumentStandardCompliance) => void;
-  onChangeDocumentScoreTarget: (value: DocumentScoreTarget) => void;
+  onChangeDocumentStandardTarget: (value: DocumentStandardTarget) => void;
 }
 
 export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
@@ -45,28 +42,20 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
           onChange={(value) => props.onChangeDocumentType(Number.parseInt(value, 10) as Rpc.SFDocumentType)}
         />
       </SectionItem>
-      <SectionItem title="Standard Compliance" fullWidth={false}>
+      <SectionItem title="Standard Target" fullWidth={false}>
         <Select
-          value={props.specs.document.standardCompliance}
+          value={props.specs.document.standardTarget}
           items={[
-            DocumentStandardCompliance.ECOWAS_ID_CARD,
-            DocumentStandardCompliance.EU_ID_CARD,
-            DocumentStandardCompliance.EU_PASSPORT,
-            DocumentStandardCompliance.EU_RESIDENT_PERMIT,
-            DocumentStandardCompliance.ICAO,
+            DocumentStandardTarget.ECOWAS_ID_CARD,
+            DocumentStandardTarget.EU_ID_CARD,
+            DocumentStandardTarget.EU_PASSPORT,
+            DocumentStandardTarget.EU_RESIDENT_PERMIT,
+            DocumentStandardTarget.ICAO,
+            DocumentStandardTarget.ICAO_DOC_9303,
           ]}
           itemId={(item) => item}
-          itemText={(item) => formatDocumentStandardComplianceString(item)}
-          onChange={props.onChangeDocumentStandardCompliance}
-        />
-      </SectionItem>
-      <SectionItem title="Score Target" fullWidth={false}>
-        <Select
-          value={props.specs.document.scoreTarget}
-          items={[DocumentScoreTarget.ICAO, DocumentScoreTarget.None]}
-          itemId={(item) => item}
-          itemText={(item) => formatDocumentScoreTargetString(item)}
-          onChange={props.onChangeDocumentScoreTarget}
+          itemText={(item) => formatDocumentStandardTargetString(item)}
+          onChange={props.onChangeDocumentStandardTarget}
         />
       </SectionItem>
     </Section>

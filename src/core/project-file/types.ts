@@ -10,6 +10,10 @@ export type Root =
   | {
       version: 3;
       content: V3.Content;
+    }
+  | {
+      version: 4;
+      content: V4.Content;
     };
 
 export namespace V1 {
@@ -118,6 +122,45 @@ export namespace V3 {
     type: DocumentType;
     scoreTarget: DocumentScoreTarget;
     standardCompliance: DocumentStandardCompliance;
+    design: DocumentDesign;
+    securityFeatures: DocumentSecurityFeatures;
+  }
+
+  export interface DocumentDesign {
+    answers: DocumentDesignAnswer[];
+  }
+
+  export interface DocumentDesignAnswer {
+    answerId: number;
+    questionId: number;
+  }
+
+  export interface DocumentSecurityFeatures {
+    ids: number[];
+  }
+}
+
+export namespace V4 {
+  export type Status = "ongoing";
+  export type DocumentType = "card" | "passport-paper" | "passport-plastic";
+
+  export type DocumentStandardTarget =
+    | "ecowas-id-card"
+    | "eu-id-card"
+    | "eu-passport"
+    | "eu-resident-permit"
+    | "icao"
+    | "icao-doc-9303";
+
+  export interface Content {
+    title: string;
+    status: Status;
+    document: Document;
+  }
+
+  export interface Document {
+    type: DocumentType;
+    standardTarget: DocumentStandardTarget;
     design: DocumentDesign;
     securityFeatures: DocumentSecurityFeatures;
   }

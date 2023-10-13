@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { DocumentScoreTarget, DocumentStandardCompliance, ProjectSpecs, ProjectStatus } from "@@core/project";
+import { DocumentStandardTarget, ProjectSpecs, ProjectStatus } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
 import * as actions from "../actions";
 
@@ -15,8 +15,7 @@ const initialState: ProjectState = {
     status: ProjectStatus.ONGOING,
     document: {
       type: Rpc.SFDocumentType.Card,
-      standardCompliance: DocumentStandardCompliance.EU_PASSPORT,
-      scoreTarget: DocumentScoreTarget.ICAO,
+      standardTarget: DocumentStandardTarget.ICAO_DOC_9303,
       designAnswers: [],
       securityFeatureIds: [],
     },
@@ -49,11 +48,8 @@ export const project = createReducer(initialState, (builder) => {
     .addCase(actions.projectSetDocumentType, (state, action) => {
       state.specs.document.type = action.payload;
     })
-    .addCase(actions.projectSetDocumentStandardCompliance, (state, action) => {
-      state.specs.document.standardCompliance = action.payload;
-    })
-    .addCase(actions.projectSetDocumentScoreTarget, (state, action) => {
-      state.specs.document.scoreTarget = action.payload;
+    .addCase(actions.projectSetDocumentStandardTarget, (state, action) => {
+      state.specs.document.standardTarget = action.payload;
     })
     .addCase(actions.projectSetDocumentDesignAnswer, (state, action) => {
       const newItem = action.payload;

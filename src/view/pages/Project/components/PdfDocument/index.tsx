@@ -4,11 +4,10 @@ import {
   DocumentIcaoStatus,
   DocumentSecurityFeatureTree,
   ProjectSpecs,
-  formatDocumentScoreTargetString,
   formatDocumentSecurityFeatureCategoryString,
   formatDocumentSecurityFeatureLocationString,
   formatDocumentSecurityFeatureScoreCategoryString,
-  formatDocumentStandardComplianceString,
+  formatDocumentStandardTargetString,
   formatDocumentTypeString,
   formatProjectStatusString,
 } from "@@core/project";
@@ -88,14 +87,10 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
             Type: <Text style={styles.inlineData}>{formatDocumentTypeString(props.specs.document.type)}</Text>
           </Text>
           <Text style={styles.inputRow}>
-            Standart compliance:{" "}
+            Standard target:{" "}
             <Text style={styles.inlineData}>
-              {formatDocumentStandardComplianceString(props.specs.document.standardCompliance)}
+              {formatDocumentStandardTargetString(props.specs.document.standardTarget)}
             </Text>
-          </Text>
-          <Text style={styles.inputRow}>
-            Score target:{" "}
-            <Text style={styles.inlineData}>{formatDocumentScoreTargetString(props.specs.document.scoreTarget)}</Text>
           </Text>
         </View>
         {!props.icaoStatus.completed && (

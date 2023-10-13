@@ -1,11 +1,9 @@
 import { Rpc } from "@@core/rpc/shared";
-import { DocumentStandardCompliance } from "./DocumentStandardCompliance";
-import { DocumentScoreTarget } from "./DocumentScoreTarget";
+import { DocumentStandardTarget } from "./DocumentStandardTarget";
 
 export interface DocumentSpecs {
   type: Rpc.SFDocumentType;
-  standardCompliance: DocumentStandardCompliance;
-  scoreTarget: DocumentScoreTarget;
+  standardTarget: DocumentStandardTarget;
   designAnswers: Rpc.DocumentDesignFormAnswer[];
   securityFeatureIds: number[];
 }

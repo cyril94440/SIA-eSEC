@@ -1,10 +1,5 @@
 import { FC, useState } from "react";
-import {
-  DocumentScoreTarget,
-  DocumentSecurityFeatureTree,
-  DocumentStandardCompliance,
-  ProjectSpecs,
-} from "@@core/project";
+import { DocumentSecurityFeatureTree, DocumentStandardTarget, ProjectSpecs } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
 import { ScrollController, TabControl } from "@@view/components";
 import { DocumentDesign, GeneralInfo, Header, Section, SecurityFeatures, Status } from "./components";
@@ -24,8 +19,7 @@ export interface ContentProps {
   onEncryptionInfoClick: () => void;
   onSaveClick: () => void;
   onChangeDocumentType: (value: Rpc.SFDocumentType) => void;
-  onChangeDocumentStandardCompliance: (value: DocumentStandardCompliance) => void;
-  onChangeDocumentScoreTarget: (value: DocumentScoreTarget) => void;
+  onChangeDocumentStandardTarget: (value: DocumentStandardTarget) => void;
   onChangeDocumentDesignAnswer: (value: Rpc.DocumentDesignFormAnswer) => void;
   onChangeDocumentSecurityFeatures: (value: number[]) => void;
 }
@@ -54,8 +48,7 @@ export const Content: FC<ContentProps> = (props) => {
                   <GeneralInfo
                     specs={props.specs}
                     onChangeDocumentType={props.onChangeDocumentType}
-                    onChangeDocumentStandardCompliance={props.onChangeDocumentStandardCompliance}
-                    onChangeDocumentScoreTarget={props.onChangeDocumentScoreTarget}
+                    onChangeDocumentStandardTarget={props.onChangeDocumentStandardTarget}
                   />
                 ),
               },

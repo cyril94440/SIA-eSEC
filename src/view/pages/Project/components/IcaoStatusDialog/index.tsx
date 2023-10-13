@@ -12,7 +12,13 @@ export interface IcaoStatusDialogProps {
 
 export const IcaoStatusDialog: FC<IcaoStatusDialogProps> = (props) => {
   return (
-    <Dialog open={props.open} fullWidth={true} background={"white"} onOpenChange={props.onOpenChange}>
+    <Dialog
+      open={props.open}
+      fullWidth={true}
+      background={"white"}
+      onOpenChange={props.onOpenChange}
+      fitToContent={false}
+    >
       <Dialog.Title>
         ICAO:{" "}
         <span css={props.status.completed ? Css.colorComplete : Css.colorNotComplete}>

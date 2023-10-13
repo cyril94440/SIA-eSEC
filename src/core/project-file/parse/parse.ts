@@ -3,6 +3,7 @@ import { Root } from "../types";
 import { parseV1 } from "./parsers/parse-v1";
 import { parseV2 } from "./parsers/parse-v2";
 import { parseV3 } from "./parsers/parse-v3";
+import { parseV4 } from "./parsers/parse-v4";
 
 export function parse(data: Root): ProjectSpecs {
   switch (data.version) {
@@ -12,5 +13,7 @@ export function parse(data: Root): ProjectSpecs {
       return parseV2(data.content);
     case 3:
       return parseV3(data.content);
+    case 4:
+      return parseV4(data.content);
   }
 }

@@ -7,6 +7,7 @@ interface Props {
   children: ReactNode;
   open?: boolean;
   fullWidth?: boolean;
+  fitToContent?: boolean;
   background?: "default" | "white";
   onOpenChange?: (value: boolean) => void;
 }
@@ -21,6 +22,7 @@ type DialogComponents = {
 };
 
 export const Dialog: FC<Props> & DialogComponents = (props) => {
+  const { fitToContent = true } = props;
   let trigger = null;
   let title = null;
   let description = null;
@@ -57,6 +59,7 @@ export const Dialog: FC<Props> & DialogComponents = (props) => {
         <RadixDialog.Content
           css={[
             styles.dialogContent,
+            !fitToContent && "height: 90vh",
             props.fullWidth && styles.dialogContentFullWidth,
             props.background === "white" && styles.dialogContentBackgroundWhite,
           ]}

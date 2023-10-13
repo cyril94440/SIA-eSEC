@@ -163,11 +163,8 @@ export const Project: NextPage<ProjectProps> = (props) => {
           onChangeDocumentType={(value) => {
             dispatch(Thunks.projectChangeDocumentType(value));
           }}
-          onChangeDocumentStandardCompliance={(value) => {
-            dispatch(Thunks.projectChangeDocumentStandardCompliance(value));
-          }}
-          onChangeDocumentScoreTarget={(value) => {
-            dispatch(Thunks.projectChangeDocumentScoreTarget(value));
+          onChangeDocumentStandardTarget={(value) => {
+            dispatch(Thunks.projectChangeDocumentStandardTarget(value));
           }}
           onChangeDocumentDesignAnswer={(value) => {
             dispatch(Thunks.projectChangeDocumentDesignAnswer(value));

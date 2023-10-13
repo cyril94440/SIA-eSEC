@@ -36,7 +36,7 @@ export const dialogContent = css`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-height: ${styles.getSize(88)};
+  max-height: ${styles.getSize(100)};
   padding: ${styles.getSize(4)};
   animation: ${contentShow} 350ms cubic-bezier(0.16, 1, 0.3, 1);
   overflow-y: auto;

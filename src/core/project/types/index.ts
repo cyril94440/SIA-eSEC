@@ -1,5 +1,4 @@
-export * from "./DocumentScoreTarget";
 export * from "./DocumentSpecs";
-export * from "./DocumentStandardCompliance";
+export * from "./DocumentStandardTarget";
 export * from "./ProjectSpecs";
 export * from "./ProjectStatus";
