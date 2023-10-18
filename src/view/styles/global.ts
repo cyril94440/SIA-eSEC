@@ -9,6 +9,10 @@ export const global = css`
     font-weight: 300 600;
   }
 
+  .grecaptcha-badge {
+    visibility: hidden;
+  }
+
   html {
     box-sizing: border-box;
   }

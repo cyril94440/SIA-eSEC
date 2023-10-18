@@ -39,7 +39,7 @@ export const ResetPassword: NextPage = () => {
       return;
     }
 
-    executeRecaptcha("reset-password")
+    executeRecaptcha("reset_password")
       .then(async (recaptchaToken) => {
         try {
           const res = await Api.authResetPassword({
