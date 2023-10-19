@@ -51,10 +51,10 @@ enum SFLocation {
 }
 
 enum SFCategory {
-  Personalization = 0;
-  Structure = 1;
-  Printed = 2;
-  Material = 3;
+  Material = 0;
+  Personalization = 1;
+  Structure = 2;
+  Printed = 3;
 }
 
 enum SFDocumentType {
