@@ -22,12 +22,7 @@ export namespace V1 {
   export type DocumentMaterial = "paper" | "plastic";
   export type DocumentScoreTarget = "sia-reco" | "theorical-maximum";
 
-  export type DocumentStandardCompliance =
-    | "ecowas-id-card"
-    | "eu-id-card"
-    | "eu-passport"
-    | "eu-resident-permit"
-    | "icao";
+  export type DocumentStandardCompliance = "ecowas-id-card" | "eu-id-card" | "eu-passport" | "eu-resident-permit";
 
   export interface Content {
     title: string;
@@ -64,12 +59,7 @@ export namespace V2 {
   export type DocumentMaterial = "paper" | "plastic";
   export type DocumentScoreTarget = "icao" | "none";
 
-  export type DocumentStandardCompliance =
-    | "ecowas-id-card"
-    | "eu-id-card"
-    | "eu-passport"
-    | "eu-resident-permit"
-    | "icao";
+  export type DocumentStandardCompliance = "ecowas-id-card" | "eu-id-card" | "eu-passport" | "eu-resident-permit";
 
   export interface Content {
     title: string;
@@ -105,12 +95,7 @@ export namespace V3 {
   export type DocumentType = "card" | "passport-paper" | "passport-plastic";
   export type DocumentScoreTarget = "icao" | "none";
 
-  export type DocumentStandardCompliance =
-    | "ecowas-id-card"
-    | "eu-id-card"
-    | "eu-passport"
-    | "eu-resident-permit"
-    | "icao";
+  export type DocumentStandardCompliance = "ecowas-id-card" | "eu-id-card" | "eu-passport" | "eu-resident-permit";
 
   export interface Content {
     title: string;
@@ -149,7 +134,6 @@ export namespace V4 {
     | "eu-id-card"
     | "eu-passport"
     | "eu-resident-permit"
-    | "icao"
     | "icao-doc-9303";
 
   export interface Content {

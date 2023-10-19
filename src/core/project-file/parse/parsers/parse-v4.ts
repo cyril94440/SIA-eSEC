@@ -44,8 +44,6 @@ function parseDocumentStandardTarget(value: V4.DocumentStandardTarget): Document
       return DocumentStandardTarget.EU_PASSPORT;
     case "eu-resident-permit":
       return DocumentStandardTarget.EU_RESIDENT_PERMIT;
-    case "icao":
-      return DocumentStandardTarget.ICAO;
     case "icao-doc-9303":
       return DocumentStandardTarget.ICAO_DOC_9303;
   }

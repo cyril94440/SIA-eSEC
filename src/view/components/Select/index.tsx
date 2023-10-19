@@ -34,11 +34,16 @@ export const Select = <TItem,>(props: SelectProps<TItem>) => {
           <div css={styles.content}>
             {props.items.map((item) => {
               const selected = item === props.value;
+              const formattedItemText = props.itemText(item);
+              const disabled = formattedItemText.includes("Not available yet");
+              console.log({ disabled });
               return (
                 <div
                   key={props.itemId(item)}
                   css={[styles.item, item === props.value && styles.itemSelected]}
+                  aria-disabled={disabled}
                   onClick={() => {
+                    if (disabled) return;
                     if (hideRef.current) {
                       hideRef.current();
                       hideRef.current = undefined;
@@ -47,7 +52,7 @@ export const Select = <TItem,>(props: SelectProps<TItem>) => {
                   }}
                 >
                   {props.itemContent?.(item, selected) ?? (
-                    <div css={styles.defaultItemContent}>{props.itemText(item)}</div>
+                    <div css={[styles.defaultItemContent, disabled && styles.itemDisabled]}>{props.itemText(item)}</div>
                   )}
                 </div>
               );

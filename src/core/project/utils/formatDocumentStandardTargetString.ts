@@ -10,8 +10,6 @@ export function formatDocumentStandardTargetString(value: DocumentStandardTarget
       return "EU Passport (Not available yet)";
     case DocumentStandardTarget.EU_RESIDENT_PERMIT:
       return "EU Resident permit (Not available yet)";
-    case DocumentStandardTarget.ICAO:
-      return "ICAO (Not available yet)";
     case DocumentStandardTarget.ICAO_DOC_9303:
       return "ICAO doc 9303 (part 2)";
   }

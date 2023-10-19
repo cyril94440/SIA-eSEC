@@ -50,7 +50,6 @@ export const GeneralInfo: FC<GeneralInfoProps> = (props) => {
             DocumentStandardTarget.EU_ID_CARD,
             DocumentStandardTarget.EU_PASSPORT,
             DocumentStandardTarget.EU_RESIDENT_PERMIT,
-            DocumentStandardTarget.ICAO,
             DocumentStandardTarget.ICAO_DOC_9303,
           ]}
           itemId={(item) => item}

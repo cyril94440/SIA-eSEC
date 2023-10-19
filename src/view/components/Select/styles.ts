@@ -68,3 +68,13 @@ export const defaultItemContent = css`
   cursor: pointer;
   user-select: none;
 `;
+
+export const itemDisabled = css`
+  color: ${styles.COLOR_NEUTRAL_60};
+  cursor: not-allowed;
+
+  &:hover {
+    color: ${styles.COLOR_NEUTRAL_60};
+    background: ${styles.COLOR_NEUTRAL_95};
+  }
+`;

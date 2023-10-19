@@ -4,6 +4,7 @@ import {
   formatDocumentSecurityFeatureLocationString,
   formatDocumentSecurityFeatureScoreCategoryString,
   DocumentIcaoStatus,
+  DocumentStandardTarget,
 } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
 import { DownloadReport, Header, Icao, Overall, Panel, PanelGroup } from "./components";
@@ -16,6 +17,7 @@ export interface ScoresProps {
   icaoStatus: DocumentIcaoStatus;
   onIcaoStatusClick: () => void;
   onDownloadReportClick: () => void;
+  documentScoreTarget: DocumentStandardTarget;
 }
 
 export const allLocations = [
@@ -49,9 +51,11 @@ export const Scores: FC<ScoresProps> = (props) => {
         <Panel title="Overall score">
           <Overall value={props.value.totalScore} />
         </Panel>
-        <Panel>
-          <Icao status={props.icaoStatus} onStatusClick={props.onIcaoStatusClick} />
-        </Panel>
+        {props.documentScoreTarget === DocumentStandardTarget.ICAO_DOC_9303 && (
+          <Panel>
+            <Icao status={props.icaoStatus} onStatusClick={props.onIcaoStatusClick} />
+          </Panel>
+        )}
         <Panel title="Overall Security">
           <div css={styles.barContainer}>
             <div css={styles.barTitle}>Location</div>

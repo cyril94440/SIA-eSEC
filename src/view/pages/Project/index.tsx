@@ -5,7 +5,12 @@ import { useEffect, useMemo, useState } from "react";
 import { useStore } from "react-redux";
 import { Api } from "@@core/api/client";
 import { formatPageTitle } from "@@core/base";
-import { getDocumentSecurityFeatures, getDocumentSecurityFeatureTree, getDocumentIcaoStatus } from "@@core/project";
+import {
+  getDocumentSecurityFeatures,
+  getDocumentSecurityFeatureTree,
+  getDocumentIcaoStatus,
+  DocumentStandardTarget,
+} from "@@core/project";
 import { ProjectFile } from "@@core/project-file";
 import { Rpc } from "@@core/rpc/shared";
 import { RootState } from "@@store";
@@ -140,6 +145,7 @@ export const Project: NextPage<ProjectProps> = (props) => {
             icaoStatus={icaoStatus}
             onIcaoStatusClick={handleIcaoStatusClick}
             onDownloadReportClick={handleDownloadReportClick}
+            documentScoreTarget={specs.document.standardTarget}
           />
         }
         sidebarCollapsed={scoresCollapsed}

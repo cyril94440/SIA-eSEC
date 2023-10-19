@@ -3,6 +3,5 @@ export enum DocumentStandardTarget {
   EU_ID_CARD = "EU_ID_CARD",
   EU_PASSPORT = "EU_PASSPORT",
   EU_RESIDENT_PERMIT = "EU_RESIDENT_PERMIT",
-  ICAO = "ICAO",
   ICAO_DOC_9303 = "ICAO_DOC_9303",
 }

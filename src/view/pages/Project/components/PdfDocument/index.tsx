@@ -3,6 +3,7 @@ import * as globalStyles from "@@view/styles";
 import {
   DocumentIcaoStatus,
   DocumentSecurityFeatureTree,
+  DocumentStandardTarget,
   ProjectSpecs,
   formatDocumentSecurityFeatureCategoryString,
   formatDocumentSecurityFeatureLocationString,
@@ -74,12 +75,14 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
               }
             />
           </View>
-          <Text style={styles.splitTitle}>
-            ICAO:{" "}
-            <Text style={props.icaoStatus.completed ? styles.success : styles.red}>
-              {props.icaoStatus.completed ? "Complete" : "Not complete"}
+          {props.specs.document.standardTarget === DocumentStandardTarget.ICAO_DOC_9303 && (
+            <Text style={styles.splitTitle}>
+              ICAO:{" "}
+              <Text style={props.icaoStatus.completed ? styles.success : styles.red}>
+                {props.icaoStatus.completed ? "Complete" : "Not complete"}
+              </Text>
             </Text>
-          </Text>
+          )}
         </View>
         <View style={styles.section}>
           <Text style={styles.subtitle}>General Info</Text>

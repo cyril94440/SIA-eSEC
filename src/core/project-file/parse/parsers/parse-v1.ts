@@ -45,8 +45,6 @@ function parseDocumentStandardTarget(value: V1.DocumentStandardCompliance): Docu
       return DocumentStandardTarget.EU_PASSPORT;
     case "eu-resident-permit":
       return DocumentStandardTarget.EU_RESIDENT_PERMIT;
-    case "icao":
-      return DocumentStandardTarget.ICAO;
   }
 }
 
