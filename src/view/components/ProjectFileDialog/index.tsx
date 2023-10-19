@@ -65,6 +65,10 @@ export const ProjectFileDialog: FC<ProjectFileDialogProps> = (props) => {
           <form
             onSubmit={form.handleSubmit(async ({ name, password }) => {
               console.log("submit", password);
+              if (password.length < 7) {
+                setErrorMessage("Password must be at least 7 characters");
+                return;
+              }
               setSubmitting(true);
               setErrorMessage("");
               try {
