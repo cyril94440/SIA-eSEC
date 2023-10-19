@@ -36,7 +36,6 @@ export const Select = <TItem,>(props: SelectProps<TItem>) => {
               const selected = item === props.value;
               const formattedItemText = props.itemText(item);
               const disabled = formattedItemText.includes("Not available yet");
-              console.log({ disabled });
               return (
                 <div
                   key={props.itemId(item)}

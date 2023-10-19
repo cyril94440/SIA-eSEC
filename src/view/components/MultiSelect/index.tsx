@@ -57,7 +57,7 @@ export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
         onToggle={props.onDropdownToggle}
       />
       {selectedItems.length > 0 && (
-        <div css={styles.itemList}>
+        <div css={[styles.itemList, { position: "relative", zIndex: 2 }]}>
           {selectedItems.map((item) => (
             <Item
               key={props.itemId(item)}

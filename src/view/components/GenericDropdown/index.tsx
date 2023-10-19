@@ -71,10 +71,11 @@ export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
           expanded && styles.contentContainerExpanded,
           collapsing && styles.contentContainerCollapsing,
           props.fullWidth && styles.contentContainerFullWidth,
+          expanded && { position: "relative", zIndex: 4 },
         ]}
       >
-        {expanded && props.renderContent(collapse)}
-        <div style={{ marginTop: 60 }} ref={scrollRef}></div>
+        {expanded && <div style={{ position: "relative", zIndex: 3 }}>{props.renderContent(collapse)}</div>}
+        <div style={{ position: "relative", zIndex: -10, marginTop: 60 }} ref={scrollRef}></div>
       </div>
     </div>
   );
