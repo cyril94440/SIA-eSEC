@@ -65,7 +65,6 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
         <View style={styles.section}>
           <View style={[styles.noGap, styles.littleMarginBottom]}>
             <Text style={styles.title}>{props.specs.title}</Text>
-            <Text style={styles.status}>Status: {formatProjectStatusString(props.specs.status)}</Text>
           </View>
           <View style={styles.noGap}>
             <Text style={styles.splitTitle}>Total score</Text>

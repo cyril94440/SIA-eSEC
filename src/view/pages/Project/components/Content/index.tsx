@@ -31,7 +31,6 @@ export const Content: FC<ContentProps> = (props) => {
       {(containerRef) => (
         <div ref={containerRef} css={styles.root}>
           <Section>
-            <Status value={props.specs.status} />
             <Header
               title={props.specs.title}
               onRenameClick={props.onRenameClick}

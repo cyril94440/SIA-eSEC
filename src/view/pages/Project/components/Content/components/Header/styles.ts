@@ -3,6 +3,7 @@ import * as styles from "@@view/styles";
 
 export const root = css`
   margin-bottom: ${styles.getSize(2)};
+  margin-top: ${styles.getSize(4)};
 `;
 
 export const title = css`
