@@ -30,7 +30,7 @@ export const Collapsible: FC<CollapsibleProps> = ({ title, children }) => {
         <div
           css={styles.titleIcon}
           style={{
-            transform: !isOpen ? "rotate(180deg)" : "rotate(0deg)",
+            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
             transition: "transform 200ms",
           }}
         >

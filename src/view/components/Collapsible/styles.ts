@@ -6,7 +6,7 @@ export const titleContainer = css`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: ${styles.getSize(4)} ${styles.getSize(2)};
+  padding: ${styles.getSize(3)} ${styles.getSize(2)};
   cursor: pointer;
 
   &:hover {
@@ -19,7 +19,7 @@ export const titleContent = css`
   margin: 0;
   outline: none;
   text-decoration: none;
-  font-size: ${styles.FONT_MEDIUM_20_SIZE};
+  font-size: ${styles.FONT_MEDIUM_16_SIZE};
   background: none;
   text-align: left;
   max-width: 95%;
