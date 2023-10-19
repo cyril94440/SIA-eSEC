@@ -23,7 +23,7 @@ export const Header: FC<HeaderProps> = (props) => {
             <Icons.Lock />
           </div>
           <div css={styles.encryptionInfoText}>
-            The data are end-to-end encrypted, you and your collaborators are the only ones who can access the data.
+            The data is encrypted from end-to-end. Only users of this account can access it.
           </div>
           <Button title="More info" kind={ButtonKind.Info} onClick={props.onEncryptionInfoClick} />
         </div>
