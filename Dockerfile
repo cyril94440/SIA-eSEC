@@ -7,6 +7,7 @@ ENV RPC_ADDRESS ${RPC_ADDRESS}
 RUN yarn --network-timeout 1000000
 RUN yarn buf
 RUN yarn build
+RUN npx prisma generate
 RUN yarn install --production --ignore-scripts --prefer-offline
 RUN yarn cache clean
 # ==================================================================
