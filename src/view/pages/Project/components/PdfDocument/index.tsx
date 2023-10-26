@@ -184,7 +184,7 @@ export const PdfDocument: FC<PdfDocumentProps> = (props) => {
         <View style={styles.section}>
           <Text style={styles.subtitle}>Graph - Overall Security</Text>
           <View style={styles.littleMarginBottom}>
-            <Text style={styles.barTitle}>Location</Text>
+            <Text style={styles.barTitle}>Distribution</Text>
             <CheckpointBar
               progression={
                 props.score?.securityFeaturesScore?.locationScore?.score

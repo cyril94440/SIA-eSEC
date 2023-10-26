@@ -58,7 +58,7 @@ export const Scores: FC<ScoresProps> = (props) => {
         )}
         <Panel title="Overall Security">
           <div css={styles.barContainer}>
-            <div css={styles.barTitle}>Location</div>
+            <div css={styles.barTitle}>Distribution</div>
             <CheckpointBar progression={props.value.securityFeaturesScore!.locationScore!.score * 10} />
           </div>
           <div css={styles.barContainer}>

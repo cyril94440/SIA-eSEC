@@ -3,7 +3,7 @@ import { Rpc } from "@@core/rpc/shared";
 export function formatDocumentSecurityFeatureScoreCategoryString(value: Rpc.SFScoreCategory): string {
   switch (value) {
     case Rpc.SFScoreCategory.ABC:
-      return "ABC";
+      return "Automatic Border Control";
     case Rpc.SFScoreCategory.Alteration:
       return "Alteration";
     case Rpc.SFScoreCategory.Counterfeit:
