@@ -15,12 +15,22 @@ export const container = css`
   margin-bottom: ${styles.getSize(1)};
 `;
 
-export const progressBarSegment = (color: string, width: number) => css`
-  background-color: ${color};
+export const progressBarSegment = css`
+  position: relative;
   height: ${barHeight}px;
-  width: ${width}%;
+  width: 100%;
   border-radius: ${barHeight / 2}px;
-  transition: width 200ms;
+  overflow: hidden;
+`;
+
+export const progressBarFill = (progression: number) => css`
+  position: absolute;
+  background-image: linear-gradient(to right, ${styles.COLOR_PRIMARY_60}, ${styles.COLOR_PRIMARY_36});
+  height: 100%;
+  width: 100%;
+  border-radius: ${barHeight / 2}px;
+  clip-path: inset(0 ${100 - progression}% 0 0);
+  transition: clip-path 200ms;
 `;
 
 export const checkpoint = (color: string, isCheck: boolean, percentage: number) => css`
