@@ -54,11 +54,19 @@ export const Dashboard: NextPage = () => {
         <div css={styles.mainTitle}>{`Welcome ${fullname && `${fullname}`}`}</div>
         <br />
         <div css={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
+          The eDocument Scheme for Evaluating Physical Security (eSEC) has been designed by the SIA’s Document Security
+          Working Group and other experts of the ID documents sector to help governments develop secure eDocuments. It
+          can be used as a self-assessment tool to evaluate the physical security of current documents, the security
+          impact of additional design changes, or simply to learn and understand what is required to build a ‘secure
+          eDocument’.
+          <br />
+          <br />
+          With this version of the eSEC tool, one can create a new project or re-start from an existing one (uploading
+          an .esec file). It is also possible to evaluate if the document follows some international Standards And
+          Recommended Practices (SARPs) set by ICAO in its Doc 9303*, with a focus on basic security features).
+          <br />
+          <br />
+          <i>* Part 2: Specifications for the Security of the Design, Manufacture and Issuance of MRTDs</i>
         </div>
         <div css={styles.buttonsContainer}>
           <Button
