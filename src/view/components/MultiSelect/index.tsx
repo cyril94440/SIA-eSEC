@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { GenericDropdown } from "../GenericDropdown";
 import { Icons } from "../Icons";
 import * as styles from "./styles";
@@ -16,7 +16,7 @@ export interface MultiSelectProps<TItem> {
 export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
   const valueSet = new Set(props.value);
   const selectedItems = props.items.filter((item) => valueSet.has(item));
-
+  const [expanded, setExpanded] = useState(false);
   const handleChange = (item: TItem, selected: boolean) => {
     const newValue = selected ? [...props.value, item] : props.value.filter((i) => i !== item);
     props.onChange(newValue);
@@ -27,6 +27,7 @@ export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
       <GenericDropdown
         fullWidth={true}
         renderControl={(toggle, expanded) => {
+          setExpanded(expanded);
           return (
             <div css={styles.input} onClick={toggle}>
               <div css={styles.inputText}>{props.title}</div>
@@ -56,7 +57,7 @@ export const MultiSelect = <TItem,>(props: MultiSelectProps<TItem>) => {
         }}
         onToggle={props.onDropdownToggle}
       />
-      {selectedItems.length > 0 && (
+      {selectedItems.length > 0 && !expanded && (
         <div css={[styles.itemList, { position: "relative", zIndex: 2 }]}>
           {selectedItems.map((item) => (
             <Item
