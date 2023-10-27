@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { DocumentSecurityFeatureTree, DocumentStandardTarget, ProjectSpecs } from "@@core/project";
 import { Rpc } from "@@core/rpc/shared";
-import { ScrollController, TabControl } from "@@view/components";
+import { Button, ButtonKind, ScrollController, TabControl } from "@@view/components";
 import { DocumentDesign, GeneralInfo, Header, Section, SecurityFeatures, Status } from "./components";
 import * as styles from "./styles";
 
@@ -44,33 +44,79 @@ export const Content: FC<ContentProps> = (props) => {
                 key: TabControlItem.GeneralInfo,
                 title: "1 - General Info",
                 content: () => (
-                  <GeneralInfo
-                    specs={props.specs}
-                    onChangeDocumentType={props.onChangeDocumentType}
-                    onChangeDocumentStandardTarget={props.onChangeDocumentStandardTarget}
-                  />
+                  <>
+                    <GeneralInfo
+                      specs={props.specs}
+                      onChangeDocumentType={props.onChangeDocumentType}
+                      onChangeDocumentStandardTarget={props.onChangeDocumentStandardTarget}
+                    />
+                    <div css={styles.buttonsContainer}>
+                      <Button title={"Previous"} kind={ButtonKind.Info} disabled fullWidth />
+                      <Button
+                        fullWidth
+                        title={"Next"}
+                        kind={ButtonKind.Info}
+                        onClick={() => {
+                          setTabControlActiveItem(TabControlItem.DocumentDesign);
+                        }}
+                      />
+                    </div>
+                  </>
                 ),
               },
               {
                 key: TabControlItem.DocumentDesign,
                 title: "2 - Document Design",
                 content: () => (
-                  <DocumentDesign
-                    specs={props.specs}
-                    designQuestions={props.designQuestions}
-                    onChangeDesignAnswer={props.onChangeDocumentDesignAnswer}
-                  />
+                  <>
+                    <DocumentDesign
+                      specs={props.specs}
+                      designQuestions={props.designQuestions}
+                      onChangeDesignAnswer={props.onChangeDocumentDesignAnswer}
+                    />
+                    <div css={styles.buttonsContainer}>
+                      <Button
+                        title={"Previous"}
+                        kind={ButtonKind.Info}
+                        onClick={() => {
+                          setTabControlActiveItem(TabControlItem.GeneralInfo);
+                        }}
+                        fullWidth
+                      />
+                      <Button
+                        fullWidth
+                        title={"Next"}
+                        kind={ButtonKind.Info}
+                        onClick={() => {
+                          setTabControlActiveItem(TabControlItem.SecurityFeatures);
+                        }}
+                      />
+                    </div>
+                  </>
                 ),
               },
               {
                 key: TabControlItem.SecurityFeatures,
                 title: "3 - Security Features",
                 content: () => (
-                  <SecurityFeatures
-                    specs={props.specs}
-                    documentSecurityFeatureTree={props.documentSecurityFeatureTree}
-                    onChange={props.onChangeDocumentSecurityFeatures}
-                  />
+                  <>
+                    <SecurityFeatures
+                      specs={props.specs}
+                      documentSecurityFeatureTree={props.documentSecurityFeatureTree}
+                      onChange={props.onChangeDocumentSecurityFeatures}
+                    />
+                    <div css={styles.buttonsContainer}>
+                      <Button
+                        title={"Previous"}
+                        kind={ButtonKind.Info}
+                        onClick={() => {
+                          setTabControlActiveItem(TabControlItem.DocumentDesign);
+                        }}
+                        fullWidth
+                      />
+                      <Button fullWidth title={"Next"} kind={ButtonKind.Info} disabled />
+                    </div>
+                  </>
                 ),
               },
             ]}
