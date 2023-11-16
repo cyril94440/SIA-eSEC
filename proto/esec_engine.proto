@@ -43,8 +43,8 @@ message SFScore {
 }
 
 enum SFLocation {
-  SFPersonalization = 0;
-  InksTechPersonalization = 1;
+  InksTechPersonalization = 0;
+  SFPersonalization = 1;
   SFDocumentBody = 2;
   InksBackground = 3;
   SecurityDesign = 4;

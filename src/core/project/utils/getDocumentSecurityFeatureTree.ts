@@ -2,6 +2,7 @@ import { sort } from "fast-sort";
 import { Rpc } from "@@core/rpc/shared";
 import { ProjectSpecs } from "../types";
 import { getDocumentSecurityFeatures } from "./getDocumentSecurityFeatures";
+import { SFCategory } from "core/rpc/shared/index.exports";
 
 export interface DocumentSecurityFeatureTree {
   categoryNodes: DocumentSecurityFeatureCategoryNode[];
@@ -17,6 +18,7 @@ export interface DocumentSecurityFeatureLocationNode {
   features: Rpc.SecurityFeature[];
 }
 
+const CATEGORY_ORDER = [SFCategory.Material, SFCategory.Structure, SFCategory.Printed, SFCategory.Personalization];
 export function getDocumentSecurityFeatureTree(
   specs: ProjectSpecs,
   allFeatures: Rpc.SecurityFeature[]
@@ -42,7 +44,7 @@ export function getDocumentSecurityFeatureTree(
   });
 
   const categoryNodes = sort(Array.from(categoryMap.entries()))
-    .asc(([item]) => item)
+    .asc(([item]) => CATEGORY_ORDER.indexOf(item) ?? 0)
     .map(([item, locationMap]) => {
       const locationNodes = sort(Array.from(locationMap.entries()))
         .asc(([item]) => item)
