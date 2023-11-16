@@ -50,11 +50,9 @@ export const GenericDropdown: FC<GenericDropdownProps> = (props) => {
     };
 
     document.addEventListener("click", listener);
-    document.addEventListener("wheel", listener);
 
     return () => {
       document.removeEventListener("click", listener);
-      document.removeEventListener("wheel", listener);
     };
   }, [expanded, collapse]);
 
