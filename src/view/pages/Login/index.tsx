@@ -65,6 +65,10 @@ export const Login: NextPage = () => {
         <div css={styles.logo}>
           <Icons.App />
         </div>
+        <div css={styles.betaDescription}>
+          This is a <b>beta version</b>, currently under test by early users. Your feedback is welcome to improve the
+          tool.
+        </div>
         <form css={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
           <label css={styles.label}>Email</label>
           <input

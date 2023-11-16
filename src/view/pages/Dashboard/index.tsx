@@ -67,6 +67,12 @@ export const Dashboard: NextPage = () => {
           <br />
           <br />
           <i>* Part 2: Specifications for the Security of the Design, Manufacture and Issuance of MRTDs</i>
+          <br />
+          <br />
+          <br />
+          <b>
+            This is a beta version, currently under test by early users. Your feedback is welcome to improve the tool.
+          </b>
         </div>
         <div css={styles.buttonsContainer}>
           <Button

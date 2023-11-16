@@ -3,7 +3,7 @@ import * as styles from "@@view/styles";
 
 export const logo = css`
   width: ${styles.getSize(16)};
-  margin-bottom: ${styles.getSize(8)};
+  margin-bottom: ${styles.getSize(4)};
 `;
 
 export const container = css`
@@ -101,4 +101,10 @@ export const signUp = css`
   text-decoration: none;
   cursor: pointer;
   color: ${styles.COLOR_PRIMARY_36};
+`;
+
+export const betaDescription = css`
+  max-width: ${styles.getSize(40)};
+  ${styles.fontMedium14};
+  margin-bottom: ${styles.getSize(4)};
 `;
