@@ -39,7 +39,7 @@ export const ForgotPassword: NextPage = () => {
       setSubmitting("success");
       toast.success("Email sent successfully! Redirecting to login page...");
       setTimeout(() => {
-        router.reload();
+        router.push("/login");
       }, 1000);
       return;
     } catch (error) {

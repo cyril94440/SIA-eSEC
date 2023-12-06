@@ -34,6 +34,16 @@ export const handler: NextApiHandler<ApiResult<MailResetPasswordResult>> = async
       return res.status(400).json({ success: false, error: "Invalid email." });
     }
 
+    const invite = await db.invite.findUnique({
+      where: {
+        email: req.body.email ?? "",
+      },
+    });
+
+    if (invite?.email) {
+      return res.status(200).json({ success: false, error: "User already exists." });
+    }
+
     /**
      * JWT signing
      */
