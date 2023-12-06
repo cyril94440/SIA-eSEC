@@ -21,7 +21,7 @@ export const handler: NextApiHandler<ApiResult<UsersGetResult | UsersDeleteResul
           return res.status(200).json({ success: false, error: "An error occured, couldn't get users." });
         }
       });
-
+      break;
     case "DELETE":
       await handleAuthenticated("DELETE", req, res, async (token) => {
         const isAdmin = token?.role === UserRole.Admin;
@@ -40,7 +40,7 @@ export const handler: NextApiHandler<ApiResult<UsersGetResult | UsersDeleteResul
           return res.status(200).json({ success: false, error: "An error occured, couldn't delete user." });
         }
       });
-
+      break;
     case "PATCH":
       await handleAuthenticated("PATCH", req, res, async (token) => {
         const isAdmin = token?.role === UserRole.Admin;
@@ -61,7 +61,7 @@ export const handler: NextApiHandler<ApiResult<UsersGetResult | UsersDeleteResul
           return res.status(200).json({ success: false, error: "An error occured, couldn't update user." });
         }
       });
-
+      break;
     default:
       return res.status(200).json({ success: false, error: "Method not allowed" });
   }

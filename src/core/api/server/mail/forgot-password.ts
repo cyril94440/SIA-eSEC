@@ -56,10 +56,10 @@ export const handler: NextApiHandler<ApiResult<MailForgotPasswordResult>> = asyn
 
     const mailContent: MailContent = {
       toEmail: req.body.email,
-      subject: "You have forgot your password",
+      subject: "eSec Reset Password",
       text: `Hi, 
 
-    You have forgot your password? Don't worry! Just click on the following link to reset your password:
+      Have you forgotten your password? Don't worry! Just click on the following link to reset your password:
     
     ${process.env.NEXTAUTH_URL}/reset-password?token=${resetPasswordToken}
     `,

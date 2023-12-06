@@ -7,10 +7,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "start:withprisma": "prisma migrate deploy && npx prisma db seed && next start",
     "lint": "next lint",
     "check-types": "tsc --noEmit",
     "prettier": "prettier --write .",
-    "docker": "docker buildx build --push --platform linux/amd64,linux/arm64 . --build-arg RPC_ADDRESS=host.docker.internal:4000 -t 780933574146.dkr.ecr.eu-west-3.amazonaws.com/esec-front:latest"
+    "docker": "docker buildx build --push --platform linux/amd64,linux/arm64 . --build-arg RPC_ADDRESS=host.docker.internal:4000 -t 780933574146.dkr.ecr.eu-west-3.amazonaws.com/esec-front:latest",
+    "docker:export": "docker buildx build --load --platform linux/amd64 . --build-arg RPC_ADDRESS=host.docker.internal:4000 -t 780933574146.dkr.ecr.eu-west-3.amazonaws.com/esec-front:latest && docker save -o esec-front.tar 780933574146.dkr.ecr.eu-west-3.amazonaws.com/esec-front:latest"
   },
   "prisma": {
     "schema": "./src/lib/prisma/schema.prisma",
