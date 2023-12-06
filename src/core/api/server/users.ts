@@ -29,11 +29,26 @@ export const handler: NextApiHandler<ApiResult<UsersGetResult | UsersDeleteResul
         if (!req.body.id) return res.status(200).json({ success: false, error: "Missing parameters." });
 
         try {
-          await db.user.delete({
+          const user = await db.user.delete({
             where: {
               id: req.body.id,
             },
           });
+
+          // Check if user had an invite and delete it
+          const invite = await db.invite.findUnique({
+            where: {
+              email: user.email,
+            },
+          });
+
+          if (invite) {
+            await db.invite.delete({
+              where: {
+                email: invite.email,
+              },
+            });
+          }
 
           return res.status(200).json({ success: true, data: { message: "User deleted." } });
         } catch (error) {
