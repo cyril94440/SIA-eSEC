@@ -49,23 +49,20 @@ export const columns = [
     id: "actions",
     cell: (info) => {
       const { id, email, fullname, role } = info.row.original;
-
-      if (role === UserRole.NotDefined) {
-        return null;
-      }
+      const userIsDefined = role !== UserRole.NotDefined;
 
       return (
         <div
           style={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "center",
+            justifyContent: "end",
             gap: 12,
           }}
         >
-          <EditUser id={id} fullname={fullname} actualRole={role} />
-          <ResetPassword id={id} fullname={fullname} userEmail={email} />
-          <DeleteUser id={id} />
+          {userIsDefined && <EditUser id={id} fullname={fullname} actualRole={role} />}
+          {userIsDefined && <ResetPassword id={id} fullname={fullname} userEmail={email} />}
+          <DeleteUser id={userIsDefined ? id : email} type={userIsDefined ? "user" : "invite"} />
         </div>
       );
     },

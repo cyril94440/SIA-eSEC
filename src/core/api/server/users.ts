@@ -50,7 +50,7 @@ export const handler: NextApiHandler<ApiResult<UsersGetResult | UsersDeleteResul
             });
           }
 
-          return res.status(200).json({ success: true, data: { message: "User deleted." } });
+          return res.status(200).json({ success: true, data: { message: "User successfully deleted." } });
         } catch (error) {
           return res.status(200).json({ success: false, error: "An error occured, couldn't delete user." });
         }

@@ -8,6 +8,7 @@ import { Api } from "@@core/api/client";
 
 interface DeleteUserProps {
   id: string;
+  type: "user" | "invite";
 }
 
 export const DeleteUser: FC<DeleteUserProps> = (props) => {
@@ -15,18 +16,19 @@ export const DeleteUser: FC<DeleteUserProps> = (props) => {
 
   const handleDelete = async () => {
     try {
-      const response = await Api.deleteUser({ id: props.id });
+      const response =
+        props.type === "user" ? await Api.deleteUser({ id: props.id }) : await Api.deleteInvite({ email: props.id });
 
       if (!response.success) {
         throw new Error(response.error);
       }
 
-      toast.success("User deleted successfully.");
+      toast.success(response.data.message);
       setTimeout(() => {
         router.reload();
       }, 1000);
     } catch (error) {
-      toast.error("An error occured while deleting the user.");
+      toast.error((error as Error).message ?? "An error occured, please try again later.");
     }
   };
 

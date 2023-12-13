@@ -102,3 +102,11 @@ export interface MailAddUserResult {
 export interface InvitesGetResult {
   invites: Invite[];
 }
+
+export interface InviteDeleteResult {
+  message: string;
+}
+
+export interface InviteDeleteParams {
+  email: string;
+}
