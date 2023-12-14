@@ -1,16 +1,24 @@
 import { MailContent, MailResponse } from "./types";
 import nodemailer from "nodemailer";
+import Transport from "nodemailer-brevo-transport";
 
 export const sendMail = async (mailContent: MailContent): Promise<MailResponse> => {
-  const { NODEMAILER_EMAIL, NODEMAILER_PASSWORD, NODE_ENV, EMAIL_ADDRESS_DEBUG } = process.env;
+  const { NODEMAILER_EMAIL, NODEMAILER_PASSWORD, NODE_ENV, EMAIL_ADDRESS_DEBUG, BREVO_API_KEY } = process.env;
 
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: NODEMAILER_EMAIL,
-      pass: NODEMAILER_PASSWORD,
-    },
-  });
+  let transporter : nodemailer.Transporter;
+  if(BREVO_API_KEY){
+    transporter = nodemailer.createTransport(
+      new Transport({ apiKey: BREVO_API_KEY })
+  );
+  }else{
+    transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: NODEMAILER_EMAIL,
+        pass: NODEMAILER_PASSWORD,
+      },
+    });
+}
 
   const mailOptions = {
     from: NODEMAILER_EMAIL,
